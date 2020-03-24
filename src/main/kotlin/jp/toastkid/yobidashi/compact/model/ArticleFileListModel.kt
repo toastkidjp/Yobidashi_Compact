@@ -38,10 +38,9 @@ class ArticleFileListModel : ListModel<Article> {
         items.sortBy { it.getTitle() }
     }
 
-    fun addAll(folder: Path) {
-        Files.list(folder)
-                ?.map { Article(it) }
-                ?.forEach {
+    fun addAll(articles: Collection<Article>) {
+        articles
+                .forEach {
                     master.add(it)
                     items.add(it)
                 }

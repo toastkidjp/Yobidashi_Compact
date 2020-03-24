@@ -26,8 +26,6 @@ class ArticleListView {
     fun view() = scrollPane
 
     private fun initializeView(): JList<Article> {
-        fileListModel.addAll(Paths.get(Setting.articleFolder()))
-
         val list = JList(fileListModel)
         list.cellRenderer = ArticleCellRenderer()
         return list
@@ -35,6 +33,10 @@ class ArticleListView {
 
     fun add(article: Article) {
         fileListModel.add(article)
+    }
+
+    fun addAll(articles: Collection<Article>) {
+        fileListModel.addAll(articles)
     }
 
     fun filter(searchInput: JTextField) {
@@ -51,4 +53,6 @@ class ArticleListView {
     }
 
     fun currentArticle(): Article? = view.selectedValue
+
+    fun isEmpty() = fileListModel.size == 0
 }
