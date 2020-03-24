@@ -6,8 +6,10 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import java.awt.BorderLayout
 import java.awt.Dimension
+import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.nio.file.Files
 import java.nio.file.Paths
 import javax.swing.*
 
@@ -72,9 +74,37 @@ class MainFrame(title: String) : JFrame(title) {
         })
         searchInput.preferredSize = Dimension(600, 40)
 
+        val buttons = JPanel()
+        val openButton = JButton()
+        openButton.action = object : AbstractAction() {
+            override fun actionPerformed(e: ActionEvent?) {
+                list.selectedValue.open()
+            }
+        }
+        openButton.text = "Open"
+        openButton.preferredSize = Dimension(100, 40)
+        buttons.add(openButton)
+
+        val countButton = JButton()
+        countButton.action = object : AbstractAction() {
+            override fun actionPerformed(e: ActionEvent?) {
+                val selectedValue = list.selectedValue ?: return
+                JOptionPane.showConfirmDialog(
+                        this@MainFrame,
+                        "${selectedValue.getTitle()} - ${selectedValue.count()}"
+                )
+            }
+        }
+        countButton.text = "Count"
+        countButton.preferredSize = Dimension(100, 40)
+        buttons.add(countButton)
+        buttons.preferredSize = Dimension(300, 60)
+
         val panel = JPanel()
-        panel.add(searchInput)
-        panel.add(scrollPane)
+        panel.layout = BorderLayout()
+        panel.add(searchInput, BorderLayout.NORTH)
+        panel.add(scrollPane, BorderLayout.CENTER)
+        panel.add(buttons, BorderLayout.SOUTH)
 
         jMenuBar = menubar
         contentPane.add(panel, BorderLayout.CENTER)
@@ -91,7 +121,7 @@ class MainFrame(title: String) : JFrame(title) {
         val list = JList(fileListModel)
         list.cellRenderer = ArticleCellRenderer()
         list.addListSelectionListener {
-            list.selectedValue.open()
+            // NOP.
         }
         return list
     }
