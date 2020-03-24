@@ -120,9 +120,6 @@ class MainFrame(title: String) : JFrame(title) {
 
         val list = JList(fileListModel)
         list.cellRenderer = ArticleCellRenderer()
-        list.addListSelectionListener {
-            // NOP.
-        }
         return list
     }
 }
