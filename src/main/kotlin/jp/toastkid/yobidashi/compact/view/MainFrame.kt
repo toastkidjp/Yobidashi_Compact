@@ -1,9 +1,9 @@
 package jp.toastkid.yobidashi.compact.view
 
-import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
-import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.KeyEvent
@@ -39,6 +39,8 @@ class MainFrame(title: String) : JFrame(title) {
         }
         fileMenu.add(newFileMenuItem)
         menubar.add(fileMenu)
+
+        menubar.add(LookAndFeelMenuView { this }())
 
         val searchInput = JTextField()
         searchInput.addKeyListener(object : KeyListener {

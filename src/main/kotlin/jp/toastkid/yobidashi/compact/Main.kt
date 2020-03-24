@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact
 
+import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.view.MainFrame
 
 /**
@@ -12,5 +13,8 @@ object Main {
 
         frame.setBounds(200, 200, 1024, 800)
         frame.isVisible = true
+        Runtime.getRuntime().addShutdownHook(Thread {
+            Setting.save()
+        })
     }
 }

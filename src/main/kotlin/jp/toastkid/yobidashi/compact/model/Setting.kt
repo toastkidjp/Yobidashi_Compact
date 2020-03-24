@@ -21,4 +21,14 @@ object Setting {
     }
 
     fun articleFolder() = properties.getProperty("article.folder")
+
+    fun lookAndFeel() = properties.getProperty("look_and_feel")
+
+    fun setLookAndFeel(newValue: String) {
+        properties.setProperty("look_and_feel", newValue)
+    }
+
+    fun save() {
+        properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
+    }
 }
