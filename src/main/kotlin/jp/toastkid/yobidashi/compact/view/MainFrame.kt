@@ -1,16 +1,12 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Article
-import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
-import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import java.nio.file.Files
-import java.nio.file.Paths
 import javax.swing.*
 
 /**
@@ -18,25 +14,19 @@ import javax.swing.*
  */
 class MainFrame(title: String) : JFrame(title) {
 
-    private val fileListModel = ArticleFileListModel()
-
     init {
         setTitle(title)
 
         defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
-        val list = initializeList()
-
-        val scrollPane = JScrollPane()
-        scrollPane.viewport.view = list
-        scrollPane.preferredSize = Dimension(400, 800)
+        val list = ArticleListView()
 
         val menubar = JMenuBar()
         val fileMenu = JMenu("File")
 
         val todayFileMenuItem = JMenuItem("Make today")
         todayFileMenuItem.addActionListener {
-            fileListModel.add(Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis())))
+            list.add(Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis())))
             list.updateUI()
         }
         fileMenu.add(todayFileMenuItem)
@@ -48,7 +38,7 @@ class MainFrame(title: String) : JFrame(title) {
             if (dialog.isNullOrBlank()) {
                 return@addActionListener
             }
-            fileListModel.add(Article.withTitle(dialog))
+            list.add(Article.withTitle(dialog))
             list.updateUI()
         }
         fileMenu.add(newFileMenuItem)
@@ -68,7 +58,7 @@ class MainFrame(title: String) : JFrame(title) {
                     return
                 }
                 if (e.keyCode == KeyEvent.VK_ENTER) {
-                    filter(searchInput, list)
+                    list.filter(searchInput)
                 }
             }
         })
@@ -78,7 +68,7 @@ class MainFrame(title: String) : JFrame(title) {
         val openButton = JButton()
         openButton.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent?) {
-                list.selectedValue.open()
+                list.openCurrentArticle()
             }
         }
         openButton.text = "Open"
@@ -88,7 +78,7 @@ class MainFrame(title: String) : JFrame(title) {
         val countButton = JButton()
         countButton.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent?) {
-                val selectedValue = list.selectedValue ?: return
+                val selectedValue = list.currentArticle() ?: return
                 JOptionPane.showConfirmDialog(
                         this@MainFrame,
                         "${selectedValue.getTitle()} - ${selectedValue.count()}"
@@ -103,23 +93,11 @@ class MainFrame(title: String) : JFrame(title) {
         val panel = JPanel()
         panel.layout = BorderLayout()
         panel.add(searchInput, BorderLayout.NORTH)
-        panel.add(scrollPane, BorderLayout.CENTER)
+        panel.add(list.view(), BorderLayout.CENTER)
         panel.add(buttons, BorderLayout.SOUTH)
 
         jMenuBar = menubar
         contentPane.add(panel, BorderLayout.CENTER)
     }
 
-    private fun filter(searchInput: JTextField, list: JList<Article>) {
-        fileListModel.filter(searchInput.text)
-        list.updateUI()
-    }
-
-    private fun initializeList(): JList<Article> {
-        fileListModel.addAll(Paths.get(Setting.articleFolder()))
-
-        val list = JList(fileListModel)
-        list.cellRenderer = ArticleCellRenderer()
-        return list
-    }
 }
