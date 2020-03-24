@@ -23,7 +23,7 @@ class Article(private val file: File) {
     companion object {
 
         fun withTitle(title: String): Article {
-            val file = File("C://Users/toastkidjp/Documents/Article2", "$title.md")
+            val file = File(Setting.articleFolder(), "$title.md")
             if (!file.exists()) {
                 file.createNewFile()
                 Files.write(file.toPath(), ArticleTemplate()(title).toByteArray(StandardCharsets.UTF_8))
