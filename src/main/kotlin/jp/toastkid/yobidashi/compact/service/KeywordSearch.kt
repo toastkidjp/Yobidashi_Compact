@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.service
 
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Collectors
 
@@ -16,7 +15,6 @@ class KeywordSearch {
                 .map { it.first }
                 .collect(Collectors.toList())
     }
-
 
     private fun filterByKeyword(fileFilter: String?, it: Pair<String, MutableList<String>>, keyword: String): Boolean {
         if (fileFilter?.isNotBlank() == true && !it.first.contains(fileFilter)) {
