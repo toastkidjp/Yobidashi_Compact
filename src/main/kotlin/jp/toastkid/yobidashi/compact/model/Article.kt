@@ -21,6 +21,14 @@ class Article(private val file: Path) {
         }
     }
 
+    fun count(): Int {
+        return Files.readAllLines(file).map { it.codePointCount(0, it.length) }.sum()
+    }
+
+    fun lastModified(): Long {
+        return Files.getLastModifiedTime(file).toMillis()
+    }
+
     companion object {
 
         fun withTitle(title: String): Article {
