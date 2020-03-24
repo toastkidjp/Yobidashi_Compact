@@ -11,7 +11,7 @@ object Main {
     fun main(args: Array<String>) {
         val frame = MainFrame("Yobidashi Compact")
 
-        frame.setBounds(200, 200, 1024, 800)
+        frame.setBounds(200, 200, 400, 800)
         frame.isVisible = true
         Runtime.getRuntime().addShutdownHook(Thread {
             Setting.save()

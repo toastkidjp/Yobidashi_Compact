@@ -29,7 +29,7 @@ class MainFrame(title: String) : JFrame(title) {
 
         val scrollPane = JScrollPane()
         scrollPane.viewport.view = list
-        scrollPane.preferredSize = Dimension(1000, 800)
+        scrollPane.preferredSize = Dimension(400, 800)
 
         val menubar = JMenuBar()
         val fileMenu = JMenu("File")
