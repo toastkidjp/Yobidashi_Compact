@@ -31,13 +31,26 @@ class MainFrame(title: String) : JFrame(title) {
 
         val menubar = JMenuBar()
         val fileMenu = JMenu("File")
-        val newFileMenuItem = JMenuItem("Make today")
-        newFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_CONTROL, KeyEvent.VK_N)
-        newFileMenuItem.addActionListener {
+
+        val todayFileMenuItem = JMenuItem("Make today")
+        todayFileMenuItem.addActionListener {
             fileListModel.add(Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis())))
             list.updateUI()
         }
+        fileMenu.add(todayFileMenuItem)
+
+        val newFileMenuItem = JMenuItem("Make new")
+        newFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_CONTROL, KeyEvent.VK_N)
+        newFileMenuItem.addActionListener {
+            val dialog = JOptionPane.showInputDialog(this, "Please input new article name.")
+            if (dialog.isNullOrBlank()) {
+                return@addActionListener
+            }
+            fileListModel.add(Article.withTitle(dialog))
+            list.updateUI()
+        }
         fileMenu.add(newFileMenuItem)
+
         menubar.add(fileMenu)
 
         menubar.add(LookAndFeelMenuView { this }())
