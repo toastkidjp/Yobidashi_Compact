@@ -1,5 +1,10 @@
 package jp.toastkid.yobidashi.compact.view
 
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.kotlin.toObservable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import jp.toastkid.yobidashi.compact.SubjectPool
+import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.service.KeywordSearch
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -32,7 +37,22 @@ class SearchMenuView {
                     return
                 }
 
-                println(KeywordSearch().invoke(keyword, fileFilter.text))
+                val articleListView = ArticleListView()
+                Single.fromCallable {
+                    KeywordSearch().invoke(keyword, fileFilter.text)
+                }.subscribeOn(Schedulers.io())
+                        .flatMapObservable { it.toObservable() }
+                        .map { Article.withTitle(it) }
+                        .subscribe(
+                                { articleListView.add(it) },
+                                { it.printStackTrace() },
+                                {
+                                    if (articleListView.isEmpty()) {
+                                        return@subscribe
+                                    }
+                                    SubjectPool.next(articleListView)
+                                }
+                        )
             }
         }
         item.text = "Search"

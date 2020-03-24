@@ -1,12 +1,18 @@
 package jp.toastkid.yobidashi.compact.view
 
+import io.reactivex.rxjava3.functions.Consumer
+import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.util.stream.Collectors
 import javax.swing.*
 
 /**
@@ -20,6 +26,10 @@ class MainFrame(title: String) : JFrame(title) {
         defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
         val list = ArticleListView()
+        list.addAll(Files.list(Paths.get(Setting.articleFolder())).map { Article(it) }.collect(Collectors.toList()))
+
+        val tabPane = JTabbedPane()
+        tabPane.add("Articles", list.view())
 
         val menubar = JMenuBar()
         val fileMenu = JMenu("File")
@@ -93,8 +103,12 @@ class MainFrame(title: String) : JFrame(title) {
         val panel = JPanel()
         panel.layout = BorderLayout()
         panel.add(searchInput, BorderLayout.NORTH)
-        panel.add(list.view(), BorderLayout.CENTER)
+        panel.add(tabPane, BorderLayout.CENTER)
         panel.add(buttons, BorderLayout.SOUTH)
+
+        SubjectPool.observe(Consumer {
+            SwingUtilities.invokeLater { tabPane.add("Search result", it.view()) }
+        })
 
         jMenuBar = menubar
         contentPane.add(panel, BorderLayout.CENTER)
