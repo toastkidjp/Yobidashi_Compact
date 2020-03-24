@@ -8,10 +8,7 @@ import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import java.io.File
-import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.*
 import javax.swing.*
 
 /**
@@ -74,7 +71,7 @@ class MainFrame(title: String) : JFrame(title) {
     }
 
     private fun initializeList(): JList<Article> {
-        fileListModel.addAll(File(Setting.articleFolder()))
+        fileListModel.addAll(Paths.get(Setting.articleFolder()))
 
         val list = JList(fileListModel)
         list.cellRenderer = ArticleCellRenderer()

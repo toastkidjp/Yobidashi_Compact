@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.model
 
-import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
 import javax.swing.ListModel
 import javax.swing.event.ListDataListener
 
@@ -37,8 +38,8 @@ class ArticleFileListModel : ListModel<Article> {
         items.sortBy { it.getTitle() }
     }
 
-    fun addAll(folder: File) {
-        folder.listFiles()
+    fun addAll(folder: Path) {
+        Files.list(folder)
                 ?.map { Article(it) }
                 ?.forEach {
                     master.add(it)
