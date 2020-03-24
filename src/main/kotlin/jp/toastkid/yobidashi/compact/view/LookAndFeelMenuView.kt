@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.awt.event.ActionEvent
-import java.lang.Exception
 import javax.swing.*
 
 class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {

@@ -2,11 +2,13 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Article
 import java.awt.BorderLayout
-import java.awt.Color
 import java.awt.Component
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.swing.*
+import javax.swing.JLabel
+import javax.swing.JList
+import javax.swing.JPanel
+import javax.swing.ListCellRenderer
 
 class ArticleCellRenderer :  ListCellRenderer<Article> {
 

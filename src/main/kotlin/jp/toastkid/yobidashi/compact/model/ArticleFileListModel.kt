@@ -1,7 +1,5 @@
 package jp.toastkid.yobidashi.compact.model
 
-import java.nio.file.Files
-import java.nio.file.Path
 import javax.swing.ListModel
 import javax.swing.event.ListDataListener
 
