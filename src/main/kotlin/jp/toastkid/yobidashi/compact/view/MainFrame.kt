@@ -54,7 +54,7 @@ class MainFrame(title: String) : JFrame(title) {
         fileMenu.add(newFileMenuItem)
 
         menubar.add(fileMenu)
-
+        menubar.add(SearchMenuView().invoke())
         menubar.add(LookAndFeelMenuView { this }())
 
         val searchInput = JTextField()
