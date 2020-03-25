@@ -8,6 +8,7 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
 
     operator fun invoke(): JMenu {
         val menu = JMenu(TITLE)
+        menu.setMnemonic('L')
 
         val current = Setting.lookAndFeel() ?: UIManager.getLookAndFeel().javaClass.canonicalName
         updateLookAndFeelWith(current)
@@ -49,6 +50,6 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
     }
 
     companion object {
-        private const val TITLE = "Look & Feel"
+        private const val TITLE = "Look & Feel(L)"
     }
 }
