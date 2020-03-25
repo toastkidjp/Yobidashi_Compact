@@ -33,7 +33,8 @@ class MainFrame(title: String) : JFrame(title) {
         tabPane.add("Articles", list.view())
 
         val menubar = JMenuBar()
-        val fileMenu = JMenu("File")
+        val fileMenu = JMenu("File(F)")
+        fileMenu.setMnemonic('F')
 
         val todayFileMenuItem = JMenuItem("Make today")
         todayFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
