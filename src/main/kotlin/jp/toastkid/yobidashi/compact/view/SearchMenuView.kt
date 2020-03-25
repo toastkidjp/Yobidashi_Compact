@@ -8,6 +8,8 @@ import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.service.KeywordSearch
 import java.awt.Dimension
 import java.awt.event.ActionEvent
+import java.awt.event.KeyEvent
+import java.awt.event.InputEvent
 import javax.swing.*
 import javax.swing.BoxLayout
 
@@ -55,6 +57,7 @@ class SearchMenuView {
                         )
             }
         }
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK)
         item.text = "Search"
         return item
     }
