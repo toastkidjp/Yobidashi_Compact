@@ -10,6 +10,7 @@ import java.awt.Dimension
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.awt.event.InputEvent
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.stream.Collectors
@@ -35,6 +36,7 @@ class MainFrame(title: String) : JFrame(title) {
         val fileMenu = JMenu("File")
 
         val todayFileMenuItem = JMenuItem("Make today")
+        todayFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
         todayFileMenuItem.addActionListener {
             list.add(Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis())))
             list.updateUI()
@@ -42,7 +44,7 @@ class MainFrame(title: String) : JFrame(title) {
         fileMenu.add(todayFileMenuItem)
 
         val newFileMenuItem = JMenuItem("Make new")
-        newFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_CONTROL, KeyEvent.VK_N)
+        newFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK)
         newFileMenuItem.addActionListener {
             val dialog = JOptionPane.showInputDialog(this, "Please input new article name.")
             if (dialog.isNullOrBlank()) {
