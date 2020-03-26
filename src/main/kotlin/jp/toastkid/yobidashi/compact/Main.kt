@@ -10,9 +10,7 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         val frame = MainFrame("Yobidashi Compact")
-
-        frame.setBounds(200, 200, 400, 800)
-        frame.isVisible = true
+        frame.show()
         Runtime.getRuntime().addShutdownHook(Thread {
             Setting.save()
         })

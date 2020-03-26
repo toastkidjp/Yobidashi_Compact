@@ -1,6 +1,5 @@
 package jp.toastkid.yobidashi.compact.view
 
-import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.functions.Consumer
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
@@ -19,14 +18,16 @@ import javax.swing.*
 /**
  * @author toastkidjp
  */
-class MainFrame(title: String) : JFrame(title) {
+class MainFrame(title: String) {
 
     private val tabs = ArticleListTabs()
 
-    init {
-        setTitle(title)
+    private val frame = JFrame(title)
 
-        defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    init {
+        frame.setTitle(title)
+
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
         val list = ArticleListView()
         list.addAll(Files.list(Paths.get(Setting.articleFolder())).map { Article(it) }.collect(Collectors.toList()))
@@ -47,7 +48,7 @@ class MainFrame(title: String) : JFrame(title) {
         }.invoke())
         menubar.add(SearchMenuView().invoke())
         menubar.add(SortMenuView().invoke())
-        menubar.add(LookAndFeelMenuView { this }())
+        menubar.add(LookAndFeelMenuView { frame }())
 
         val searchInput = JTextField()
         searchInput.addKeyListener(object : KeyListener {
@@ -82,7 +83,7 @@ class MainFrame(title: String) : JFrame(title) {
             override fun actionPerformed(e: ActionEvent?) {
                 val selectedValue = tabs.get(tabPane.selectedIndex).currentArticle() ?: return
                 JOptionPane.showConfirmDialog(
-                        this@MainFrame,
+                        frame,
                         "${selectedValue.getTitle()} - ${selectedValue.count()}"
                 )
             }
@@ -104,12 +105,15 @@ class MainFrame(title: String) : JFrame(title) {
         })
 
         SubjectPool.observeCloseWindow(Consumer {
-            dispose()
+            frame.dispose()
         })
 
-        jMenuBar = menubar
-        contentPane.add(panel, BorderLayout.CENTER)
-        defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        frame.jMenuBar = menubar
+        frame.contentPane.add(panel, BorderLayout.CENTER)
+        frame.setBounds(200, 200, 400, 800)
     }
 
+    fun show() {
+        frame.isVisible = true
+    }
 }
