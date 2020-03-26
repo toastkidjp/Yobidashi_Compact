@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact
+package jp.toastkid.yobidashi.compact.service
 
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import org.junit.jupiter.api.Assertions.assertEquals
