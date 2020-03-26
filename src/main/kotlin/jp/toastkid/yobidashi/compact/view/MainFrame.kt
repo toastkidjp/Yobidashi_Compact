@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.view
 import io.reactivex.rxjava3.functions.Consumer
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import java.awt.BorderLayout
@@ -21,6 +22,8 @@ import javax.swing.*
  */
 class MainFrame(title: String) : JFrame(title) {
 
+    private val tabs = ArticleListTabs()
+
     init {
         setTitle(title)
 
@@ -31,6 +34,7 @@ class MainFrame(title: String) : JFrame(title) {
 
         val tabPane = JTabbedPane()
         tabPane.add("Articles", list.view())
+        tabs.add(list)
 
         val menubar = JMenuBar()
         val fileMenu = JMenu("File(F)")
@@ -81,7 +85,7 @@ class MainFrame(title: String) : JFrame(title) {
         val openButton = JButton()
         openButton.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent?) {
-                list.openCurrentArticle()
+                tabs.get(tabPane.selectedIndex).openCurrentArticle()
             }
         }
         openButton.text = "Open"
@@ -91,7 +95,7 @@ class MainFrame(title: String) : JFrame(title) {
         val countButton = JButton()
         countButton.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent?) {
-                val selectedValue = list.currentArticle() ?: return
+                val selectedValue = tabs.get(tabPane.selectedIndex).currentArticle() ?: return
                 JOptionPane.showConfirmDialog(
                         this@MainFrame,
                         "${selectedValue.getTitle()} - ${selectedValue.count()}"
@@ -111,6 +115,7 @@ class MainFrame(title: String) : JFrame(title) {
 
         SubjectPool.observe(Consumer {
             SwingUtilities.invokeLater { tabPane.add("Search result", it.view()) }
+            tabs.add(it)
         })
 
         jMenuBar = menubar

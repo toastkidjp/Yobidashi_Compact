@@ -9,6 +9,7 @@ import java.nio.file.Paths
 
 class Article(private val file: Path) {
 
+    // TODO use [ExtensionRemover]
     private val title = file.fileName.toString().substring(0, file.fileName.toString().lastIndexOf("."))
 
     fun getTitle() = title
@@ -19,6 +20,14 @@ class Article(private val file: Path) {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun makeFieIfNeed() {
+        if (Files.exists(file)) {
+            return
+        }
+        Files.createFile(file)
+        Files.write(file, ArticleTemplate()(title).toByteArray(StandardCharsets.UTF_8))
     }
 
     fun count(): Int {
@@ -33,10 +42,6 @@ class Article(private val file: Path) {
 
         fun withTitle(title: String): Article {
             val file = Paths.get(Setting.articleFolder(), "$title.md")
-            if (!Files.exists(file)) {
-                Files.createFile(file)
-                Files.write(file, ArticleTemplate()(title).toByteArray(StandardCharsets.UTF_8))
-            }
             return Article(file)
         }
     }
