@@ -26,4 +26,11 @@ object SubjectPool {
     fun observeSort(onNext: Consumer<Sorting>) {
         sort.subscribe(onNext)
     }
+
+    private val closeWindow: PublishSubject<Unit> = PublishSubject.create()
+
+    fun closeWindow() = closeWindow.onNext(Unit)
+
+    fun observeCloseWindow(onNext: Consumer<Unit>) = closeWindow.subscribe(onNext)
+
 }

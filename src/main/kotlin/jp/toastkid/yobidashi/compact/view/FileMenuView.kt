@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.view
 
+import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
@@ -21,7 +22,17 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
         fileMenu.add(makeTodayMenuItem())
         fileMenu.add(makeNewMenuItem())
         fileMenu.add(makeZipMenuItem())
+        fileMenu.add(makeExit())
         return fileMenu
+    }
+
+    private fun makeExit(): JMenuItem {
+        val item = JMenuItem("Exit")
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK)
+        item.addActionListener {
+            SubjectPool.closeWindow()
+        }
+        return item
     }
 
     private fun makeTodayMenuItem(): JMenuItem {

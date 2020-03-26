@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.view
 
+import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.functions.Consumer
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
@@ -102,8 +103,13 @@ class MainFrame(title: String) : JFrame(title) {
             tabs.add(it)
         })
 
+        SubjectPool.observeCloseWindow(Consumer {
+            dispose()
+        })
+
         jMenuBar = menubar
         contentPane.add(panel, BorderLayout.CENTER)
+        defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     }
 
 }
