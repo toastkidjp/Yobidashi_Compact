@@ -48,7 +48,7 @@ class ArticleListView {
     }
 
     fun openCurrentArticle() {
-        view.selectedValue.open()
+        view.selectedValue?.open()
     }
 
     fun currentArticle(): Article? = view.selectedValue
