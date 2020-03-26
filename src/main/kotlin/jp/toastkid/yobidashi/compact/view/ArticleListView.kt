@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
+import jp.toastkid.yobidashi.compact.model.Sorting
 import java.awt.Dimension
 import javax.swing.JList
 import javax.swing.JScrollPane
@@ -53,4 +54,9 @@ class ArticleListView {
     fun currentArticle(): Article? = view.selectedValue
 
     fun isEmpty() = fileListModel.size == 0
+
+    fun sortBy(sorting: Sorting) {
+        fileListModel.sortBy(sorting)
+        updateUI()
+    }
 }

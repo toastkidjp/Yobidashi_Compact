@@ -34,6 +34,10 @@ class MainFrame(title: String) : JFrame(title) {
         tabPane.add("Articles", list.view())
         tabs.add(list)
 
+        SubjectPool.observeSort(Consumer {
+            tabs.get(tabPane.selectedIndex).sortBy(it)
+        })
+
         val menubar = JMenuBar()
 
         menubar.add(FileMenuView {
@@ -41,6 +45,7 @@ class MainFrame(title: String) : JFrame(title) {
             list.updateUI()
         }.invoke())
         menubar.add(SearchMenuView().invoke())
+        menubar.add(SortMenuView().invoke())
         menubar.add(LookAndFeelMenuView { this }())
 
         val searchInput = JTextField()

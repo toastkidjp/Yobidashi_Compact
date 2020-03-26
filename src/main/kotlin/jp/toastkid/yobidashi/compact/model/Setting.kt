@@ -24,6 +24,12 @@ object Setting {
 
     fun lookAndFeel() = properties.getProperty("look_and_feel")
 
+    fun sorting() = Sorting.findByName(properties.getProperty("sorting"))
+
+    fun setSorting(newValue: Sorting) {
+        properties.setProperty("sorting", newValue.name)
+    }
+
     fun setLookAndFeel(newValue: String) {
         properties.setProperty("look_and_feel", newValue)
     }

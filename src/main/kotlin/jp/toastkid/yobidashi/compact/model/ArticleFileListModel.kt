@@ -43,4 +43,13 @@ class ArticleFileListModel : ListModel<Article> {
                     items.add(it)
                 }
     }
+
+    fun sortBy(sorting: Sorting) {
+        items.sortByDescending {
+            when (sorting) {
+                Sorting.LAST_MODIFIED -> it.lastModified().toString()
+                else -> it.getTitle()
+            }
+        }
+    }
 }
