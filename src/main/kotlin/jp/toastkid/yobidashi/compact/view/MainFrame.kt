@@ -5,14 +5,11 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
-import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
-import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import java.awt.event.InputEvent
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.stream.Collectors
@@ -38,31 +35,11 @@ class MainFrame(title: String) : JFrame(title) {
         tabs.add(list)
 
         val menubar = JMenuBar()
-        val fileMenu = JMenu("File(F)")
-        fileMenu.setMnemonic('F')
 
-        val todayFileMenuItem = JMenuItem("Make today")
-        todayFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
-        todayFileMenuItem.addActionListener {
-            list.add(Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis())))
+        menubar.add(FileMenuView {
+            list.add(it)
             list.updateUI()
-        }
-        fileMenu.add(todayFileMenuItem)
-
-        val newFileMenuItem = JMenuItem("Make new")
-        newFileMenuItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK)
-        newFileMenuItem.addActionListener {
-            val dialog = JOptionPane.showInputDialog(this, "Please input new article name.")
-            if (dialog.isNullOrBlank()) {
-                return@addActionListener
-            }
-            list.add(Article.withTitle(dialog))
-            list.updateUI()
-        }
-        fileMenu.add(newFileMenuItem)
-        fileMenu.add(makeZipMenuItem())
-
-        menubar.add(fileMenu)
+        }.invoke())
         menubar.add(SearchMenuView().invoke())
         menubar.add(LookAndFeelMenuView { this }())
 
@@ -122,26 +99,6 @@ class MainFrame(title: String) : JFrame(title) {
 
         jMenuBar = menubar
         contentPane.add(panel, BorderLayout.CENTER)
-    }
-
-    private fun makeZipMenuItem(): JMenuItem {
-        val item = JMenuItem()
-        item.action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent) {
-                val paths = Files.list(Paths.get(Setting.articleFolder()))
-                        .sorted { p1, p2 -> Files.getLastModifiedTime(p1).compareTo(Files.getLastModifiedTime(p2)) * -1 }
-                        .filter {
-                            val name = it.fileName.toString()
-                            name.startsWith("20") || name.startsWith("『")
-                        }
-                        .collect(Collectors.toList())
-                        .subList(0, 1500)
-                ZipArchiver().invoke(paths)
-            }
-        }
-        item.text = "zip"
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK)
-        return item
     }
 
 }
