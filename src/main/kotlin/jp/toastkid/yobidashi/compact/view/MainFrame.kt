@@ -6,6 +6,7 @@ import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
+import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -59,6 +60,7 @@ class MainFrame(title: String) : JFrame(title) {
             list.updateUI()
         }
         fileMenu.add(newFileMenuItem)
+        fileMenu.add(makeZipMenuItem())
 
         menubar.add(fileMenu)
         menubar.add(SearchMenuView().invoke())
@@ -120,6 +122,26 @@ class MainFrame(title: String) : JFrame(title) {
 
         jMenuBar = menubar
         contentPane.add(panel, BorderLayout.CENTER)
+    }
+
+    private fun makeZipMenuItem(): JMenuItem {
+        val item = JMenuItem()
+        item.action = object : AbstractAction() {
+            override fun actionPerformed(e: ActionEvent) {
+                val paths = Files.list(Paths.get(Setting.articleFolder()))
+                        .sorted { p1, p2 -> Files.getLastModifiedTime(p1).compareTo(Files.getLastModifiedTime(p2)) * -1 }
+                        .filter {
+                            val name = it.fileName.toString()
+                            name.startsWith("20") || name.startsWith("『")
+                        }
+                        .collect(Collectors.toList())
+                        .subList(0, 1500)
+                ZipArchiver().invoke(paths)
+            }
+        }
+        item.text = "zip"
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK)
+        return item
     }
 
 }
