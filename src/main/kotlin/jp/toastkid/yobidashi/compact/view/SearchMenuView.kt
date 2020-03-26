@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.kotlin.toObservable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.service.ExtensionRemover
 import jp.toastkid.yobidashi.compact.service.KeywordSearch
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -14,6 +15,8 @@ import javax.swing.*
 import javax.swing.BoxLayout
 
 class SearchMenuView {
+
+    private val extensionRemover = ExtensionRemover()
 
     operator fun invoke(): JMenu {
         val menu = JMenu("Search")
@@ -44,6 +47,8 @@ class SearchMenuView {
                     KeywordSearch().invoke(keyword, fileFilter.text)
                 }.subscribeOn(Schedulers.io())
                         .flatMapObservable { it.toObservable() }
+                        .map { extensionRemover(it) ?: "" }
+                        .filter { it.isNotBlank() }
                         .map { Article.withTitle(it) }
                         .subscribe(
                                 { articleListView.add(it) },
