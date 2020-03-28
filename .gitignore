@@ -3,6 +3,7 @@
 *.pdf
 *.lnk
 *.jar
+*.zip
 .git/
 .gradle/
 .settings/
