@@ -76,6 +76,7 @@ class MainFrame(title: String) {
         }
         openButton.text = "Open"
         openButton.preferredSize = Dimension(100, 40)
+        openButton.setMnemonic(KeyEvent.VK_O)
         buttons.add(openButton)
 
         val countButton = JButton()
@@ -85,11 +86,11 @@ class MainFrame(title: String) {
                 JOptionPane.showConfirmDialog(
                         frame,
                         "${selectedValue.getTitle()} - ${selectedValue.count()}"
-                )
-            }
+                )            }
         }
         countButton.text = "Count"
         countButton.preferredSize = Dimension(100, 40)
+        countButton.setMnemonic(KeyEvent.VK_C)
         buttons.add(countButton)
         buttons.preferredSize = Dimension(300, 60)
 
