@@ -11,7 +11,7 @@ import java.util.zip.ZipOutputStream
 
 class ZipArchiver {
 
-    operator fun invoke(paths: MutableList<Path>) {
+    operator fun invoke(paths: Collection<Path>) {
         var zos: ZipOutputStream? = null
         try {
             zos = ZipOutputStream(BufferedOutputStream(Files.newOutputStream(Paths.get(DESTINATION))))

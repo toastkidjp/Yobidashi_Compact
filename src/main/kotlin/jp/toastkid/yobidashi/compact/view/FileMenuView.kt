@@ -5,10 +5,10 @@ import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
-import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Collectors
 import javax.swing.*
@@ -21,7 +21,8 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
 
         fileMenu.add(makeTodayMenuItem())
         fileMenu.add(makeNewMenuItem())
-        fileMenu.add(makeZipMenuItem())
+        fileMenu.add(makeZipAllMenuItem())
+        fileMenu.add(makeZipDiaryMenuItem())
         fileMenu.add(makeExit())
         return fileMenu
     }
@@ -61,21 +62,34 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
         return item
     }
 
-    private fun makeZipMenuItem(): JMenuItem {
-        val item = JMenuItem("Zip")
+    private fun makeZipAllMenuItem(): JMenuItem {
+        val item = JMenuItem("Zip all")
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK)
         item.addActionListener {
-            val paths = Files.list(Paths.get(Setting.articleFolder()))
-                    .sorted { p1, p2 -> Files.getLastModifiedTime(p1).compareTo(Files.getLastModifiedTime(p2)) * -1 }
-                    .filter {
-                        val name = it.fileName.toString()
-                        name.startsWith("20") || name.startsWith("『")
-                    }
-                    .collect(Collectors.toList())
-                    .subList(0, 1500)
-            ZipArchiver().invoke(paths)
+            zipPaths(Files.list(Paths.get(Setting.articleFolder())).collect(Collectors.toList()))
         }
         return item
+    }
+
+    private fun makeZipDiaryMenuItem(): JMenuItem {
+        val item = JMenuItem("Zip diaries")
+        item.addActionListener {
+            zipPaths(
+                    Files.list(Paths.get(Setting.articleFolder()))
+                            .sorted { p1, p2 -> Files.getLastModifiedTime(p1).compareTo(Files.getLastModifiedTime(p2)) * -1 }
+                            .filter {
+                                val name = it.fileName.toString()
+                                name.startsWith("20") || name.startsWith("『")
+                            }
+                            .collect(Collectors.toList())
+                            .subList(0, 1500)
+            )
+        }
+        return item
+    }
+
+    private fun zipPaths(paths: Collection<Path>) {
+        ZipArchiver().invoke(paths)
     }
 
 }
