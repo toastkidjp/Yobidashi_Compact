@@ -52,4 +52,6 @@ class ArticleFileListModel : ListModel<Article> {
             }
         }
     }
+
+    fun all() = ArrayList<Article>().also { it.addAll(items) }
 }
