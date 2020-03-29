@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
+import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.nio.file.Files
@@ -66,7 +67,7 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
         val item = JMenuItem("Zip all")
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK)
         item.addActionListener {
-            zipPaths(Files.list(Paths.get(Setting.articleFolder())).collect(Collectors.toList()))
+            ZipViewModel.zip()
         }
         return item
     }

@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -107,6 +108,10 @@ class MainFrame(title: String) {
 
         SubjectPool.observeCloseWindow(Consumer {
             frame.dispose()
+        })
+
+        ZipViewModel.observe(Consumer {
+            tabs.get(tabPane.selectedIndex).zip()
         })
 
         frame.jMenuBar = menubar
