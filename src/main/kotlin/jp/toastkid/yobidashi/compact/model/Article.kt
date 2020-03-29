@@ -38,6 +38,8 @@ class Article(private val file: Path) {
         return Files.getLastModifiedTime(file).toMillis()
     }
 
+    fun path() = file
+
     companion object {
 
         fun withTitle(title: String): Article {
