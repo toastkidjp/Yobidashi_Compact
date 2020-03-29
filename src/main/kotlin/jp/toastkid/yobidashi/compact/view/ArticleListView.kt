@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.view
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
 import jp.toastkid.yobidashi.compact.model.Sorting
+import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Dimension
 import javax.swing.JList
 import javax.swing.JScrollPane
@@ -58,5 +59,10 @@ class ArticleListView {
     fun sortBy(sorting: Sorting) {
         fileListModel.sortBy(sorting)
         updateUI()
+    }
+
+    fun zip() {
+        val paths = (view.selectedValuesList ?: fileListModel.all()).map { it.path() }
+        ZipArchiver().invoke(paths)
     }
 }
