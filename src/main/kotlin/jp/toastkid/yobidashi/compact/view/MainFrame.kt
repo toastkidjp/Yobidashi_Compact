@@ -83,11 +83,10 @@ class MainFrame(title: String) {
         val countButton = JButton()
         countButton.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent?) {
-                val selectedValue = tabs.get(tabPane.selectedIndex).currentArticle() ?: return
-                JOptionPane.showConfirmDialog(
-                        frame,
-                        "${selectedValue.getTitle()} - ${selectedValue.count()}"
-                )            }
+                tabs.get(tabPane.selectedIndex).counts()?.also {
+                    JOptionPane.showConfirmDialog(frame, it)
+                }
+            }
         }
         countButton.text = "Count"
         countButton.preferredSize = Dimension(100, 40)

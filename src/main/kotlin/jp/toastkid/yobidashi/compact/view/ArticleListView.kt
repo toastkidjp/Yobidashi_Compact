@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
+import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Dimension
@@ -53,6 +54,13 @@ class ArticleListView {
     }
 
     fun currentArticle(): Article? = view.selectedValue
+
+    fun counts(): String? {
+        val selectedArticles = view.selectedValuesList ?: return null
+        return selectedArticles
+                .map { "${it.getTitle()}: ${it.count()}" }
+                .reduce { base, item -> "$base${System.lineSeparator()}$item" }
+    }
 
     fun isEmpty() = fileListModel.size == 0
 
