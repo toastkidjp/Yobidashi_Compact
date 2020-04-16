@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Article
 import java.awt.BorderLayout
+import java.awt.Color
 import java.awt.Component
 import java.text.SimpleDateFormat
 import java.util.*
@@ -9,6 +10,7 @@ import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JPanel
 import javax.swing.ListCellRenderer
+import javax.swing.border.LineBorder
 
 class ArticleCellRenderer :  ListCellRenderer<Article> {
 
@@ -37,6 +39,8 @@ class ArticleCellRenderer :  ListCellRenderer<Article> {
 
         view.background = if (isSelected) list?.selectionBackground else list?.background
         view.foreground = if (isSelected) list?.selectionForeground else list?.foreground
+
+        view.border = LineBorder(Color.GRAY, 1, false)
         return view
     }
 
