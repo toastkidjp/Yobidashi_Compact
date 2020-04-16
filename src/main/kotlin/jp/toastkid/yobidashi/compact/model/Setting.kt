@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
@@ -21,6 +22,8 @@ object Setting {
     }
 
     fun articleFolder() = properties.getProperty("article.folder")
+
+    fun articleFolderFile() = File(articleFolder())
 
     fun lookAndFeel() = properties.getProperty("look_and_feel")
 

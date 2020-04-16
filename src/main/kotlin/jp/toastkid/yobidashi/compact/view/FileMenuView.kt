@@ -6,6 +6,7 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
+import java.awt.Desktop
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.nio.file.Files
@@ -24,6 +25,14 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
         fileMenu.add(makeNewMenuItem())
         fileMenu.add(makeZipAllMenuItem())
         fileMenu.add(makeZipDiaryMenuItem())
+
+        val item = JMenuItem("Open folder")
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK)
+        item.addActionListener {
+            Desktop.getDesktop().open(Setting.articleFolderFile())
+        }
+        fileMenu.add(item)
+
         fileMenu.add(makeExit())
         return fileMenu
     }
