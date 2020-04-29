@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact
 
 import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.subjects.PublishSubject
+import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.view.ArticleListView
 
@@ -33,4 +34,9 @@ object SubjectPool {
 
     fun observeCloseWindow(onNext: Consumer<Unit>) = closeWindow.subscribe(onNext)
 
+    private val addToList: PublishSubject<Article> = PublishSubject.create()
+
+    fun addToList(article: Article) = addToList.onNext(article)
+
+    fun observeAddToList(onNext: Consumer<Article>) = addToList.subscribe(onNext)
 }

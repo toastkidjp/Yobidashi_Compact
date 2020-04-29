@@ -15,7 +15,7 @@ import java.nio.file.Paths
 import java.util.stream.Collectors
 import javax.swing.*
 
-class FileMenuView(private val addToList: (Article) -> Unit) {
+class FileMenuView {
 
     operator fun invoke(): JMenu {
         val fileMenu = JMenu("File(F)")
@@ -52,7 +52,7 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
         item.addActionListener {
             val article = Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis()))
             article.makeFieIfNeed()
-            addToList(article)
+            SubjectPool.addToList(article)
         }
         return item
     }
@@ -67,7 +67,7 @@ class FileMenuView(private val addToList: (Article) -> Unit) {
             }
             val article = Article.withTitle(dialog)
             article.makeFieIfNeed()
-            addToList(article)
+            SubjectPool.addToList(article)
         }
         return item
     }

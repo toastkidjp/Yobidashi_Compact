@@ -41,17 +41,6 @@ class MainFrame(title: String) {
             tabs.get(tabPane.selectedIndex).sortBy(it)
         })
 
-        val menubar = JMenuBar()
-
-        menubar.add(FileMenuView {
-            list.add(it)
-            list.sortBy(Setting.sorting())
-        }.invoke())
-        menubar.add(SearchMenuView().invoke())
-        menubar.add(AggregationMenuView().invoke())
-        menubar.add(SortMenuView().invoke())
-        menubar.add(LookAndFeelMenuView { frame }())
-
         val searchInput = JTextField()
         searchInput.addKeyListener(object : KeyListener {
             override fun keyTyped(e: KeyEvent?) = Unit
@@ -110,11 +99,16 @@ class MainFrame(title: String) {
             frame.dispose()
         })
 
+        SubjectPool.observeAddToList(Consumer {
+            list.add(it)
+            list.sortBy(Setting.sorting())
+        })
+
         ZipViewModel.observe(Consumer {
             tabs.get(tabPane.selectedIndex).zip()
         })
 
-        frame.jMenuBar = menubar
+        frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 800)
     }
