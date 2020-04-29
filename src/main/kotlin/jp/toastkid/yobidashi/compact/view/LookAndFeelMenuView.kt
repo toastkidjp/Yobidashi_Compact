@@ -1,17 +1,20 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import java.awt.event.ActionEvent
 import javax.swing.*
 
 class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
+
+    private val uiUpdaterService = UiUpdaterService()
 
     operator fun invoke(): JMenu {
         val menu = JMenu(TITLE)
         menu.setMnemonic('L')
 
         val current = Setting.lookAndFeel() ?: UIManager.getLookAndFeel().javaClass.canonicalName
-        updateLookAndFeelWith(current)
+        uiUpdaterService(frameSupplier(), current)
 
         val group = ButtonGroup()
 
@@ -31,22 +34,12 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
         item.hideActionText = true
         item.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent) {
-                updateLookAndFeelWith(group.selection.actionCommand)
+                uiUpdaterService(frameSupplier(), group.selection.actionCommand)
             }
         }
         item.text = it.name
         item.actionCommand = it.className
         return item
-    }
-
-    private fun updateLookAndFeelWith(command: String) {
-        try {
-            UIManager.setLookAndFeel(command)
-            Setting.setLookAndFeel(command)
-            SwingUtilities.updateComponentTreeUI(frameSupplier())
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     companion object {
