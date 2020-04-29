@@ -45,9 +45,10 @@ class MainFrame(title: String) {
 
         menubar.add(FileMenuView {
             list.add(it)
-            list.updateUI()
+            list.sortBy(Setting.sorting())
         }.invoke())
         menubar.add(SearchMenuView().invoke())
+        menubar.add(AggregationMenuView().invoke())
         menubar.add(SortMenuView().invoke())
         menubar.add(LookAndFeelMenuView { frame }())
 
