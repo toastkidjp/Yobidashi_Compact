@@ -31,7 +31,7 @@ class ZipArchiver {
             entry.time = Files.getLastModifiedTime(path).toMillis()
             zos.putNextEntry(entry)
             BufferedInputStream(Files.newInputStream(path)).use { stream ->
-                var len = 0
+                var len: Int
                 while (stream.read(buffer).also { len = it } != -1) {
                     zos.write(buffer, 0, len)
                 }
