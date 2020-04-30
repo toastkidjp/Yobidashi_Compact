@@ -51,21 +51,23 @@ class AggregationMenuView {
         Single.fromCallable { OutgoAggregatorService().invoke(keyword) }
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                        {
-                            if (it.isEmpty()) {
-                                JOptionPane.showConfirmDialog(null, "Result is empty.")
-                                return@subscribe
-                            }
-
-                            val sum = it.values.sum()
-                            val detail = it.entries.map { "${it.key}: ${it.value}" }.reduce { base, item -> "$base$LINE_SEPARATOR$item" }
-                            JOptionPane.showConfirmDialog(null, "\\$sum$LINE_SEPARATOR$detail")
-                        },
+                        { onSuccess(it) },
                         {
                             it.printStackTrace()
                             JOptionPane.showConfirmDialog(null, it)
                         }
                 )
+    }
+
+    private fun onSuccess(aggregationResult: Map<String, Int>) {
+        if (aggregationResult.isEmpty()) {
+            JOptionPane.showConfirmDialog(null, "Result is empty.")
+            return
+        }
+
+        val sum = aggregationResult.values.sum()
+        val detail = aggregationResult.entries.map { "${it.key}: ${it.value}" }.reduce { base, item -> "$base$LINE_SEPARATOR$item" }
+        JOptionPane.showConfirmDialog(null, "\\$sum$LINE_SEPARATOR$detail")
     }
 
     companion object {
