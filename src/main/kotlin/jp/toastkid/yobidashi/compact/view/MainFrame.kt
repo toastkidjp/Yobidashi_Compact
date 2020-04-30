@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import java.awt.BorderLayout
 import java.awt.Dimension
@@ -111,6 +112,10 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 800)
+
+        Setting.lookAndFeel()?.let {
+            UiUpdaterService().invoke(frame, it)
+        }
     }
 
     fun show() {

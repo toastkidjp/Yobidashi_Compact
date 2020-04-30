@@ -14,7 +14,6 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
         menu.setMnemonic('L')
 
         val current = Setting.lookAndFeel() ?: UIManager.getLookAndFeel().javaClass.canonicalName
-        uiUpdaterService(frameSupplier(), current)
 
         val group = ButtonGroup()
 
