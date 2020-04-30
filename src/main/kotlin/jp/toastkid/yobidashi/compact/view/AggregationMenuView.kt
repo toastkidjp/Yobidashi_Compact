@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.view
 
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
 import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
@@ -59,18 +60,13 @@ class AggregationMenuView {
                 )
     }
 
-    private fun onSuccess(aggregationResult: Map<String, Int>) {
+    private fun onSuccess(aggregationResult: OutgoAggregationResult) {
         if (aggregationResult.isEmpty()) {
             JOptionPane.showConfirmDialog(null, "Result is empty.")
             return
         }
 
-        val sum = aggregationResult.values.sum()
-        val detail = aggregationResult.entries.map { "${it.key}: ${it.value}" }.reduce { base, item -> "$base$LINE_SEPARATOR$item" }
-        JOptionPane.showConfirmDialog(null, "\\$sum$LINE_SEPARATOR$detail")
+        JOptionPane.showConfirmDialog(null, aggregationResult.makeMessage())
     }
 
-    companion object {
-        private val LINE_SEPARATOR = System.lineSeparator()
-    }
 }

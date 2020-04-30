@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.service
 
+import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -7,8 +8,8 @@ import java.util.stream.Collectors
 
 class OutgoAggregatorService {
 
-    operator fun invoke(keyword: String): Map<String, Int> {
-        val map = mutableMapOf<String, Int>()
+    operator fun invoke(keyword: String): OutgoAggregationResult {
+        val map = OutgoAggregationResult()
         Files.list(Paths.get(Setting.articleFolder()))
                 .parallel()
                 .map { it.fileName.toString() to Files.readAllLines(it) }
