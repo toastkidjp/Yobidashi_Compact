@@ -29,42 +29,46 @@ class SearchMenuView {
         item.hideActionText = true
         item.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent) {
-                val panel = JPanel()
-                panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
-                val fileFilter = JTextField()
-                fileFilter.preferredSize = Dimension(100, 36)
-                panel.add(JLabel("Please would you input search query."))
-                panel.add(JLabel("Title filter"))
-                panel.add(fileFilter)
-                panel.add(JLabel("Keyword"))
-                val keyword = JOptionPane.showInputDialog(null, panel)
-                if (keyword.isNullOrBlank() && fileFilter.text.isNullOrBlank()) {
-                    return
-                }
-
-                val articleListView = ArticleListView()
-                Single.fromCallable {
-                    KeywordSearch().invoke(keyword, fileFilter.text)
-                }.subscribeOn(Schedulers.io())
-                        .flatMapObservable { it.toObservable() }
-                        .map { extensionRemover(it) ?: "" }
-                        .filter { it.isNotBlank() }
-                        .map { Article.withTitle(it) }
-                        .subscribe(
-                                { articleListView.add(it) },
-                                { it.printStackTrace() },
-                                {
-                                    if (articleListView.isEmpty()) {
-                                        return@subscribe
-                                    }
-                                    SubjectPool.next(articleListView)
-                                }
-                        )
+                onAction()
             }
         }
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK)
         item.text = "Search"
         return item
+    }
+
+    private fun onAction() {
+        val panel = JPanel()
+        panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
+        val fileFilter = JTextField()
+        fileFilter.preferredSize = Dimension(100, 36)
+        panel.add(JLabel("Please would you input search query."))
+        panel.add(JLabel("Title filter"))
+        panel.add(fileFilter)
+        panel.add(JLabel("Keyword"))
+        val keyword = JOptionPane.showInputDialog(null, panel)
+        if (keyword.isNullOrBlank() && fileFilter.text.isNullOrBlank()) {
+            return
+        }
+
+        val articleListView = ArticleListView()
+        Single.fromCallable {
+            KeywordSearch().invoke(keyword, fileFilter.text)
+        }.subscribeOn(Schedulers.io())
+                .flatMapObservable { it.toObservable() }
+                .map { extensionRemover(it) ?: "" }
+                .filter { it.isNotBlank() }
+                .map { Article.withTitle(it) }
+                .subscribe(
+                        { articleListView.add(it) },
+                        { it.printStackTrace() },
+                        {
+                            if (articleListView.isEmpty()) {
+                                return@subscribe
+                            }
+                            SubjectPool.next(articleListView)
+                        }
+                )
     }
 
 }
