@@ -27,41 +27,45 @@ class AggregationMenuView {
         item.hideActionText = true
         item.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent) {
-                val defaultInput = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"))
-
-                val keyword = JOptionPane.showInputDialog(
-                        null,
-                        "Please input year and month you want aggregate outgo? ex) $defaultInput",
-                        defaultInput
-                )
-
-                if (keyword.isNullOrBlank()) {
-                    return
-                }
-
-                Single.fromCallable { OutgoAggregatorService().invoke(keyword) }
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(
-                                {
-                                    if (it.isEmpty()) {
-                                        JOptionPane.showConfirmDialog(null, "Result is empty.")
-                                        return@subscribe
-                                    }
-
-                                    val sum = it.values.sum()
-                                    val detail = it.entries.map { "${it.key}: ${it.value}" }.reduce { base, item -> "$base$LINE_SEPARATOR$item" }
-                                    JOptionPane.showConfirmDialog(null, "\\$sum$LINE_SEPARATOR$detail")
-                                },
-                                {
-                                    it.printStackTrace()
-                                    JOptionPane.showConfirmDialog(null, it)
-                                }
-                        )
+                onAction()
             }
         }
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK)
         item.text = "OutGo"
         return item
+    }
+
+    private fun onAction() {
+        val defaultInput = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"))
+
+        val keyword = JOptionPane.showInputDialog(
+                null,
+                "Please input year and month you want aggregate outgo? ex) $defaultInput",
+                defaultInput
+        )
+
+        if (keyword.isNullOrBlank()) {
+            return
+        }
+
+        Single.fromCallable { OutgoAggregatorService().invoke(keyword) }
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                        {
+                            if (it.isEmpty()) {
+                                JOptionPane.showConfirmDialog(null, "Result is empty.")
+                                return@subscribe
+                            }
+
+                            val sum = it.values.sum()
+                            val detail = it.entries.map { "${it.key}: ${it.value}" }.reduce { base, item -> "$base$LINE_SEPARATOR$item" }
+                            JOptionPane.showConfirmDialog(null, "\\$sum$LINE_SEPARATOR$detail")
+                        },
+                        {
+                            it.printStackTrace()
+                            JOptionPane.showConfirmDialog(null, it)
+                        }
+                )
     }
 
     companion object {
