@@ -37,7 +37,7 @@ class AggregationMenuView {
     }
 
     private fun onAction() {
-        val defaultInput = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"))
+        val defaultInput = LocalDate.now().format(DATE_FORMATTER)
 
         val keyword = JOptionPane.showInputDialog(
                 null,
@@ -69,4 +69,7 @@ class AggregationMenuView {
         JOptionPane.showConfirmDialog(null, aggregationResult.makeMessage())
     }
 
+    companion object {
+        private val DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM")
+    }
 }
