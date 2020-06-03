@@ -17,7 +17,7 @@ class OutgoAggregatorService {
                 .map {
                     var isOutGoLine = false
                     for (line in it.second) {
-                        if ((line.startsWith("#")) && line.endsWith("家計簿")) {
+                        if (line.startsWith("#") && line.endsWith("家計簿")) {
                             isOutGoLine = true
                         }
 
