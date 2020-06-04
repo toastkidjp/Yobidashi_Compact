@@ -22,12 +22,12 @@ class Article(private val file: Path) {
         }
     }
 
-    fun makeFieIfNeed() {
+    fun makeFieIfNeed(contentSupplier: () -> String) {
         if (Files.exists(file)) {
             return
         }
         Files.createFile(file)
-        Files.write(file, ArticleTemplate()(title).toByteArray(StandardCharsets.UTF_8))
+        Files.write(file, contentSupplier().toByteArray(StandardCharsets.UTF_8))
     }
 
     fun count(): Int {

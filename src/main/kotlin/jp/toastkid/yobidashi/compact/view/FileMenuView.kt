@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.model.ArticleTemplate
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
@@ -51,7 +52,7 @@ class FileMenuView {
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
         item.addActionListener {
             val article = Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis()))
-            article.makeFieIfNeed()
+            article.makeFieIfNeed { ArticleTemplate()(article.getTitle()) }
             SubjectPool.addToList(article)
         }
         return item
@@ -66,7 +67,7 @@ class FileMenuView {
                 return@addActionListener
             }
             val article = Article.withTitle(dialog)
-            article.makeFieIfNeed()
+            article.makeFieIfNeed { "# ${article.getTitle()}" }
             SubjectPool.addToList(article)
         }
         return item
