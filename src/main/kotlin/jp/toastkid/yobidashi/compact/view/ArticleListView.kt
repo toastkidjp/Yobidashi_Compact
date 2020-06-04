@@ -53,8 +53,6 @@ class ArticleListView {
         view.selectedValue?.open()
     }
 
-    fun currentArticle(): Article? = view.selectedValue
-
     fun counts(): String? {
         val selectedArticles = view.selectedValuesList ?: return null
         return selectedArticles
