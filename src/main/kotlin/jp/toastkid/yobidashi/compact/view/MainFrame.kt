@@ -15,6 +15,7 @@ import java.awt.event.KeyListener
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.stream.Collectors
+import javax.imageio.ImageIO
 import javax.swing.*
 
 /**
@@ -28,6 +29,8 @@ class MainFrame(title: String) {
 
     init {
         frame.setTitle(title)
+
+        frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
 
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
