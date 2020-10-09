@@ -3,6 +3,8 @@ package jp.toastkid.yobidashi.compact.model
 class ArticleTemplate {
     operator fun invoke(header: String) = """# $header
 
+時分起床。起きた時の室温は度だった。
+
 追記
 
 ## 朝食
@@ -30,7 +32,7 @@ class ArticleTemplate {
 追記
 
 ## 消灯
-時分に消灯し、寝る。
+寝る前の室温は度だった。時分に消灯し、寝る。
 
 ## 今日の日経平均株価終値
 円(円高安)
