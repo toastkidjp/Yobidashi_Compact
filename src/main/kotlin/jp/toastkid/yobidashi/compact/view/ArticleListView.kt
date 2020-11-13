@@ -50,7 +50,9 @@ class ArticleListView {
     }
 
     fun openCurrentArticle() {
-        view.selectedValue?.open()
+        view.selectedValuesList.forEach {
+            it.open()
+        }
     }
 
     fun counts(): String? {
