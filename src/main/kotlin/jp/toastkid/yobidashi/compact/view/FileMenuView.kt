@@ -10,6 +10,7 @@ import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import java.awt.Desktop
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -101,6 +102,7 @@ class FileMenuView {
 
     private fun zipPaths(paths: Collection<Path>) {
         ZipArchiver().invoke(paths)
+        Desktop.getDesktop().open(File("."))
     }
 
 }

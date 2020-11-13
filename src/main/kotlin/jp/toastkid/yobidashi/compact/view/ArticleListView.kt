@@ -5,7 +5,9 @@ import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
+import java.awt.Desktop
 import java.awt.Dimension
+import java.io.File
 import javax.swing.JList
 import javax.swing.JScrollPane
 import javax.swing.JTextField
@@ -72,5 +74,6 @@ class ArticleListView {
     fun zip() {
         val paths = (view.selectedValuesList ?: fileListModel.all()).map { it.path() }
         ZipArchiver().invoke(paths)
+        Desktop.getDesktop().open(File("."))
     }
 }
