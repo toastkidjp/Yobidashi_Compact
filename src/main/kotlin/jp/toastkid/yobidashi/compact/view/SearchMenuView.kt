@@ -64,6 +64,7 @@ class SearchMenuView {
                         { it.printStackTrace() },
                         {
                             if (articleListView.isEmpty()) {
+                                JOptionPane.showMessageDialog(null, "Article which contains '$keyword' is not found.")
                                 return@subscribe
                             }
                             SubjectPool.next(articleListView)
