@@ -6,13 +6,10 @@ import jp.toastkid.yobidashi.compact.view.MainFrame
 /**
  * Created by toastkidjp on 2020/03/23.
  */
-object Main {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        val frame = MainFrame("Yobidashi Compact")
-        frame.show()
-        Runtime.getRuntime().addShutdownHook(Thread {
-            Setting.save()
-        })
-    }
+fun main() {
+    val frame = MainFrame("Yobidashi Compact")
+    frame.show()
+    Runtime.getRuntime().addShutdownHook(Thread {
+        Setting.save()
+    })
 }
