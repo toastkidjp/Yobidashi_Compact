@@ -114,7 +114,7 @@ class MainFrame(title: String) {
 
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
-        frame.setBounds(200, 200, 400, 800)
+        frame.setBounds(200, 200, 400, 600)
 
         Setting.lookAndFeel()?.let {
             UiUpdaterService().invoke(frame, it)
