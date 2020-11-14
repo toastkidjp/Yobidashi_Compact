@@ -52,7 +52,8 @@ class FileMenuView {
         val item = JMenuItem("Make today")
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
         item.addActionListener {
-            val article = Article.withTitle(TodayFileTitleGenerator().invoke(System.currentTimeMillis()))
+            val title = TodayFileTitleGenerator().invoke(System.currentTimeMillis()) ?: return@addActionListener
+            val article = Article.withTitle(title)
             article.makeFieIfNeed { ArticleTemplate()(article.getTitle()) }
             SubjectPool.addToList(article)
         }

@@ -9,6 +9,6 @@ class TodayFileTitleGenerator {
         return@withInitial SimpleDateFormat("yyyy-MM-dd(E)", Locale.ENGLISH)
     }
 
-    operator fun invoke(ms: Long) =
+    operator fun invoke(ms: Long): String? =
             dateFormat.get().format(Date().also { it.time = ms })
 }
