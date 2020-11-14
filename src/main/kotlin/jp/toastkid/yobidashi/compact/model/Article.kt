@@ -1,5 +1,7 @@
 package jp.toastkid.yobidashi.compact.model
 
+import jp.toastkid.yobidashi.compact.editor.OpenEditorUseCase
+import jp.toastkid.yobidashi.compact.view.EditorFrame
 import java.awt.Desktop
 import java.io.IOException
 import java.nio.charset.StandardCharsets
@@ -16,7 +18,8 @@ class Article(private val file: Path) {
 
     fun open() {
         try {
-            Desktop.getDesktop().open(file.toFile())
+            OpenEditorUseCase().invoke(this)
+            //Desktop.getDesktop().open(file.toFile())
         } catch (e: IOException) {
             e.printStackTrace()
         }
