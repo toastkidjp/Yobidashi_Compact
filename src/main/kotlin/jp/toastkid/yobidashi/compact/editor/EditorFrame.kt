@@ -39,20 +39,9 @@ class EditorFrame {
 
         val channel = Channel<MenuCommand>()
         frame.jMenuBar = MenubarView(channel).invoke(frame)
+
         CoroutineScope(Dispatchers.Swing).launch {
-            channel.receiveAsFlow().collect {
-                when (it) {
-                    MenuCommand.SAVE -> {
-                        val article = currentArticle ?: return@collect
-                        try {
-                            withContext(Dispatchers.IO) { Files.write(article.path(), editorArea.text.toByteArray()) }
-                        } catch (e: IOException) {
-                            e.printStackTrace()
-                        }
-                    }
-                    MenuCommand.CLOSE -> frame.dispose()
-                }
-            }
+            receiveCommand(channel)
         }
 
         frame.contentPane.add(panel, BorderLayout.CENTER)
@@ -70,6 +59,22 @@ class EditorFrame {
         scrollArea.isIconRowHeaderEnabled = true
         scrollArea.gutter.lineNumberFont = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
         panel.add(scrollArea, BorderLayout.CENTER)
+    }
+
+    private suspend fun receiveCommand(channel: Channel<MenuCommand>) {
+        channel.receiveAsFlow().collect {
+            when (it) {
+                MenuCommand.SAVE -> {
+                    val article = currentArticle ?: return@collect
+                    try {
+                        withContext(Dispatchers.IO) { Files.write(article.path(), editorArea.text.toByteArray()) }
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+                MenuCommand.CLOSE -> frame.dispose()
+            }
+        }
     }
 
     fun load(article: Article) {
