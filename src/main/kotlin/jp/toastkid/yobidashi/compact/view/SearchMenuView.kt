@@ -1,18 +1,27 @@
 package jp.toastkid.yobidashi.compact.view
 
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.kotlin.toObservable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.service.ExtensionRemover
 import jp.toastkid.yobidashi.compact.service.KeywordSearch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
+import kotlinx.coroutines.withContext
 import java.awt.Dimension
 import java.awt.event.ActionEvent
-import java.awt.event.KeyEvent
 import java.awt.event.InputEvent
-import javax.swing.*
+import java.awt.event.KeyEvent
+import javax.swing.AbstractAction
 import javax.swing.BoxLayout
+import javax.swing.JLabel
+import javax.swing.JMenu
+import javax.swing.JMenuItem
+import javax.swing.JOptionPane
+import javax.swing.JPanel
+import javax.swing.JTextField
+import javax.swing.KeyStroke
 
 class SearchMenuView {
 
@@ -52,24 +61,22 @@ class SearchMenuView {
         }
 
         val articleListView = ArticleListView()
-        Single.fromCallable {
-            KeywordSearch().invoke(keyword, fileFilter.text)
-        }.subscribeOn(Schedulers.io())
-                .flatMapObservable { it.toObservable() }
-                .map { extensionRemover(it) ?: "" }
-                .filter { it.isNotBlank() }
-                .map { Article.withTitle(it) }
-                .subscribe(
-                        { articleListView.add(it) },
-                        { it.printStackTrace() },
-                        {
-                            if (articleListView.isEmpty()) {
-                                JOptionPane.showMessageDialog(null, "Article which contains '$keyword' is not found.")
-                                return@subscribe
-                            }
-                            SubjectPool.next(articleListView)
-                        }
-                )
+        CoroutineScope(Dispatchers.Swing).launch {
+            withContext(Dispatchers.IO) {
+                KeywordSearch().invoke(keyword, fileFilter.text)
+                        .asSequence()
+                        .map { extensionRemover(it) ?: "" }
+                        .filter { it.isNotBlank() }
+                        .map { Article.withTitle(it) }
+                        .forEach { articleListView.add(it) }
+            }
+
+            if (articleListView.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Article which contains '$keyword' is not found.")
+                return@launch
+            }
+            SubjectPool.next(articleListView)
+        }
     }
 
 }
