@@ -1,42 +1,61 @@
 package jp.toastkid.yobidashi.compact
 
-import io.reactivex.rxjava3.functions.Consumer
-import io.reactivex.rxjava3.subjects.PublishSubject
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.view.ArticleListView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
 
 object SubjectPool {
 
-    private val pool: PublishSubject<ArticleListView> = PublishSubject.create()
+    private val pool: Channel<ArticleListView> = Channel()
 
     fun next(next: ArticleListView) {
-        pool.onNext(next)
+        CoroutineScope(Dispatchers.Default).launch { pool.send(next) }
     }
 
-    fun observe(onNext: Consumer<ArticleListView>) {
-        pool.subscribe(onNext)
+    fun observe(send: (ArticleListView) -> Unit) {
+        CoroutineScope(Dispatchers.Swing).launch {
+            pool.receiveAsFlow().collect {
+                send(it)
+            }
+        }
     }
 
-    private val sort: PublishSubject<Sorting> = PublishSubject.create()
+    private val sort: Channel<Sorting> = Channel()
 
     fun nextSorting(next: Sorting) {
-        sort.onNext(next)
+        CoroutineScope(Dispatchers.Default).launch { sort.send(next) }
     }
 
-    fun observeSort(onNext: Consumer<Sorting>) {
-        sort.subscribe(onNext)
+    fun observeSort(send: (Sorting) -> Unit) {
+        CoroutineScope(Dispatchers.Swing).launch {
+            sort.receiveAsFlow().collect { send(it) }
+        }
     }
 
-    private val closeWindow: PublishSubject<Unit> = PublishSubject.create()
+    private val closeWindow: Channel<Unit> = Channel()
 
-    fun closeWindow() = closeWindow.onNext(Unit)
+    fun closeWindow() = CoroutineScope(Dispatchers.Default).launch { closeWindow.send(Unit) }
 
-    fun observeCloseWindow(onNext: Consumer<Unit>) = closeWindow.subscribe(onNext)
+    fun observeCloseWindow(send: () -> Unit) = CoroutineScope(Dispatchers.Swing).launch {
+        closeWindow.receiveAsFlow().collect {
+            send()
+        }
+    }
 
-    private val addToList: PublishSubject<Article> = PublishSubject.create()
+    private val addToList: Channel<Article> = Channel()
 
-    fun addToList(article: Article) = addToList.onNext(article)
+    fun addToList(article: Article) = CoroutineScope(Dispatchers.Default).launch { addToList.send(article) }
 
-    fun observeAddToList(onNext: Consumer<Article>) = addToList.subscribe(onNext)
+    fun observeAddToList(send: (Article) -> Unit) = CoroutineScope(Dispatchers.Swing).launch {
+        addToList.receiveAsFlow().collect {
+            send(it)
+        }
+    }
 }

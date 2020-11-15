@@ -1,6 +1,5 @@
 package jp.toastkid.yobidashi.compact.view
 
-import io.reactivex.rxjava3.functions.Consumer
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
@@ -41,7 +40,7 @@ class MainFrame(title: String) {
         tabPane.add("Articles", list.view())
         tabs.add(list)
 
-        SubjectPool.observeSort(Consumer {
+        SubjectPool.observeSort({
             tabs.get(tabPane.selectedIndex).sortBy(it)
         })
 
@@ -94,21 +93,21 @@ class MainFrame(title: String) {
         panel.add(tabPane, BorderLayout.CENTER)
         panel.add(buttons, BorderLayout.SOUTH)
 
-        SubjectPool.observe(Consumer {
+        SubjectPool.observe({
             SwingUtilities.invokeLater { tabPane.add("Search result", it.view()) }
             tabs.add(it)
         })
 
-        SubjectPool.observeCloseWindow(Consumer {
+        SubjectPool.observeCloseWindow({
             frame.dispose()
         })
 
-        SubjectPool.observeAddToList(Consumer {
+        SubjectPool.observeAddToList({
             list.add(it)
             list.sortBy(Setting.sorting())
         })
 
-        ZipViewModel.observe(Consumer {
+        ZipViewModel.observe({
             tabs.get(tabPane.selectedIndex).zip()
         })
 

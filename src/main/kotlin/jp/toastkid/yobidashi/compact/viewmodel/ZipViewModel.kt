@@ -1,18 +1,23 @@
 package jp.toastkid.yobidashi.compact.viewmodel
 
-import io.reactivex.rxjava3.functions.Consumer
-import io.reactivex.rxjava3.subjects.PublishSubject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
 
 object ZipViewModel {
 
-    private val zip = PublishSubject.create<Unit>()
+    private val zip = Channel<Unit>()
 
     fun zip() {
-        zip.onNext(Unit)
+        CoroutineScope(Dispatchers.Default).launch { zip.send(Unit) }
     }
 
-    fun observe(onNext: Consumer<Unit>) {
-        zip.subscribe(onNext)
+    fun observe(onNext: () -> Unit) {
+        CoroutineScope(Dispatchers.Swing).launch { zip.receiveAsFlow().collect { onNext() } }
     }
 
 }
