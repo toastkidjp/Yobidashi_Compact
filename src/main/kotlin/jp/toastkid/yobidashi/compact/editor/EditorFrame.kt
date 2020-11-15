@@ -3,6 +3,17 @@ package jp.toastkid.yobidashi.compact.editor
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consume
+import kotlinx.coroutines.channels.receiveOrNull
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
+import kotlinx.coroutines.swing.SwingDispatcher
+import kotlinx.coroutines.withContext
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
@@ -26,19 +37,23 @@ class EditorFrame {
         val panel = JPanel()
         panel.layout = BorderLayout()
 
-        frame.jMenuBar = MenubarView().invoke(frame,
-                {
-                    val article = currentArticle ?: return@invoke
-                    try {
-                        Files.write(article.path(), editorArea.text.toByteArray())
-                    } catch (e: IOException) {
-                        e.printStackTrace()
+        val channel = Channel<MenuCommand>()
+        frame.jMenuBar = MenubarView(channel).invoke(frame)
+        CoroutineScope(Dispatchers.Swing).launch {
+            channel.receiveAsFlow().collect {
+                when (it) {
+                    MenuCommand.SAVE -> {
+                        val article = currentArticle ?: return@collect
+                        try {
+                            withContext(Dispatchers.IO) { Files.write(article.path(), editorArea.text.toByteArray()) }
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
                     }
-                },
-                {
-                    frame.dispose()
+                    MenuCommand.CLOSE -> frame.dispose()
                 }
-        )
+            }
+        }
 
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 100, 900, 600)
