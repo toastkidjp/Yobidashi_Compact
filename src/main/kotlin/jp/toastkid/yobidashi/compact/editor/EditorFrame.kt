@@ -6,17 +6,15 @@ import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.consume
-import kotlinx.coroutines.channels.receiveOrNull
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
-import kotlinx.coroutines.swing.SwingDispatcher
 import kotlinx.coroutines.withContext
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
+import java.awt.Color
 import java.io.IOException
 import java.nio.file.Files
 import javax.imageio.ImageIO
@@ -51,6 +49,7 @@ class EditorFrame {
             UiUpdaterService().invoke(frame, it)
         }
 
+        editorArea.background = Color(220, 220, 220, 220)
         editorArea.paintTabLines = true
         editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
 
