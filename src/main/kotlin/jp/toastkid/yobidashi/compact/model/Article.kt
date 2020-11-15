@@ -17,7 +17,6 @@ class Article(private val file: Path) {
     fun open() {
         try {
             OpenEditorUseCase().invoke(this)
-            //Desktop.getDesktop().open(file.toFile())
         } catch (e: IOException) {
             e.printStackTrace()
         }
