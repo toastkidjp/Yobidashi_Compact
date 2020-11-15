@@ -93,23 +93,23 @@ class MainFrame(title: String) {
         panel.add(tabPane, BorderLayout.CENTER)
         panel.add(buttons, BorderLayout.SOUTH)
 
-        SubjectPool.observe({
+        SubjectPool.observe {
             SwingUtilities.invokeLater { tabPane.add("Search result", it.view()) }
             tabs.add(it)
-        })
+        }
 
-        SubjectPool.observeCloseWindow({
+        SubjectPool.observeCloseWindow {
             frame.dispose()
-        })
+        }
 
-        SubjectPool.observeAddToList({
+        SubjectPool.observeAddToList {
             list.add(it)
             list.sortBy(Setting.sorting())
-        })
+        }
 
-        ZipViewModel.observe({
+        ZipViewModel.observe {
             tabs.get(tabPane.selectedIndex).zip()
-        })
+        }
 
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
