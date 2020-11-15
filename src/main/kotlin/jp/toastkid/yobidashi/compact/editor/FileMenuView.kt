@@ -10,7 +10,7 @@ import javax.swing.KeyStroke
 
 class FileMenuView {
 
-    operator fun invoke(function: () -> Unit): JMenu {
+    operator fun invoke(function: () -> Unit, closeFunction: () -> Unit): JMenu {
         val fileMenu = JMenu("File(F)")
         fileMenu.setMnemonic('F')
 
@@ -25,6 +25,11 @@ class FileMenuView {
         saveItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK)
         saveItem.addActionListener { function() }
         fileMenu.add(saveItem)
+
+        val closeItem = JMenuItem("Close")
+        closeItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK)
+        closeItem.addActionListener { closeFunction() }
+        fileMenu.add(closeItem)
 
         return fileMenu
     }

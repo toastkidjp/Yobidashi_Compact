@@ -6,10 +6,10 @@ import javax.swing.JMenuBar
 
 class MenubarView {
 
-    operator fun invoke(frame: JFrame, function: () -> Unit): JMenuBar {
+    operator fun invoke(frame: JFrame, function: () -> Unit, closeFunction: () -> Unit): JMenuBar {
         val menubar = JMenuBar()
 
-        menubar.add(FileMenuView().invoke(function))
+        menubar.add(FileMenuView().invoke(function, closeFunction))
         menubar.add(LookAndFeelMenuView { frame }())
         return menubar
     }

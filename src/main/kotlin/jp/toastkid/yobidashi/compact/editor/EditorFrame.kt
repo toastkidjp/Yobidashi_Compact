@@ -26,14 +26,19 @@ class EditorFrame {
         val panel = JPanel()
         panel.layout = BorderLayout()
 
-        frame.jMenuBar = MenubarView().invoke(frame) {
-            val article = currentArticle ?: return@invoke
-            try {
-                Files.write(article.path(), editorArea.text.toByteArray())
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
+        frame.jMenuBar = MenubarView().invoke(frame,
+                {
+                    val article = currentArticle ?: return@invoke
+                    try {
+                        Files.write(article.path(), editorArea.text.toByteArray())
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                },
+                {
+                    frame.dispose()
+                }
+        )
 
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 100, 900, 600)
