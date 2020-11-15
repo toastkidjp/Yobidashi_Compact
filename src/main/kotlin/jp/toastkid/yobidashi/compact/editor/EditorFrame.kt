@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact.view
+package jp.toastkid.yobidashi.compact.editor
 
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
@@ -6,11 +6,11 @@ import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
+import java.io.IOException
 import java.nio.file.Files
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JPanel
-import javax.swing.SwingUtilities
 
 class EditorFrame {
 
@@ -26,7 +26,15 @@ class EditorFrame {
         val panel = JPanel()
         panel.layout = BorderLayout()
 
-        frame.jMenuBar = MenuBarView().invoke(frame)
+        frame.jMenuBar = MenubarView().invoke(frame) {
+            val article = currentArticle ?: return@invoke
+            try {
+                Files.write(article.path(), editorArea.text.toByteArray())
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 100, 900, 600)
 

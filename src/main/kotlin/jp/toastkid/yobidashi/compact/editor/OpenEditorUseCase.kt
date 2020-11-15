@@ -1,7 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor
 
 import jp.toastkid.yobidashi.compact.model.Article
-import jp.toastkid.yobidashi.compact.view.EditorFrame
 import java.io.IOException
 
 class OpenEditorUseCase(private val editorFrame: EditorFrame = EditorFrame()) {
