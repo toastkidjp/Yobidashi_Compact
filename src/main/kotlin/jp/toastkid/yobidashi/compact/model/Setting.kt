@@ -37,6 +37,14 @@ object Setting {
         properties.setProperty("look_and_feel", newValue)
     }
 
+    fun setUseInternalEditor(newValue: Boolean) {
+        properties.setProperty("use_internal_editor", newValue.toString())
+    }
+
+    fun useInternalEditor(): Boolean {
+        return properties.getProperty("use_internal_editor")?.toBoolean() ?: false
+    }
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }

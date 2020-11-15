@@ -35,6 +35,12 @@ class FileMenuView {
         }
         fileMenu.add(item)
 
+        val useInternalEditorMenu = JCheckBoxMenuItem("Use internal editor", Setting.useInternalEditor())
+        useInternalEditorMenu.addChangeListener {
+            Setting.setUseInternalEditor(useInternalEditorMenu.isSelected)
+        }
+        fileMenu.add(useInternalEditorMenu)
+
         fileMenu.add(makeExit())
         return fileMenu
     }
