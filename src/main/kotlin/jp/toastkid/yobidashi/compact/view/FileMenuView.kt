@@ -35,14 +35,18 @@ class FileMenuView {
         }
         fileMenu.add(item)
 
+        fileMenu.add(makeSwitchInternalBrowserMenu())
+
+        fileMenu.add(makeExit())
+        return fileMenu
+    }
+
+    private fun makeSwitchInternalBrowserMenu(): JCheckBoxMenuItem {
         val useInternalEditorMenu = JCheckBoxMenuItem("Use internal editor", Setting.useInternalEditor())
         useInternalEditorMenu.addChangeListener {
             Setting.setUseInternalEditor(useInternalEditorMenu.isSelected)
         }
-        fileMenu.add(useInternalEditorMenu)
-
-        fileMenu.add(makeExit())
-        return fileMenu
+        return useInternalEditorMenu
     }
 
     private fun makeExit(): JMenuItem {
