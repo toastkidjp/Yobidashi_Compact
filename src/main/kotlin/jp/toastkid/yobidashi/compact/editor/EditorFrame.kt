@@ -90,6 +90,6 @@ class EditorFrame {
     }
 
     companion object {
-        private val DEFAULT_FONT_SIZE = 16f
+        private const val DEFAULT_FONT_SIZE = 16f
     }
 }
