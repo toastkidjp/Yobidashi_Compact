@@ -66,7 +66,7 @@ class AggregationMenuView {
             return
         }
 
-        JOptionPane.showConfirmDialog(null, aggregationResult.makeMessage())
+        JOptionPane.showConfirmDialog(null, JScrollPane(JTextArea(aggregationResult.makeMessage())))
     }
 
     companion object {
