@@ -8,11 +8,11 @@ import javax.swing.JMenuBar
 class MenubarView(private val channel: Channel<MenuCommand>) {
 
     operator fun invoke(frame: JFrame): JMenuBar {
-        val menubar = JMenuBar()
+        val menuBar = JMenuBar()
 
-        menubar.add(FileMenuView(channel).invoke())
-        menubar.add(LookAndFeelMenuView { frame }())
-        return menubar
+        menuBar.add(FileMenuView(channel).invoke())
+        menuBar.add(LookAndFeelMenuView { frame }())
+        return menuBar
     }
 
 }
