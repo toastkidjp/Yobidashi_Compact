@@ -6,6 +6,11 @@ import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
+import kotlinx.coroutines.withContext
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -34,7 +39,14 @@ class MainFrame(title: String) {
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
         val list = ArticleListView()
-        list.addAll(Files.list(Paths.get(Setting.articleFolder())).map { Article(it) }.collect(Collectors.toList()))
+        CoroutineScope(Dispatchers.Swing).launch {
+            val articles = withContext(Dispatchers.IO) {
+                Files.list(Paths.get(Setting.articleFolder()))
+                        .map { Article(it) }
+                        .collect(Collectors.toList())
+            }
+            list.addAll(articles)
+        }
 
         val tabPane = JTabbedPane()
         tabPane.add("Articles", list.view())
