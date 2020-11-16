@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
-import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Desktop
