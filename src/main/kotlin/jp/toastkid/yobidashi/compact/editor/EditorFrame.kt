@@ -15,10 +15,13 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
 import java.awt.Color
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 import java.io.IOException
 import java.nio.file.Files
 import javax.imageio.ImageIO
 import javax.swing.JFrame
+import javax.swing.JLabel
 import javax.swing.JPanel
 
 class EditorFrame {
@@ -28,6 +31,8 @@ class EditorFrame {
     private val editorArea = RSyntaxTextArea()
 
     private var currentArticle: Article? = null
+
+    private val statusLabel = JLabel()
 
     init {
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
@@ -52,12 +57,25 @@ class EditorFrame {
         editorArea.background = Color(220, 220, 220, 220)
         editorArea.paintTabLines = true
         editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
+        editorArea.addKeyListener(object : KeyListener{
+            override fun keyTyped(e: KeyEvent?) = Unit
+
+            override fun keyPressed(e: KeyEvent?) = Unit
+
+            override fun keyReleased(e: KeyEvent?) {
+                statusLabel.text = "Character: ${editorArea.text.length}"
+            }
+        })
 
         val scrollArea = RTextScrollPane(editorArea)
         scrollArea.lineNumbersEnabled = true
         scrollArea.isIconRowHeaderEnabled = true
         scrollArea.gutter.lineNumberFont = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
         panel.add(scrollArea, BorderLayout.CENTER)
+
+        val footer = JPanel(BorderLayout())
+        footer.add(statusLabel, BorderLayout.EAST)
+        panel.add(footer, BorderLayout.SOUTH)
     }
 
     private suspend fun receiveCommand(channel: Channel<MenuCommand>) {
@@ -83,6 +101,7 @@ class EditorFrame {
         val lineSeparator = System.lineSeparator()
         editorArea.text = Files.readAllLines(article.path()).reduce { base, item -> "$base$lineSeparator$item" }
         editorArea.caretPosition = 0
+        statusLabel.text = "Character: ${editorArea.text.length}"
     }
 
     fun show() {
