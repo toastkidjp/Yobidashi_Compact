@@ -38,6 +38,10 @@ class MainFrame(title: String) {
 
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
+        Setting.lookAndFeel()?.let {
+            UiUpdaterService().invoke(frame, it)
+        }
+
         val list = ArticleListView()
         CoroutineScope(Dispatchers.Swing).launch {
             val articles = withContext(Dispatchers.IO) {
@@ -126,10 +130,6 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 600)
-
-        Setting.lookAndFeel()?.let {
-            UiUpdaterService().invoke(frame, it)
-        }
     }
 
     fun show() {
