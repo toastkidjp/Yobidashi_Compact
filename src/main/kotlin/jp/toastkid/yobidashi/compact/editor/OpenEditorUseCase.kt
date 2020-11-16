@@ -5,7 +5,10 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import java.awt.Desktop
 import java.io.IOException
 
-class OpenEditorUseCase(private val editorFrame: EditorFrame = EditorFrame()) {
+class OpenEditorUseCase(
+        private val editorFrame: EditorFrame = EditorFrame(),
+        private val desktop: Desktop = Desktop.getDesktop()
+) {
 
     operator fun invoke(article: Article) {
         try {
@@ -15,7 +18,7 @@ class OpenEditorUseCase(private val editorFrame: EditorFrame = EditorFrame()) {
                 return
             }
 
-            Desktop.getDesktop().open(article.path().toFile())
+            desktop.open(article.path().toFile())
         } catch (e: IOException) {
             e.printStackTrace()
         }
