@@ -37,10 +37,12 @@ class ArticleFileListModel : ListModel<Article> {
     }
 
     fun addAll(articles: Collection<Article>) {
-        articles
+        articles.sortedByDescending { it.lastModified() }
                 .forEach {
                     master.add(it)
-                    items.add(it)
+                    if (items.size <= 100) {
+                        items.add(it)
+                    }
                 }
     }
 
