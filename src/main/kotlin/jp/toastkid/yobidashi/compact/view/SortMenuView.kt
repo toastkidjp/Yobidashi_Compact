@@ -4,7 +4,10 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.model.Sorting
 import java.awt.event.ActionEvent
-import javax.swing.*
+import javax.swing.AbstractAction
+import javax.swing.ButtonGroup
+import javax.swing.JMenu
+import javax.swing.JRadioButtonMenuItem
 
 class SortMenuView {
 
