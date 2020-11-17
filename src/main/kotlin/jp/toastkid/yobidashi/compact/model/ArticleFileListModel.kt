@@ -1,6 +1,13 @@
 package jp.toastkid.yobidashi.compact.model
 
+import jp.toastkid.yobidashi.compact.SubjectPool
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
+import kotlinx.coroutines.withContext
 import javax.swing.ListModel
+import javax.swing.SwingUtilities
 import javax.swing.event.ListDataListener
 
 class ArticleFileListModel : ListModel<Article> {
@@ -36,14 +43,13 @@ class ArticleFileListModel : ListModel<Article> {
         items.sortBy { it.getTitle() }
     }
 
-    fun addAll(articles: Collection<Article>) {
-        articles.sortedByDescending { it.lastModified() }
-                .forEach {
-                    master.add(it)
-                    if (items.size <= 100) {
-                        items.add(it)
-                    }
-                }
+    fun addAll(articles: Collection<Article>, onComplete: () -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val sorted = articles.sortedByDescending { it.lastModified() }
+            master.addAll(sorted)
+            items.addAll(sorted.take(100))
+            onComplete()
+        }
     }
 
     fun sortBy(sorting: Sorting) {

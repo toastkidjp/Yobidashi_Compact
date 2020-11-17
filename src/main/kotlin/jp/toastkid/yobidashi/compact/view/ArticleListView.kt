@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.view
 
+import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
 import jp.toastkid.yobidashi.compact.model.Sorting
@@ -38,7 +39,7 @@ class ArticleListView {
     }
 
     fun addAll(articles: Collection<Article>) {
-        fileListModel.addAll(articles)
+        fileListModel.addAll(articles, { SubjectPool.refreshUi(view) })
     }
 
     fun filter(searchInput: JTextField) {

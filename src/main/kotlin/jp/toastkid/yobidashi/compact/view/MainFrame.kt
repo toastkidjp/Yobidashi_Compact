@@ -123,6 +123,10 @@ class MainFrame(title: String) {
             list.sortBy(Setting.sorting())
         }
 
+        SubjectPool.observeRefreshUi {
+            SwingUtilities.updateComponentTreeUI(it)
+        }
+
         ZipViewModel.observe {
             tabs.get(tabPane.selectedIndex).zip()
         }
