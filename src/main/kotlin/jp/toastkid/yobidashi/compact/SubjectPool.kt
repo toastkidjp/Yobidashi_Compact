@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
+import javax.swing.JComponent
 
 object SubjectPool {
 
@@ -58,4 +59,19 @@ object SubjectPool {
             send(it)
         }
     }
+
+    private val refreshUi: Channel<JComponent> = Channel()
+
+    fun refreshUi(component: JComponent) {
+        CoroutineScope(Dispatchers.Default).launch { refreshUi.send(component) }
+    }
+
+    fun observeRefreshUi(observer: (JComponent) -> Unit) {
+        CoroutineScope(Dispatchers.Swing).launch {
+            refreshUi.receiveAsFlow().collect {
+                observer(it)
+            }
+        }
+    }
+
 }
