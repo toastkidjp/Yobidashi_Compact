@@ -71,8 +71,8 @@ class EditorFrame {
             }
         })
 
-        val toTableMenu = JMenuItem("To table")
-        toTableMenu.action = object : AbstractAction() {
+        val toTableMenu = JMenuItem()
+        toTableMenu.action = object : AbstractAction("To table") {
             override fun actionPerformed(e: ActionEvent?) {
                 editorArea.selectedText.also { text ->
                     editorArea.replaceSelection(TableFormConverter().invoke(text))
