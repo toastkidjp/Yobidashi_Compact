@@ -32,7 +32,7 @@ class MainFrame(title: String) {
     private val frame = JFrame(title)
 
     init {
-        frame.setTitle(title)
+        frame.title = title
 
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
 
