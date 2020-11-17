@@ -6,13 +6,13 @@ import javax.swing.JMenuBar
 class MenuBarView {
 
     operator fun invoke(frame: JFrame): JMenuBar {
-        val menubar = JMenuBar()
+        val menuBar = JMenuBar()
 
-        menubar.add(FileMenuView().invoke())
-        menubar.add(SearchMenuView().invoke())
-        menubar.add(AggregationMenuView().invoke())
-        menubar.add(SortMenuView().invoke())
-        menubar.add(LookAndFeelMenuView { frame }())
-        return menubar
+        menuBar.add(FileMenuView().invoke())
+        menuBar.add(SearchMenuView().invoke())
+        menuBar.add(AggregationMenuView().invoke())
+        menuBar.add(SortMenuView().invoke())
+        menuBar.add(LookAndFeelMenuView { frame }())
+        return menuBar
     }
 }
