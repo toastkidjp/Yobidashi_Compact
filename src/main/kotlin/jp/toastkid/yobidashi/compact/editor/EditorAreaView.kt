@@ -9,9 +9,13 @@ import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Color
+import java.awt.Desktop
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.net.URI
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import javax.swing.AbstractAction
 import javax.swing.JComponent
 import javax.swing.JMenuItem
@@ -98,6 +102,14 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         }
         editorArea.popupMenu.add(countMenu)
+
+        val webSearchMenu = JMenuItem()
+        webSearchMenu.action = object : AbstractAction("Web search") {
+            override fun actionPerformed(e: ActionEvent?) {
+                Desktop.getDesktop().browse(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(editorArea.selectedText, StandardCharsets.UTF_8.name())}"))
+            }
+        }
+        editorArea.popupMenu.add(webSearchMenu)
     }
 
     fun view(): JComponent {
