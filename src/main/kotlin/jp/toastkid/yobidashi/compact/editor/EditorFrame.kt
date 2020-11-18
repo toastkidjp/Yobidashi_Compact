@@ -32,9 +32,9 @@ class EditorFrame {
 
     private val frame = JFrame("Editor")
 
-    private val editorArea = RSyntaxTextArea()
-
     private var currentArticle: Article? = null
+
+    private val editorAreaView = EditorAreaView()
 
     private val statusLabel = JLabel()
 
@@ -58,38 +58,15 @@ class EditorFrame {
             UiUpdaterService().invoke(frame, it)
         }
 
-        editorArea.background = Color(220, 220, 220, 220)
-        editorArea.paintTabLines = true
-        editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
-        editorArea.addKeyListener(object : KeyListener{
-            override fun keyTyped(e: KeyEvent?) = Unit
-
-            override fun keyPressed(e: KeyEvent?) = Unit
-
-            override fun keyReleased(e: KeyEvent?) {
-                statusLabel.text = "Character: ${editorArea.text.length}"
-            }
-        })
-
-        val toTableMenu = JMenuItem()
-        toTableMenu.action = object : AbstractAction("To table") {
-            override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection(TableFormConverter().invoke(text))
-                }
-            }
-        }
-        editorArea.popupMenu.add(toTableMenu)
-
-        val scrollArea = RTextScrollPane(editorArea)
-        scrollArea.lineNumbersEnabled = true
-        scrollArea.isIconRowHeaderEnabled = true
-        scrollArea.gutter.lineNumberFont = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
-        panel.add(scrollArea, BorderLayout.CENTER)
+        panel.add(editorAreaView.view(), BorderLayout.CENTER)
 
         val footer = JPanel(BorderLayout())
         footer.add(statusLabel, BorderLayout.EAST)
         panel.add(footer, BorderLayout.SOUTH)
+
+        editorAreaView.receiveStatus {
+            statusLabel.text = "Character: $it"
+        }
     }
 
     private suspend fun receiveCommand(channel: Channel<MenuCommand>) {
@@ -98,7 +75,7 @@ class EditorFrame {
                 MenuCommand.SAVE -> {
                     val article = currentArticle ?: return@collect
                     try {
-                        withContext(Dispatchers.IO) { Files.write(article.path(), editorArea.text.toByteArray()) }
+                        withContext(Dispatchers.IO) { Files.write(article.path(), editorAreaView.getTextArray()) }
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
@@ -112,17 +89,14 @@ class EditorFrame {
         currentArticle = article
 
         frame.title = "${article.getTitle()} - Editor"
-        val lineSeparator = System.lineSeparator()
-        editorArea.text = Files.readAllLines(article.path()).reduce { base, item -> "$base$lineSeparator$item" }
-        editorArea.caretPosition = 0
-        statusLabel.text = "Character: ${editorArea.text.length}"
+
+        val text = ArticleContentLoaderUseCase().invoke(article)
+        editorAreaView.setText(text)
+        statusLabel.text = "Character: ${text.length}"
     }
 
     fun show() {
         frame.isVisible = true
     }
 
-    companion object {
-        private const val DEFAULT_FONT_SIZE = 16f
-    }
 }
