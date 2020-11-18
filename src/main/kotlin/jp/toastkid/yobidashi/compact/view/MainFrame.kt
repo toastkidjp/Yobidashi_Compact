@@ -32,8 +32,6 @@ class MainFrame(title: String) {
     private val frame = JFrame(title)
 
     init {
-        frame.title = title
-
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
 
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
