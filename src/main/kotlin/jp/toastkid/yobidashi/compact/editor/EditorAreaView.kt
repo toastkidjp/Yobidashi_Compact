@@ -15,6 +15,7 @@ import java.awt.event.KeyListener
 import javax.swing.AbstractAction
 import javax.swing.JComponent
 import javax.swing.JMenuItem
+import javax.swing.JOptionPane
 
 class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()) {
 
@@ -86,6 +87,17 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         }
         editorArea.popupMenu.add(numberedListMenu)
+
+        val countMenu = JMenuItem()
+        countMenu.action = object : AbstractAction("Count") {
+            override fun actionPerformed(e: ActionEvent?) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Count: ${editorArea.selectedText.trim().codePoints().count()}"
+                )
+            }
+        }
+        editorArea.popupMenu.add(countMenu)
     }
 
     fun view(): JComponent {
