@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
 import kotlinx.coroutines.CoroutineScope
