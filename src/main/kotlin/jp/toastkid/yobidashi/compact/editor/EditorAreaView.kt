@@ -36,6 +36,15 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         })
 
+        initializePopupMenu()
+
+        scrollArea = RTextScrollPane(editorArea)
+        scrollArea.lineNumbersEnabled = true
+        scrollArea.isIconRowHeaderEnabled = true
+        scrollArea.gutter.lineNumberFont = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
+    }
+
+    private fun initializePopupMenu() {
         val toTableMenu = JMenuItem()
         toTableMenu.action = object : AbstractAction("To table") {
             override fun actionPerformed(e: ActionEvent?) {
@@ -46,10 +55,15 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         }
         editorArea.popupMenu.add(toTableMenu)
 
-        scrollArea = RTextScrollPane(editorArea)
-        scrollArea.lineNumbersEnabled = true
-        scrollArea.isIconRowHeaderEnabled = true
-        scrollArea.gutter.lineNumberFont = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
+        val blockQuotationMenu = JMenuItem()
+        blockQuotationMenu.action = object : AbstractAction("Block quote") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection(BlockQuotation().invoke(text))
+                }
+            }
+        }
+        editorArea.popupMenu.add(blockQuotationMenu)
     }
 
     fun view(): JComponent {
