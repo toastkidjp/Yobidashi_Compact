@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -64,6 +65,16 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         }
         editorArea.popupMenu.add(blockQuotationMenu)
+
+        val hyphenListMenu = JMenuItem()
+        hyphenListMenu.action = object : AbstractAction("Hyphen list") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection(ListHeadAdder().invoke(text, "-"))
+                }
+            }
+        }
+        editorArea.popupMenu.add(hyphenListMenu)
     }
 
     fun view(): JComponent {
