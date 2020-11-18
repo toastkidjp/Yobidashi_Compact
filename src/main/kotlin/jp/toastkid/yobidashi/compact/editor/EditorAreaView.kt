@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor
 
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
+import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -75,6 +76,16 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         }
         editorArea.popupMenu.add(hyphenListMenu)
+
+        val numberedListMenu = JMenuItem()
+        numberedListMenu.action = object : AbstractAction("Numbered list") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection(NumberedListHeadAdder().invoke(text))
+                }
+            }
+        }
+        editorArea.popupMenu.add(numberedListMenu)
     }
 
     fun view(): JComponent {
