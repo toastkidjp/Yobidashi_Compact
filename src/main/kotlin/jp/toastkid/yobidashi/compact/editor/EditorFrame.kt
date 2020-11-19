@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
@@ -15,6 +16,10 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
 import java.awt.Color
+import java.awt.Toolkit
+import java.awt.datatransfer.Clipboard
+import java.awt.datatransfer.DataFlavor
+import java.awt.datatransfer.Transferable
 import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -81,6 +86,19 @@ class EditorFrame {
                     }
                 }
                 MenuCommand.CLOSE -> frame.dispose()
+                MenuCommand.PASTE_AS_QUOTATION -> {
+                    val text = withContext(Dispatchers.IO) {
+                        val transferData = Toolkit.getDefaultToolkit()
+                                .systemClipboard
+                                .getContents(this)
+                        if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) {
+                            return@withContext null
+                        }
+                        transferData.getTransferData(DataFlavor.stringFlavor).toString()
+                    } ?: return@collect
+                    val quotedText = BlockQuotation().invoke(text) ?: return@collect
+                    editorAreaView.insertText(quotedText)
+                }
             }
         }
     }

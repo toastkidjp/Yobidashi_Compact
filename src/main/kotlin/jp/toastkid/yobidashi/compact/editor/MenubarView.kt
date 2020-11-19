@@ -11,6 +11,7 @@ class MenubarView(private val channel: Channel<MenuCommand>) {
         val menuBar = JMenuBar()
 
         menuBar.add(FileMenuView(channel).invoke())
+        menuBar.add(EditMenuView(channel).invoke())
         menuBar.add(LookAndFeelMenuView { frame }())
         return menuBar
     }

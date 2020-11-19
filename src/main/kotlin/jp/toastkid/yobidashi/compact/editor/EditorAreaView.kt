@@ -132,6 +132,10 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         }
     }
 
+    fun insertText(text: String) {
+        editorArea.insert(text, editorArea.caretPosition)
+    }
+
     companion object {
         private const val DEFAULT_FONT_SIZE = 16f
     }
