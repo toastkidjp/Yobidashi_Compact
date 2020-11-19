@@ -3,7 +3,7 @@ package jp.toastkid.yobidashi.compact.model
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.*
+import java.util.Properties
 
 /**
  * You should put "settings.properties" to same folder.

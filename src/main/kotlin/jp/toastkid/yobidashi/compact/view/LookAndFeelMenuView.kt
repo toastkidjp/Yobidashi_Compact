@@ -3,7 +3,12 @@ package jp.toastkid.yobidashi.compact.view
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import java.awt.event.ActionEvent
-import javax.swing.*
+import javax.swing.AbstractAction
+import javax.swing.ButtonGroup
+import javax.swing.JFrame
+import javax.swing.JMenu
+import javax.swing.JRadioButtonMenuItem
+import javax.swing.UIManager
 
 class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
 

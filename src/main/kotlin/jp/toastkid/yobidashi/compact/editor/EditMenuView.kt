@@ -1,11 +1,9 @@
 package jp.toastkid.yobidashi.compact.editor
 
-import jp.toastkid.yobidashi.compact.model.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import java.awt.Desktop
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import javax.swing.JMenu

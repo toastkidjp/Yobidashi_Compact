@@ -15,7 +15,11 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Collectors
-import javax.swing.*
+import javax.swing.JCheckBoxMenuItem
+import javax.swing.JMenu
+import javax.swing.JMenuItem
+import javax.swing.JOptionPane
+import javax.swing.KeyStroke
 
 class FileMenuView {
 

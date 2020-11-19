@@ -5,7 +5,8 @@ import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JPanel

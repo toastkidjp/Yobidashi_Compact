@@ -1,7 +1,8 @@
 package jp.toastkid.yobidashi.compact.service
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class TodayFileTitleGenerator {
 

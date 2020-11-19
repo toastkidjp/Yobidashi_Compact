@@ -1,13 +1,9 @@
 package jp.toastkid.yobidashi.compact.model
 
-import jp.toastkid.yobidashi.compact.SubjectPool
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.swing.Swing
-import kotlinx.coroutines.withContext
 import javax.swing.ListModel
-import javax.swing.SwingUtilities
 import javax.swing.event.ListDataListener
 
 class ArticleFileListModel : ListModel<Article> {
