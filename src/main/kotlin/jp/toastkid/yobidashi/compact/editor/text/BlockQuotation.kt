@@ -10,7 +10,7 @@ class BlockQuotation {
     /**
      * Invoke quotation function.
      *
-     * @param str Nullable [CharSequence]
+     * @param text Nullable [CharSequence]
      */
     operator fun invoke(text: String?): String? {
         if (text.isNullOrEmpty()) {
