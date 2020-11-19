@@ -65,7 +65,7 @@ class EditorFrame {
         panel.add(footer, BorderLayout.SOUTH)
 
         editorAreaView.receiveStatus {
-            statusLabel.text = "Character: $it"
+            setStatus("Character: $it")
         }
     }
 
@@ -92,7 +92,11 @@ class EditorFrame {
 
         val text = ArticleContentLoaderUseCase().invoke(article)
         editorAreaView.setText(text)
-        statusLabel.text = "Character: ${text.length}"
+        setStatus("Character: ${text.length}")
+    }
+
+    private fun setStatus(status: String) {
+        statusLabel.text = status
     }
 
     fun show() {
