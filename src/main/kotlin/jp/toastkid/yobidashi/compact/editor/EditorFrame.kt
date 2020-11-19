@@ -62,8 +62,8 @@ class EditorFrame {
 
         editorAreaView.receiveStatus {
             setStatus("Character: $it")
-            frame.title = "${currentArticle?.getTitle()} * - Editor"
             editing = true
+            resetFrameTitle()
         }
     }
 
@@ -77,7 +77,7 @@ class EditorFrame {
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
-                    frame.title = "${currentArticle?.getTitle()} - Editor"
+                    resetFrameTitle()
                     editing = false
                 }
                 MenuCommand.CLOSE -> frame.dispose()
@@ -101,11 +101,16 @@ class EditorFrame {
     fun load(article: Article) {
         currentArticle = article
 
-        frame.title = "${article.getTitle()} - Editor"
+        resetFrameTitle()
 
         val text = ArticleContentLoaderUseCase().invoke(article)
         editorAreaView.setText(text)
         setStatus("Character: ${text.length}")
+    }
+
+    private fun resetFrameTitle() {
+        val editingIndicator = if (editing) " *" else ""
+        frame.title = "${currentArticle?.getTitle()}$editingIndicator - Editor"
     }
 
     private fun setStatus(status: String) {
