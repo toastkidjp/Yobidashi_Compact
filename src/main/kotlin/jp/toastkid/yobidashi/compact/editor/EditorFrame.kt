@@ -30,6 +30,8 @@ class EditorFrame {
 
     private val editorAreaView = EditorAreaView()
 
+    private var editing = false
+
     private val statusLabel = JLabel()
 
     init {
@@ -60,6 +62,8 @@ class EditorFrame {
 
         editorAreaView.receiveStatus {
             setStatus("Character: $it")
+            frame.title = "${currentArticle?.getTitle()} * - Editor"
+            editing = true
         }
     }
 
@@ -73,6 +77,8 @@ class EditorFrame {
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
+                    frame.title = "${currentArticle?.getTitle()} - Editor"
+                    editing = false
                 }
                 MenuCommand.CLOSE -> frame.dispose()
                 MenuCommand.PASTE_AS_QUOTATION -> {
