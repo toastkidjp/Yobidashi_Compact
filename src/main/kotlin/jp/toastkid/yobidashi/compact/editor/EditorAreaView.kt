@@ -29,7 +29,7 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
     private val statusChannel: Channel<Int> = Channel()
 
     init {
-        editorArea.background = Color(220, 220, 220, 220)
+        editorArea.background = Color(225, 225, 225, 255)
         editorArea.paintTabLines = true
         editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
         editorArea.addKeyListener(object : KeyListener {
