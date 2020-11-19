@@ -39,7 +39,7 @@ class ArticleListView {
     }
 
     fun addAll(articles: Collection<Article>) {
-        fileListModel.addAll(articles, { SubjectPool.refreshUi(view) })
+        fileListModel.addAll(articles) { SubjectPool.refreshUi(view) }
     }
 
     fun filter(searchInput: JTextField) {
