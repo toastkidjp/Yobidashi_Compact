@@ -12,25 +12,14 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
-import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.BorderLayout
-import java.awt.Color
 import java.awt.Toolkit
-import java.awt.datatransfer.Clipboard
 import java.awt.datatransfer.DataFlavor
-import java.awt.datatransfer.Transferable
-import java.awt.event.ActionEvent
-import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 import java.io.IOException
 import java.nio.file.Files
 import javax.imageio.ImageIO
-import javax.swing.AbstractAction
-import javax.swing.Action
 import javax.swing.JFrame
 import javax.swing.JLabel
-import javax.swing.JMenuItem
 import javax.swing.JPanel
 
 class EditorFrame {
