@@ -32,6 +32,8 @@ class EditorFrame {
 
     private var editing = false
 
+    private var previousCount = 0
+
     private val statusLabel = JLabel()
 
     init {
@@ -61,6 +63,10 @@ class EditorFrame {
         panel.add(footer, BorderLayout.SOUTH)
 
         editorAreaView.receiveStatus {
+            if (previousCount == it) {
+                return@receiveStatus
+            }
+
             setStatus("Character: $it")
             editing = true
             resetFrameTitle()
@@ -77,8 +83,8 @@ class EditorFrame {
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
-                    resetFrameTitle()
                     editing = false
+                    resetFrameTitle()
                 }
                 MenuCommand.CLOSE -> frame.dispose()
                 MenuCommand.PASTE_AS_QUOTATION -> {
@@ -105,6 +111,7 @@ class EditorFrame {
 
         val text = ArticleContentLoaderUseCase().invoke(article)
         editorAreaView.setText(text)
+        previousCount = text.length
         setStatus("Character: ${text.length}")
     }
 
