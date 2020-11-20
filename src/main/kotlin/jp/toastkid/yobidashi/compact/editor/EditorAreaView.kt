@@ -6,6 +6,8 @@ import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
@@ -128,7 +130,9 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
 
     fun receiveStatus(receiver: (Int) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
-            receiver(editorArea.text.length)
+            statusChannel.receiveAsFlow().collect {
+                receiver(editorArea.text.length)
+            }
         }
     }
 
