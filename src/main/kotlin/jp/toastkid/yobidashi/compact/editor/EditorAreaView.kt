@@ -95,6 +95,16 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         }
         editorArea.popupMenu.add(numberedListMenu)
 
+        val taskListMenu = JMenuItem()
+        taskListMenu.action = object : AbstractAction("Task list") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection(ListHeadAdder().invoke(text, "- [ ]"))
+                }
+            }
+        }
+        editorArea.popupMenu.add(taskListMenu)
+
         val boldMenu = JMenuItem()
         boldMenu.action = object : AbstractAction("Bold") {
             override fun actionPerformed(e: ActionEvent?) {
