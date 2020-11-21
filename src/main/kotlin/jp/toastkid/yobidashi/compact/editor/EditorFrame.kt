@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
@@ -30,9 +31,7 @@ class EditorFrame {
 
     private val editorAreaView = EditorAreaView()
 
-    private var editing = false
-
-    private var previousCount = 0
+    private val editing = Editing()
 
     private val statusLabel = JLabel()
 
@@ -63,12 +62,8 @@ class EditorFrame {
         panel.add(footer, BorderLayout.SOUTH)
 
         editorAreaView.receiveStatus {
-            if (previousCount == it) {
-                return@receiveStatus
-            }
-
             setStatus("Character: $it")
-            editing = true
+            editing.setCurrentSize(it)
             resetFrameTitle()
         }
     }
@@ -83,7 +78,7 @@ class EditorFrame {
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
-                    editing = false
+                    editing.clear()
                     resetFrameTitle()
                 }
                 MenuCommand.CLOSE -> frame.dispose()
@@ -111,12 +106,12 @@ class EditorFrame {
 
         val text = ArticleContentLoaderUseCase().invoke(article)
         editorAreaView.setText(text)
-        previousCount = text.length
+        editing.setCurrentSize(text.length)
         setStatus("Character: ${text.length}")
     }
 
     private fun resetFrameTitle() {
-        val editingIndicator = if (editing) " *" else ""
+        val editingIndicator = if (editing.shouldShowIndicator()) " *" else ""
         frame.title = "${currentArticle?.getTitle()}$editingIndicator - Editor"
     }
 
