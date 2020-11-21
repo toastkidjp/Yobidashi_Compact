@@ -50,7 +50,7 @@ class EditorFrame {
         }
 
         frame.contentPane.add(panel, BorderLayout.CENTER)
-        frame.setBounds(200, 100, 900, 600)
+        frame.setBounds(200, 80, 1200, 600)
 
         Setting.lookAndFeel()?.let {
             UiUpdaterService().invoke(frame, it)
