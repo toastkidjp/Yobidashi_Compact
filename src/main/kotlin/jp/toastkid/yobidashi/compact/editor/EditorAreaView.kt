@@ -20,6 +20,7 @@ import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import javax.swing.AbstractAction
+import javax.swing.JColorChooser
 import javax.swing.JComponent
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
@@ -144,6 +145,25 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         }
         editorArea.popupMenu.add(codeBlockMenu)
+
+        val fontColorMenu = JMenuItem()
+        fontColorMenu.action = object : AbstractAction("Font color") {
+            override fun actionPerformed(e: ActionEvent?) {
+                val colorPicker = JColorChooser()
+                val dialog = JOptionPane.showConfirmDialog(
+                        null,
+                        colorPicker
+                )
+                if (dialog != JOptionPane.OK_OPTION) {
+                    return
+                }
+                val color = colorPicker.color
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection("<font color='#${Integer.toHexString(color.rgb)}'>$text</font>")
+                }
+            }
+        }
+        editorArea.popupMenu.add(fontColorMenu)
 
         val countMenu = JMenuItem()
         countMenu.action = object : AbstractAction("Count") {
