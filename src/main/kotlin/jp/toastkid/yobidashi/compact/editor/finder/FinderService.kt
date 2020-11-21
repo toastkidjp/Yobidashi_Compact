@@ -10,7 +10,7 @@ class FinderService(private val editorArea: RSyntaxTextArea) {
         if (order.invokeReplace) {
             var indexOf = editorArea.text.indexOf(order.target)
             while (indexOf != -1) {
-                editorArea.replaceRange(order.replace, indexOf, indexOf + order.replace.length)
+                editorArea.replaceRange(order.replace, indexOf, indexOf + order.target.length)
                 indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
             }
             return
