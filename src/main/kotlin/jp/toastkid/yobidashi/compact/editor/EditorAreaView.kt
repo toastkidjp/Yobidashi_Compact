@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor
 
 import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
+import jp.toastkid.yobidashi.compact.editor.finder.FinderService
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,8 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
     private val scrollArea: RTextScrollPane
 
     private val statusChannel: Channel<Int> = Channel()
+
+    private val finderService = FinderService(editorArea)
 
     init {
         editorArea.background = Color(225, 225, 225, 255)
@@ -70,30 +73,8 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         editorArea.insert(text, editorArea.caretPosition)
     }
 
-    private var lastFound = 0
-
     fun find(order: FindOrder) {
-        if (order.invokeReplace) {
-            var indexOf = editorArea.text.indexOf(order.target)
-            while (indexOf != -1) {
-                editorArea.replaceRange(order.replace, indexOf, indexOf + order.replace.length)
-                indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
-            }
-            return
-        }
-
-        val indexOf = if (order.upper) {
-            editorArea.text.lastIndexOf(order.target, lastFound - 1)
-        } else {
-            editorArea.text.indexOf(order.target, lastFound + 1)
-        }
-        if (indexOf == -1) {
-            return
-        }
-        lastFound = indexOf
-
-        editorArea.selectionStart = indexOf
-        editorArea.selectionEnd = indexOf + order.target.length
+        finderService.invoke(order)
     }
 
     companion object {
