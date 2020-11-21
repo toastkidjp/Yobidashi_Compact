@@ -22,7 +22,7 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
 
     private val statusChannel: Channel<Int> = Channel()
 
-    private val finderService = FinderService(editorArea)
+    private val finderService by lazy { FinderService(editorArea) }
 
     init {
         editorArea.background = Color(225, 225, 225, 255)
