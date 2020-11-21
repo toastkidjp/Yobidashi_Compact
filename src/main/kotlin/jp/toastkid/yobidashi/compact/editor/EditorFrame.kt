@@ -31,7 +31,7 @@ class EditorFrame {
 
     private var currentArticle: Article? = null
 
-    private val editorAreaView = EditorAreaView()
+    private val editorAreaView: EditorAreaView
 
     private val editing = Editing()
 
@@ -56,6 +56,8 @@ class EditorFrame {
         Setting.lookAndFeel()?.let {
             UiUpdaterService().invoke(frame, it)
         }
+
+        editorAreaView = EditorAreaView(channel = channel)
 
         panel.add(editorAreaView.view(), BorderLayout.CENTER)
 
@@ -103,6 +105,11 @@ class EditorFrame {
                     finderFrame.show()
                     finderChannel.receiveAsFlow().collect {
                         editorAreaView.find(it)
+                    }
+                }
+                MenuCommand.TO_TABLE -> {
+                    editorAreaView.replaceSelected { text ->
+                        TableFormConverter().invoke(text)
                     }
                 }
             }

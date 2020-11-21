@@ -16,7 +16,10 @@ import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.JComponent
 
-class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()) {
+class EditorAreaView(
+        private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
+        private val channel: Channel<MenuCommand>
+) {
 
     private val scrollArea: RTextScrollPane
 
@@ -31,7 +34,17 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         editorArea.addKeyListener(object : KeyListener {
             override fun keyTyped(e: KeyEvent?) = Unit
 
-            override fun keyPressed(e: KeyEvent?) = Unit
+            override fun keyPressed(e: KeyEvent?) {
+                if (e == null) {
+                    return
+                }
+
+                if (e.isControlDown && e.keyCode == KeyEvent.VK_T) {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        channel.send(MenuCommand.TO_TABLE)
+                    }
+                }
+            }
 
             override fun keyReleased(e: KeyEvent?) {
                 CoroutineScope(Dispatchers.Default).launch {
@@ -40,7 +53,7 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
             }
         })
 
-        PopupMenuInitializer(editorArea).invoke()
+        PopupMenuInitializer(editorArea, channel).invoke()
 
         scrollArea = RTextScrollPane(editorArea)
         scrollArea.lineNumbersEnabled = true
@@ -75,6 +88,12 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
 
     fun find(order: FindOrder) {
         finderService.invoke(order)
+    }
+
+    fun replaceSelected(action: (String) -> String) {
+        editorArea.selectedText.also { text ->
+            editorArea.replaceSelection(action(text))
+        }
     }
 
     companion object {

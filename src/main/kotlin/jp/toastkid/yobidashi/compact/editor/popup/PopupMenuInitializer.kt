@@ -1,9 +1,13 @@
 package jp.toastkid.yobidashi.compact.editor.popup
 
-import jp.toastkid.yobidashi.compact.editor.TableFormConverter
+import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import java.awt.Desktop
 import java.awt.event.ActionEvent
@@ -15,14 +19,14 @@ import javax.swing.JColorChooser
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 
-class PopupMenuInitializer(private val editorArea: RSyntaxTextArea) {
+class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val channel: Channel<MenuCommand>) {
 
     operator fun invoke() {
         val toTableMenu = JMenuItem()
         toTableMenu.action = object : AbstractAction("To table") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection(TableFormConverter().invoke(text))
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.TO_TABLE)
                 }
             }
         }
