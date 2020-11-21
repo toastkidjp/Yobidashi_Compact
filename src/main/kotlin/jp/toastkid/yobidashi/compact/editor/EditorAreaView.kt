@@ -95,6 +95,16 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         }
         editorArea.popupMenu.add(numberedListMenu)
 
+        val boldMenu = JMenuItem()
+        boldMenu.action = object : AbstractAction("Bold") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection("**$text**")
+                }
+            }
+        }
+        editorArea.popupMenu.add(boldMenu)
+
         val strikethroughMenu = JMenuItem()
         strikethroughMenu.action = object : AbstractAction("Strikethrough") {
             override fun actionPerformed(e: ActionEvent?) {
