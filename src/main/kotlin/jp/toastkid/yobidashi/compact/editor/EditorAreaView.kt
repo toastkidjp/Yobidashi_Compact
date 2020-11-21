@@ -135,6 +135,16 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         }
         editorArea.popupMenu.add(strikethroughMenu)
 
+        val codeBlockMenu = JMenuItem()
+        codeBlockMenu.action = object : AbstractAction("Code block") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection("```\n$text```")
+                }
+            }
+        }
+        editorArea.popupMenu.add(codeBlockMenu)
+
         val countMenu = JMenuItem()
         countMenu.action = object : AbstractAction("Count") {
             override fun actionPerformed(e: ActionEvent?) {
