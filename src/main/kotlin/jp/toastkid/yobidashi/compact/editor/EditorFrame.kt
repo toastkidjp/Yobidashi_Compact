@@ -1,5 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
+import jp.toastkid.yobidashi.compact.editor.finder.FinderFrame
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.model.Article
@@ -94,6 +96,14 @@ class EditorFrame {
                     } ?: return@collect
                     val quotedText = BlockQuotation().invoke(text) ?: return@collect
                     editorAreaView.insertText(quotedText)
+                }
+                MenuCommand.FIND -> {
+                    val finderChannel = Channel<FindOrder>()
+                    val finderFrame = FinderFrame(finderChannel)
+                    finderFrame.show()
+                    finderChannel.receiveAsFlow().collect {
+                        editorAreaView.find(it)
+                    }
                 }
             }
         }

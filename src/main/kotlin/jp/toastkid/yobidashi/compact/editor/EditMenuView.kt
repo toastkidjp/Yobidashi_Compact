@@ -16,6 +16,15 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         val menu = JMenu("Edit(E)")
         menu.setMnemonic('E')
 
+        val findItem = JMenuItem("Find")
+        findItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK)
+        findItem.addActionListener {
+            CoroutineScope(Dispatchers.Default).launch {
+                channel.send(MenuCommand.FIND)
+            }
+        }
+        menu.add(findItem)
+
         val item = JMenuItem("Paste as quotation")
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK)
         item.addActionListener {

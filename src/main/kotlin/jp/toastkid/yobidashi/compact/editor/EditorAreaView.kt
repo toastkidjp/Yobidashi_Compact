@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +68,28 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
 
     fun insertText(text: String) {
         editorArea.insert(text, editorArea.caretPosition)
+    }
+
+    private var lastFound = 0
+
+    fun find(order: FindOrder) {
+        if (order.invokeReplace) {
+            // TODO
+            return
+        }
+
+        val indexOf = if (order.upper) {
+            editorArea.text.lastIndexOf(order.target, lastFound - 1)
+        } else {
+            editorArea.text.indexOf(order.target, lastFound + 1)
+        }
+        if (indexOf == -1) {
+            return
+        }
+        lastFound = indexOf
+
+        editorArea.selectionStart = indexOf
+        editorArea.selectionEnd = indexOf + order.target.length
     }
 
     companion object {
