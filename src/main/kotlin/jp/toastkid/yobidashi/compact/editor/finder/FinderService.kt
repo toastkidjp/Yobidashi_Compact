@@ -8,14 +8,22 @@ class FinderService(private val editorArea: RSyntaxTextArea) {
 
     operator fun invoke(order: FindOrder) {
         if (order.invokeReplace) {
-            var indexOf = editorArea.text.indexOf(order.target)
-            while (indexOf != -1) {
-                editorArea.replaceRange(order.replace, indexOf, indexOf + order.target.length)
-                indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
-            }
+            replace(order)
             return
         }
 
+        find(order)
+    }
+
+    private fun replace(order: FindOrder) {
+        var indexOf = editorArea.text.indexOf(order.target)
+        while (indexOf != -1) {
+            editorArea.replaceRange(order.replace, indexOf, indexOf + order.target.length)
+            indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
+        }
+    }
+
+    private fun find(order: FindOrder) {
         val indexOf = if (order.upper) {
             editorArea.text.lastIndexOf(order.target, lastFound - 1)
         } else {
