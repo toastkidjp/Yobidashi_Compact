@@ -35,11 +35,17 @@ class FinderFrame(private val channel: Channel<FindOrder>) {
         replace.preferredSize = Dimension(100, 36)
         content.add(replace)
 
+        content.add(makeButtons(target, replace))
+
+        frame.add(content)
+    }
+
+    private fun makeButtons(target: JTextField, replace: JTextField): JPanel {
         val buttons = JPanel()
         buttons.layout = BoxLayout(buttons, BoxLayout.X_AXIS)
         val upper = JButton()
         upper.preferredSize = Dimension(100, 36)
-        upper.margin = Insets(10, 20,10, 20)
+        upper.margin = Insets(10, 20, 10, 20)
         upper.action = object : AbstractAction("↑") {
             override fun actionPerformed(e: ActionEvent?) {
                 CoroutineScope(Dispatchers.Default).launch {
@@ -49,7 +55,7 @@ class FinderFrame(private val channel: Channel<FindOrder>) {
         }
 
         val downer = JButton()
-        downer.margin = Insets(10, 20,10, 20)
+        downer.margin = Insets(10, 20, 10, 20)
         downer.action = object : AbstractAction("↓") {
             override fun actionPerformed(e: ActionEvent?) {
                 CoroutineScope(Dispatchers.Default).launch {
@@ -59,12 +65,11 @@ class FinderFrame(private val channel: Channel<FindOrder>) {
         }
 
         val all = JButton("All")
-        all.margin = Insets(10, 20,10, 20)
+        all.margin = Insets(10, 20, 10, 20)
         buttons.add(upper)
         buttons.add(downer)
         buttons.add(all)
-        content.add(buttons)
-        frame.add(content)
+        return buttons
     }
 
     fun show() {
