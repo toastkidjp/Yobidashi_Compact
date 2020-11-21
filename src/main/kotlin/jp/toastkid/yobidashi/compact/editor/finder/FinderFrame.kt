@@ -64,8 +64,20 @@ class FinderFrame(private val channel: Channel<FindOrder>) {
             }
         }
 
-        val all = JButton("All")
+        val all = JButton()
         all.margin = Insets(10, 20, 10, 20)
+        all.action = object : AbstractAction("All") {
+            override fun actionPerformed(e: ActionEvent?) {
+                if (target.text == replace.text) {
+                    return
+                }
+
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(FindOrder(target.text, replace.text, invokeReplace = true))
+                }
+            }
+        }
+
         buttons.add(upper)
         buttons.add(downer)
         buttons.add(all)

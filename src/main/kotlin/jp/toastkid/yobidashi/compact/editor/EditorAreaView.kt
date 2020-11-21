@@ -74,7 +74,11 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
 
     fun find(order: FindOrder) {
         if (order.invokeReplace) {
-            // TODO
+            var indexOf = editorArea.text.indexOf(order.target)
+            while (indexOf != -1) {
+                editorArea.replaceRange(order.replace, indexOf, indexOf + order.replace.length)
+                indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
+            }
             return
         }
 
