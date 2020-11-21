@@ -105,6 +105,16 @@ class EditorAreaView(private val editorArea: RSyntaxTextArea = RSyntaxTextArea()
         }
         editorArea.popupMenu.add(boldMenu)
 
+        val italicMenu = JMenuItem()
+        italicMenu.action = object : AbstractAction("Italic") {
+            override fun actionPerformed(e: ActionEvent?) {
+                editorArea.selectedText.also { text ->
+                    editorArea.replaceSelection("*$text*")
+                }
+            }
+        }
+        editorArea.popupMenu.add(italicMenu)
+
         val strikethroughMenu = JMenuItem()
         strikethroughMenu.action = object : AbstractAction("Strikethrough") {
             override fun actionPerformed(e: ActionEvent?) {
