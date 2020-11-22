@@ -142,8 +142,8 @@ class MainFrame(title: String) {
     }
 
     fun show() {
-        frame.isVisible = true
         initialize()
+        frame.isVisible = true
     }
 
 }
