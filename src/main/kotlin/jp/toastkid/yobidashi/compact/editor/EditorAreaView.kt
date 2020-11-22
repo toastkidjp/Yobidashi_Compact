@@ -91,7 +91,7 @@ class EditorAreaView(
     }
 
     fun replaceSelected(action: (String) -> String) {
-        editorArea.selectedText.also { text ->
+        editorArea.selectedText?.also { text ->
             editorArea.replaceSelection(action(text))
         }
     }
