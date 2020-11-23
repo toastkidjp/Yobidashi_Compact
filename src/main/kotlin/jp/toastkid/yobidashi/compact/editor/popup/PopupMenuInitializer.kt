@@ -1,7 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor.popup
 
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
-import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -33,8 +32,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val blockQuotationMenu = JMenuItem()
         blockQuotationMenu.action = object : AbstractAction("Block quote") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection(BlockQuotation().invoke(text))
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.BLOCKQUOTE)
                 }
             }
         }
