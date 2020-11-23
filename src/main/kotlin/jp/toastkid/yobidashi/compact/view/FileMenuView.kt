@@ -78,7 +78,7 @@ class FileMenuView {
         val item = JMenuItem("Make new")
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK)
         item.addActionListener {
-            val dialog = JOptionPane.showInputDialog(this, "Please input new article name.")
+            val dialog = JOptionPane.showInputDialog("Please input new article name.")
             if (dialog.isNullOrBlank()) {
                 return@addActionListener
             }
