@@ -1,8 +1,5 @@
 package jp.toastkid.yobidashi.compact.editor.model
 
-/**
- * TODO write test.
- */
 class Editing {
 
     private var editing = false
