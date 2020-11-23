@@ -35,14 +35,23 @@ class EditorAreaView(
             override fun keyTyped(e: KeyEvent?) = Unit
 
             override fun keyPressed(e: KeyEvent?) {
-                if (e == null) {
+                if (e == null || e.isControlDown.not()) {
                     return
                 }
 
-                if (e.isControlDown && e.keyCode == KeyEvent.VK_T) {
-                    CoroutineScope(Dispatchers.Default).launch {
-                        channel.send(MenuCommand.TO_TABLE)
-                    }
+                CoroutineScope(Dispatchers.Default).launch {
+                    val command = when (e.keyCode) {
+                        KeyEvent.VK_T -> MenuCommand.TO_TABLE
+                        KeyEvent.VK_I -> MenuCommand.ITALIC
+                        KeyEvent.VK_B -> MenuCommand.BOLD
+                        KeyEvent.VK_PERIOD -> MenuCommand.BLOCKQUOTE
+                        KeyEvent.VK_CIRCUMFLEX -> MenuCommand.STRIKETHROUGH
+                        KeyEvent.VK_1 -> MenuCommand.ORDERED_LIST
+                        KeyEvent.VK_2 -> MenuCommand.TASK_LIST
+                        KeyEvent.VK_MINUS -> MenuCommand.UNORDERED_LIST
+                        else -> null
+                    } ?: return@launch
+                    channel.send(command)
                 }
             }
 
