@@ -68,6 +68,9 @@ class FileMenuView {
         item.addActionListener {
             val title = TodayFileTitleGenerator().invoke(System.currentTimeMillis()) ?: return@addActionListener
             val article = Article.withTitle(title)
+            if (Setting.articleFolderFile().listFiles()?.any { it.nameWithoutExtension == article.getTitle() } == true) {
+                return@addActionListener
+            }
             article.makeFieIfNeed { ArticleTemplate()(article.getTitle()) }
             SubjectPool.addToList(article)
         }
