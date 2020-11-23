@@ -45,8 +45,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val hyphenListMenu = JMenuItem()
         hyphenListMenu.action = object : AbstractAction("Hyphen list") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection(ListHeadAdder().invoke(text, "-"))
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.UNORDERED_LIST)
                 }
             }
         }

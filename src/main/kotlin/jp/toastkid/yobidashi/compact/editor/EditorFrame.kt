@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.finder.FinderFrame
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
+import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
@@ -110,6 +111,11 @@ class EditorFrame {
                 MenuCommand.TO_TABLE -> {
                     editorAreaView.replaceSelected { text ->
                         TableFormConverter().invoke(text)
+                    }
+                }
+                MenuCommand.UNORDERED_LIST -> {
+                    editorAreaView.replaceSelected { text ->
+                        ListHeadAdder().invoke(text, "-") ?: text
                     }
                 }
             }
