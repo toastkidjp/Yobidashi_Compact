@@ -2,8 +2,6 @@ package jp.toastkid.yobidashi.compact.editor.popup
 
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
-import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
-import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -65,8 +63,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val taskListMenu = JMenuItem()
         taskListMenu.action = object : AbstractAction("Task list") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection(ListHeadAdder().invoke(text, "- [ ]"))
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.TASK_LIST)
                 }
             }
         }

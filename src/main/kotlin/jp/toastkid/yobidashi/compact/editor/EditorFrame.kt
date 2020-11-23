@@ -124,6 +124,11 @@ class EditorFrame {
                         NumberedListHeadAdder().invoke(text) ?: text
                     }
                 }
+                MenuCommand.TASK_LIST -> {
+                    editorAreaView.replaceSelected { text ->
+                        ListHeadAdder().invoke(text, "- [ ]") ?: text
+                    }
+                }
             }
         }
     }
