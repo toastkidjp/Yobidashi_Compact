@@ -12,7 +12,6 @@ import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import javax.swing.AbstractAction
-import javax.swing.JColorChooser
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 
@@ -112,17 +111,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val fontColorMenu = JMenuItem()
         fontColorMenu.action = object : AbstractAction("Font color") {
             override fun actionPerformed(e: ActionEvent?) {
-                val colorPicker = JColorChooser()
-                val dialog = JOptionPane.showConfirmDialog(
-                        null,
-                        colorPicker
-                )
-                if (dialog != JOptionPane.OK_OPTION) {
-                    return
-                }
-                val color = colorPicker.color
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection("<font color='#${Integer.toHexString(color.rgb)}'>$text</font>")
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.FONT_COLOR)
                 }
             }
         }

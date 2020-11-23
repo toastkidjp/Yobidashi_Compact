@@ -19,6 +19,8 @@ import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 import java.io.IOException
 import java.nio.file.Files
+import javax.swing.JColorChooser
+import javax.swing.JOptionPane
 
 class CommandReceiverService(
         private val channel: Channel<MenuCommand>,
@@ -107,6 +109,20 @@ class CommandReceiverService(
                 MenuCommand.STRIKETHROUGH -> {
                     editorAreaView.replaceSelected { text ->
                         "~~$text~~"
+                    }
+                }
+                MenuCommand.FONT_COLOR -> {
+                    val colorPicker = JColorChooser()
+                    val dialog = JOptionPane.showConfirmDialog(
+                            null,
+                            colorPicker
+                    )
+                    if (dialog != JOptionPane.OK_OPTION) {
+                        return@collect
+                    }
+                    val color = colorPicker.color
+                    editorAreaView.replaceSelected { text ->
+                        "<font color='#${Integer.toHexString(color.rgb)}'>$text</font>"
                     }
                 }
             }
