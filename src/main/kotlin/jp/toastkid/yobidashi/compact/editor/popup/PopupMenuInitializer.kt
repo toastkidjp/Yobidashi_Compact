@@ -40,7 +40,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         editorArea.popupMenu.add(blockQuotationMenu)
 
         val hyphenListMenu = JMenuItem()
-        hyphenListMenu.action = object : AbstractAction("Hyphen list") {
+        hyphenListMenu.action = object : AbstractAction("Unordered list") {
             override fun actionPerformed(e: ActionEvent?) {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.UNORDERED_LIST)
@@ -50,7 +50,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         editorArea.popupMenu.add(hyphenListMenu)
 
         val numberedListMenu = JMenuItem()
-        numberedListMenu.action = object : AbstractAction("Numbered list") {
+        numberedListMenu.action = object : AbstractAction("Ordered list") {
             override fun actionPerformed(e: ActionEvent?) {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.ORDERED_LIST)
