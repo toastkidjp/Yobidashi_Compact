@@ -139,6 +139,11 @@ class EditorFrame {
                         "**$text**"
                     }
                 }
+                MenuCommand.STRIKETHROUGH -> {
+                    editorAreaView.replaceSelected { text ->
+                        "~~$text~~"
+                    }
+                }
             }
         }
     }

@@ -93,8 +93,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val strikethroughMenu = JMenuItem()
         strikethroughMenu.action = object : AbstractAction("Strikethrough") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection("~~$text~~")
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.STRIKETHROUGH)
                 }
             }
         }
