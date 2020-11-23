@@ -1,27 +1,16 @@
 package jp.toastkid.yobidashi.compact.editor
 
-import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
-import jp.toastkid.yobidashi.compact.editor.finder.FinderFrame
 import jp.toastkid.yobidashi.compact.editor.model.Editing
-import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
-import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
-import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
+import jp.toastkid.yobidashi.compact.editor.service.CommandReceiverService
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
-import kotlinx.coroutines.withContext
 import java.awt.BorderLayout
-import java.awt.Toolkit
-import java.awt.datatransfer.DataFlavor
-import java.io.IOException
-import java.nio.file.Files
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JLabel
@@ -47,11 +36,6 @@ class EditorFrame {
 
         val channel = Channel<MenuCommand>()
         frame.jMenuBar = MenubarView(channel).invoke(frame)
-
-        CoroutineScope(Dispatchers.Swing).launch {
-            receiveCommand(channel)
-        }
-
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 80, 1200, 600)
 
@@ -72,84 +56,17 @@ class EditorFrame {
             editing.setCurrentSize(it)
             resetFrameTitle()
         }
-    }
 
-    private suspend fun receiveCommand(channel: Channel<MenuCommand>) {
-        channel.receiveAsFlow().collect {
-            when (it) {
-                MenuCommand.SAVE -> {
-                    val article = currentArticle ?: return@collect
-                    try {
-                        withContext(Dispatchers.IO) { Files.write(article.path(), editorAreaView.getTextArray()) }
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-                    editing.clear()
-                    resetFrameTitle()
-                }
-                MenuCommand.CLOSE -> frame.dispose()
-                MenuCommand.PASTE_AS_QUOTATION -> {
-                    val text = withContext(Dispatchers.IO) {
-                        val transferData = Toolkit.getDefaultToolkit()
-                                .systemClipboard
-                                .getContents(this)
-                        if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) {
-                            return@withContext null
-                        }
-                        transferData.getTransferData(DataFlavor.stringFlavor).toString()
-                    } ?: return@collect
-                    val quotedText = BlockQuotation().invoke(text) ?: return@collect
-                    editorAreaView.insertText(quotedText)
-                }
-                MenuCommand.FIND -> {
-                    val finderChannel = Channel<FindOrder>()
-                    val finderFrame = FinderFrame(finderChannel)
-                    finderFrame.show()
-                    finderChannel.receiveAsFlow().collect {
-                        editorAreaView.find(it)
-                    }
-                }
-                MenuCommand.TO_TABLE -> {
-                    editorAreaView.replaceSelected { text ->
-                        TableFormConverter().invoke(text)
-                    }
-                }
-                MenuCommand.UNORDERED_LIST -> {
-                    editorAreaView.replaceSelected { text ->
-                        ListHeadAdder().invoke(text, "-") ?: text
-                    }
-                }
-                MenuCommand.ORDERED_LIST -> {
-                    editorAreaView.replaceSelected { text ->
-                        NumberedListHeadAdder().invoke(text) ?: text
-                    }
-                }
-                MenuCommand.TASK_LIST -> {
-                    editorAreaView.replaceSelected { text ->
-                        ListHeadAdder().invoke(text, "- [ ]") ?: text
-                    }
-                }
-                MenuCommand.BLOCKQUOTE -> {
-                    editorAreaView.replaceSelected { text ->
-                        BlockQuotation().invoke(text) ?: text
-                    }
-                }
-                MenuCommand.ITALIC -> {
-                    editorAreaView.replaceSelected { text ->
-                        "*$text*"
-                    }
-                }
-                MenuCommand.BOLD -> {
-                    editorAreaView.replaceSelected { text ->
-                        "**$text**"
-                    }
-                }
-                MenuCommand.STRIKETHROUGH -> {
-                    editorAreaView.replaceSelected { text ->
-                        "~~$text~~"
-                    }
-                }
-            }
+        val commandReceiverService = CommandReceiverService(
+                channel,
+                editorAreaView,
+                { currentArticle },
+                editing,
+                this::resetFrameTitle,
+                frame::dispose
+        )
+        CoroutineScope(Dispatchers.Swing).launch {
+            commandReceiverService()
         }
     }
 
