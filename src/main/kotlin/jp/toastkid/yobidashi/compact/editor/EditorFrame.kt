@@ -134,6 +134,11 @@ class EditorFrame {
                         "*$text*"
                     }
                 }
+                MenuCommand.BOLD -> {
+                    editorAreaView.replaceSelected { text ->
+                        "**$text**"
+                    }
+                }
             }
         }
     }

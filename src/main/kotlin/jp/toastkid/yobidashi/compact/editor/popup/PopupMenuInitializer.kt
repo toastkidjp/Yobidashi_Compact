@@ -73,8 +73,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val boldMenu = JMenuItem()
         boldMenu.action = object : AbstractAction("Bold") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection("**$text**")
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.BOLD)
                 }
             }
         }
