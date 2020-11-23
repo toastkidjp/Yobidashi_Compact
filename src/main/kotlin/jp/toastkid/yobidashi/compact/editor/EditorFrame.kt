@@ -129,6 +129,11 @@ class EditorFrame {
                         ListHeadAdder().invoke(text, "- [ ]") ?: text
                     }
                 }
+                MenuCommand.ITALIC -> {
+                    editorAreaView.replaceSelected { text ->
+                        "*$text*"
+                    }
+                }
             }
         }
     }
