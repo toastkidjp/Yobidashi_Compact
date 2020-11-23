@@ -89,6 +89,11 @@ class CommandReceiverService(
                         BlockQuotation().invoke(text) ?: text
                     }
                 }
+                MenuCommand.CODE_BLOCK -> {
+                    editorAreaView.replaceSelected { text ->
+                        "```\n$text```"
+                    }
+                }
                 MenuCommand.ITALIC -> {
                     editorAreaView.replaceSelected { text ->
                         "*$text*"

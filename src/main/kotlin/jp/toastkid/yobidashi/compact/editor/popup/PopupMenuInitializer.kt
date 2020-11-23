@@ -102,8 +102,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val codeBlockMenu = JMenuItem()
         codeBlockMenu.action = object : AbstractAction("Code block") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection("```\n$text```")
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.CODE_BLOCK)
                 }
             }
         }
