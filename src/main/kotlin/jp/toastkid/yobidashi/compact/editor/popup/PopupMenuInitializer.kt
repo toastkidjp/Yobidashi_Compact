@@ -55,8 +55,8 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val numberedListMenu = JMenuItem()
         numberedListMenu.action = object : AbstractAction("Numbered list") {
             override fun actionPerformed(e: ActionEvent?) {
-                editorArea.selectedText.also { text ->
-                    editorArea.replaceSelection(NumberedListHeadAdder().invoke(text))
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.ORDERED_LIST)
                 }
             }
         }
