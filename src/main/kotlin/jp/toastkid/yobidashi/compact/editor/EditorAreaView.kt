@@ -95,6 +95,10 @@ class EditorAreaView(
         }
     }
 
+    fun count(): Long {
+        return editorArea.selectedText.trim().codePoints().count()
+    }
+
     companion object {
         private const val DEFAULT_FONT_SIZE = 16f
     }

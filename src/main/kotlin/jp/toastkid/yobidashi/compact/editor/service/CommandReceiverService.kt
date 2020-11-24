@@ -19,6 +19,7 @@ import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 import java.io.IOException
 import java.nio.file.Files
+import javax.swing.JOptionPane
 
 class CommandReceiverService(
         private val channel: Channel<MenuCommand>,
@@ -114,6 +115,12 @@ class CommandReceiverService(
                     editorAreaView.replaceSelected { text ->
                         "<font color='#${Integer.toHexString(color.rgb)}'>$text</font>"
                     }
+                }
+                MenuCommand.COUNT -> {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Count: ${editorAreaView.count()}"
+                    )
                 }
             }
         }
