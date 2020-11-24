@@ -15,9 +15,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
+import java.awt.Desktop
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 import java.io.IOException
+import java.net.URI
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import javax.swing.JOptionPane
 
@@ -121,6 +125,13 @@ class CommandReceiverService(
                             null,
                             "Count: ${editorAreaView.count()}"
                     )
+                }
+                MenuCommand.WEB_SEARCH -> {
+                    val selectedText = editorAreaView.selectedText()
+                    if (selectedText.isNullOrBlank()) {
+                        return@collect
+                    }
+                    Desktop.getDesktop().browse(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}"))
                 }
             }
         }
