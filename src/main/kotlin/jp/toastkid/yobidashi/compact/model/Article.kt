@@ -23,9 +23,6 @@ class Article(private val file: Path) {
     }
 
     fun makeFieIfNeed(contentSupplier: () -> String) {
-        if (Files.exists(file)) {
-            return
-        }
         Files.createFile(file)
         Files.write(file, contentSupplier().toByteArray(StandardCharsets.UTF_8))
     }
