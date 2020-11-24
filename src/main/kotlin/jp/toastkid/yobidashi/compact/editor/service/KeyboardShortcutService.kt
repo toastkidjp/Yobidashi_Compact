@@ -24,6 +24,7 @@ class KeyboardShortcutService(private val channel: Channel<MenuCommand>) {
                 KeyEvent.VK_1 -> MenuCommand.ORDERED_LIST
                 KeyEvent.VK_2 -> MenuCommand.TASK_LIST
                 KeyEvent.VK_MINUS -> MenuCommand.UNORDERED_LIST
+                KeyEvent.VK_AT -> MenuCommand.CODE_BLOCK
                 else -> null
             } ?: return@launch
             channel.send(command)
