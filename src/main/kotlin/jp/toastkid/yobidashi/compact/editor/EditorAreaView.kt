@@ -52,7 +52,7 @@ class EditorAreaView(
             }
         })
 
-        PopupMenuInitializer(editorArea, channel).invoke()
+        PopupMenuInitializer(editorArea.popupMenu, channel).invoke()
 
         scrollArea = RTextScrollPane(editorArea)
         scrollArea.lineNumbersEnabled = true

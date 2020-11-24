@@ -5,12 +5,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import java.awt.event.ActionEvent
 import javax.swing.AbstractAction
 import javax.swing.JMenuItem
+import javax.swing.JPopupMenu
 
-class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val channel: Channel<MenuCommand>) {
+class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channel: Channel<MenuCommand>) {
 
     operator fun invoke() {
         val toTableMenu = JMenuItem()
@@ -21,7 +21,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(toTableMenu)
+        popupMenu.add(toTableMenu)
 
         val blockQuotationMenu = JMenuItem()
         blockQuotationMenu.action = object : AbstractAction("Block quote") {
@@ -31,7 +31,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(blockQuotationMenu)
+        popupMenu.add(blockQuotationMenu)
 
         val hyphenListMenu = JMenuItem()
         hyphenListMenu.action = object : AbstractAction("Unordered list") {
@@ -41,7 +41,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(hyphenListMenu)
+        popupMenu.add(hyphenListMenu)
 
         val numberedListMenu = JMenuItem()
         numberedListMenu.action = object : AbstractAction("Ordered list") {
@@ -51,7 +51,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(numberedListMenu)
+        popupMenu.add(numberedListMenu)
 
         val taskListMenu = JMenuItem()
         taskListMenu.action = object : AbstractAction("Task list") {
@@ -61,7 +61,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(taskListMenu)
+        popupMenu.add(taskListMenu)
 
         val boldMenu = JMenuItem()
         boldMenu.action = object : AbstractAction("Bold") {
@@ -71,7 +71,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(boldMenu)
+        popupMenu.add(boldMenu)
 
         val italicMenu = JMenuItem()
         italicMenu.action = object : AbstractAction("Italic") {
@@ -81,7 +81,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(italicMenu)
+        popupMenu.add(italicMenu)
 
         val strikethroughMenu = JMenuItem()
         strikethroughMenu.action = object : AbstractAction("Strikethrough") {
@@ -91,7 +91,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(strikethroughMenu)
+        popupMenu.add(strikethroughMenu)
 
         val codeBlockMenu = JMenuItem()
         codeBlockMenu.action = object : AbstractAction("Code block") {
@@ -101,7 +101,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(codeBlockMenu)
+        popupMenu.add(codeBlockMenu)
 
         val fontColorMenu = JMenuItem()
         fontColorMenu.action = object : AbstractAction("Font color") {
@@ -111,7 +111,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(fontColorMenu)
+        popupMenu.add(fontColorMenu)
 
         val countMenu = JMenuItem()
         countMenu.action = object : AbstractAction("Count") {
@@ -121,7 +121,7 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(countMenu)
+        popupMenu.add(countMenu)
 
         val webSearchMenu = JMenuItem()
         webSearchMenu.action = object : AbstractAction("Web search") {
@@ -131,6 +131,6 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
                 }
             }
         }
-        editorArea.popupMenu.add(webSearchMenu)
+        popupMenu.add(webSearchMenu)
     }
 }
