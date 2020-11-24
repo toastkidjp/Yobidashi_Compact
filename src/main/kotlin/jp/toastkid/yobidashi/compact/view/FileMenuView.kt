@@ -86,6 +86,9 @@ class FileMenuView {
                 return@addActionListener
             }
             val article = Article.withTitle(dialog)
+            if (Setting.articleFolderFile().listFiles()?.any { it.nameWithoutExtension == article.getTitle() } == true) {
+                return@addActionListener
+            }
             article.makeFieIfNeed { "# ${article.getTitle()}" }
             SubjectPool.addToList(article)
         }
