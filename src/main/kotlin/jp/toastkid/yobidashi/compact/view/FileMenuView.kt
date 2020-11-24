@@ -67,10 +67,11 @@ class FileMenuView {
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
         item.addActionListener {
             val title = TodayFileTitleGenerator().invoke(System.currentTimeMillis()) ?: return@addActionListener
-            val article = Article.withTitle(title)
             if (existsArticle(title)) {
                 return@addActionListener
             }
+
+            val article = Article.withTitle(title)
             article.makeFieIfNeed { ArticleTemplate()(article.getTitle()) }
             SubjectPool.addToList(article)
         }
@@ -85,10 +86,11 @@ class FileMenuView {
             if (dialog.isNullOrBlank()) {
                 return@addActionListener
             }
-            val article = Article.withTitle(dialog)
-            if (existsArticle(article)) {
+            if (existsArticle(dialog)) {
                 return@addActionListener
             }
+
+            val article = Article.withTitle(dialog)
             article.makeFieIfNeed { "# ${article.getTitle()}" }
             SubjectPool.addToList(article)
         }
