@@ -13,7 +13,6 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import javax.swing.AbstractAction
 import javax.swing.JMenuItem
-import javax.swing.JOptionPane
 
 class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val channel: Channel<MenuCommand>) {
 
@@ -121,10 +120,9 @@ class PopupMenuInitializer(private val editorArea: RSyntaxTextArea, private val 
         val countMenu = JMenuItem()
         countMenu.action = object : AbstractAction("Count") {
             override fun actionPerformed(e: ActionEvent?) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Count: ${editorArea.selectedText.trim().codePoints().count()}"
-                )
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.COUNT)
+                }
             }
         }
         editorArea.popupMenu.add(countMenu)
