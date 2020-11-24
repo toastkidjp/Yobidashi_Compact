@@ -3,8 +3,6 @@ package jp.toastkid.yobidashi.compact.editor.service
 import jp.toastkid.yobidashi.compact.editor.EditorAreaView
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.TableFormConverter
-import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
-import jp.toastkid.yobidashi.compact.editor.finder.FinderFrame
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
@@ -31,6 +29,7 @@ class CommandReceiverService(
         private val currentArticle: () -> Article?,
         private val editing: Editing,
         private val resetFrameTitle: () -> Unit,
+        private val switchFinder: () -> Unit,
         private val close: () -> Unit
 ) {
 
@@ -62,12 +61,7 @@ class CommandReceiverService(
                     editorAreaView.insertText(quotedText)
                 }
                 MenuCommand.FIND -> {
-                    val finderChannel = Channel<FindOrder>()
-                    val finderFrame = FinderFrame(finderChannel)
-                    finderFrame.show()
-                    finderChannel.receiveAsFlow().collect {
-                        editorAreaView.find(it)
-                    }
+                    switchFinder()
                 }
                 MenuCommand.TO_TABLE -> {
                     editorAreaView.replaceSelected { text ->

@@ -1,5 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor
 
+import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
+import jp.toastkid.yobidashi.compact.editor.finder.FinderFrame
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.service.CommandReceiverService
 import jp.toastkid.yobidashi.compact.model.Article
@@ -8,6 +10,8 @@ import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import java.awt.BorderLayout
@@ -51,6 +55,16 @@ class EditorFrame {
         footer.add(statusLabel, BorderLayout.EAST)
         panel.add(footer, BorderLayout.SOUTH)
 
+        val finderChannel = Channel<FindOrder>()
+        val finderView = FinderFrame(finderChannel).view()
+        finderView.isVisible = false
+        panel.add(finderView, BorderLayout.NORTH)
+        CoroutineScope(Dispatchers.Default).launch {
+            finderChannel.receiveAsFlow().collect {
+                editorAreaView.find(it)
+            }
+        }
+
         editorAreaView.receiveStatus {
             setStatus("Character: $it")
             editing.setCurrentSize(it)
@@ -63,6 +77,7 @@ class EditorFrame {
                 { currentArticle },
                 editing,
                 this::resetFrameTitle,
+                { finderView.isVisible = !finderView.isVisible },
                 frame::dispose
         )
         CoroutineScope(Dispatchers.Swing).launch {

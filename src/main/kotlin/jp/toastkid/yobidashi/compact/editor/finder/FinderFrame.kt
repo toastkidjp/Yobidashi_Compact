@@ -11,6 +11,7 @@ import javax.imageio.ImageIO
 import javax.swing.AbstractAction
 import javax.swing.BoxLayout
 import javax.swing.JButton
+import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -20,11 +21,12 @@ class FinderFrame(private val channel: Channel<FindOrder>) {
 
     private val frame = JFrame()
 
+    private val content = JPanel()
+
     init {
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
         frame.setBounds(400, 300, 400, 180)
 
-        val content = JPanel()
         content.layout = BoxLayout(content, BoxLayout.Y_AXIS)
         content.add(JLabel("Target"))
         val target = JTextField()
@@ -92,5 +94,7 @@ class FinderFrame(private val channel: Channel<FindOrder>) {
         frame.isVisible = false
         frame.dispose()
     }
+
+    fun view(): JComponent = content
 
 }
