@@ -68,7 +68,7 @@ class FileMenuView {
         item.addActionListener {
             val title = TodayFileTitleGenerator().invoke(System.currentTimeMillis()) ?: return@addActionListener
             val article = Article.withTitle(title)
-            if (Setting.articleFolderFile().listFiles()?.any { it.nameWithoutExtension == article.getTitle() } == true) {
+            if (existsArticle(title)) {
                 return@addActionListener
             }
             article.makeFieIfNeed { ArticleTemplate()(article.getTitle()) }
@@ -86,7 +86,7 @@ class FileMenuView {
                 return@addActionListener
             }
             val article = Article.withTitle(dialog)
-            if (Setting.articleFolderFile().listFiles()?.any { it.nameWithoutExtension == article.getTitle() } == true) {
+            if (existsArticle(article)) {
                 return@addActionListener
             }
             article.makeFieIfNeed { "# ${article.getTitle()}" }
@@ -94,6 +94,9 @@ class FileMenuView {
         }
         return item
     }
+
+    private fun existsArticle(title: String) =
+            Setting.articleFolderFile().listFiles()?.any { it.nameWithoutExtension == title } == true
 
     private fun makeZipAllMenuItem(): JMenuItem {
         val item = JMenuItem("Zip all")
