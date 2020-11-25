@@ -6,7 +6,7 @@ import java.nio.file.Files
 class ArticleContentLoaderUseCase(private val lineSeparator: String = System.lineSeparator()) {
 
     operator fun invoke(article: Article): String {
-        return Files.readAllLines(article.path()).reduce { base, item -> "$base$lineSeparator$item" }
+        return Files.readAllLines(article.path()).reduce { base, item -> "$base$lineSeparator$item" } + lineSeparator
     }
 
 }
