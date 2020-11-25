@@ -83,10 +83,7 @@ class FileMenuView {
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK)
         item.addActionListener {
             val dialog = JOptionPane.showInputDialog("Please input new article name.")
-            if (dialog.isNullOrBlank()) {
-                return@addActionListener
-            }
-            if (existsArticle(dialog)) {
+            if (dialog.isNullOrBlank() || existsArticle(dialog)) {
                 return@addActionListener
             }
 
