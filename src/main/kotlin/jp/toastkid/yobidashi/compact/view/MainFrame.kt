@@ -119,7 +119,7 @@ class MainFrame(title: String) {
         SubjectPool.observe {
             SwingUtilities.invokeLater {
                 val newContent = it.view()
-                tabPane.add("Search result", newContent)
+                tabPane.add(newContent)
                 val indexOfComponent = tabPane.indexOfComponent(newContent)
                 if (indexOfComponent == -1) {
                     return@invokeLater
