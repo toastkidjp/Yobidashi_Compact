@@ -13,12 +13,10 @@ import javax.swing.JPopupMenu
 class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channel: Channel<MenuCommand>) {
 
     operator fun invoke() {
-        val toTableMenu = JMenuItem()
-        toTableMenu.action = object : AbstractAction("To table") {
-            override fun actionPerformed(e: ActionEvent?) {
-                CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(MenuCommand.TO_TABLE)
-                }
+        val toTableMenu = JMenuItem("To table")
+        toTableMenu.addActionListener {
+            CoroutineScope(Dispatchers.Default).launch {
+                channel.send(MenuCommand.TO_TABLE)
             }
         }
         popupMenu.add(toTableMenu)
