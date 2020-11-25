@@ -21,8 +21,10 @@ import java.nio.file.Paths
 import java.util.stream.Collectors
 import javax.imageio.ImageIO
 import javax.swing.AbstractAction
+import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JFrame
+import javax.swing.JLabel
 import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.JTabbedPane
@@ -115,7 +117,21 @@ class MainFrame(title: String) {
         panel.add(buttons, BorderLayout.SOUTH)
 
         SubjectPool.observe {
-            SwingUtilities.invokeLater { tabPane.add("Search result", it.view()) }
+            SwingUtilities.invokeLater {
+                val newContent = it.view()
+                tabPane.add("Search result", newContent)
+                val indexOfComponent = tabPane.indexOfComponent(newContent)
+                if (indexOfComponent == -1) {
+                    return@invokeLater
+                }
+                val closeButton = JButton("x")
+                closeButton.addActionListener { tabPane.removeTabAt(tabPane.indexOfComponent(newContent)) }
+                val panel = JPanel()
+                panel.layout = BoxLayout(panel, BoxLayout.X_AXIS)
+                panel.add(JLabel("Search result"))
+                panel.add(closeButton)
+                tabPane.setTabComponentAt(indexOfComponent, panel)
+            }
             tabs.add(it)
         }
 
