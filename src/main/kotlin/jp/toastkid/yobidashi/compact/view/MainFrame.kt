@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.CloserTabComponentFactoryService
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -21,10 +22,8 @@ import java.nio.file.Paths
 import java.util.stream.Collectors
 import javax.imageio.ImageIO
 import javax.swing.AbstractAction
-import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JFrame
-import javax.swing.JLabel
 import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.JTabbedPane
@@ -124,13 +123,7 @@ class MainFrame(title: String) {
                 if (indexOfComponent == -1) {
                     return@invokeLater
                 }
-                val closeButton = JButton("x")
-                closeButton.addActionListener { tabPane.removeTabAt(tabPane.indexOfComponent(newContent)) }
-                val panel = JPanel()
-                panel.layout = BoxLayout(panel, BoxLayout.X_AXIS)
-                panel.add(JLabel("Search result"))
-                panel.add(closeButton)
-                tabPane.setTabComponentAt(indexOfComponent, panel)
+                tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(newContent))
             }
             tabs.add(it)
         }
