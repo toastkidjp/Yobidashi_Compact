@@ -1,7 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor
 
 import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
-import jp.toastkid.yobidashi.compact.editor.finder.FinderFrame
+import jp.toastkid.yobidashi.compact.editor.finder.FinderAreaView
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.service.CommandReceiverService
 import jp.toastkid.yobidashi.compact.model.Article
@@ -56,7 +56,7 @@ class EditorFrame {
         panel.add(footer, BorderLayout.SOUTH)
 
         val finderChannel = Channel<FindOrder>()
-        val finderView = FinderFrame(finderChannel).view()
+        val finderView = FinderAreaView(finderChannel).view()
         finderView.isVisible = false
         panel.add(finderView, BorderLayout.NORTH)
         CoroutineScope(Dispatchers.Default).launch {
