@@ -34,8 +34,8 @@ class CommandReceiverService(
 ) {
 
     suspend operator fun invoke() {
-        channel.receiveAsFlow().collect {
-            when (it) {
+        channel.receiveAsFlow().collect { command ->
+            when (command) {
                 MenuCommand.SAVE -> {
                     val article = currentArticle() ?: return@collect
                     try {
@@ -88,26 +88,10 @@ class CommandReceiverService(
                         BlockQuotation().invoke(text) ?: text
                     }
                 }
-                MenuCommand.CODE_BLOCK -> {
-                    editorAreaView.replaceSelected { text ->
-                        "```\n$text```"
-                    }
-                }
-                MenuCommand.ITALIC -> {
-                    editorAreaView.replaceSelected { text ->
-                        "*$text*"
-                    }
-                }
-                MenuCommand.BOLD -> {
-                    editorAreaView.replaceSelected { text ->
-                        "**$text**"
-                    }
-                }
-                MenuCommand.STRIKETHROUGH -> {
-                    editorAreaView.replaceSelected { text ->
-                        "~~$text~~"
-                    }
-                }
+                MenuCommand.CODE_BLOCK -> editorAreaView.replaceSelected { "```\n$it```" }
+                MenuCommand.ITALIC -> editorAreaView.replaceSelected { "*$it*" }
+                MenuCommand.BOLD -> editorAreaView.replaceSelected { "**$it**" }
+                MenuCommand.STRIKETHROUGH -> editorAreaView.replaceSelected { "~~$it~~" }
                 MenuCommand.FONT_COLOR -> {
                     val color = ColorChooserService().invoke() ?: return@collect
                     editorAreaView.replaceSelected { text ->
