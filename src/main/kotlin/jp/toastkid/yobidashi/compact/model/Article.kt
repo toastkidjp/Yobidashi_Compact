@@ -22,7 +22,7 @@ class Article(private val file: Path) {
         }
     }
 
-    fun makeFieIfNeed(contentSupplier: () -> String) {
+    fun makeFile(contentSupplier: () -> String) {
         Files.createFile(file)
         Files.write(file, contentSupplier().toByteArray(StandardCharsets.UTF_8))
     }

@@ -72,7 +72,7 @@ class FileMenuView {
             }
 
             val article = Article.withTitle(title)
-            article.makeFieIfNeed { ArticleTemplate()(article.getTitle()) }
+            article.makeFile { ArticleTemplate()(article.getTitle()) }
             SubjectPool.addToList(article)
         }
         return item
@@ -88,7 +88,7 @@ class FileMenuView {
             }
 
             val article = Article.withTitle(dialog)
-            article.makeFieIfNeed { "# ${article.getTitle()}" }
+            article.makeFile { "# ${article.getTitle()}" }
             SubjectPool.addToList(article)
         }
         return item
