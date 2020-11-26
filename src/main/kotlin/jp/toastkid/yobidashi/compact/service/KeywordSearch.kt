@@ -10,7 +10,7 @@ class KeywordSearch {
     operator fun invoke(keyword: String, fileFilter: String?): MutableList<String> {
         return Files.list(Paths.get(Setting.articleFolder()))
                 .parallel()
-                .map { it.fileName.toString() to Files.readAllLines(it) }
+                .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
                 .filter { filterByKeyword(fileFilter, it, keyword) }
                 .map { it.first }
                 .collect(Collectors.toList())
