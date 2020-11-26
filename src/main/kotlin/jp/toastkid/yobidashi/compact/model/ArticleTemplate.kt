@@ -4,10 +4,11 @@ class ArticleTemplate {
     operator fun invoke(header: String) = """# $header
 時分起床。起きた時の室温は度だった。
 
+## 今日のプログラミング
 追記
 
 ## 朝食
-
+追記
 
 ## 午前の仕事
 に打刻する。
@@ -30,6 +31,10 @@ class ArticleTemplate {
 
 追記
 
+## 今晩のWBS
+
+追記
+
 ## 室温
 
 | 時刻 | 室温
@@ -44,6 +49,8 @@ class ArticleTemplate {
 ## 家計簿
 | 品目 | 金額 |
 |:---|:---|
+| | 円
+| | 円
 | | 円
 | | 円
 
