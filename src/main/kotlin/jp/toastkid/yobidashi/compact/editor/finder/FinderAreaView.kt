@@ -5,6 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import java.awt.Dimension
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
 import java.awt.Insets
 import java.awt.event.ActionEvent
 import javax.imageio.ImageIO
@@ -27,17 +29,36 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
         frame.setBounds(400, 300, 400, 180)
 
-        content.layout = BoxLayout(content, BoxLayout.Y_AXIS)
-        content.add(JLabel("Target"))
-        val target = JTextField()
-        target.preferredSize = Dimension(100, 36)
-        content.add(target)
-        val replace = JTextField()
-        content.add(JLabel("Replace"))
-        replace.preferredSize = Dimension(100, 36)
-        content.add(replace)
+        content.layout = GridBagLayout()
+        val constraints = GridBagConstraints()
 
-        content.add(makeButtons(target, replace))
+        constraints.gridx = 0
+        constraints.gridy = 0
+        constraints.gridwidth = 1
+        content.add(JLabel("Target"), constraints)
+
+        val target = JTextField()
+        target.preferredSize = Dimension(200, 36)
+        constraints.gridx = 1
+        constraints.gridy = 0
+        constraints.gridwidth = 2
+        content.add(target, constraints)
+
+        constraints.gridx = 0
+        constraints.gridy = 1
+        constraints.gridwidth = 1
+        content.add(JLabel("Replace"), constraints)
+
+        val replace = JTextField()
+        replace.preferredSize = Dimension(200, 36)
+        constraints.gridx = 1
+        constraints.gridy = 1
+        constraints.gridwidth = 2
+        content.add(replace, constraints)
+
+        constraints.gridx = 3
+        constraints.gridy = 0
+        content.add(makeButtons(target, replace), constraints)
 
         frame.add(content)
     }
