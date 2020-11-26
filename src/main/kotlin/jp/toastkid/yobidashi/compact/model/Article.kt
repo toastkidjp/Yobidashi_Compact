@@ -9,8 +9,7 @@ import java.nio.file.Paths
 
 class Article(private val file: Path) {
 
-    // TODO use [ExtensionRemover]
-    private val title = file.fileName.toString().substring(0, file.fileName.toString().lastIndexOf("."))
+    private val title = file.toFile().nameWithoutExtension
 
     fun getTitle() = title
 
