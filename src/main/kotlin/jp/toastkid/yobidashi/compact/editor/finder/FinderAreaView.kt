@@ -71,6 +71,9 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
         upper.margin = Insets(10, 20, 10, 20)
         upper.action = object : AbstractAction("↑") {
             override fun actionPerformed(e: ActionEvent?) {
+                if (target.text.isNullOrEmpty()) {
+                    return
+                }
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(FindOrder(target.text, replace.text, true))
                 }
@@ -81,6 +84,9 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
         downer.margin = Insets(10, 20, 10, 20)
         downer.action = object : AbstractAction("↓") {
             override fun actionPerformed(e: ActionEvent?) {
+                if (target.text.isNullOrEmpty()) {
+                    return
+                }
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(FindOrder(target.text, replace.text))
                 }
