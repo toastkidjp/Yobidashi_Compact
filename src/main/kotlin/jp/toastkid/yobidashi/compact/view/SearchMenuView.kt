@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
-import jp.toastkid.yobidashi.compact.service.ExtensionRemover
 import jp.toastkid.yobidashi.compact.service.KeywordSearch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,8 +23,6 @@ import javax.swing.JTextField
 import javax.swing.KeyStroke
 
 class SearchMenuView {
-
-    private val extensionRemover = ExtensionRemover()
 
     operator fun invoke(): JMenu {
         val menu = JMenu("Search")
@@ -65,7 +62,6 @@ class SearchMenuView {
             withContext(Dispatchers.IO) {
                 KeywordSearch().invoke(keyword, fileFilter.text)
                         .asSequence()
-                        .map { extensionRemover(it) ?: "" }
                         .filter { it.isNotBlank() }
                         .map { Article.withTitle(it) }
                         .forEach { articleListView.add(it) }
