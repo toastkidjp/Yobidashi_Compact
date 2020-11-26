@@ -111,6 +111,13 @@ class CommandReceiverService(
                     }
                     Desktop.getDesktop().browse(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}"))
                 }
+                MenuCommand.DICTIONARY_SEARCH -> {
+                    val selectedText = editorAreaView.selectedText()
+                    if (selectedText.isNullOrBlank()) {
+                        return@collect
+                    }
+                    Desktop.getDesktop().browse(URI("https://ejje.weblio.jp/content/${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}"))
+                }
                 MenuCommand.TRANSLATION_TO_ENGLISH -> {
                     val selectedText = editorAreaView.selectedText()
                     if (selectedText.isNullOrBlank()) {

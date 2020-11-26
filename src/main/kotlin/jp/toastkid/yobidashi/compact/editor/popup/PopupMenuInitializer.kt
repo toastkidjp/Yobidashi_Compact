@@ -131,6 +131,16 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(webSearchMenu)
 
+        val dictionaryMenu = JMenuItem()
+        dictionaryMenu.action = object : AbstractAction("Dictionary") {
+            override fun actionPerformed(e: ActionEvent?) {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.DICTIONARY_SEARCH)
+                }
+            }
+        }
+        popupMenu.add(dictionaryMenu)
+
         val translateMenu = JMenuItem()
         translateMenu.action = object : AbstractAction("Translate to English") {
             override fun actionPerformed(e: ActionEvent?) {
