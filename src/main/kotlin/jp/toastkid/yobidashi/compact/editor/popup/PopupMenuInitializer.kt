@@ -130,5 +130,15 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
             }
         }
         popupMenu.add(webSearchMenu)
+
+        val translateMenu = JMenuItem()
+        translateMenu.action = object : AbstractAction("Translate to English") {
+            override fun actionPerformed(e: ActionEvent?) {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.TRANSLATION_TO_ENGLISH)
+                }
+            }
+        }
+        popupMenu.add(translateMenu)
     }
 }

@@ -111,6 +111,13 @@ class CommandReceiverService(
                     }
                     Desktop.getDesktop().browse(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}"))
                 }
+                MenuCommand.TRANSLATION_TO_ENGLISH -> {
+                    val selectedText = editorAreaView.selectedText()
+                    if (selectedText.isNullOrBlank()) {
+                        return@collect
+                    }
+                    Desktop.getDesktop().browse(URI("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}&op=translate"))
+                }
             }
         }
     }
