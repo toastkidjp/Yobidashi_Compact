@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.model
 
 class ArticleTemplate {
     operator fun invoke(header: String) = """# $header
-
 時分起床。起きた時の室温は度だった。
 
 追記
@@ -30,6 +29,11 @@ class ArticleTemplate {
 ## 夕食
 
 追記
+
+## 室温
+
+| 時刻 | 室温
+|:---|:---
 
 ## 消灯
 寝る前の室温は度だった。時分に消灯し、寝る。
