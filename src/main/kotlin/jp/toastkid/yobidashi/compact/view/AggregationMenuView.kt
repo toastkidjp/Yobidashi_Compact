@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
+import java.awt.Dimension
 import java.awt.ScrollPane
 import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
@@ -91,6 +92,7 @@ class AggregationMenuView {
                                 it.add(table)
                             }
                     )
+                    it.preferredSize = Dimension(600, 400)
                 }
         )
     }
