@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
+import java.awt.ScrollPane
 import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
@@ -82,10 +83,14 @@ class AggregationMenuView {
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
         JOptionPane.showConfirmDialog(
                 null,
-                JPanel().also {
-                    it.layout = BoxLayout(it, BoxLayout.PAGE_AXIS)
-                    it.add(table.tableHeader)
-                    it.add(table)
+                ScrollPane().also {
+                    it.add(
+                            JPanel().also {
+                                it.layout = BoxLayout(it, BoxLayout.PAGE_AXIS)
+                                it.add(table.tableHeader)
+                                it.add(table)
+                            }
+                    )
                 }
         )
     }
