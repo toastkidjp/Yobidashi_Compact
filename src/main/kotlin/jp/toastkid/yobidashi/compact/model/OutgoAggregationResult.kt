@@ -16,6 +16,8 @@ class OutgoAggregationResult {
         return "${sum()}$LINE_SEPARATOR${detail()}"
     }
 
+    fun makeItemArrays() = map.map { arrayOf(it.date, it.title, it.price.toString()) }
+
     private fun sum(): Int {
         return map.map { it.price }.sum()
     }

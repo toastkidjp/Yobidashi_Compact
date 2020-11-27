@@ -7,19 +7,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
-import java.awt.Dimension
 import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.swing.AbstractAction
+import javax.swing.BoxLayout
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
-import javax.swing.JScrollPane
-import javax.swing.JTextArea
+import javax.swing.JPanel
+import javax.swing.JTable
 import javax.swing.KeyStroke
+import javax.swing.table.DefaultTableModel
 
 /**
  * TODO:
@@ -76,9 +77,17 @@ class AggregationMenuView {
             return
         }
 
-        val scrollPane = JScrollPane(JTextArea(aggregationResult.makeMessage()))
-        scrollPane.preferredSize = Dimension(300, 500)
-        JOptionPane.showConfirmDialog(null, scrollPane)
+        val tableModel = DefaultTableModel(arrayOf("Date", "Item", "Price"), 0)
+        val table = JTable(tableModel)
+        aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
+        JOptionPane.showConfirmDialog(
+                null,
+                JPanel().also {
+                    it.layout = BoxLayout(it, BoxLayout.PAGE_AXIS)
+                    it.add(table.tableHeader)
+                    it.add(table)
+                }
+        )
     }
 
     companion object {
