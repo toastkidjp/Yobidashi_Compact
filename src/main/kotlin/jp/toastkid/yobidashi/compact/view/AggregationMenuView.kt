@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
 import java.awt.Dimension
+import java.awt.Font
 import java.awt.ScrollPane
 import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
@@ -81,6 +82,10 @@ class AggregationMenuView {
 
         val tableModel = DefaultTableModel(arrayOf("Date", "Item", "Price"), 0)
         val table = JTable(tableModel)
+        val font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
+        table.tableHeader?.font = font
+        table.font = font
+        table.rowHeight = 36
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
         JOptionPane.showConfirmDialog(
                 null,
