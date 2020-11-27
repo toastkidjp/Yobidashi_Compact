@@ -87,6 +87,9 @@ class AggregationMenuView {
         table.tableHeader?.font = font
         table.font = font
         table.rowHeight = 36
+
+        table.setAutoCreateRowSorter(true)
+
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
         val scrollPane = ScrollPane().also {
             it.add(
