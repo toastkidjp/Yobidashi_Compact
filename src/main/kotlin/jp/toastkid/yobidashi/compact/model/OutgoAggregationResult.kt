@@ -2,10 +2,10 @@ package jp.toastkid.yobidashi.compact.model
 
 class OutgoAggregationResult {
 
-    private val map: MutableMap<String, Int> = mutableMapOf()
+    private val map: MutableList<Outgo> = mutableListOf()
 
-    fun put(key: String, value: Int) {
-        map.put(key, value)
+    fun add(date: String, title: String, value: Int) {
+        map.add(Outgo(date, title, value))
     }
 
     fun isEmpty(): Boolean {
@@ -17,11 +17,11 @@ class OutgoAggregationResult {
     }
 
     private fun sum(): Int {
-        return map.values.sum()
+        return map.map { it.price }.sum()
     }
 
     private fun detail(): String {
-        return map.entries.map { "${it.key}: ${it.value}" }.reduce { base, item -> "$base${LINE_SEPARATOR}$item" }
+        return map.map { "${it.date} ${it.title}: ${it.price}" }.reduce { base, item -> "$base${LINE_SEPARATOR}$item" }
     }
 
     companion object {

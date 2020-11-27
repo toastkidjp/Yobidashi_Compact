@@ -12,7 +12,7 @@ class OutgoAggregatorService {
         val map = OutgoAggregationResult()
         Files.list(Paths.get(Setting.articleFolder()))
                 .parallel()
-                .map { it.fileName.toString() to Files.readAllLines(it) }
+                .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
                 .filter { it.first.startsWith(keyword) }
                 .map {
                     var isOutGoLine = false
@@ -33,7 +33,7 @@ class OutgoAggregatorService {
                             if (priceStr.isNotBlank()) {
                                 price = Integer.parseInt(priceStr)
                             }
-                            map.put(items.get(0) +  items.get(1).trim(), price)
+                            map.add(it.first, items.get(0) + items.get(1).trim(), price)
                         }
                     }
                 }
