@@ -9,7 +9,7 @@ import java.util.stream.Collectors
 class OutgoAggregatorService {
 
     operator fun invoke(keyword: String): OutgoAggregationResult {
-        val aggregationResult = OutgoAggregationResult()
+        val aggregationResult = OutgoAggregationResult(keyword)
         Files.list(Paths.get(Setting.articleFolder()))
                 .parallel()
                 .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }

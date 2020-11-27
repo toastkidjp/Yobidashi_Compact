@@ -103,7 +103,7 @@ class AggregationMenuView {
         contentPanel.add(JLabel())
         contentPanel.add(scrollPane)
         JOptionPane.showMessageDialog(
-                null, scrollPane, "Total: ${aggregationResult.sum()}", JOptionPane.INFORMATION_MESSAGE)
+                null, scrollPane, "${aggregationResult.target} Total: ${aggregationResult.sum()}", JOptionPane.INFORMATION_MESSAGE)
     }
 
     companion object {

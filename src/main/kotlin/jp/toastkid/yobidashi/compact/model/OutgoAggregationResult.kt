@@ -1,6 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
-class OutgoAggregationResult {
+class OutgoAggregationResult(val target: String) {
 
     private val map: MutableList<Outgo> = mutableListOf()
 
