@@ -9,7 +9,7 @@ import java.util.stream.Collectors
 class OutgoAggregatorService {
 
     operator fun invoke(keyword: String): OutgoAggregationResult {
-        val map = OutgoAggregationResult()
+        val aggregationResult = OutgoAggregationResult()
         Files.list(Paths.get(Setting.articleFolder()))
                 .parallel()
                 .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
@@ -33,11 +33,11 @@ class OutgoAggregatorService {
                             if (priceStr.isNotBlank()) {
                                 price = Integer.parseInt(priceStr)
                             }
-                            map.add(it.first, items.get(0) + items.get(1).trim(), price)
+                            aggregationResult.add(it.first, items.get(0) + items.get(1).trim(), price)
                         }
                     }
                 }
                 .collect(Collectors.toList())
-        return map
+        return aggregationResult
     }
 }
