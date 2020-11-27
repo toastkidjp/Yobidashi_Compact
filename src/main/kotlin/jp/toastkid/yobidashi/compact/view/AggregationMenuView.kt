@@ -1,30 +1,23 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
+import jp.toastkid.yobidashi.compact.service.OutgoAggregationResultTableContentFactoryService
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
-import java.awt.Dimension
-import java.awt.Font
-import java.awt.ScrollPane
 import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.swing.AbstractAction
-import javax.swing.BoxLayout
-import javax.swing.JLabel
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
-import javax.swing.JPanel
-import javax.swing.JTable
 import javax.swing.KeyStroke
-import javax.swing.table.DefaultTableModel
 
 /**
  * TODO:
@@ -81,32 +74,12 @@ class AggregationMenuView {
             return
         }
 
-        val tableModel = DefaultTableModel(arrayOf("Date", "Item", "Price"), 0)
-        val table = JTable(tableModel)
-        val font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
-        table.tableHeader?.font = font
-        table.font = font
-        table.rowHeight = 36
-
-        table.setAutoCreateRowSorter(true)
-
-        aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
-        val scrollPane = ScrollPane().also {
-            it.add(
-                    JPanel().also {
-                        it.layout = BoxLayout(it, BoxLayout.PAGE_AXIS)
-                        it.add(table.tableHeader)
-                        it.add(table)
-                    }
-            )
-            it.preferredSize = Dimension(600, 400)
-        }
-        val contentPanel = JPanel()
-        contentPanel.layout = BoxLayout(contentPanel, BoxLayout.PAGE_AXIS)
-        contentPanel.add(JLabel())
-        contentPanel.add(scrollPane)
         JOptionPane.showMessageDialog(
-                null, scrollPane, "${aggregationResult.target} Total: ${aggregationResult.sum()}", JOptionPane.INFORMATION_MESSAGE)
+                null,
+                OutgoAggregationResultTableContentFactoryService()(aggregationResult),
+                "${aggregationResult.target} Total: ${aggregationResult.sum()}",
+                JOptionPane.INFORMATION_MESSAGE
+        )
     }
 
     companion object {
