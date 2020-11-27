@@ -17,6 +17,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.swing.AbstractAction
 import javax.swing.BoxLayout
+import javax.swing.JLabel
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
@@ -87,19 +88,22 @@ class AggregationMenuView {
         table.font = font
         table.rowHeight = 36
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
-        JOptionPane.showConfirmDialog(
-                null,
-                ScrollPane().also {
-                    it.add(
-                            JPanel().also {
-                                it.layout = BoxLayout(it, BoxLayout.PAGE_AXIS)
-                                it.add(table.tableHeader)
-                                it.add(table)
-                            }
-                    )
-                    it.preferredSize = Dimension(600, 400)
-                }
-        )
+        val scrollPane = ScrollPane().also {
+            it.add(
+                    JPanel().also {
+                        it.layout = BoxLayout(it, BoxLayout.PAGE_AXIS)
+                        it.add(table.tableHeader)
+                        it.add(table)
+                    }
+            )
+            it.preferredSize = Dimension(600, 400)
+        }
+        val contentPanel = JPanel()
+        contentPanel.layout = BoxLayout(contentPanel, BoxLayout.PAGE_AXIS)
+        contentPanel.add(JLabel())
+        contentPanel.add(scrollPane)
+        JOptionPane.showMessageDialog(
+                null, scrollPane, "Total: ${aggregationResult.sum()}", JOptionPane.INFORMATION_MESSAGE)
     }
 
     companion object {
