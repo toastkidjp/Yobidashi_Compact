@@ -28,10 +28,9 @@ class OutgoAggregationResultTableContentFactoryService {
         table.setAutoCreateRowSorter(true)
 
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
-        val scrollPane = JScrollPane(table).also {
+
+        return JScrollPane(table).also {
             it.preferredSize = Dimension(600, 400)
         }
-
-        return scrollPane
     }
 }
