@@ -20,10 +20,7 @@ class OutgoAggregationResultTableContentFactoryService {
             }
         }
         val table = JTable(tableModel)
-        val font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
-        table.tableHeader?.font = font
-        table.font = font
-        table.rowHeight = 36
+        setAppropriateTextAppearance(table)
 
         table.setAutoCreateRowSorter(true)
 
@@ -33,4 +30,12 @@ class OutgoAggregationResultTableContentFactoryService {
             it.preferredSize = Dimension(600, 400)
         }
     }
+
+    private fun setAppropriateTextAppearance(table: JTable) {
+        val font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
+        table.tableHeader?.font = font
+        table.font = font
+        table.rowHeight = 36
+    }
+
 }
