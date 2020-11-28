@@ -5,7 +5,6 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.ScrollPane
 import javax.swing.BoxLayout
-import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTable
 import javax.swing.table.DefaultTableModel
@@ -41,10 +40,6 @@ class OutgoAggregationResultTableContentFactoryService {
             )
             it.preferredSize = Dimension(600, 400)
         }
-        val contentPanel = JPanel()
-        contentPanel.layout = BoxLayout(contentPanel, BoxLayout.PAGE_AXIS)
-        contentPanel.add(JLabel())
-        contentPanel.add(scrollPane)
 
         return scrollPane
     }
