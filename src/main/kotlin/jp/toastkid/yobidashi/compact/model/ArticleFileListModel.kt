@@ -25,11 +25,10 @@ class ArticleFileListModel : ListModel<Article> {
     override fun removeListDataListener(l: ListDataListener?) = Unit
 
     fun filter(text: String?) {
-        items.clear()
         if (text.isNullOrBlank()) {
-            items.addAll(master)
             return
         }
+        items.clear()
         master.filter { it.getTitle().contains(text) }.forEach { items.add(it) }
     }
 
