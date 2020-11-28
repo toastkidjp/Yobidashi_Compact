@@ -10,10 +10,18 @@ import javax.swing.JPanel
 import javax.swing.JTable
 import javax.swing.table.DefaultTableModel
 
+
 class OutgoAggregationResultTableContentFactoryService {
 
     operator fun invoke(aggregationResult: OutgoAggregationResult): ScrollPane {
-        val tableModel = DefaultTableModel(arrayOf("Date", "Item", "Price"), 0)
+        val tableModel = object : DefaultTableModel(arrayOf("Date", "Item", "Price"), 0) {
+            override fun getColumnClass(columnIndex: Int): Class<*> {
+                return when (columnIndex) {
+                    2 -> Integer::class.java
+                    else -> String::class.java
+                }
+            }
+        }
         val table = JTable(tableModel)
         val font = Font(Font.SANS_SERIF, Font.PLAIN, 16)
         table.tableHeader?.font = font
