@@ -98,6 +98,9 @@ class CommandReceiverService(
                         "<font color='#${Integer.toHexString(color.rgb)}'>$text</font>"
                     }
                 }
+                MenuCommand.HORIZONTAL_RULE -> {
+                    editorAreaView.insertText("---")
+                }
                 MenuCommand.COUNT -> {
                     JOptionPane.showMessageDialog(
                             null,

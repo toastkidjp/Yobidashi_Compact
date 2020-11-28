@@ -150,5 +150,15 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
             }
         }
         popupMenu.add(translateMenu)
+
+        val horizontalRuleMenu = JMenuItem()
+        horizontalRuleMenu.action = object : AbstractAction("Horizontal rule") {
+            override fun actionPerformed(e: ActionEvent?) {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.HORIZONTAL_RULE)
+                }
+            }
+        }
+        popupMenu.add(horizontalRuleMenu)
     }
 }
