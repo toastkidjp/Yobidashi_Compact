@@ -63,14 +63,18 @@ class CalendarPanel : JPanel() {
     private fun addMonth(additional: Int) {
         val currentMonth = monthChooser.value as? Month ?: return
         val next = currentMonth.ordinal + additional
-        val nextMonth = if (next < 0) {
-            yearChooser.value = yearChooser.value as Int - 1
-            Month.DEC
-        } else if (next > 11) {
-            yearChooser.value = yearChooser.value as Int + 1
-            Month.JAN
-        } else {
-            Month.values()[next]
+        val nextMonth = when {
+            next < 0 -> {
+                yearChooser.value = yearChooser.value as Int - 1
+                Month.DEC
+            }
+            next > 11 -> {
+                yearChooser.value = yearChooser.value as Int + 1
+                Month.JAN
+            }
+            else -> {
+                Month.values()[next]
+            }
         }
         monthChooser.value = nextMonth
     }
