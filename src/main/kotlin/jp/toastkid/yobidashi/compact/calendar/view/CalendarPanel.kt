@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import jp.toastkid.yobidashi.compact.calendar.model.Month
+import jp.toastkid.yobidashi.compact.calendar.usecase.OffDayFinderUseCase
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -148,9 +149,21 @@ class CalendarPanel : JPanel() {
                 l?.text = ""
             }
         }
+
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val offDayFinder = OffDayFinderUseCase()
         for (day in 1..maxDate) {
-            getDayLabel(day, firstDayOfWeek)?.text = day.toString()
+            getDayLabel(day, firstDayOfWeek)?.also {
+                it.text = day.toString()
+                val color = offDayFinder(year, month, day)
+                when (it.foreground) {
+                    Color.BLACK -> it.foreground = color
+                    Color.RED -> it.foreground = color
+                }
+            }
         }
+
         for (i in dayLabels.indices) {
             for (element in dayLabels[i]) {
                 element?.also {
@@ -163,7 +176,7 @@ class CalendarPanel : JPanel() {
         if (currentMonth) {
             getDayLabel(today, firstDayOfWeek)?.also {
                 it.background = TODAY_BG
-                it.foreground = TODAY_FG
+                it.foreground = TODAY_FG//TODO Delete
                 it.border = TODAY_BORDER
             }
         }
