@@ -12,10 +12,6 @@ class OutgoAggregationResult(val target: String) {
         return map.isEmpty()
     }
 
-    fun makeMessage(): String {
-        return "${sum()}$LINE_SEPARATOR${detail()}"
-    }
-
     fun makeItemArrays() = map.map { arrayOf(it.date, it.title, it.price) }
 
     fun sum(): Int {
