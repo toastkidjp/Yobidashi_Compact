@@ -10,6 +10,7 @@ class DayLabelFactory(private val preferredSize: Dimension) {
 
     operator fun invoke(): JLabel {
         val dayLabel = JLabel()
+        dayLabel.font = dayLabel.font.deriveFont(16f)
         dayLabel.horizontalAlignment = SwingConstants.CENTER
         dayLabel.verticalAlignment = SwingConstants.CENTER
         dayLabel.isOpaque = true
