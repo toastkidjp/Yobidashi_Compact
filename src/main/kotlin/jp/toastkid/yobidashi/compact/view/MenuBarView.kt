@@ -12,6 +12,7 @@ class MenuBarView {
         menuBar.add(SearchMenuView().invoke())
         menuBar.add(AggregationMenuView().invoke())
         menuBar.add(SortMenuView().invoke())
+        menuBar.add(ToolMenuView().invoke())
         menuBar.add(LookAndFeelMenuView { frame }())
         return menuBar
     }
