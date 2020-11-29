@@ -104,7 +104,7 @@ class EditorAreaView(
     }
 
     companion object {
-        private const val DEFAULT_FONT_SIZE = 16f
+        private const val DEFAULT_FONT_SIZE = 14f
     }
 
 }
