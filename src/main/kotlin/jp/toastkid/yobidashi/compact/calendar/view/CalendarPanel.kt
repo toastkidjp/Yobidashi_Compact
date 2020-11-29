@@ -95,7 +95,7 @@ class CalendarPanel : JPanel() {
 
         for (i in 0..5) {
             for (j in 0..6) {
-                dayLabels[i][j] = dayLabelFactory.invoke()
+                dayLabels[i][j] = dayLabelFactory.invoke(j)
                 dayPanel.add(dayLabels[i][j])
             }
         }
@@ -155,7 +155,6 @@ class CalendarPanel : JPanel() {
             for (element in dayLabels[i]) {
                 element?.also {
                     it.background = DAY_BG
-                    it.foreground = DAY_FG
                     it.border = BORDER
                     it.isVisible = it.text.isNotEmpty()
                 }
@@ -176,7 +175,6 @@ class CalendarPanel : JPanel() {
 
     companion object {
         private val DAY_BG: Color = Color(250, 250, 255)
-        private val DAY_FG: Color = Color.BLACK
         private val BORDER = LineBorder(Color(220, 220, 220, 220), 2, false)
 
         private val TODAY_BG: Color = Color(220, 220, 255)
