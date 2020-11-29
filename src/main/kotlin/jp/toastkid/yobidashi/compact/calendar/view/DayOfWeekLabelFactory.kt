@@ -12,6 +12,7 @@ class DayOfWeekLabelFactory(private val preferredSize: Dimension) {
 
     operator fun invoke(i: Int): JComponent {
         val dayOfWeekLabel = JLabel(DayOfWeek.getName(i))
+        dayOfWeekLabel.font = dayOfWeekLabel.font.deriveFont(16f)
         dayOfWeekLabel.horizontalAlignment = SwingConstants.CENTER
         dayOfWeekLabel.verticalAlignment = SwingConstants.CENTER
         dayOfWeekLabel.preferredSize = preferredSize
