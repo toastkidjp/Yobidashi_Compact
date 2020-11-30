@@ -176,7 +176,6 @@ class CalendarPanel : JPanel() {
         if (currentMonth) {
             getDayLabel(today, firstDayOfWeek)?.also {
                 it.background = TODAY_BG
-                it.foreground = TODAY_FG//TODO Delete
                 it.border = TODAY_BORDER
             }
         }
