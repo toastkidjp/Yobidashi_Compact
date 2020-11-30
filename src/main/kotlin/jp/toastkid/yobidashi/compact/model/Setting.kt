@@ -45,6 +45,13 @@ object Setting {
         return properties.getProperty("use_internal_editor")?.toBoolean() ?: false
     }
 
+    fun userOffDay(): List<Pair<Int, Int>> {
+        val offDayString = properties.getProperty("user_off_day") ?: return emptyList()
+        return offDayString.split(",")
+                .filter { it.contains("/") }
+                .map { it.split("/").let { it[0].toInt() to it[1].toInt() } }
+    }
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
