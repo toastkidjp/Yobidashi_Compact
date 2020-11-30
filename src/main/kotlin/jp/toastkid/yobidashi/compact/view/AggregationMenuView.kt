@@ -22,7 +22,6 @@ import javax.swing.KeyStroke
 /**
  * TODO:
  * Code clean up.
- * Make scrollable
  */
 class AggregationMenuView {
 
