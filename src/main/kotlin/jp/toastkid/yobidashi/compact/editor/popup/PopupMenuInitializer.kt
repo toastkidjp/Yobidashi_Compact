@@ -141,9 +141,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(dictionaryMenu)
 
-        val translateMenu = JMenuItem()
-        translateMenu.action = object : AbstractAction("Translate to English") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val translateMenu = JMenuItem("Translate to English").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.TRANSLATION_TO_ENGLISH)
                 }
