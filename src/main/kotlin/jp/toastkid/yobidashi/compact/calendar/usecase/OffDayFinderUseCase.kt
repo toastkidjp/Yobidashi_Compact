@@ -2,11 +2,14 @@ package jp.toastkid.yobidashi.compact.calendar.usecase
 
 import jp.toastkid.yobidashi.compact.calendar.model.EquinoxDayCalculator
 import jp.toastkid.yobidashi.compact.calendar.model.FixedJapaneseHoliday
+import jp.toastkid.yobidashi.compact.calendar.service.UserOffDayService
 import java.awt.Color
 
 class OffDayFinderUseCase {
 
     private val equinoxDayCalculator = EquinoxDayCalculator()
+
+    private val userOffDayService = UserOffDayService()
 
     operator fun invoke(year: Int, month: Int, date: Int): Color {
         if (month == 6) {
@@ -18,6 +21,10 @@ class OffDayFinderUseCase {
         }
 
         if (month == 9 && date == equinoxDayCalculator.calculateAutumnalEquinoxDay(year)) {
+            return Color.RED
+        }
+
+        if (userOffDayService(month, date)) {
             return Color.RED
         }
 
