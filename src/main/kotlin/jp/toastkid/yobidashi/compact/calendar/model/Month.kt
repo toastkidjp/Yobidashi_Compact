@@ -9,14 +9,6 @@ enum class Month {
         return calendar.get(Calendar.MONTH) == this.ordinal
     }
 
-    fun previous(): Month {
-        return values()[this.ordinal - 1]
-    }
-
-    fun next(): Month {
-        return values()[this.ordinal + 1]
-    }
-
     companion object {
 
         fun from(calendar: Calendar): Month {
