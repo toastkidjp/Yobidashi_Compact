@@ -22,7 +22,7 @@ class OutgoAggregationResultTableContentFactoryService {
         val table = JTable(tableModel)
         setAppropriateTextAppearance(table)
 
-        table.setAutoCreateRowSorter(true)
+        table.autoCreateRowSorter = true
 
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
 
