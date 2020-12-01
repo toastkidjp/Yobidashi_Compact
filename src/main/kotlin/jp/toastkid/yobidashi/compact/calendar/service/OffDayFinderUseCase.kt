@@ -10,6 +10,8 @@ class OffDayFinderUseCase {
 
     private val userOffDayService = UserOffDayService()
 
+    private val moveableHolidayCalculatorService = MoveableHolidayCalculatorService()
+
     operator fun invoke(year: Int, month: Int, date: Int): Color {
         if (month == 6) {
             return Color.BLACK
@@ -20,6 +22,10 @@ class OffDayFinderUseCase {
         }
 
         if (month == 9 && date == equinoxDayCalculator.calculateAutumnalEquinoxDay(year)) {
+            return Color.RED
+        }
+
+        if (moveableHolidayCalculatorService(year, month, date)) {
             return Color.RED
         }
 
