@@ -27,7 +27,7 @@ class OutgoAggregationResultTableContentFactoryService {
         aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
 
         return JScrollPane(table).also {
-            it.preferredSize = Dimension(600, 400)
+            it.preferredSize = PREFERRED_SIZE
         }
     }
 
@@ -38,4 +38,7 @@ class OutgoAggregationResultTableContentFactoryService {
         table.rowHeight = 36
     }
 
+    companion object {
+        private val PREFERRED_SIZE = Dimension(600, 400)
+    }
 }
