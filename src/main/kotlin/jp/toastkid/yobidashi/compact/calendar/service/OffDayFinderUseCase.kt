@@ -1,8 +1,7 @@
-package jp.toastkid.yobidashi.compact.calendar.usecase
+package jp.toastkid.yobidashi.compact.calendar.service
 
 import jp.toastkid.yobidashi.compact.calendar.model.EquinoxDayCalculator
 import jp.toastkid.yobidashi.compact.calendar.model.FixedJapaneseHoliday
-import jp.toastkid.yobidashi.compact.calendar.service.UserOffDayService
 import java.awt.Color
 
 class OffDayFinderUseCase {

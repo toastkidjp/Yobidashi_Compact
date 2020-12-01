@@ -1,7 +1,7 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import jp.toastkid.yobidashi.compact.calendar.model.Month
-import jp.toastkid.yobidashi.compact.calendar.usecase.OffDayFinderUseCase
+import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderUseCase
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout

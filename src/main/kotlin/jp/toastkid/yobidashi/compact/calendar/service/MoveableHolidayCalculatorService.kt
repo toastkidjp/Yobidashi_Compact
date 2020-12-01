@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact.calendar.usecase
+package jp.toastkid.yobidashi.compact.calendar.service
 
 import jp.toastkid.yobidashi.compact.calendar.model.MoveableJapaneseHoliday
 import java.util.Calendar
