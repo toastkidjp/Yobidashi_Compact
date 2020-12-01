@@ -1,0 +1,24 @@
+package jp.toastkid.yobidashi.compact.calendar.model
+
+enum class MoveableJapaneseHoliday(private val month: Int, val week: Int) {
+
+    SEIJIN(1, 2),
+    SEA_DAY(7, 3),
+    SILVER_DAY(9, 3),
+    SPORTS_DAY(10, 2)
+    ;
+
+    companion object {
+        private val months = values().map { it.month }.distinct()
+
+        fun isTargetMonth(month: Int): Boolean {
+            return months.contains(month)
+        }
+
+        fun find(month: Int): MoveableJapaneseHoliday? {
+            return values().firstOrNull { it.month == month }
+        }
+
+    }
+
+}
