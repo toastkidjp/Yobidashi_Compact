@@ -14,29 +14,37 @@ class OffDayFinderUseCase {
 
     operator fun invoke(year: Int, month: Int, date: Int): Color {
         if (month == 6) {
-            return Color.BLACK
+            return COLOR_NORMAL_DAY
         }
 
         if (month == 3 && date == equinoxDayCalculator.calculateVernalEquinoxDay(year)) {
-            return Color.RED
+            return COLOR_OFF_DAY
         }
 
         if (month == 9 && date == equinoxDayCalculator.calculateAutumnalEquinoxDay(year)) {
-            return Color.RED
+            return COLOR_OFF_DAY
         }
 
         if (moveableHolidayCalculatorService(year, month, date)) {
-            return Color.RED
+            return COLOR_OFF_DAY
         }
 
         if (userOffDayService(month, date)) {
-            return Color.RED
+            return COLOR_OFF_DAY
         }
 
         return if (FixedJapaneseHoliday.values()
                         .firstOrNull() { month == it.month && date == it.date } != null) {
-            Color.RED
-        } else Color.BLACK
+            COLOR_OFF_DAY
+        } else COLOR_NORMAL_DAY
+    }
+
+    companion object {
+
+        private val COLOR_NORMAL_DAY = Color.BLACK
+
+        private val COLOR_OFF_DAY = Color.RED
+
     }
 
 }
