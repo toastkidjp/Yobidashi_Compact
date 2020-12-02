@@ -156,7 +156,7 @@ class CalendarPanel : JPanel() {
         for (day in 1..maxDate) {
             getDayLabel(day, firstDayOfWeek)?.also {
                 it.text = day.toString()
-                val color = offDayFinder(year, month, day)
+                val color = offDayFinder(year, month, day, (day + firstDayOfWeek - 2) % 7)
                 when (it.foreground) {
                     Color.BLACK -> it.foreground = color
                     Color.RED -> it.foreground = color
