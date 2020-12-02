@@ -38,7 +38,6 @@ class MoveableHolidayCalculatorService {
                 }
             }
             if (month == 8) {
-                println("$year $month $date ${date == 9}")
                 return date == 9
             }
             if (month == 10) {
