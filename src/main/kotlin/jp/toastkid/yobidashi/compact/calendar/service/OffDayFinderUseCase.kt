@@ -12,7 +12,7 @@ class OffDayFinderUseCase {
 
     private val moveableHolidayCalculatorService = MoveableHolidayCalculatorService()
 
-    operator fun invoke(year: Int, month: Int, date: Int): Color {
+    operator fun invoke(year: Int, month: Int, date: Int, dayOfWeek: Int): Color {
         if (month == 6) {
             return COLOR_NORMAL_DAY
         }
@@ -33,8 +33,18 @@ class OffDayFinderUseCase {
             return COLOR_OFF_DAY
         }
 
-        return if (FixedJapaneseHoliday.values()
-                        .firstOrNull() { month == it.month && date == it.date } != null) {
+        var firstOrNull = FixedJapaneseHoliday.values()
+                .firstOrNull { month == it.month && date == it.date }
+        if (firstOrNull == null) {
+            if (month == 5 && date == 6 && dayOfWeek <= 3) {
+                return COLOR_OFF_DAY
+            }
+            if (dayOfWeek == 1) {
+                firstOrNull = FixedJapaneseHoliday.values()
+                        .firstOrNull { month == it.month && (date - 1) == it.date }
+            }
+        }
+        return if (firstOrNull != null) {
             COLOR_OFF_DAY
         } else COLOR_NORMAL_DAY
     }
