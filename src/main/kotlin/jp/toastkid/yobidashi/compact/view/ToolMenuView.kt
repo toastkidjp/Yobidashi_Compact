@@ -1,8 +1,12 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.calendar.view.CalendarPanel
+import jp.toastkid.yobidashi.compact.service.DateArticleUrlFactoryService
+import java.awt.Desktop
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
+import java.net.URI
+import java.time.LocalDateTime
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
@@ -17,6 +21,14 @@ class ToolMenuView {
                 JOptionPane.showMessageDialog(null, CalendarPanel())
             }
             it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK)
+        })
+        menu.add(JMenuItem("What happened today").also {
+            it.addActionListener {
+                val dateTime = LocalDateTime.now()
+                val url = DateArticleUrlFactoryService().invoke(dateTime.month.value, dateTime.dayOfMonth)
+                println(url)
+                Desktop.getDesktop().browse(URI(url))
+            }
         })
         return menu
     }
