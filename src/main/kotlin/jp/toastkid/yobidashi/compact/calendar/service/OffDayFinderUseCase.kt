@@ -27,8 +27,12 @@ class OffDayFinderUseCase {
             return COLOR_OFF_DAY
         }
 
-        if (specialCaseOffDayCalculator(year, month, date)) {
+        val isSpecialCase = specialCaseOffDayCalculator(year, month, date)
+        if (isSpecialCase.first) {
             return COLOR_OFF_DAY
+        }
+        if (isSpecialCase.second) {
+            return COLOR_NORMAL_DAY
         }
 
         if (moveableHolidayCalculatorService(year, month, date)) {
