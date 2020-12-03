@@ -107,6 +107,7 @@ class CalendarPanel : JPanel() {
         yearChooser.model = SpinnerNumberModel(2012, 0, 5000, 1)
         val editor = JSpinner.NumberEditor(yearChooser, "#")
         yearChooser.editor = editor
+        yearChooser.font = yearChooser.font.deriveFont(14f)
         yearChooser.addChangeListener(monthYearListener)
         val dy = yearChooser.preferredSize
         dy.width += 10 //dy.height += 1;
@@ -121,6 +122,7 @@ class CalendarPanel : JPanel() {
 
     private fun makeMonthChooser() {
         monthChooser.model = SpinnerListModel(Month.values())
+        monthChooser.font = monthChooser.font.deriveFont(14f)
         val tm = (monthChooser.editor as? DefaultEditor)?.textField
         tm?.horizontalAlignment = JTextField.CENTER
 
