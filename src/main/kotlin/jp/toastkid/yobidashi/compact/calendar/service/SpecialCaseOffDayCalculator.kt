@@ -3,8 +3,13 @@ package jp.toastkid.yobidashi.compact.calendar.service
 class SpecialCaseOffDayCalculator {
 
     operator fun invoke(year: Int, month: Int, date: Int): Pair<Boolean, Boolean> {
-        if (year == 2019 && month == 5 && date == 1) {
-            return true to false
+        if (year == 2019) {
+            if (month == 4 && date == 30) {
+                return true to false
+            }
+            if (month == 5 && (date == 1 || date == 2)) {
+                return true to false
+            }
         }
 
         if (year == 2020) {
