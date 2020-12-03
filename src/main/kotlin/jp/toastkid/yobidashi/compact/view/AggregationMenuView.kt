@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
+import jp.toastkid.yobidashi.compact.service.ArticleLengthAggregatorService
 import jp.toastkid.yobidashi.compact.service.OutgoAggregationResultTableContentFactoryService
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
 import kotlinx.coroutines.CoroutineScope
@@ -17,6 +18,8 @@ import javax.swing.AbstractAction
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
+import javax.swing.JScrollPane
+import javax.swing.JTextArea
 import javax.swing.KeyStroke
 
 /**
@@ -28,6 +31,40 @@ class AggregationMenuView {
     operator fun invoke(): JMenu {
         val menu = JMenu("Aggregate")
         menu.add(makeMenuItem())
+
+        val item = JMenuItem("Article length")
+        item.hideActionText = true
+        item.addActionListener {
+            val defaultInput = LocalDate.now().format(DATE_FORMATTER)
+            val keyword = JOptionPane.showInputDialog(
+                    null,
+                    "Please input year and month you want aggregate article length? ex) $defaultInput",
+                    defaultInput
+            )
+
+            if (keyword.isNullOrBlank()) {
+                return@addActionListener
+            }
+
+            CoroutineScope(Dispatchers.Swing).launch {
+                try {
+                    val result = withContext(Dispatchers.IO) {  ArticleLengthAggregatorService().invoke(keyword) }
+                    val area = JTextArea(result.map { "${it.key}\t${it.value}" }.reduce { base, item -> "$base\n$item" })
+                    JOptionPane.showMessageDialog(
+                            null,
+                            JScrollPane(area),
+                            "$keyword ${result.values.sum()}",
+                            JOptionPane.PLAIN_MESSAGE
+                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    JOptionPane.showConfirmDialog(null, e)
+                }
+            }
+        }
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK)
+        menu.add(item)
+
         return menu
     }
     private fun makeMenuItem(): JMenuItem {
