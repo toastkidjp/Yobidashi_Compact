@@ -7,6 +7,7 @@ enum class FixedJapaneseHoliday(val month: Int, val date: Int, japaneseTitle: St
     CONSTITUTION_MEMORIAL_DAY(5, 3, "憲法記念日"),
     GREENERY_DAY(5, 4, "みどりの日"),
     CHILDREN_S_DAY(5, 5, "こどもの日"),
+    MOUNTAIN_DAY(8, 11, "山の日"),
     CULTURE_DAY(11, 3, "文化の日"),
     LABOR_THANKSGIVING_DAY(11, 23, "勤労感謝の日"),
     ;
