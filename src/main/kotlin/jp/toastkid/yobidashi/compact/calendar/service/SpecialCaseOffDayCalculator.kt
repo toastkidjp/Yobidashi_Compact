@@ -3,6 +3,10 @@ package jp.toastkid.yobidashi.compact.calendar.service
 class SpecialCaseOffDayCalculator {
 
     operator fun invoke(year: Int, month: Int, date: Int): Pair<Boolean, Boolean> {
+        if (TARGET_MONTHS.contains(month).not()) {
+            return false to false
+        }
+
         if (year == 2019) {
             if (month == 4 && date == 30) {
                 return true to false
@@ -42,6 +46,10 @@ class SpecialCaseOffDayCalculator {
             }
         }
         return false to false
+    }
+
+    companion object {
+        private val TARGET_MONTHS = setOf(4, 5, 7, 8, 10)
     }
 
 }
