@@ -13,7 +13,7 @@ class DateArticleUrlFactoryService {
      * @return Wikipedia article's url
      */
     operator fun invoke(month: Int, dayOfMonth: Int): String {
-        if (month < 1 || month >= 12) {
+        if (month < 1 || month > 12) {
             return ""
         }
         if (dayOfMonth <= 0 || dayOfMonth >= 31) {
