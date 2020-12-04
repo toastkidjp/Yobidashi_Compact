@@ -18,8 +18,6 @@ import javax.swing.AbstractAction
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
-import javax.swing.JScrollPane
-import javax.swing.JTextArea
 import javax.swing.KeyStroke
 
 /**
@@ -49,10 +47,12 @@ class AggregationMenuView {
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
                     val result = withContext(Dispatchers.IO) {  ArticleLengthAggregatorService().invoke(keyword) }
-                    val area = JTextArea(result.map { "${it.key}\t${it.value}" }.reduce { base, item -> "$base\n$item" })
                     JOptionPane.showMessageDialog(
                             null,
-                            JScrollPane(area),
+                            OutgoAggregationResultTableContentFactoryService().invoke(
+                                    arrayOf("Title", "Length"),
+                                    result.entries.map { arrayOf(it.key, it.value) }
+                            ),
                             "$keyword ${result.values.sum()}",
                             JOptionPane.PLAIN_MESSAGE
                     )
