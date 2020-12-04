@@ -1,6 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
-class OutgoAggregationResult(val target: String) {
+class OutgoAggregationResult(val target: String): AggregationResult {
 
     private val map: MutableList<Outgo> = mutableListOf()
 
@@ -12,8 +12,6 @@ class OutgoAggregationResult(val target: String) {
         return map.isEmpty()
     }
 
-    fun makeItemArrays() = map.map { arrayOf(it.date, it.title, it.price) }
-
     fun sum(): Int {
         return map.map { it.price }.sum()
     }
@@ -21,6 +19,10 @@ class OutgoAggregationResult(val target: String) {
     private fun detail(): String {
         return map.map { "${it.date} ${it.title}: ${it.price}" }.reduce { base, item -> "$base${LINE_SEPARATOR}$item" }
     }
+
+    override fun itemArrays() = map.map { arrayOf(it.date, it.title, it.price) }
+
+    override fun header(): Array<Any> = arrayOf("Date", "Item", "Price")
 
     companion object {
         private val LINE_SEPARATOR = System.lineSeparator()

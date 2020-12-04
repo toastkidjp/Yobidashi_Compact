@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.service
 
+import jp.toastkid.yobidashi.compact.model.AggregationResult
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JComponent
@@ -9,16 +10,10 @@ import javax.swing.table.DefaultTableModel
 
 class AggregationResultTableFactoryService {
 
-    operator fun invoke(
-            tableHeader: Array<String>,
-            rows: Collection<Array<Any>>
-    ): JComponent {
-        val tableModel = object : DefaultTableModel(tableHeader, 0) {
+    operator fun invoke(result: AggregationResult): JComponent {
+        val tableModel = object : DefaultTableModel(result.header(), 0) {
             override fun getColumnClass(columnIndex: Int): Class<*> {
-                return when (columnIndex) {
-                    tableHeader.size - 1 -> Integer::class.java
-                    else -> String::class.java
-                }
+                return result.columnClass(columnIndex)
             }
         }
         val table = JTable(tableModel)
@@ -26,7 +21,7 @@ class AggregationResultTableFactoryService {
 
         table.autoCreateRowSorter = true
 
-        rows.forEach { tableModel.addRow(it) }
+        result.itemArrays().forEach { tableModel.addRow(it) }
 
         return JScrollPane(table).also {
             it.preferredSize = PREFERRED_SIZE
