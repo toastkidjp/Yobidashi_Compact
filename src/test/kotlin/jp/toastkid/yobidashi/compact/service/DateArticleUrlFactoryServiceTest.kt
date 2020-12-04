@@ -17,6 +17,7 @@ internal class DateArticleUrlFactoryServiceTest {
     @Test
     fun test() {
         assertEquals("https://ja.wikipedia.org/wiki/1月23日", dateArticleUrlFactoryService(1, 23))
+        assertEquals("https://ja.wikipedia.org/wiki/12月1日", dateArticleUrlFactoryService(12, 1))
     }
 
     @Test
