@@ -28,10 +28,9 @@ class AggregationMenuView {
 
     operator fun invoke(): JMenu {
         val menu = JMenu("Aggregate")
-        menu.add(makeMenuItem())
 
-        val item = makeArticleLengthAggregationMenuItem()
-        menu.add(item)
+        menu.add(makeMenuItem())
+        menu.add(makeArticleLengthAggregationMenuItem())
 
         return menu
     }
