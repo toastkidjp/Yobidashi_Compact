@@ -1,6 +1,5 @@
 package jp.toastkid.yobidashi.compact.service
 
-import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JComponent
@@ -10,11 +9,14 @@ import javax.swing.table.DefaultTableModel
 
 class OutgoAggregationResultTableContentFactoryService {
 
-    operator fun invoke(aggregationResult: OutgoAggregationResult): JComponent {
-        val tableModel = object : DefaultTableModel(arrayOf("Date", "Item", "Price"), 0) {
+    operator fun invoke(
+            tableHeader: Array<String>,
+            rows: Collection<Array<Any>>
+    ): JComponent {
+        val tableModel = object : DefaultTableModel(tableHeader, 0) {
             override fun getColumnClass(columnIndex: Int): Class<*> {
                 return when (columnIndex) {
-                    2 -> Integer::class.java
+                    tableHeader.size - 1 -> Integer::class.java
                     else -> String::class.java
                 }
             }
@@ -24,7 +26,7 @@ class OutgoAggregationResultTableContentFactoryService {
 
         table.autoCreateRowSorter = true
 
-        aggregationResult.makeItemArrays().forEach { tableModel.addRow(it) }
+        rows.forEach { tableModel.addRow(it) }
 
         return JScrollPane(table).also {
             it.preferredSize = PREFERRED_SIZE

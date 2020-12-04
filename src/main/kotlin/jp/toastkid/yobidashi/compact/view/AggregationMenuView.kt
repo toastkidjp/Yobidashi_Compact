@@ -112,7 +112,10 @@ class AggregationMenuView {
 
         JOptionPane.showMessageDialog(
                 null,
-                OutgoAggregationResultTableContentFactoryService()(aggregationResult),
+                OutgoAggregationResultTableContentFactoryService().invoke(
+                        arrayOf("Date", "Item", "Price"),
+                        aggregationResult.makeItemArrays()
+                ),
                 "${aggregationResult.target} Total: ${aggregationResult.sum()}",
                 JOptionPane.INFORMATION_MESSAGE
         )
