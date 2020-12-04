@@ -7,7 +7,7 @@ import javax.swing.JScrollPane
 import javax.swing.JTable
 import javax.swing.table.DefaultTableModel
 
-class OutgoAggregationResultTableContentFactoryService {
+class AggregationResultTableFactoryService {
 
     operator fun invoke(
             tableHeader: Array<String>,

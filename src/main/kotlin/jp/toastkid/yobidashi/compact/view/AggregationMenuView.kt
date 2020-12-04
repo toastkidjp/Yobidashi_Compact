@@ -1,8 +1,8 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
+import jp.toastkid.yobidashi.compact.service.AggregationResultTableFactoryService
 import jp.toastkid.yobidashi.compact.service.ArticleLengthAggregatorService
-import jp.toastkid.yobidashi.compact.service.OutgoAggregationResultTableContentFactoryService
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -80,7 +80,7 @@ class AggregationMenuView {
 
         JOptionPane.showMessageDialog(
                 null,
-                OutgoAggregationResultTableContentFactoryService().invoke(
+                AggregationResultTableFactoryService().invoke(
                         arrayOf("Date", "Item", "Price"),
                         aggregationResult.makeItemArrays()
                 ),
@@ -109,7 +109,7 @@ class AggregationMenuView {
                     val result = withContext(Dispatchers.IO) { ArticleLengthAggregatorService().invoke(keyword) }
                     JOptionPane.showMessageDialog(
                             null,
-                            OutgoAggregationResultTableContentFactoryService().invoke(
+                            AggregationResultTableFactoryService().invoke(
                                     arrayOf("Title", "Length"),
                                     result.entries.map { arrayOf(it.key, it.value) }
                             ),
