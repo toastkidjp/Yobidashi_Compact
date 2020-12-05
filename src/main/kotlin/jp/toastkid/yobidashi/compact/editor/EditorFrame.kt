@@ -18,6 +18,7 @@ import java.awt.BorderLayout
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JLabel
+import javax.swing.JOptionPane
 import javax.swing.JPanel
 
 class EditorFrame {
@@ -42,6 +43,7 @@ class EditorFrame {
         frame.jMenuBar = MenubarView(channel).invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 80, 1200, 600)
+        frame.defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
 
         Setting.lookAndFeel()?.let {
             UiUpdaterService().invoke(frame, it)
@@ -78,7 +80,7 @@ class EditorFrame {
                 editing,
                 this::resetFrameTitle,
                 { finderView.isVisible = !finderView.isVisible },
-                frame::dispose
+                this::dispose
         )
         CoroutineScope(Dispatchers.Swing).launch {
             commandReceiverService()
@@ -107,6 +109,23 @@ class EditorFrame {
 
     fun show() {
         frame.isVisible = true
+    }
+
+    private fun dispose() {
+        if (editing.shouldShowIndicator().not()) {
+            frame.dispose()
+            return
+        }
+
+        val choice = JOptionPane.showConfirmDialog(
+                frame,
+                "Would you like to close this editor window? This file is editing."
+        )
+
+        when (choice) {
+            JOptionPane.OK_OPTION -> frame.dispose()
+            else -> Unit
+        }
     }
 
 }
