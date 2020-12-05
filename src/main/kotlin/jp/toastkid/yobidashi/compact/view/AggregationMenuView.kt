@@ -106,11 +106,8 @@ class AggregationMenuView {
                     val result = withContext(Dispatchers.IO) { ArticleLengthAggregatorService().invoke(keyword) }
                     JOptionPane.showMessageDialog(
                             null,
-                            AggregationResultTableFactoryService().invoke(
-                                    arrayOf("Title", "Length"),
-                                    result.entries.map { arrayOf(it.key, it.value) }
-                            ),
-                            "$keyword ${result.values.sum()}",
+                            AggregationResultTableFactoryService().invoke(result),
+                            "$keyword ${result.sum()}",
                             JOptionPane.PLAIN_MESSAGE
                     )
                 } catch (e: Exception) {
