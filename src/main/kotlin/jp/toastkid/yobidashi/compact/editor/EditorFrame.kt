@@ -54,6 +54,7 @@ class EditorFrame {
         panel.add(editorAreaView.view(), BorderLayout.CENTER)
 
         val footer = JPanel(BorderLayout())
+        statusLabel.font = statusLabel.font.deriveFont(16f)
         footer.add(statusLabel, BorderLayout.EAST)
         panel.add(footer, BorderLayout.SOUTH)
 
