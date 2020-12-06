@@ -89,9 +89,17 @@ class EditorAreaView(
         finderService.invoke(order)
     }
 
-    fun replaceSelected(action: (String) -> String) {
+    fun replaceSelected(keepSelection: Boolean = false, action: (String) -> String) {
         editorArea.selectedText?.also { text ->
+            val selectionStart = editorArea.selectionStart
+            val selectionEnd = editorArea.selectionEnd
+
             editorArea.replaceSelection(action(text))
+
+            if (keepSelection) {
+                editorArea.selectionStart = selectionStart
+                editorArea.selectionEnd = selectionEnd
+            }
         }
     }
 

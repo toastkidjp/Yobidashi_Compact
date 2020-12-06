@@ -101,6 +101,12 @@ class CommandReceiverService(
                 MenuCommand.HORIZONTAL_RULE -> {
                     editorAreaView.insertText("---")
                 }
+                MenuCommand.REVERSE_CASE -> {
+                    editorAreaView.replaceSelected(true) {
+                        if (it.isEmpty()) return@replaceSelected it
+                        return@replaceSelected if (it.toCharArray()[0].isUpperCase()) it.toLowerCase() else it.toUpperCase()
+                    }
+                }
                 MenuCommand.COUNT -> {
                     JOptionPane.showMessageDialog(
                             null,

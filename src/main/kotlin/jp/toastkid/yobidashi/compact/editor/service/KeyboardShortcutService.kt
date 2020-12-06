@@ -14,6 +14,13 @@ class KeyboardShortcutService(private val channel: Channel<MenuCommand>) {
             return
         }
 
+        if (e.isShiftDown && e.keyCode == KeyEvent.VK_U) {
+            CoroutineScope(Dispatchers.Default).launch {
+                channel.send(MenuCommand.REVERSE_CASE)
+            }
+            return
+        }
+
         CoroutineScope(Dispatchers.Default).launch {
             val command = when (e.keyCode) {
                 KeyEvent.VK_T -> MenuCommand.TO_TABLE
