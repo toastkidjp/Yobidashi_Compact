@@ -123,9 +123,8 @@ class EditorFrame {
                 "Would you like to close this editor window? This file is editing."
         )
 
-        when (choice) {
-            JOptionPane.OK_OPTION -> frame.dispose()
-            else -> Unit
+        if (choice == JOptionPane.OK_OPTION) {
+            frame.dispose()
         }
     }
 
