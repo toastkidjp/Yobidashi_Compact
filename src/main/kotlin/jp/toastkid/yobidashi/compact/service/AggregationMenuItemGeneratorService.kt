@@ -41,7 +41,7 @@ class AggregationMenuItemGeneratorService {
                     JOptionPane.showMessageDialog(
                             null,
                             table,
-                            "$keyword ",
+                            "$keyword ${result.resultTitleSuffix()}",
                             JOptionPane.PLAIN_MESSAGE
                     )
                 } catch (e: Exception) {
