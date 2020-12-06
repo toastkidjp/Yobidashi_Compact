@@ -2,9 +2,9 @@ package jp.toastkid.yobidashi.compact.calendar.model
 
 enum class MoveableJapaneseHoliday(private val month: Int, val week: Int) {
 
-    SEIJIN(1, 2),
-    SEA_DAY(7, 3),
-    SILVER_DAY(9, 3),
+    COMING_OF_AGE_DAY(1, 2),
+    MARINE_DAY(7, 3),
+    RESPECT_FOR_THE_AGED_DAY(9, 3),
     SPORTS_DAY(10, 2)
     ;
 
