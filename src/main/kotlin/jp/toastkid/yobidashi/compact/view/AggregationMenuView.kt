@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.view
 import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
 import jp.toastkid.yobidashi.compact.service.AggregationResultTableFactoryService
 import jp.toastkid.yobidashi.compact.service.ArticleLengthAggregatorService
+import jp.toastkid.yobidashi.compact.service.MovieMemoSubtitleExtractor
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ class AggregationMenuView {
 
         menu.add(makeMenuItem())
         menu.add(makeArticleLengthAggregationMenuItem())
+        menu.add(makeMovieMemoAggregationMenuItem())
 
         return menu
     }
@@ -108,6 +110,40 @@ class AggregationMenuView {
                             null,
                             AggregationResultTableFactoryService().invoke(result),
                             "$keyword ${result.sum()}",
+                            JOptionPane.PLAIN_MESSAGE
+                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    JOptionPane.showConfirmDialog(null, e)
+                }
+            }
+        }
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK)
+        return item
+    }
+
+    private fun makeMovieMemoAggregationMenuItem(): JMenuItem {
+        val item = JMenuItem("Movie mwmo")
+        item.hideActionText = true
+        item.addActionListener {
+            val defaultInput = LocalDate.now().format(DATE_FORMATTER)
+            val keyword = JOptionPane.showInputDialog(
+                    null,
+                    "Please input year and month you want aggregate article length? ex) $defaultInput",
+                    defaultInput
+            )
+
+            if (keyword.isNullOrBlank()) {
+                return@addActionListener
+            }
+
+            CoroutineScope(Dispatchers.Swing).launch {
+                try {
+                    val result = withContext(Dispatchers.IO) { MovieMemoSubtitleExtractor().invoke(keyword) }
+                    JOptionPane.showMessageDialog(
+                            null,
+                            AggregationResultTableFactoryService().invoke(result),
+                            "$keyword movies",
                             JOptionPane.PLAIN_MESSAGE
                     )
                 } catch (e: Exception) {
