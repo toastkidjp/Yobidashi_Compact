@@ -121,9 +121,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(countMenu)
 
-        val webSearchMenu = JMenuItem()
-        webSearchMenu.action = object : AbstractAction("Web search") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val webSearchMenu = JMenuItem("Web search").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.WEB_SEARCH)
                 }
