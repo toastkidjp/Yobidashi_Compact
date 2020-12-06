@@ -123,7 +123,7 @@ class AggregationMenuView {
     }
 
     private fun makeMovieMemoAggregationMenuItem(): JMenuItem {
-        val item = JMenuItem("Movie mwmo")
+        val item = JMenuItem("Movie memo")
         item.hideActionText = true
         item.addActionListener {
             val defaultInput = LocalDate.now().format(DATE_FORMATTER)
