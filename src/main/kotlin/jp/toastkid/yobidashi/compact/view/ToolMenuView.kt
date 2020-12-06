@@ -24,10 +24,8 @@ class ToolMenuView {
         })
         menu.add(JMenuItem("What happened today").also {
             it.addActionListener {
-                // TODO Delete it.
                 val dateTime = LocalDateTime.now()
                 val url = DateArticleUrlFactoryService().invoke(dateTime.month.value, dateTime.dayOfMonth)
-                println(url)
                 Desktop.getDesktop().browse(URI(url))
             }
         })
