@@ -140,10 +140,11 @@ class AggregationMenuView {
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
                     val result = withContext(Dispatchers.IO) { MovieMemoSubtitleExtractor().invoke(keyword) }
+                    val table = AggregationResultTableFactoryService().invoke(result)
                     JOptionPane.showMessageDialog(
                             null,
-                            AggregationResultTableFactoryService().invoke(result),
-                            "$keyword movies",
+                            table,
+                            "$keyword movies ${table.componentCount}",
                             JOptionPane.PLAIN_MESSAGE
                     )
                 } catch (e: Exception) {
@@ -152,7 +153,7 @@ class AggregationMenuView {
                 }
             }
         }
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK)
         return item
     }
 
