@@ -18,6 +18,7 @@ class MovieMemoSubtitleExtractor {
                     it.fileName.toString() to
                         Files.readAllLines(it)
                                 .filter { line -> line.startsWith("##") && line.contains("年、") }
+                                .map { line -> line.substring(line.indexOf(" ")) }
                 }
                 .filter { it.second.isNotEmpty() }
                 .forEach {
