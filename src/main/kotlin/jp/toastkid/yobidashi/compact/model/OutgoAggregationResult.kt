@@ -24,6 +24,10 @@ class OutgoAggregationResult(val target: String): AggregationResult {
 
     override fun header(): Array<Any> = arrayOf("Date", "Item", "Price")
 
+    override fun resultTitleSuffix(): String {
+        return "Total: ${sum()}"
+    }
+
     companion object {
         private val LINE_SEPARATOR = System.lineSeparator()
     }

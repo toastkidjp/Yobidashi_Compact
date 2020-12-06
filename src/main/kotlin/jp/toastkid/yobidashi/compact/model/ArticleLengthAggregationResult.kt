@@ -16,4 +16,8 @@ class ArticleLengthAggregationResult : AggregationResult {
     override fun itemArrays(): Collection<Array<Any>> =
             map.entries.map { arrayOf(it.key, it.value) }
 
+    override fun resultTitleSuffix(): String {
+        return "Total: ${sum()}"
+    }
+
 }

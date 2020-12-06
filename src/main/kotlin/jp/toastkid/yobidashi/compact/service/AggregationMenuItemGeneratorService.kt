@@ -41,7 +41,7 @@ class AggregationMenuItemGeneratorService {
                     JOptionPane.showMessageDialog(
                             null,
                             table,
-                            "$keyword movies ${table.componentCount}",// TODO Make title function into result interface.
+                            "$keyword ",
                             JOptionPane.PLAIN_MESSAGE
                     )
                 } catch (e: Exception) {

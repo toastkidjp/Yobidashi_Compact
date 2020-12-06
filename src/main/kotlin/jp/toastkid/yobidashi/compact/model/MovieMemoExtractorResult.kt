@@ -12,6 +12,10 @@ class MovieMemoExtractorResult : AggregationResult {
         return items.map { it.toArray() }
     }
 
+    override fun resultTitleSuffix(): String {
+        return "movies ${items.size}"
+    }
+
     fun add(date: String, title: String) {
         items.add(MovieMemo(date, title))
     }
