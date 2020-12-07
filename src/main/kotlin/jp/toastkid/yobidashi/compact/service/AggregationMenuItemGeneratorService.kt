@@ -50,7 +50,7 @@ class AggregationMenuItemGeneratorService {
                 }
             }
         }
-        item.accelerator = accelerator
+        accelerator?.let { item.accelerator = it }
         return item
     }
 
