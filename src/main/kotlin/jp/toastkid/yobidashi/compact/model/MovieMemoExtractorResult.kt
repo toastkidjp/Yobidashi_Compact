@@ -16,6 +16,10 @@ class MovieMemoExtractorResult : AggregationResult {
         return "movies ${items.size}"
     }
 
+    override fun isEmpty(): Boolean {
+        return items.isEmpty()
+    }
+
     fun add(date: String, title: String) {
         items.add(MovieMemo(date, title))
     }
