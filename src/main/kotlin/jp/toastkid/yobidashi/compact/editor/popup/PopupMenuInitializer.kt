@@ -111,9 +111,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(fontColorMenu)
 
-        val countMenu = JMenuItem()
-        countMenu.action = object : AbstractAction("Count") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val countMenu = JMenuItem("Count").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.COUNT)
                 }
