@@ -12,7 +12,7 @@ class OffDayFinderUseCase {
 
     private val moveableHolidayCalculatorService = MoveableHolidayCalculatorService()
 
-    private val specialCaseOffDayCalculator = SpecialCaseOffDayCalculator()
+    private val specialCaseOffDayCalculator = SpecialCaseOffDayCalculatorService()
 
     operator fun invoke(year: Int, month: Int, date: Int, dayOfWeek: Int): Color {
         if (month == 6) {
