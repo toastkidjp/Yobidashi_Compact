@@ -13,4 +13,6 @@ interface AggregationResult {
 
     fun resultTitleSuffix(): String
 
+    fun isEmpty(): Boolean
+
 }
