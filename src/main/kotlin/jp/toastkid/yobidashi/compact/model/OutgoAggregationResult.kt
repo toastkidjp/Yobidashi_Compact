@@ -8,10 +8,6 @@ class OutgoAggregationResult(val target: String): AggregationResult {
         map.add(Outgo(date, title, value))
     }
 
-    fun isEmpty(): Boolean {
-        return map.isEmpty()
-    }
-
     fun sum(): Int {
         return map.map { it.price }.sum()
     }
@@ -26,6 +22,10 @@ class OutgoAggregationResult(val target: String): AggregationResult {
 
     override fun resultTitleSuffix(): String {
         return "Total: ${sum()}"
+    }
+
+    override fun isEmpty(): Boolean {
+        return map.isEmpty()
     }
 
     companion object {
