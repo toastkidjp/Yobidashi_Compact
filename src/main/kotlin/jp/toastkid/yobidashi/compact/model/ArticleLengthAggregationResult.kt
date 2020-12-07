@@ -20,4 +20,8 @@ class ArticleLengthAggregationResult : AggregationResult {
         return "Total: ${sum()}"
     }
 
+    override fun isEmpty(): Boolean {
+        return map.isEmpty()
+    }
+
 }
