@@ -28,12 +28,14 @@ import javax.swing.KeyStroke
  */
 class AggregationMenuView {
 
+    private val aggregationMenuItemGeneratorService = AggregationMenuItemGeneratorService()
+
     operator fun invoke(): JMenu {
         val menu = JMenu("Aggregate")
 
         menu.add(makeMenuItem())
         menu.add(
-                AggregationMenuItemGeneratorService().invoke(
+                aggregationMenuItemGeneratorService.invoke(
                         "Article length",
                         "Please input year and month you want aggregate article length?",
                         { ArticleLengthAggregatorService().invoke(it) },
@@ -41,7 +43,7 @@ class AggregationMenuView {
                 )
         )
         menu.add(
-                AggregationMenuItemGeneratorService().invoke(
+                aggregationMenuItemGeneratorService.invoke(
                     "Movie memo",
                     "Please input year and month you want aggregate article length? ex)",
                     { MovieMemoSubtitleExtractor().invoke(it) },
