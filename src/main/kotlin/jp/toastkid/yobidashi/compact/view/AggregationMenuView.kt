@@ -33,7 +33,14 @@ class AggregationMenuView {
     operator fun invoke(): JMenu {
         val menu = JMenu("Aggregate")
 
-        menu.add(makeMenuItem())
+        menu.add(
+                aggregationMenuItemGeneratorService.invoke(
+                        "OutGo",
+                        "Please input year and month you want aggregate outgo?",
+                        { OutgoAggregatorService().invoke(it) },
+                        KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK)
+                )
+        )
         menu.add(
                 aggregationMenuItemGeneratorService.invoke(
                         "Article length",
