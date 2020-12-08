@@ -107,6 +107,9 @@ class CommandReceiverService(
                         return@replaceSelected if (it.toCharArray()[0].isUpperCase()) it.toLowerCase() else it.toUpperCase()
                     }
                 }
+                MenuCommand.DUPLICATE_LINE -> {
+                    editorAreaView.duplicateLine()
+                }
                 MenuCommand.COUNT -> {
                     JOptionPane.showMessageDialog(
                             null,

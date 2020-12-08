@@ -34,6 +34,17 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         }
         menu.add(item)
 
+        menu.add(
+                JMenuItem("Duplicate line").also {
+                    it.addActionListener {
+                        CoroutineScope(Dispatchers.Default).launch {
+                            channel.send(MenuCommand.DUPLICATE_LINE)
+                        }
+                    }
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
+                }
+        )
+
         return menu
     }
 

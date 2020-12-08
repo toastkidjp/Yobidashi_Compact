@@ -111,6 +111,13 @@ class EditorAreaView(
         return editorArea.selectedText.trim()
     }
 
+    fun duplicateLine() {
+        val start = editorArea.lineStartOffsetOfCurrentLine
+        val end = editorArea.lineEndOffsetOfCurrentLine
+        val currentLineText = editorArea.getText(start, end - start)
+        editorArea.insert(currentLineText, end)
+    }
+
     companion object {
         private const val DEFAULT_FONT_SIZE = 14f
     }
