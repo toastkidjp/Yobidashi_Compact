@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.service.AggregationMenuItemGeneratorService
 import jp.toastkid.yobidashi.compact.service.AggregationResultTableFactoryService
 import jp.toastkid.yobidashi.compact.service.ArticleLengthAggregatorService
 import jp.toastkid.yobidashi.compact.service.MovieMemoSubtitleExtractor
+import jp.toastkid.yobidashi.compact.service.Nikkei225AggregatorService
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -55,6 +56,14 @@ class AggregationMenuView {
                     "Please input year and month you want aggregate article length? ex)",
                     { MovieMemoSubtitleExtractor().invoke(it) },
                     KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK)
+                )
+        )
+        menu.add(
+                aggregationMenuItemGeneratorService.invoke(
+                        "Nikkei 225",
+                        "Please input year and month you want aggregate Nikkei 225? ex)",
+                        { Nikkei225AggregatorService().invoke(it) },
+                        KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK)
                 )
         )
 
