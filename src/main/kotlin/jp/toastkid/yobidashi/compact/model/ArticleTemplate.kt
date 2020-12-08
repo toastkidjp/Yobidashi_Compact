@@ -11,6 +11,9 @@ class ArticleTemplate {
 
 ## 朝食
 追記
+
+## 今日の資産運用
+追記
 ${ if (isNotOffDay()) {
 """
 
