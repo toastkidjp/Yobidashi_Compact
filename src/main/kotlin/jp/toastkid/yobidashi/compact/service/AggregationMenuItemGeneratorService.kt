@@ -37,6 +37,12 @@ class AggregationMenuItemGeneratorService {
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
                     val result = withContext(Dispatchers.IO) { aggregator(keyword) }
+
+                    if (result.isEmpty()) {
+                        JOptionPane.showConfirmDialog(null, "Result is empty.")
+                        return@launch
+                    }
+
                     val table = AggregationResultTableFactoryService().invoke(result)
                     JOptionPane.showMessageDialog(
                             null,
