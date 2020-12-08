@@ -101,9 +101,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(codeBlockMenu)
 
-        val fontColorMenu = JMenuItem()
-        fontColorMenu.action = object : AbstractAction("Font color") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val fontColorMenu = JMenuItem("Font color").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.FONT_COLOR)
                 }
