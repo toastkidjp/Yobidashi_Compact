@@ -9,10 +9,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
 import java.awt.Dimension
-import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
-import javax.swing.AbstractAction
 import javax.swing.BoxLayout
 import javax.swing.JLabel
 import javax.swing.JMenu
@@ -33,10 +31,8 @@ class SearchMenuView {
     private fun makeMenuItem(): JMenuItem {
         val item = JMenuItem()
         item.hideActionText = true
-        item.action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent) {
-                onAction()
-            }
+        item.addActionListener {
+            onAction()
         }
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK)
         item.text = "Search"
