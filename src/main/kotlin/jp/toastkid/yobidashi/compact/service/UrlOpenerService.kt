@@ -6,7 +6,7 @@ import java.net.URI
 class UrlOpenerService(private val desktop: Desktop = Desktop.getDesktop()) {
 
     operator fun invoke(url: String?) {
-        if (url.isNullOrEmpty()) {
+        if (url.isNullOrBlank()) {
             return
         }
 
