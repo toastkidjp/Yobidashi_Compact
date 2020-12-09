@@ -12,14 +12,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
-import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import javax.swing.AbstractAction
 import javax.swing.JMenu
-import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.KeyStroke
 
@@ -68,19 +65,6 @@ class AggregationMenuView {
         )
 
         return menu
-    }
-
-    private fun makeMenuItem(): JMenuItem {
-        val item = JMenuItem()
-        item.hideActionText = true
-        item.action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent) {
-                onAction()
-            }
-        }
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK)
-        item.text = "OutGo"
-        return item
     }
 
     private fun onAction() {
