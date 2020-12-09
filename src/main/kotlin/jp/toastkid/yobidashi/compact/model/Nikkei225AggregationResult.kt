@@ -2,14 +2,14 @@ package jp.toastkid.yobidashi.compact.model
 
 class Nikkei225AggregationResult : AggregationResult {
 
-    private val map = mutableMapOf<String, String>()
+    private val map = mutableMapOf<String, Pair<String, String>>()
 
     override fun header(): Array<Any> {
-        return arrayOf("Date", "Price")
+        return arrayOf("Date", "Price", "Diff")
     }
 
     override fun itemArrays(): Collection<Array<Any>> {
-        return map.map { arrayOf<Any>(it.key, it.value) }
+        return map.map { arrayOf<Any>(it.key, it.value.first, it.value.second) }
     }
 
     override fun resultTitleSuffix(): String {
@@ -20,7 +20,7 @@ class Nikkei225AggregationResult : AggregationResult {
         return map.isEmpty()
     }
 
-    fun put(first: String, count: String) {
-        map.put(first, count.toString())
+    fun put(first: String, count: String, diff: String) {
+        map.put(first, count.toString() to diff)
     }
 }
