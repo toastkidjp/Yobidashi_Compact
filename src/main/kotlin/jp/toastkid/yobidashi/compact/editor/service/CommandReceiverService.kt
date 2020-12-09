@@ -8,16 +8,15 @@ import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
-import java.awt.Desktop
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 import java.io.IOException
-import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
@@ -30,7 +29,8 @@ class CommandReceiverService(
         private val editing: Editing,
         private val resetFrameTitle: () -> Unit,
         private val switchFinder: () -> Unit,
-        private val close: () -> Unit
+        private val close: () -> Unit,
+        private val urlOpenerService: UrlOpenerService = UrlOpenerService()
 ) {
 
     suspend operator fun invoke() {
@@ -121,21 +121,21 @@ class CommandReceiverService(
                     if (selectedText.isNullOrBlank()) {
                         return@collect
                     }
-                    Desktop.getDesktop().browse(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}"))
+                    urlOpenerService("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}")
                 }
                 MenuCommand.DICTIONARY_SEARCH -> {
                     val selectedText = editorAreaView.selectedText()
                     if (selectedText.isNullOrBlank()) {
                         return@collect
                     }
-                    Desktop.getDesktop().browse(URI("https://ejje.weblio.jp/content/${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}"))
+                    urlOpenerService("https://ejje.weblio.jp/content/${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}")
                 }
                 MenuCommand.TRANSLATION_TO_ENGLISH -> {
                     val selectedText = editorAreaView.selectedText()
                     if (selectedText.isNullOrBlank()) {
                         return@collect
                     }
-                    Desktop.getDesktop().browse(URI("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}&op=translate"))
+                    urlOpenerService("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}&op=translate")
                 }
             }
         }
