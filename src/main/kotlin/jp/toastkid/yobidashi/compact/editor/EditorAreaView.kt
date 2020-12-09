@@ -29,7 +29,7 @@ class EditorAreaView(
     private val finderService by lazy { FinderService(editorArea) }
 
     init {
-        editorArea.background = Color(225, 225, 225, 255)
+        editorArea.background = BACKGROUND_COLOR
         editorArea.paintTabLines = true
         editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
         editorArea.addKeyListener(object : KeyListener {
@@ -119,7 +119,11 @@ class EditorAreaView(
     }
 
     companion object {
+
         private const val DEFAULT_FONT_SIZE = 14f
+
+        private val BACKGROUND_COLOR = Color(225, 225, 225, 255)
+
     }
 
 }
