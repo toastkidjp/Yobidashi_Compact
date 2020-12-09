@@ -91,12 +91,10 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(strikethroughMenu)
 
-        val codeBlockMenu = JMenuItem()
-        codeBlockMenu.action = object : AbstractAction("Code block") {
-            override fun actionPerformed(e: ActionEvent?) {
-                CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(MenuCommand.CODE_BLOCK)
-                }
+        val codeBlockMenu = JMenuItem("Code block")
+        codeBlockMenu.addActionListener {
+            CoroutineScope(Dispatchers.Default).launch {
+                channel.send(MenuCommand.CODE_BLOCK)
             }
         }
         popupMenu.add(codeBlockMenu)
