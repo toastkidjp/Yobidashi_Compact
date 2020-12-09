@@ -21,6 +21,6 @@ class Nikkei225AggregationResult : AggregationResult {
     }
 
     fun put(first: String, count: String, diff: String) {
-        map.put(first, count.toString() to diff)
+        map.put(first, count to diff)
     }
 }
