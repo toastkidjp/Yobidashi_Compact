@@ -1,6 +1,6 @@
-package jp.toastkid.yobidashi.compact.service
+package jp.toastkid.yobidashi.compact.aggregation.service
 
-import jp.toastkid.yobidashi.compact.model.AggregationResult
+import jp.toastkid.yobidashi.compact.aggregation.model.AggregationResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

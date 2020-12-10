@@ -1,6 +1,6 @@
-package jp.toastkid.yobidashi.compact.service
+package jp.toastkid.yobidashi.compact.aggregation.service
 
-import jp.toastkid.yobidashi.compact.model.ArticleLengthAggregationResult
+import jp.toastkid.yobidashi.compact.aggregation.model.ArticleLengthAggregationResult
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.nio.file.Files
 import java.nio.file.Paths

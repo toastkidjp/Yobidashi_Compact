@@ -1,6 +1,6 @@
-package jp.toastkid.yobidashi.compact.service
+package jp.toastkid.yobidashi.compact.aggregation.service
 
-import jp.toastkid.yobidashi.compact.model.MovieMemoExtractorResult
+import jp.toastkid.yobidashi.compact.aggregation.model.MovieMemoExtractorResult
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.nio.file.Files
 import java.nio.file.Paths

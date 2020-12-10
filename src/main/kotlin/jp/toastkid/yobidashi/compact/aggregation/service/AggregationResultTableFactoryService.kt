@@ -1,6 +1,6 @@
-package jp.toastkid.yobidashi.compact.service
+package jp.toastkid.yobidashi.compact.aggregation.service
 
-import jp.toastkid.yobidashi.compact.model.AggregationResult
+import jp.toastkid.yobidashi.compact.aggregation.model.AggregationResult
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JComponent

@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact.model
+package jp.toastkid.yobidashi.compact.aggregation.model
 
 data class Outgo(
         val date: String,
