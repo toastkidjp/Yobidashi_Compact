@@ -81,9 +81,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(italicMenu)
 
-        val strikethroughMenu = JMenuItem()
-        strikethroughMenu.action = object : AbstractAction("Strikethrough") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val strikethroughMenu = JMenuItem("Strikethrough").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.STRIKETHROUGH)
                 }
