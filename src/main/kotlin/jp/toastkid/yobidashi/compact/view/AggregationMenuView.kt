@@ -1,12 +1,12 @@
 package jp.toastkid.yobidashi.compact.view
 
-import jp.toastkid.yobidashi.compact.model.OutgoAggregationResult
-import jp.toastkid.yobidashi.compact.service.AggregationMenuItemGeneratorService
-import jp.toastkid.yobidashi.compact.service.AggregationResultTableFactoryService
-import jp.toastkid.yobidashi.compact.service.ArticleLengthAggregatorService
-import jp.toastkid.yobidashi.compact.service.MovieMemoSubtitleExtractor
-import jp.toastkid.yobidashi.compact.service.Nikkei225AggregatorService
-import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
+import jp.toastkid.yobidashi.compact.aggregation.model.OutgoAggregationResult
+import jp.toastkid.yobidashi.compact.aggregation.service.AggregationMenuItemGeneratorService
+import jp.toastkid.yobidashi.compact.aggregation.service.AggregationResultTableFactoryService
+import jp.toastkid.yobidashi.compact.aggregation.service.ArticleLengthAggregatorService
+import jp.toastkid.yobidashi.compact.aggregation.service.MovieMemoSubtitleExtractor
+import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorService
+import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.time.format.DateTimeFormatter
