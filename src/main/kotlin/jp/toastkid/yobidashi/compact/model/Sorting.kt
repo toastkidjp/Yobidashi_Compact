@@ -1,8 +1,5 @@
 package jp.toastkid.yobidashi.compact.model
 
-/**
- * TODO write test.
- */
 enum class Sorting(val text: String) {
     LAST_MODIFIED("Last modified"), TITLE("Title");
 
