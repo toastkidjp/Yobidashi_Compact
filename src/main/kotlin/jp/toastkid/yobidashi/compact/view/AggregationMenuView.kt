@@ -7,14 +7,8 @@ import jp.toastkid.yobidashi.compact.service.ArticleLengthAggregatorService
 import jp.toastkid.yobidashi.compact.service.MovieMemoSubtitleExtractor
 import jp.toastkid.yobidashi.compact.service.Nikkei225AggregatorService
 import jp.toastkid.yobidashi.compact.service.OutgoAggregatorService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.swing.Swing
-import kotlinx.coroutines.withContext
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.swing.JMenu
 import javax.swing.JOptionPane
@@ -65,30 +59,6 @@ class AggregationMenuView {
         )
 
         return menu
-    }
-
-    private fun onAction() {
-        val defaultInput = LocalDate.now().format(DATE_FORMATTER)
-
-        val keyword = JOptionPane.showInputDialog(
-                null,
-                "Please input year and month you want aggregate outgo? ex) $defaultInput",
-                defaultInput
-        )
-
-        if (keyword.isNullOrBlank()) {
-            return
-        }
-
-        CoroutineScope(Dispatchers.Swing).launch {
-            try {
-                val result = withContext(Dispatchers.IO) { OutgoAggregatorService().invoke(keyword) }
-                onSuccess(result)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                JOptionPane.showConfirmDialog(null, e)
-            }
-        }
     }
 
     private fun onSuccess(aggregationResult: OutgoAggregationResult) {
