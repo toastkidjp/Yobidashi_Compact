@@ -2,6 +2,10 @@ package jp.toastkid.yobidashi.compact.calendar.service
 
 class SpecialCaseOffDayCalculatorService {
 
+    /**
+     *
+     * @return isOffDay, forceNormal
+     */
     operator fun invoke(year: Int, month: Int, date: Int): Pair<Boolean, Boolean> {
         if (TARGET_MONTHS.contains(month).not()) {
             return false to false
