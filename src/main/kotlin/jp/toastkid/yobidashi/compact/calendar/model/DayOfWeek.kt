@@ -6,6 +6,9 @@ enum class DayOfWeek {
     companion object {
 
         fun getName(i: Int): String {
+            if (i < 0 || i >= values().size) {
+                return ""
+            }
             return values()[i].name
         }
 
