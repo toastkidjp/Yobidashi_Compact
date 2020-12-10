@@ -24,7 +24,4 @@ class OutgoAggregationResult(val target: String): AggregationResult {
         return map.isEmpty()
     }
 
-    companion object {
-        private val LINE_SEPARATOR = System.lineSeparator()
-    }
 }
