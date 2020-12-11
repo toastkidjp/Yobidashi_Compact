@@ -60,6 +60,19 @@ class CommandReceiverService(
                     val quotedText = BlockQuotation().invoke(text) ?: return@collect
                     editorAreaView.insertText(quotedText)
                 }
+                MenuCommand.PASTE_LINK_WITH_TITLE -> {
+                    val text = withContext(Dispatchers.IO) {
+                        val transferData = Toolkit.getDefaultToolkit()
+                                .systemClipboard
+                                .getContents(this)
+                        if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) {
+                            return@withContext null
+                        }
+                        transferData.getTransferData(DataFlavor.stringFlavor).toString()
+                    } ?: return@collect
+                    val decorated = LinkDecoratorService().invoke(text)
+                    editorAreaView.insertText(decorated)
+                }
                 MenuCommand.FIND -> {
                     switchFinder()
                 }

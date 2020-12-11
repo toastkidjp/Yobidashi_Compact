@@ -35,6 +35,16 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         menu.add(item)
 
         menu.add(
+                JMenuItem("Paste link with title").also {
+                    it.addActionListener {
+                        CoroutineScope(Dispatchers.Default).launch {
+                            channel.send(MenuCommand.PASTE_LINK_WITH_TITLE)
+                        }
+                    }
+                }
+        )
+
+        menu.add(
                 JMenuItem("Duplicate line").also {
                     it.addActionListener {
                         CoroutineScope(Dispatchers.Default).launch {
