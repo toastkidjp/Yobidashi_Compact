@@ -7,7 +7,7 @@ class SpecialCaseOffDayCalculatorService {
      * @return isOffDay, forceNormal
      */
     operator fun invoke(year: Int, month: Int, date: Int): Pair<Boolean, Boolean> {
-        if (TARGET_MONTHS.contains(month).not()) {
+        if (TARGET_YEARS.contains(year).not() || TARGET_MONTHS.contains(month).not()) {
             return false to false
         }
 
@@ -53,6 +53,7 @@ class SpecialCaseOffDayCalculatorService {
     }
 
     companion object {
+        private val TARGET_YEARS = setOf(2019, 2020, 2021)
         private val TARGET_MONTHS = setOf(4, 5, 7, 8, 10)
     }
 
