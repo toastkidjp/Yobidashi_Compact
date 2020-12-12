@@ -85,6 +85,11 @@ class FinderAreaView(
         constraints.gridy = 0
         content.add(message)
 
+        constraints.gridx = 10
+        content.add(JButton("x").also {
+            it.addActionListener { content.isVisible = false }
+        })
+
         frame.add(content)
     }
 
