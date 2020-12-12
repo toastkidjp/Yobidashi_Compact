@@ -16,6 +16,7 @@ import javax.imageio.ImageIO
 import javax.swing.AbstractAction
 import javax.swing.BoxLayout
 import javax.swing.JButton
+import javax.swing.JCheckBox
 import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JLabel
@@ -62,9 +63,15 @@ class FinderAreaView(
         constraints.gridwidth = 2
         content.add(replace, constraints)
 
+        val caseCondition = JCheckBox("Case sensitive")
+
         constraints.gridx = 3
         constraints.gridy = 0
-        content.add(makeButtons(target, replace), constraints)
+        content.add(makeButtons(target, replace, caseCondition), constraints)
+
+        constraints.gridx = 3
+        constraints.gridy = 1
+        content.add(caseCondition, constraints)
 
         val message = JLabel()
         message.preferredSize = Dimension(200, 36)
@@ -81,7 +88,7 @@ class FinderAreaView(
         frame.add(content)
     }
 
-    private fun makeButtons(target: JTextField, replace: JTextField): JPanel {
+    private fun makeButtons(target: JTextField, replace: JTextField, caseCondition: JCheckBox): JPanel {
         val buttons = JPanel()
         buttons.layout = BoxLayout(buttons, BoxLayout.X_AXIS)
         val upper = JButton()
@@ -93,7 +100,7 @@ class FinderAreaView(
                     return
                 }
                 CoroutineScope(Dispatchers.Default).launch {
-                    orderChannel.send(FindOrder(target.text, replace.text, true))
+                    orderChannel.send(FindOrder(target.text, replace.text, true, caseSensitive = caseCondition.isSelected))
                 }
             }
         }
@@ -106,7 +113,7 @@ class FinderAreaView(
                     return
                 }
                 CoroutineScope(Dispatchers.Default).launch {
-                    orderChannel.send(FindOrder(target.text, replace.text))
+                    orderChannel.send(FindOrder(target.text, replace.text, caseSensitive = caseCondition.isSelected))
                 }
             }
         }
@@ -120,7 +127,7 @@ class FinderAreaView(
                 }
 
                 CoroutineScope(Dispatchers.Default).launch {
-                    orderChannel.send(FindOrder(target.text, replace.text, invokeReplace = true))
+                    orderChannel.send(FindOrder(target.text, replace.text, invokeReplace = true, caseSensitive = caseCondition.isSelected))
                 }
             }
         }

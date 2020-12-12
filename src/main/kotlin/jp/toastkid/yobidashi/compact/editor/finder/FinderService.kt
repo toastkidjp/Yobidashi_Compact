@@ -23,7 +23,7 @@ class FinderService(
     }
 
     private fun replace(order: FindOrder) {
-        var indexOf = editorArea.text.indexOf(order.target)
+        var indexOf = editorArea.text.indexOf(order.target, 0, order.caseSensitive.not())
 
         if (indexOf == -1) {
             showMessage("'${order.target}' is not found.")
@@ -33,15 +33,15 @@ class FinderService(
 
         while (indexOf != -1) {
             editorArea.replaceRange(order.replace, indexOf, indexOf + order.target.length)
-            indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
+            indexOf = editorArea.text.indexOf(order.target, indexOf + 1, order.caseSensitive.not())
         }
     }
 
     private fun find(order: FindOrder) {
         val indexOf = if (order.upper) {
-            editorArea.text.lastIndexOf(order.target, lastFound - 1)
+            editorArea.text.lastIndexOf(order.target, lastFound - 1, order.caseSensitive.not())
         } else {
-            editorArea.text.indexOf(order.target, lastFound + 1)
+            editorArea.text.indexOf(order.target, lastFound + 1, order.caseSensitive.not())
         }
         if (indexOf == -1) {
             showMessage("'${order.target}' is not found.")
