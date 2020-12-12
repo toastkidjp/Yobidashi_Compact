@@ -11,7 +11,7 @@ class FinderService(
         private val messageChannel: Channel<String>
 ) {
 
-    private var lastFound = 0
+    private var lastFound = -1
 
     operator fun invoke(order: FindOrder) {
         if (order.invokeReplace) {
