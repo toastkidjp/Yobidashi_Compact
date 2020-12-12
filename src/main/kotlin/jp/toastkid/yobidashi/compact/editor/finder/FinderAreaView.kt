@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor.finder
 
+import jp.toastkid.yobidashi.compact.model.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -64,6 +65,8 @@ class FinderAreaView(
         content.add(replace, constraints)
 
         val caseCondition = JCheckBox("Case sensitive")
+        caseCondition.addActionListener { Setting.setUseCaseSensitiveInFinder(caseCondition.isSelected) }
+        caseCondition.isSelected = Setting.useCaseSensitiveInFinder()
 
         constraints.gridx = 3
         constraints.gridy = 0

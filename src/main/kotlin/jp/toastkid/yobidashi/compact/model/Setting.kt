@@ -52,7 +52,16 @@ object Setting {
                 .map { it.split("/").let { it[0].toInt() to it[1].toInt() } }
     }
 
+    fun setUseCaseSensitiveInFinder(use: Boolean) {
+        properties.setProperty("use_case_sensitive", use.toString())
+    }
+
+    fun useCaseSensitiveInFinder(): Boolean {
+        return properties.getProperty("use_case_sensitive")?.toBoolean() ?: false
+    }
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
+
 }
