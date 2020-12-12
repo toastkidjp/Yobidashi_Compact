@@ -146,15 +146,6 @@ class FinderAreaView(
         return buttons
     }
 
-    fun show() {
-        frame.isVisible = true
-    }
-
-    fun close() {
-        frame.isVisible = false
-        frame.dispose()
-    }
-
     fun view(): JComponent = content
 
 }
