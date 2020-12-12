@@ -26,10 +26,10 @@ class FinderService(
         var indexOf = editorArea.text.indexOf(order.target)
 
         if (indexOf == -1) {
-            CoroutineScope(Dispatchers.Default).launch { messageChannel.send("'${order.target}' is not found.") }
+            showMessage("'${order.target}' is not found.")
             return
         }
-        CoroutineScope(Dispatchers.Default).launch { messageChannel.send("") }
+        showMessage("")
 
         while (indexOf != -1) {
             editorArea.replaceRange(order.replace, indexOf, indexOf + order.target.length)
@@ -44,14 +44,18 @@ class FinderService(
             editorArea.text.indexOf(order.target, lastFound + 1)
         }
         if (indexOf == -1) {
-            CoroutineScope(Dispatchers.Default).launch { messageChannel.send("'${order.target}' is not found.") }
+            showMessage("'${order.target}' is not found.")
             return
         }
-        CoroutineScope(Dispatchers.Default).launch { messageChannel.send("") }
+        showMessage("")
         lastFound = indexOf
 
         editorArea.selectionStart = indexOf
         editorArea.selectionEnd = indexOf + order.target.length
+    }
+
+    private fun showMessage(message: String) {
+        CoroutineScope(Dispatchers.Default).launch { messageChannel.send(message) }
     }
 
 }
