@@ -13,13 +13,11 @@ import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
 import java.awt.event.ActionEvent
-import javax.imageio.ImageIO
 import javax.swing.AbstractAction
 import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JCheckBox
 import javax.swing.JComponent
-import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextField
@@ -29,14 +27,9 @@ class FinderAreaView(
         private val messageChannel: Channel<String>
 ) {
 
-    private val frame = JFrame()
-
     private val content = JPanel()
 
     init {
-        frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
-        frame.setBounds(400, 300, 400, 180)
-
         content.layout = GridBagLayout()
         val constraints = GridBagConstraints()
 
@@ -92,8 +85,6 @@ class FinderAreaView(
         content.add(JButton("x").also {
             it.addActionListener { content.isVisible = false }
         })
-
-        frame.add(content)
     }
 
     private fun makeButtons(target: JTextField, replace: JTextField, caseCondition: JCheckBox): JPanel {
