@@ -107,6 +107,16 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(fontColorMenu)
 
+        popupMenu.add(
+                JMenuItem("To hyperlink").also {
+                    it.addActionListener {
+                        CoroutineScope(Dispatchers.Default).launch {
+                            channel.send(MenuCommand.TO_HYPERLINK)
+                        }
+                    }
+                }
+        )
+
         val countMenu = JMenuItem("Count").also {
             it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {

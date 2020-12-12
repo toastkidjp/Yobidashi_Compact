@@ -93,6 +93,11 @@ class CommandReceiverService(
                         "<font color='#${Integer.toHexString(color.rgb)}'>$text</font>"
                     }
                 }
+                MenuCommand.TO_HYPERLINK -> {
+                    editorAreaView.replaceSelected { text ->
+                        LinkDecoratorService().invoke(text)
+                    }
+                }
                 MenuCommand.HORIZONTAL_RULE -> {
                     editorAreaView.insertText("---")
                 }
