@@ -39,6 +39,9 @@ class FinderService(
 
     private fun find(order: FindOrder) {
         val indexOf = if (order.upper) {
+            if (lastFound == -1) {
+                lastFound = editorArea.text.length
+            }
             editorArea.text.lastIndexOf(order.target, lastFound - 1, order.caseSensitive.not())
         } else {
             editorArea.text.indexOf(order.target, lastFound + 1, order.caseSensitive.not())
