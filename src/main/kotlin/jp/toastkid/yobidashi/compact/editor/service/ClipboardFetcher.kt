@@ -9,9 +9,7 @@ class ClipboardFetcher {
         val transferData = Toolkit.getDefaultToolkit()
                 .systemClipboard
                 .getContents(this)
-        if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) {
-            return null
-        }
-        return transferData.getTransferData(DataFlavor.stringFlavor).toString()
+        return if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) null
+        else transferData.getTransferData(DataFlavor.stringFlavor).toString()
     }
 }
