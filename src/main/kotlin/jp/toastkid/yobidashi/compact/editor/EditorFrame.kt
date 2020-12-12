@@ -49,7 +49,8 @@ class EditorFrame {
             UiUpdaterService().invoke(frame, it)
         }
 
-        editorAreaView = EditorAreaView(channel = channel)
+        val messageChannel = Channel<String>()
+        editorAreaView = EditorAreaView(channel = channel, messageChannel = messageChannel)
 
         panel.add(editorAreaView.view(), BorderLayout.CENTER)
 
@@ -59,7 +60,7 @@ class EditorFrame {
         panel.add(footer, BorderLayout.SOUTH)
 
         val finderChannel = Channel<FindOrder>()
-        val finderView = FinderAreaView(finderChannel).view()
+        val finderView = FinderAreaView(finderChannel, messageChannel).view()
         finderView.isVisible = false
         panel.add(finderView, BorderLayout.NORTH)
         CoroutineScope(Dispatchers.Default).launch {

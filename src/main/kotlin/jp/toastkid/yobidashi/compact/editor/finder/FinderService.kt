@@ -1,8 +1,15 @@
 package jp.toastkid.yobidashi.compact.editor.finder
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 
-class FinderService(private val editorArea: RSyntaxTextArea) {
+class FinderService(
+        private val editorArea: RSyntaxTextArea,
+        private val messageChannel: Channel<String>
+) {
 
     private var lastFound = 0
 
@@ -17,6 +24,13 @@ class FinderService(private val editorArea: RSyntaxTextArea) {
 
     private fun replace(order: FindOrder) {
         var indexOf = editorArea.text.indexOf(order.target)
+
+        if (indexOf == -1) {
+            CoroutineScope(Dispatchers.Default).launch { messageChannel.send("'${order.target}' is not found.") }
+            return
+        }
+        CoroutineScope(Dispatchers.Default).launch { messageChannel.send("") }
+
         while (indexOf != -1) {
             editorArea.replaceRange(order.replace, indexOf, indexOf + order.target.length)
             indexOf = editorArea.text.indexOf(order.target, indexOf + 1)
@@ -30,8 +44,10 @@ class FinderService(private val editorArea: RSyntaxTextArea) {
             editorArea.text.indexOf(order.target, lastFound + 1)
         }
         if (indexOf == -1) {
+            CoroutineScope(Dispatchers.Default).launch { messageChannel.send("'${order.target}' is not found.") }
             return
         }
+        CoroutineScope(Dispatchers.Default).launch { messageChannel.send("") }
         lastFound = indexOf
 
         editorArea.selectionStart = indexOf

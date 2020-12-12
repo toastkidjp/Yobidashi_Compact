@@ -3,7 +3,10 @@ package jp.toastkid.yobidashi.compact.editor.finder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -19,7 +22,10 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class FinderAreaView(private val channel: Channel<FindOrder>) {
+class FinderAreaView(
+        private val orderChannel: Channel<FindOrder>,
+        private val messageChannel: Channel<String>
+) {
 
     private val frame = JFrame()
 
@@ -60,6 +66,18 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
         constraints.gridy = 0
         content.add(makeButtons(target, replace), constraints)
 
+        val message = JLabel()
+        message.preferredSize = Dimension(200, 36)
+        message.font = message.font.deriveFont(14f)
+        CoroutineScope(Dispatchers.Swing).launch {
+            messageChannel.receiveAsFlow().collect {
+                message.text = it
+            }
+        }
+        constraints.gridx = 4
+        constraints.gridy = 0
+        content.add(message)
+
         frame.add(content)
     }
 
@@ -75,7 +93,7 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
                     return
                 }
                 CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(FindOrder(target.text, replace.text, true))
+                    orderChannel.send(FindOrder(target.text, replace.text, true))
                 }
             }
         }
@@ -88,7 +106,7 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
                     return
                 }
                 CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(FindOrder(target.text, replace.text))
+                    orderChannel.send(FindOrder(target.text, replace.text))
                 }
             }
         }
@@ -102,7 +120,7 @@ class FinderAreaView(private val channel: Channel<FindOrder>) {
                 }
 
                 CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(FindOrder(target.text, replace.text, invokeReplace = true))
+                    orderChannel.send(FindOrder(target.text, replace.text, invokeReplace = true))
                 }
             }
         }

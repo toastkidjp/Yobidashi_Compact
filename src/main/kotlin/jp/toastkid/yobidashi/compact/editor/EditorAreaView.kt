@@ -19,14 +19,15 @@ import javax.swing.JComponent
 
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
-        private val channel: Channel<MenuCommand>
+        private val channel: Channel<MenuCommand>,
+        private val messageChannel: Channel<String>
 ) {
 
     private val scrollArea: RTextScrollPane
 
     private val statusChannel: Channel<Int> = Channel()
 
-    private val finderService by lazy { FinderService(editorArea) }
+    private val finderService by lazy { FinderService(editorArea, messageChannel) }
 
     init {
         editorArea.background = BACKGROUND_COLOR
