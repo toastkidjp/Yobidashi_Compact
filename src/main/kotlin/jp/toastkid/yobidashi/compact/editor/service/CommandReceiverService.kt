@@ -14,8 +14,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
-import java.awt.Toolkit
-import java.awt.datatransfer.DataFlavor
 import java.io.IOException
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -48,28 +46,12 @@ class CommandReceiverService(
                 }
                 MenuCommand.CLOSE -> close()
                 MenuCommand.PASTE_AS_QUOTATION -> {
-                    val text = withContext(Dispatchers.IO) {
-                        val transferData = Toolkit.getDefaultToolkit()
-                                .systemClipboard
-                                .getContents(this)
-                        if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) {
-                            return@withContext null
-                        }
-                        transferData.getTransferData(DataFlavor.stringFlavor).toString()
-                    } ?: return@collect
+                    val text = withContext(Dispatchers.IO) { ClipboardFetcher().invoke() } ?: return@collect
                     val quotedText = BlockQuotation().invoke(text) ?: return@collect
                     editorAreaView.insertText(quotedText)
                 }
                 MenuCommand.PASTE_LINK_WITH_TITLE -> {
-                    val text = withContext(Dispatchers.IO) {
-                        val transferData = Toolkit.getDefaultToolkit()
-                                .systemClipboard
-                                .getContents(this)
-                        if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) {
-                            return@withContext null
-                        }
-                        transferData.getTransferData(DataFlavor.stringFlavor).toString()
-                    } ?: return@collect
+                    val text = withContext(Dispatchers.IO) { ClipboardFetcher().invoke() } ?: return@collect
                     val decorated = LinkDecoratorService().invoke(text)
                     editorAreaView.insertText(decorated)
                 }
