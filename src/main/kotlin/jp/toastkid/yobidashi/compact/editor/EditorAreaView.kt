@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.finder.FinderService
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
 import jp.toastkid.yobidashi.compact.editor.service.KeyboardShortcutService
+import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -16,6 +17,7 @@ import java.awt.Color
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.JComponent
+import javax.swing.event.HyperlinkEvent
 
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
@@ -31,6 +33,13 @@ class EditorAreaView(
 
     init {
         editorArea.background = BACKGROUND_COLOR
+        editorArea.addHyperlinkListener {
+            if (it.eventType != HyperlinkEvent.EventType.ACTIVATED) {
+                return@addHyperlinkListener
+            }
+            val uri = it.url?.toURI() ?: return@addHyperlinkListener
+            UrlOpenerService().invoke(uri)
+        }
         editorArea.paintTabLines = true
         editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
         editorArea.addKeyListener(object : KeyListener {
