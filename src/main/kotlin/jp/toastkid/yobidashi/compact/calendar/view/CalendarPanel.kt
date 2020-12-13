@@ -5,7 +5,7 @@ import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderUseCase
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
-import java.util.Calendar
+import java.time.LocalDate
 import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JFrame
@@ -32,11 +32,11 @@ class CalendarPanel : JPanel() {
         add(makeChoosersPanel())
         add(makeDayPanel())
 
-        val cal = Calendar.getInstance()
-        monthChooser.value = Month.from(cal)
-        yearChooser.value = cal[Calendar.YEAR]
+        val date = LocalDate.now()
+        monthChooser.value = Month.from(date)
+        yearChooser.value = date.year
 
-        refreshDayLabels(cal, true)
+        refreshDayLabels(date, true)
     }
 
     private fun makeChoosersPanel(): JPanel {
@@ -132,33 +132,32 @@ class CalendarPanel : JPanel() {
     }
 
     private fun refreshDayLabels(year: Int, month: Month) {
-        val cal = Calendar.getInstance()
-        if (month.isSameMonth(cal) && year == cal[Calendar.YEAR]) {
+        val cal = LocalDate.now()
+        if (month.isSameMonth(cal) && year == cal.year) {
             refreshDayLabels(cal, true)
         } else {
-            cal[year, month.ordinal] = 1
-            refreshDayLabels(cal, false)
+            refreshDayLabels(LocalDate.of(year, month.ordinal + 1, 1), false)
         }
     }
 
-    private fun refreshDayLabels(calendar: Calendar, currentMonth: Boolean) {
-        val maxDate = calendar.getActualMaximum(Calendar.DATE)
-        val today = calendar[Calendar.DATE]
-        calendar[Calendar.DATE] = 1
-        val firstDayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+    private fun refreshDayLabels(calendar: LocalDate, currentMonth: Boolean) {
+        val maxDate = calendar.month.length(calendar.isLeapYear)
+        val today = calendar.dayOfMonth
+        val firstDay = calendar.withDayOfMonth(1)
+        val firstDayOfWeek = firstDay.dayOfWeek.value % 7
         for (ll in dayLabels) {
             for (l in ll) {
                 l?.text = ""
             }
         }
 
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
+        val year = calendar.year
+        val month = calendar.monthValue
         val offDayFinder = OffDayFinderUseCase()
         for (day in 1..maxDate) {
             getDayLabel(day, firstDayOfWeek)?.also {
                 it.text = day.toString()
-                val color = offDayFinder(year, month, day, (day + firstDayOfWeek - 2) % 7)
+                val color = offDayFinder(year, month, day, (day + firstDayOfWeek - 1) % 7)
                 when (it.foreground) {
                     Color.BLACK -> it.foreground = color
                     Color.RED -> it.foreground = color
@@ -184,7 +183,8 @@ class CalendarPanel : JPanel() {
     }
 
     private fun getDayLabel(day: Int, firstDayOfWeek: Int): JLabel? {
-        return dayLabels[(day + firstDayOfWeek - 2) / 7][(day + firstDayOfWeek - 2) % 7]
+        println("day $day first $firstDayOfWeek")
+        return dayLabels[(day + firstDayOfWeek - 1) / 7][(day + firstDayOfWeek - 1) % 7]
     }
 
     companion object {
