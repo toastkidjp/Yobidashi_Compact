@@ -2,13 +2,13 @@ package jp.toastkid.yobidashi.compact.calendar.model
 
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Test
-import java.util.GregorianCalendar
+import java.time.LocalDate
 
 internal class MonthTest {
 
     @Test
     fun testFrom() {
-        assertSame(Month.DEC, Month.from(GregorianCalendar(2020, 11, 2)))
+        assertSame(Month.DEC, Month.from(LocalDate.of(2020, 12, 2)))
     }
 
     @Test
