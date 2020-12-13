@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.model
 
-import java.util.Calendar
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 class ArticleTemplate {
     operator fun invoke(header: String) = """# $header
@@ -78,8 +79,8 @@ ${ if (isNotOffDay()) {
 """
 
     private fun isNotOffDay(): Boolean {
-        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        return dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY
+        val dayOfWeek = LocalDate.now().dayOfWeek
+        return dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY
     }
 
 }
