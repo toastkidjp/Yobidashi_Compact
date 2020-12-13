@@ -10,6 +10,10 @@ class UrlOpenerService(private val desktop: Desktop = Desktop.getDesktop()) {
             return
         }
 
-        desktop.browse(URI(url))
+        invoke(URI(url))
+    }
+
+    operator fun invoke(uri: URI) {
+        desktop.browse(uri)
     }
 }
