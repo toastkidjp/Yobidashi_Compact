@@ -37,8 +37,10 @@ class EditorAreaView(
             if (it.eventType != HyperlinkEvent.EventType.ACTIVATED) {
                 return@addHyperlinkListener
             }
-            val uri = it.url?.toURI() ?: return@addHyperlinkListener
-            UrlOpenerService().invoke(uri)
+
+            it.url?.toURI()?.let { uri ->
+                UrlOpenerService().invoke(uri)
+            }
         }
         editorArea.paintTabLines = true
         editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
