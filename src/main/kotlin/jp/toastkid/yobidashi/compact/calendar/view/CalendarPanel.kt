@@ -183,7 +183,6 @@ class CalendarPanel : JPanel() {
     }
 
     private fun getDayLabel(day: Int, firstDayOfWeek: Int): JLabel? {
-        println("day $day first $firstDayOfWeek")
         return dayLabels[(day + firstDayOfWeek - 1) / 7][(day + firstDayOfWeek - 1) % 7]
     }
 
