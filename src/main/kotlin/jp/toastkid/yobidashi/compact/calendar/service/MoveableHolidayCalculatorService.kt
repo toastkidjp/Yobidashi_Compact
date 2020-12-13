@@ -1,8 +1,8 @@
 package jp.toastkid.yobidashi.compact.calendar.service
 
 import jp.toastkid.yobidashi.compact.calendar.model.MoveableJapaneseHoliday
-import java.util.Calendar
-import java.util.GregorianCalendar
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 class MoveableHolidayCalculatorService {
 
@@ -11,13 +11,13 @@ class MoveableHolidayCalculatorService {
             return false
         }
 
-        val calendar = GregorianCalendar(year, month - 1, 1)
+        val calendar = LocalDate.of(year, month, 1)
         val targetDay = MoveableJapaneseHoliday.find(month) ?: return false
-        val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-        val d = if (dayOfWeek == Calendar.MONDAY) {
+        val dayOfWeek = calendar.dayOfWeek
+        val d = if (dayOfWeek == DayOfWeek.MONDAY) {
             1
         } else {
-            8 - (dayOfWeek - 2)
+            DayOfWeek.SUNDAY.value - (dayOfWeek.value - 2)
         }
 
         return date == d + (7 * (targetDay.week - 1))
