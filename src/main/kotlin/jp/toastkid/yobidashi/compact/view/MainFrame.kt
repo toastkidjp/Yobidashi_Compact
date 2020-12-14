@@ -123,7 +123,7 @@ class MainFrame(title: String) {
                 if (indexOfComponent == -1) {
                     return@invokeLater
                 }
-                tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(newContent))
+                tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(newContent, "Search result"))
             }
             tabs.add(it)
         }
@@ -134,7 +134,7 @@ class MainFrame(title: String) {
             if (indexOfComponent == -1) {
                 return@observeAddNewTab
             }
-            tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(it))
+            tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(it, "Search result"))
         }
 
         SubjectPool.observeCloseWindow {
