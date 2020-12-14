@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.aggregation.service
 
+import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.aggregation.model.AggregationResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,12 +45,13 @@ class AggregationMenuItemGeneratorService {
                     }
 
                     val table = AggregationResultTableFactoryService().invoke(result)
-                    JOptionPane.showMessageDialog(
+                    /*JOptionPane.showMessageDialog(
                             null,
                             table,
                             "$keyword ${result.resultTitleSuffix()}",
                             JOptionPane.PLAIN_MESSAGE
-                    )
+                    )*/
+                    SubjectPool.addNewTab(table)
                 } catch (e: Exception) {
                     e.printStackTrace()
                     JOptionPane.showConfirmDialog(null, e)

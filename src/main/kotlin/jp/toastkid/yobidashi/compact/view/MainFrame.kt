@@ -128,6 +128,15 @@ class MainFrame(title: String) {
             tabs.add(it)
         }
 
+        SubjectPool.observeAddNewTab {
+            tabPane.add(it)
+            val indexOfComponent = tabPane.indexOfComponent(it)
+            if (indexOfComponent == -1) {
+                return@observeAddNewTab
+            }
+            tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(it))
+        }
+
         SubjectPool.observeCloseWindow {
             frame.dispose()
         }

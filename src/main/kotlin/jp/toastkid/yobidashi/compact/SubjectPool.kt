@@ -74,4 +74,18 @@ object SubjectPool {
         }
     }
 
+    private val addNewTab: Channel<JComponent> = Channel()
+
+    fun addNewTab(component: JComponent) {
+        CoroutineScope(Dispatchers.Default).launch { addNewTab.send(component) }
+    }
+
+    fun observeAddNewTab(observer: (JComponent) -> Unit) {
+        CoroutineScope(Dispatchers.Swing).launch {
+            addNewTab.receiveAsFlow().collect {
+                observer(it)
+            }
+        }
+    }
+
 }
