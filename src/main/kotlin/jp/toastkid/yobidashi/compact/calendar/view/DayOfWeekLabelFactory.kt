@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
-import jp.toastkid.yobidashi.compact.calendar.model.DayOfWeek
 import java.awt.Color
 import java.awt.Dimension
+import java.time.DayOfWeek
+import java.time.format.TextStyle
+import java.util.Locale
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.SwingConstants
@@ -10,8 +12,8 @@ import javax.swing.border.LineBorder
 
 class DayOfWeekLabelFactory(private val preferredSize: Dimension) {
 
-    operator fun invoke(i: Int): JComponent {
-        val dayOfWeekLabel = JLabel(DayOfWeek.getName(i))
+    operator fun invoke(dayOfWeek: DayOfWeek): JComponent {
+        val dayOfWeekLabel = JLabel(dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH))
         dayOfWeekLabel.font = dayOfWeekLabel.font.deriveFont(16f)
         dayOfWeekLabel.horizontalAlignment = SwingConstants.CENTER
         dayOfWeekLabel.verticalAlignment = SwingConstants.CENTER
@@ -19,9 +21,9 @@ class DayOfWeekLabelFactory(private val preferredSize: Dimension) {
         dayOfWeekLabel.isOpaque = true
         dayOfWeekLabel.background = WEEK_BG
         dayOfWeekLabel.border = BORDER
-        if (i == 0) {
+        if (dayOfWeek == DayOfWeek.SUNDAY) {
             dayOfWeekLabel.foreground = Color.RED
-        } else if (i == 6) {
+        } else if (dayOfWeek == DayOfWeek.SATURDAY) {
             dayOfWeekLabel.foreground = Color.BLUE
         }
         return dayOfWeekLabel
