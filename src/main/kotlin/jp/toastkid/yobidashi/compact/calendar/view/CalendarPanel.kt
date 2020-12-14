@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderUseCase
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
+import java.time.DayOfWeek
 import java.time.LocalDate
 import javax.swing.BoxLayout
 import javax.swing.JButton
@@ -88,9 +89,13 @@ class CalendarPanel : JPanel() {
         dayPanel.layout = layout
 
         val dayOfWeekLabelFactory = DayOfWeekLabelFactory(DAY_LABEL_SIZE)
-        for (i in 0..6) {
-            dayPanel.add(dayOfWeekLabelFactory.invoke(i))
-        }
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.SUNDAY))
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.MONDAY))
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.TUESDAY))
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.WEDNESDAY))
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.THURSDAY))
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.FRIDAY))
+        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.SATURDAY))
 
         val dayLabelFactory = DayLabelFactory(DAY_LABEL_SIZE)
 
