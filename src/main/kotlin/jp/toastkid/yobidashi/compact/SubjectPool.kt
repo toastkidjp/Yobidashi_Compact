@@ -74,13 +74,13 @@ object SubjectPool {
         }
     }
 
-    private val addNewTab: Channel<JComponent> = Channel()
+    private val addNewTab: Channel<Pair<JComponent, String>> = Channel()
 
-    fun addNewTab(component: JComponent) {
-        CoroutineScope(Dispatchers.Default).launch { addNewTab.send(component) }
+    fun addNewTab(component: JComponent, title: String) {
+        CoroutineScope(Dispatchers.Default).launch { addNewTab.send(component to title) }
     }
 
-    fun observeAddNewTab(observer: (JComponent) -> Unit) {
+    fun observeAddNewTab(observer: (Pair<JComponent, String>) -> Unit) {
         CoroutineScope(Dispatchers.Swing).launch {
             addNewTab.receiveAsFlow().collect {
                 observer(it)

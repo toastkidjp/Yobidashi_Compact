@@ -51,7 +51,7 @@ class AggregationMenuItemGeneratorService {
                             "$keyword ${result.resultTitleSuffix()}",
                             JOptionPane.PLAIN_MESSAGE
                     )*/
-                    SubjectPool.addNewTab(table)
+                    SubjectPool.addNewTab(table, "$keyword ${result.resultTitleSuffix()}")
                 } catch (e: Exception) {
                     e.printStackTrace()
                     JOptionPane.showConfirmDialog(null, e)

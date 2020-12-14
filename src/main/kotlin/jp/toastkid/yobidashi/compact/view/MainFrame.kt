@@ -129,12 +129,12 @@ class MainFrame(title: String) {
         }
 
         SubjectPool.observeAddNewTab {
-            tabPane.add(it)
-            val indexOfComponent = tabPane.indexOfComponent(it)
+            tabPane.add(it.first)
+            val indexOfComponent = tabPane.indexOfComponent(it.first)
             if (indexOfComponent == -1) {
                 return@observeAddNewTab
             }
-            tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(it, "Search result"))
+            tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(it.first, it.second))
         }
 
         SubjectPool.observeCloseWindow {
