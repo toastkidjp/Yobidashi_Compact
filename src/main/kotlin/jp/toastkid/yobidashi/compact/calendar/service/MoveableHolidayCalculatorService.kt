@@ -11,9 +11,9 @@ class MoveableHolidayCalculatorService {
             return false
         }
 
-        val calendar = LocalDate.of(year, month, 1)
+        val localDate = LocalDate.of(year, month, 1)
         val targetDay = MoveableJapaneseHoliday.find(month) ?: return false
-        val dayOfWeek = calendar.dayOfWeek
+        val dayOfWeek = localDate.dayOfWeek
         val d = if (dayOfWeek == DayOfWeek.MONDAY) {
             1
         } else {
