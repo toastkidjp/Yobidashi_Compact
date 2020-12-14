@@ -115,18 +115,18 @@ class MainFrame(title: String) {
         panel.add(tabPane, BorderLayout.CENTER)
         panel.add(buttons, BorderLayout.SOUTH)
 
-        SubjectPool.observe {
+        SubjectPool.observe { component, title ->
             SwingUtilities.invokeLater {
-                val newContent = it.view()
+                val newContent = component.view()
                 tabPane.add(newContent)
                 val indexOfComponent = tabPane.indexOfComponent(newContent)
                 if (indexOfComponent == -1) {
                     return@invokeLater
                 }
-                tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(newContent, "Search result"))
+                tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(newContent, title))
                 tabPane.selectedIndex = indexOfComponent
             }
-            tabs.add(it)
+            tabs.add(component)
         }
 
         SubjectPool.observeAddNewTab {

@@ -14,16 +14,16 @@ import javax.swing.JComponent
 
 object SubjectPool {
 
-    private val pool: Channel<ArticleListView> = Channel()
+    private val pool: Channel<Pair<ArticleListView, String>> = Channel()
 
-    fun next(next: ArticleListView) {
-        CoroutineScope(Dispatchers.Default).launch { pool.send(next) }
+    fun next(component: ArticleListView, title: String) {
+        CoroutineScope(Dispatchers.Default).launch { pool.send(component to title) }
     }
 
-    fun observe(send: (ArticleListView) -> Unit) {
+    fun observe(send: (ArticleListView, String) -> Unit) {
         CoroutineScope(Dispatchers.Swing).launch {
             pool.receiveAsFlow().collect {
-                send(it)
+                send(it.first, it.second)
             }
         }
     }

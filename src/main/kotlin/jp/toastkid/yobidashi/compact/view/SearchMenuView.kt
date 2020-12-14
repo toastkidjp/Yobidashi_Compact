@@ -67,7 +67,7 @@ class SearchMenuView {
                 JOptionPane.showMessageDialog(null, "Article which contains '$keyword' is not found.")
                 return@launch
             }
-            SubjectPool.next(articleListView)
+            SubjectPool.next(articleListView, "'$keyword' search result")
         }
     }
 
