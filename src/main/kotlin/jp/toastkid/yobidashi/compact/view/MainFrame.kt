@@ -117,9 +117,7 @@ class MainFrame(title: String) {
         panel.add(buttons, BorderLayout.SOUTH)
 
         SubjectPool.observeNewSearchResult { component, title ->
-            SwingUtilities.invokeLater {
-                addNewTab(tabPane, component.view(), title)
-            }
+            addNewTab(tabPane, component.view(), title)
             tabs.add(component)
         }
 
