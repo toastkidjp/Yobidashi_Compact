@@ -131,7 +131,7 @@ class MainFrame(title: String) {
                 { tabPane.removeTabAt(tabPane.tabCount - 1) },
                 frame::dispose
         )
-        SubjectPool.observeCloseWindow { closeActionService.invoke() }
+        SubjectPool.observeCloseWindow(closeActionService::invoke)
 
         SubjectPool.observeAddToList {
             list.add(it)
