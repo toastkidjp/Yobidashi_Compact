@@ -127,13 +127,11 @@ class MainFrame(title: String) {
         }
 
         val closeActionService = CloseActionService(
-                { tabPane.tabCount },
+                tabPane::getTabCount,
                 { tabPane.removeTabAt(tabPane.tabCount - 1) },
-                { frame.dispose() }
+                frame::dispose
         )
-        SubjectPool.observeCloseWindow {
-            closeActionService.invoke()
-        }
+        SubjectPool.observeCloseWindow { closeActionService.invoke() }
 
         SubjectPool.observeAddToList {
             list.add(it)
