@@ -55,6 +55,17 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                 }
         )
 
+        menu.addSeparator()
+
+        menu.add(JMenuItem("Switch editable").also {
+            it.addActionListener {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.SWITCH_EDITABLE)
+                }
+            }
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
+        })
+
         return menu
     }
 

@@ -130,6 +130,10 @@ class EditorAreaView(
         editorArea.insert(currentLineText, end)
     }
 
+    fun switchEditable() {
+        editorArea.isEditable = editorArea.isEditable.not()
+    }
+
     companion object {
 
         private const val DEFAULT_FONT_SIZE = 14f

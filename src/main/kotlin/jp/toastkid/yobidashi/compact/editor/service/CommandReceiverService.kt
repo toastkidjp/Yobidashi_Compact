@@ -110,6 +110,9 @@ class CommandReceiverService(
                 MenuCommand.DUPLICATE_LINE -> {
                     editorAreaView.duplicateLine()
                 }
+                MenuCommand.SWITCH_EDITABLE -> {
+                    editorAreaView.switchEditable()
+                }
                 MenuCommand.COUNT -> {
                     JOptionPane.showMessageDialog(
                             null,
