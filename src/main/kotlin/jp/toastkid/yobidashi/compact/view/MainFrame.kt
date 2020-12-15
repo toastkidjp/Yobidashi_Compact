@@ -23,6 +23,7 @@ import java.util.stream.Collectors
 import javax.imageio.ImageIO
 import javax.swing.AbstractAction
 import javax.swing.JButton
+import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JOptionPane
 import javax.swing.JPanel
@@ -117,26 +118,13 @@ class MainFrame(title: String) {
 
         SubjectPool.observe { component, title ->
             SwingUtilities.invokeLater {
-                val newContent = component.view()
-                tabPane.add(newContent)
-                val indexOfComponent = tabPane.indexOfComponent(newContent)
-                if (indexOfComponent == -1) {
-                    return@invokeLater
-                }
-                tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(newContent, title))
-                tabPane.selectedIndex = indexOfComponent
+                addNewTab(tabPane, component.view(), title)
             }
             tabs.add(component)
         }
 
         SubjectPool.observeAddNewTab {
-            tabPane.add(it.first)
-            val indexOfComponent = tabPane.indexOfComponent(it.first)
-            if (indexOfComponent == -1) {
-                return@observeAddNewTab
-            }
-            tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(it.first, it.second))
-            tabPane.selectedIndex = indexOfComponent
+            addNewTab(tabPane, it.first, it.second)
         }
 
         SubjectPool.observeCloseWindow {
@@ -159,6 +147,16 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 600)
+    }
+
+    private fun addNewTab(tabPane: JTabbedPane, component: JComponent, title: String) {
+        tabPane.add(component)
+        val indexOfComponent = tabPane.indexOfComponent(component)
+        if (indexOfComponent == -1) {
+            return
+        }
+        tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(component, title))
+        tabPane.selectedIndex = indexOfComponent
     }
 
     fun show() {
