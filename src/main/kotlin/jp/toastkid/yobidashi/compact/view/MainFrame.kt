@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.CloseActionService
 import jp.toastkid.yobidashi.compact.service.CloserTabComponentFactoryService
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
@@ -125,13 +126,13 @@ class MainFrame(title: String) {
             addNewTab(tabPane, it.first, it.second)
         }
 
+        val closeActionService = CloseActionService(
+                { tabPane.tabCount },
+                { tabPane.removeTabAt(tabPane.tabCount - 1) },
+                { frame.dispose() }
+        )
         SubjectPool.observeCloseWindow {
-            if (tabPane.tabCount <= 1) {
-                frame.dispose()
-                return@observeCloseWindow
-            }
-
-            tabPane.removeTabAt(tabPane.tabCount - 1)
+            closeActionService.invoke()
         }
 
         SubjectPool.observeAddToList {
