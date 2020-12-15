@@ -40,6 +40,8 @@ class ArticleCellRenderer :  ListCellRenderer<Article> {
 
         view.background = if (isSelected) list?.selectionBackground else list?.background
         view.foreground = if (isSelected) list?.selectionForeground else list?.foreground
+        title.foreground = if (isSelected) Color.WHITE else Color.BLACK
+        lastUpdated.foreground = if (isSelected) Color.WHITE else Color.BLACK
 
         view.border = LineBorder(Color.GRAY, 1, false)
         return view
