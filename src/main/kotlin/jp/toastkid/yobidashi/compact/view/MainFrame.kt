@@ -126,7 +126,12 @@ class MainFrame(title: String) {
         }
 
         SubjectPool.observeCloseWindow {
-            frame.dispose()
+            if (tabPane.tabCount <= 1) {
+                frame.dispose()
+                return@observeCloseWindow
+            }
+
+            tabPane.removeTabAt(tabPane.tabCount - 1)
         }
 
         SubjectPool.observeAddToList {
