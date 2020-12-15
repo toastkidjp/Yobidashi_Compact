@@ -20,7 +20,7 @@ object SubjectPool {
         CoroutineScope(Dispatchers.Default).launch { pool.send(component to title) }
     }
 
-    fun observe(send: (ArticleListView, String) -> Unit) {
+    fun observeNewSearchResult(send: (ArticleListView, String) -> Unit) {
         CoroutineScope(Dispatchers.Swing).launch {
             pool.receiveAsFlow().collect {
                 send(it.first, it.second)
