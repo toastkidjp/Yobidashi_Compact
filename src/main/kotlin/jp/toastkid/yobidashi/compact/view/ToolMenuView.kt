@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.view
 
+import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.calendar.view.CalendarPanel
 import jp.toastkid.yobidashi.compact.service.DateArticleUrlFactoryService
 import java.awt.Desktop
@@ -9,7 +10,6 @@ import java.net.URI
 import java.time.LocalDateTime
 import javax.swing.JMenu
 import javax.swing.JMenuItem
-import javax.swing.JOptionPane
 import javax.swing.KeyStroke
 
 class ToolMenuView {
@@ -18,7 +18,7 @@ class ToolMenuView {
         val menu = JMenu("Tool")
         menu.add(JMenuItem("Calendar").also {
             it.addActionListener {
-                JOptionPane.showMessageDialog(null, CalendarPanel())
+                SubjectPool.addNewTab(CalendarPanel(), "Calendar")
             }
             it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK)
         })
