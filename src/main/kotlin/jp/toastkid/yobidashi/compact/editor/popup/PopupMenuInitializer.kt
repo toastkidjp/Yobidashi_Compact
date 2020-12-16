@@ -71,9 +71,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(boldMenu)
 
-        val italicMenu = JMenuItem()
-        italicMenu.action = object : AbstractAction("Italic") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val italicMenu = JMenuItem("Italic").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.ITALIC)
                 }
