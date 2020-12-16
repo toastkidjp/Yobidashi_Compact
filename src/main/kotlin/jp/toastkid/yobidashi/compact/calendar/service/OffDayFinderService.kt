@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.calendar.service
 
 import jp.toastkid.yobidashi.compact.calendar.model.EquinoxDayCalculator
 import jp.toastkid.yobidashi.compact.calendar.model.FixedJapaneseHoliday
-import java.awt.Color
 
 class OffDayFinderService(
         private val equinoxDayCalculator: EquinoxDayCalculator = EquinoxDayCalculator(),
@@ -11,40 +10,40 @@ class OffDayFinderService(
         private val specialCaseOffDayCalculator: SpecialCaseOffDayCalculatorService = SpecialCaseOffDayCalculatorService()
 ) {
 
-    operator fun invoke(year: Int, month: Int, date: Int, dayOfWeek: Int): Color {
+    operator fun invoke(year: Int, month: Int, date: Int, dayOfWeek: Int): Boolean {
         if (month == 6) {
-            return COLOR_NORMAL_DAY
+            return false
         }
 
         if (month == 3 && date == equinoxDayCalculator.calculateVernalEquinoxDay(year)) {
-            return COLOR_OFF_DAY
+            return true
         }
 
         if (month == 9 && date == equinoxDayCalculator.calculateAutumnalEquinoxDay(year)) {
-            return COLOR_OFF_DAY
+            return true
         }
 
         val isSpecialCase = specialCaseOffDayCalculator(year, month, date)
         if (isSpecialCase.first) {
-            return COLOR_OFF_DAY
+            return true
         }
         if (isSpecialCase.second) {
-            return COLOR_NORMAL_DAY
+            return false
         }
 
         if (moveableHolidayCalculatorService(year, month, date)) {
-            return COLOR_OFF_DAY
+            return true
         }
 
         if (userOffDayService(month, date)) {
-            return COLOR_OFF_DAY
+            return true
         }
 
         var firstOrNull = FixedJapaneseHoliday.values()
                 .firstOrNull { month == it.month && date == it.date }
         if (firstOrNull == null) {
             if (month == 5 && date == 6 && dayOfWeek <= 3) {
-                return COLOR_OFF_DAY
+                return true
             }
             if (dayOfWeek == 1) {
                 firstOrNull = FixedJapaneseHoliday.values()
@@ -52,16 +51,8 @@ class OffDayFinderService(
             }
         }
         return if (firstOrNull != null) {
-            COLOR_OFF_DAY
-        } else COLOR_NORMAL_DAY
-    }
-
-    companion object {
-
-        private val COLOR_NORMAL_DAY = Color.BLACK
-
-        private val COLOR_OFF_DAY = Color.RED
-
+            true
+        } else false
     }
 
 }
