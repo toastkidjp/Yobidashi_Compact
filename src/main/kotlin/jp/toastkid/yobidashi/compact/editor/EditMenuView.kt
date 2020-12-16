@@ -25,6 +25,8 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         }
         menu.add(findItem)
 
+        menu.addSeparator()
+
         val item = JMenuItem("Paste as quotation")
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK)
         item.addActionListener {
@@ -43,6 +45,8 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                     }
                 }
         )
+
+        menu.addSeparator()
 
         menu.add(
                 JMenuItem("Duplicate line").also {
