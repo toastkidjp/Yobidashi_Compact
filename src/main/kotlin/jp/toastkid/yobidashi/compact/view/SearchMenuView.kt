@@ -40,14 +40,7 @@ class SearchMenuView {
     }
 
     private fun onAction() {
-        val panel = JPanel()
-        panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
-        val fileFilter = JTextField()
-        fileFilter.preferredSize = Dimension(100, 36)
-        panel.add(JLabel("Please would you input search query."))
-        panel.add(JLabel("Title filter"))
-        panel.add(fileFilter)
-        panel.add(JLabel("Keyword"))
+        val (panel, fileFilter) = makeDialogContent()
         val keyword = JOptionPane.showInputDialog(null, panel)
         if (keyword.isNullOrBlank() && fileFilter.text.isNullOrBlank()) {
             return
@@ -69,6 +62,18 @@ class SearchMenuView {
             }
             SubjectPool.next(articleListView, "'$keyword' search result")
         }
+    }
+
+    private fun makeDialogContent(): Pair<JPanel, JTextField> {
+        val panel = JPanel()
+        panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
+        val fileFilter = JTextField()
+        fileFilter.preferredSize = Dimension(100, 36)
+        panel.add(JLabel("Please would you input search query."))
+        panel.add(JLabel("Title filter"))
+        panel.add(fileFilter)
+        panel.add(JLabel("Keyword"))
+        return Pair(panel, fileFilter)
     }
 
 }
