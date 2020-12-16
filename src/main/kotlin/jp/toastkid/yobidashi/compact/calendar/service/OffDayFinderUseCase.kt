@@ -4,15 +4,12 @@ import jp.toastkid.yobidashi.compact.calendar.model.EquinoxDayCalculator
 import jp.toastkid.yobidashi.compact.calendar.model.FixedJapaneseHoliday
 import java.awt.Color
 
-class OffDayFinderUseCase {
-
-    private val equinoxDayCalculator = EquinoxDayCalculator()
-
-    private val userOffDayService = UserOffDayService()
-
-    private val moveableHolidayCalculatorService = MoveableHolidayCalculatorService()
-
-    private val specialCaseOffDayCalculator = SpecialCaseOffDayCalculatorService()
+class OffDayFinderUseCase(
+        private val equinoxDayCalculator: EquinoxDayCalculator = EquinoxDayCalculator(),
+        private val userOffDayService: UserOffDayService = UserOffDayService(),
+        private val moveableHolidayCalculatorService: MoveableHolidayCalculatorService = MoveableHolidayCalculatorService(),
+        private val specialCaseOffDayCalculator: SpecialCaseOffDayCalculatorService = SpecialCaseOffDayCalculatorService()
+) {
 
     operator fun invoke(year: Int, month: Int, date: Int, dayOfWeek: Int): Color {
         if (month == 6) {
