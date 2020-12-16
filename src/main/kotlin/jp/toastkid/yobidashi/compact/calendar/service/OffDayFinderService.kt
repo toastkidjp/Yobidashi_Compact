@@ -4,7 +4,7 @@ import jp.toastkid.yobidashi.compact.calendar.model.EquinoxDayCalculator
 import jp.toastkid.yobidashi.compact.calendar.model.FixedJapaneseHoliday
 import java.awt.Color
 
-class OffDayFinderUseCase(
+class OffDayFinderService(
         private val equinoxDayCalculator: EquinoxDayCalculator = EquinoxDayCalculator(),
         private val userOffDayService: UserOffDayService = UserOffDayService(),
         private val moveableHolidayCalculatorService: MoveableHolidayCalculatorService = MoveableHolidayCalculatorService(),

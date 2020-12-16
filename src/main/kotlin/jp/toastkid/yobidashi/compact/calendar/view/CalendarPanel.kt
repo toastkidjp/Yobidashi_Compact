@@ -1,7 +1,7 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import jp.toastkid.yobidashi.compact.calendar.model.Month
-import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderUseCase
+import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -158,7 +158,7 @@ class CalendarPanel : JPanel() {
 
         val year = calendar.year
         val month = calendar.monthValue
-        val offDayFinder = OffDayFinderUseCase()
+        val offDayFinder = OffDayFinderService()
         for (day in 1..maxDate) {
             getDayLabel(day, firstDayOfWeek)?.also {
                 it.text = day.toString()
