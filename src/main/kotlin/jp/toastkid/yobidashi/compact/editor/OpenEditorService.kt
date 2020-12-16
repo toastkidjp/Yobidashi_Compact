@@ -5,7 +5,7 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import java.awt.Desktop
 import java.io.IOException
 
-class OpenEditorUseCase(
+class OpenEditorService(
         private val editorFrame: EditorFrame = EditorFrame(),
         private val desktop: Desktop = Desktop.getDesktop()
 ) {

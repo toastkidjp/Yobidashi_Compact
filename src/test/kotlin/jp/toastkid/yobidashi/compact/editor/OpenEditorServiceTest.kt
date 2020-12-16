@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test
 import java.awt.Desktop
 import java.nio.file.Path
 
-internal class OpenEditorUseCaseTest {
+internal class OpenEditorServiceTest {
 
-    private lateinit var openEditorUseCase: OpenEditorUseCase
+    private lateinit var openEditorService: OpenEditorService
 
     @MockK
     private lateinit var editorFrame: EditorFrame
@@ -34,7 +34,7 @@ internal class OpenEditorUseCaseTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        openEditorUseCase = OpenEditorUseCase(editorFrame, desktop)
+        openEditorService = OpenEditorService(editorFrame, desktop)
 
         every { editorFrame.load(any()) }.answers { Unit }
         every { editorFrame.show() }.answers { Unit }
@@ -48,7 +48,7 @@ internal class OpenEditorUseCaseTest {
         mockkObject(Setting)
         every { Setting.useInternalEditor() }.returns(true)
 
-        openEditorUseCase.invoke(article)
+        openEditorService.invoke(article)
 
         verify (exactly = 1) { editorFrame.load(any()) }
         verify (exactly = 1) { editorFrame.show() }
@@ -60,7 +60,7 @@ internal class OpenEditorUseCaseTest {
         mockkObject(Setting)
         every { Setting.useInternalEditor() }.returns(false)
 
-        openEditorUseCase.invoke(article)
+        openEditorService.invoke(article)
 
         verify (exactly = 0) { editorFrame.load(any()) }
         verify (exactly = 0) { editorFrame.show() }

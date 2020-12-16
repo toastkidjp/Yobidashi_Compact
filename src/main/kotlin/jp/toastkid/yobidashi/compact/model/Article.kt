@@ -1,6 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
-import jp.toastkid.yobidashi.compact.editor.OpenEditorUseCase
+import jp.toastkid.yobidashi.compact.editor.OpenEditorService
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
@@ -15,7 +15,7 @@ class Article(private val file: Path) {
 
     fun open() {
         try {
-            OpenEditorUseCase().invoke(this)
+            OpenEditorService().invoke(this)
         } catch (e: IOException) {
             e.printStackTrace()
         }
