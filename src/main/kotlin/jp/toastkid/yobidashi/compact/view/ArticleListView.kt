@@ -7,6 +7,8 @@ import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Desktop
 import java.awt.Dimension
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import java.io.File
 import javax.swing.JList
 import javax.swing.JScrollPane
@@ -22,6 +24,15 @@ class ArticleListView {
 
     init {
         view = initializeView()
+
+        view.addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent?) {
+                if (e?.clickCount ?: 0 >= 2) {
+                    view.selectedValue?.open()
+                }
+            }
+        })
+
         scrollPane.viewport.view = view
         scrollPane.preferredSize = Dimension(400, 800)
     }
