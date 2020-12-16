@@ -205,7 +205,6 @@ class CalendarPanel : JPanel() {
 
 fun main() {
     val frame = JFrame("Calender")
-    //      frame.setSize(400,600);
     frame.add(CalendarPanel())
     frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     frame.pack()
