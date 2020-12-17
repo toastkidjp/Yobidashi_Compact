@@ -45,12 +45,6 @@ class AggregationMenuItemGeneratorService {
                     }
 
                     val table = AggregationResultTableFactoryService().invoke(result)
-                    /*JOptionPane.showMessageDialog(
-                            null,
-                            table,
-                            "$keyword ${result.resultTitleSuffix()}",
-                            JOptionPane.PLAIN_MESSAGE
-                    )*/
                     SubjectPool.addNewTab(table, "$keyword ${result.resultTitleSuffix()}")
                 } catch (e: Exception) {
                     e.printStackTrace()
