@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.editor
 import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.finder.FinderAreaView
 import jp.toastkid.yobidashi.compact.editor.model.Editing
+import jp.toastkid.yobidashi.compact.editor.service.ArticleContentLoaderService
 import jp.toastkid.yobidashi.compact.editor.service.CommandReceiverService
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
