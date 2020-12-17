@@ -21,9 +21,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(toTableMenu)
 
-        val blockQuotationMenu = JMenuItem()
-        blockQuotationMenu.action = object : AbstractAction("Block quote") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val blockQuotationMenu = JMenuItem("Block quote").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.BLOCKQUOTE)
                 }
