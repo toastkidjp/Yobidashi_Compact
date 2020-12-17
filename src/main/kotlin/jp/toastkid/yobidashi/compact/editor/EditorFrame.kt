@@ -94,7 +94,7 @@ class EditorFrame {
 
         resetFrameTitle()
 
-        val text = ArticleContentLoaderUseCase().invoke(article)
+        val text = ArticleContentLoaderService().invoke(article)
         editorAreaView.setText(text)
         editing.setCurrentSize(text.length)
         setStatus("Character: ${text.length}")
