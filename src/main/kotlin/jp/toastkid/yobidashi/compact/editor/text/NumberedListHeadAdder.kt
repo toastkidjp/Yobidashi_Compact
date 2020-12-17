@@ -12,7 +12,7 @@ class NumberedListHeadAdder {
 
         return text.split("\n")
                 .mapIndexed { index, s -> "${index + 1}. $s" }
-                .reduceRightIndexed { index, s, acc -> "$s\n$acc" }
+                .reduceRight { s, acc -> "$s\n$acc" }
     }
 
 }
