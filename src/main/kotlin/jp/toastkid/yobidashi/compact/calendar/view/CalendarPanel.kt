@@ -200,7 +200,6 @@ class CalendarPanel : JPanel() {
         private val BORDER = LineBorder(Color(220, 220, 220, 220), 2, false)
 
         private val TODAY_BG: Color = Color(220, 220, 255)
-        private val TODAY_FG: Color = Color(105, 50, 50)
         private val TODAY_BORDER = LineBorder(Color(50, 50, 175), 2, false)
 
         private val DAY_LABEL_SIZE = Dimension(50, 50)
