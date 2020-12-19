@@ -7,9 +7,12 @@ import java.awt.Desktop
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.net.URI
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
 import javax.swing.JMenu
 import javax.swing.JMenuItem
+import javax.swing.JOptionPane
 import javax.swing.KeyStroke
 
 class ToolMenuView {
@@ -21,6 +24,16 @@ class ToolMenuView {
                 SubjectPool.addNewTab(CalendarPanel(), "Calendar")
             }
             it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK)
+        })
+        menu.add(JMenuItem("Web search").also {
+            it.addActionListener {
+                val input = JOptionPane.showInputDialog("Please would you input search query?")
+                if (input.isNullOrBlank()) {
+                    return@addActionListener
+                }
+                Desktop.getDesktop().browse(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(input, StandardCharsets.UTF_8.name())}"))
+            }
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK)
         })
         menu.add(JMenuItem("What happened today").also {
             it.addActionListener {
