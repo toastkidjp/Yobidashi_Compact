@@ -47,6 +47,11 @@ class ToolMenuView {
                 Desktop.getDesktop().browse(URI("https://kids.yahoo.co.jp/today/"))
             }
         })
+        menu.add(JMenuItem("Google Trends").also {
+            it.addActionListener {
+                Desktop.getDesktop().browse(URI("https://trends.google.co.jp/trends/trendingsearches/realtime"))
+            }
+        })
         return menu
     }
 
