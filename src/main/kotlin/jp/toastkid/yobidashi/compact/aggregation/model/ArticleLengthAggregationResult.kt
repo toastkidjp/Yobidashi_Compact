@@ -8,7 +8,7 @@ class ArticleLengthAggregationResult : AggregationResult {
         map.put(key, value)
     }
 
-    fun sum() = map.values.sum()
+    private fun sum() = map.values.sum()
 
     override fun header(): Array<Any> =
             arrayOf("Title", "Length")
