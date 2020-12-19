@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact.editor
+package jp.toastkid.yobidashi.compact.editor.service
 
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -7,6 +7,7 @@ import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.unmockkAll
 import io.mockk.verify
+import jp.toastkid.yobidashi.compact.editor.EditorFrame
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import org.junit.jupiter.api.AfterEach

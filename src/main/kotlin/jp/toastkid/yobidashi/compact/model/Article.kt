@@ -1,6 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
-import jp.toastkid.yobidashi.compact.editor.OpenEditorService
+import jp.toastkid.yobidashi.compact.editor.service.OpenEditorService
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files

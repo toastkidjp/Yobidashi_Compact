@@ -1,5 +1,6 @@
-package jp.toastkid.yobidashi.compact.editor
+package jp.toastkid.yobidashi.compact.editor.service
 
+import jp.toastkid.yobidashi.compact.editor.EditorFrame
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.awt.Desktop
