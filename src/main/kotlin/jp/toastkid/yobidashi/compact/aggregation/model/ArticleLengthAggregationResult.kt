@@ -5,7 +5,7 @@ class ArticleLengthAggregationResult : AggregationResult {
     private val map: MutableMap<String, Long> = hashMapOf()
 
     fun put(key: String, value: Long) {
-        map.put(key, value)
+        map[key] = value
     }
 
     private fun sum() = map.values.sum()
