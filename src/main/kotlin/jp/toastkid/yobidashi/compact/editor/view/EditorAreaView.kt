@@ -1,5 +1,6 @@
-package jp.toastkid.yobidashi.compact.editor
+package jp.toastkid.yobidashi.compact.editor.view
 
+import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.finder.FinderService
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer

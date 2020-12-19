@@ -1,6 +1,6 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
-import jp.toastkid.yobidashi.compact.editor.EditorAreaView
+import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.TableFormConverter
 import jp.toastkid.yobidashi.compact.editor.model.Editing

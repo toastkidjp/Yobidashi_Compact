@@ -1,5 +1,6 @@
-package jp.toastkid.yobidashi.compact.editor
+package jp.toastkid.yobidashi.compact.editor.view
 
+import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.model.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

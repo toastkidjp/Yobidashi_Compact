@@ -5,6 +5,8 @@ import jp.toastkid.yobidashi.compact.editor.finder.FinderAreaView
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.service.ArticleContentLoaderService
 import jp.toastkid.yobidashi.compact.editor.service.CommandReceiverService
+import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
+import jp.toastkid.yobidashi.compact.editor.view.MenubarView
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
