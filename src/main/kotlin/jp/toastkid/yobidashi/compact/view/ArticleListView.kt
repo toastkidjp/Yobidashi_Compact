@@ -7,6 +7,8 @@ import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Desktop
 import java.awt.Dimension
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.io.File
@@ -25,6 +27,14 @@ class ArticleListView {
     init {
         view = initializeView()
 
+        view.addKeyListener(object : KeyAdapter() {
+            override fun keyPressed(e: KeyEvent?) {
+                super.keyPressed(e)
+                if (e?.keyCode == KeyEvent.VK_ENTER) {
+                    view.selectedValue?.open()
+                }
+            }
+        })
         view.addMouseListener(object : MouseAdapter() {
             override fun mouseClicked(e: MouseEvent?) {
                 if (e?.clickCount ?: 0 >= 2) {
