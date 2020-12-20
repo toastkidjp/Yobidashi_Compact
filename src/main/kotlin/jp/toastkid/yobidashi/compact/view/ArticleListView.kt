@@ -79,7 +79,10 @@ class ArticleListView {
     }
 
     fun counts(): String? {
-        val selectedArticles = view.selectedValuesList ?: return null
+        val selectedArticles = view.selectedValuesList
+        if (selectedArticles.isNullOrEmpty()) {
+            return null
+        }
         return selectedArticles
                 .map { "${it.getTitle()}: ${it.count()}" }
                 .reduce { base, item -> "$base${System.lineSeparator()}$item" }
