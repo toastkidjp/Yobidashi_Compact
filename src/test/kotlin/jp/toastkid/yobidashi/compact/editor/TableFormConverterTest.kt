@@ -26,8 +26,9 @@ class TableFormConverterTest {
 
     @Test
     fun test() {
-        TableFormConverter().invoke(text).split("\n")
+        TableFormConverter().invoke(text).trim().split("\n")
                 .forEach {
+                    println(it)
                     assertTrue(it.startsWith("| "))
                     assertTrue(it.contains("分 | "))
                 }
