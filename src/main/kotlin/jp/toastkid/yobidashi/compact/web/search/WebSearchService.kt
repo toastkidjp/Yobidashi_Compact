@@ -21,7 +21,7 @@ class WebSearchService(private val urlOpenerService: UrlOpenerService = UrlOpene
         if (input.isNullOrBlank()) {
             return
         }
-        (searchSiteSelector.selectedItem as? SearchSite)?.make(input)?.let { uri -> urlOpenerService(uri) }
+        (searchSiteSelector.selectedItem as? SearchSite)?.make(input)?.let(urlOpenerService::invoke)
     }
 
     companion object {
