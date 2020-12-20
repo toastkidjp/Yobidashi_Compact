@@ -16,7 +16,7 @@ object SubjectPool {
 
     private val pool: Channel<Pair<ArticleListView, String>> = Channel()
 
-    fun next(component: ArticleListView, title: String) {
+    fun sendSearchResult(component: ArticleListView, title: String) {
         CoroutineScope(Dispatchers.Default).launch { pool.send(component to title) }
     }
 
