@@ -14,7 +14,7 @@ class WebSearchService(private val urlOpenerService: UrlOpenerService = UrlOpene
         val searchSiteSelector = SearchSiteSelectorFactory().invoke()
         val content = JPanel().also { panel ->
             panel.layout = BoxLayout(panel, BoxLayout.Y_AXIS)
-            panel.add(JLabel("Please would you input search query?"))
+            panel.add(JLabel(MESSAGE))
             panel.add(searchSiteSelector)
         }
         val input = JOptionPane.showInputDialog(content)
@@ -22,6 +22,10 @@ class WebSearchService(private val urlOpenerService: UrlOpenerService = UrlOpene
             return
         }
         (searchSiteSelector.selectedItem as? SearchSite)?.make(input)?.let { uri -> urlOpenerService(uri) }
+    }
+
+    companion object {
+        private const val MESSAGE = "Please would you input search query?"
     }
 
 }
