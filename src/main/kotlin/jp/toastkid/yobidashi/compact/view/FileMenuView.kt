@@ -39,6 +39,13 @@ class FileMenuView {
         }
         fileMenu.add(item)
 
+        fileMenu.add(JMenuItem("Count characters").also {
+            it.addActionListener {
+                SubjectPool.countCharacters()
+            }
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK)
+        })
+
         fileMenu.add(makeSwitchInternalBrowserMenu())
 
         fileMenu.add(makeExit())

@@ -100,9 +100,7 @@ class MainFrame(title: String) {
         val countButton = JButton()
         countButton.action = object : AbstractAction() {
             override fun actionPerformed(e: ActionEvent?) {
-                tabs.get(tabPane.selectedIndex).counts()?.also {
-                    JOptionPane.showConfirmDialog(frame, it)
-                }
+                countArticleCharacters(tabPane)
             }
         }
         countButton.text = "Count"
@@ -142,6 +140,10 @@ class MainFrame(title: String) {
             SwingUtilities.updateComponentTreeUI(it)
         }
 
+        SubjectPool.observeCountCharacters {
+            countArticleCharacters(tabPane)
+        }
+
         ZipViewModel.observe {
             tabs.get(tabPane.selectedIndex).zip()
         }
@@ -149,6 +151,12 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 600)
+    }
+
+    private fun countArticleCharacters(tabPane: JTabbedPane) {
+        tabs.get(tabPane.selectedIndex).counts()?.also {
+            JOptionPane.showConfirmDialog(frame, it)
+        }
     }
 
     private fun addNewTab(tabPane: JTabbedPane, component: JComponent, title: String) {
