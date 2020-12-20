@@ -4,15 +4,18 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.calendar.view.CalendarPanel
 import jp.toastkid.yobidashi.compact.service.DateArticleUrlFactoryService
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
+import jp.toastkid.yobidashi.compact.web.search.model.SearchSite
+import jp.toastkid.yobidashi.compact.web.search.view.SearchSiteSelectorFactory
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.net.URI
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
+import javax.swing.BoxLayout
+import javax.swing.JLabel
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
+import javax.swing.JPanel
 import javax.swing.KeyStroke
 
 class ToolMenuView(private val urlOpenerService: UrlOpenerService = UrlOpenerService()) {
@@ -29,11 +32,17 @@ class ToolMenuView(private val urlOpenerService: UrlOpenerService = UrlOpenerSer
 
         menu.add(JMenuItem("Web search").also {
             it.addActionListener {
-                val input = JOptionPane.showInputDialog("Please would you input search query?")
+                val searchSiteSelector = SearchSiteSelectorFactory().invoke()
+                val content = JPanel().also { panel ->
+                    panel.layout = BoxLayout(panel, BoxLayout.Y_AXIS)
+                    panel.add(JLabel("Please would you input search query?"))
+                    panel.add(searchSiteSelector)
+                }
+                val input = JOptionPane.showInputDialog(content)
                 if (input.isNullOrBlank()) {
                     return@addActionListener
                 }
-                urlOpenerService(URI("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(input, StandardCharsets.UTF_8.name())}"))
+                (searchSiteSelector.selectedItem as? SearchSite)?.make(input)?.let { uri -> urlOpenerService(uri) }
             }
             it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK)
         })
