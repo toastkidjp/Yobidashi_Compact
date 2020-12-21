@@ -15,15 +15,12 @@ import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
 import java.awt.BorderLayout
 import java.awt.Dimension
-import java.awt.event.ActionEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.stream.Collectors
 import javax.imageio.ImageIO
-import javax.swing.AbstractAction
-import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JOptionPane
@@ -85,35 +82,10 @@ class MainFrame(title: String) {
         })
         searchInput.preferredSize = Dimension(600, 40)
 
-        val buttons = JPanel()
-        val openButton = JButton()
-        openButton.action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent?) {
-                tabs.get(tabPane.selectedIndex).openCurrentArticle()
-            }
-        }
-        openButton.text = "Open"
-        openButton.preferredSize = Dimension(100, 40)
-        openButton.setMnemonic(KeyEvent.VK_O)
-        buttons.add(openButton)
-
-        val countButton = JButton()
-        countButton.action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent?) {
-                countArticleCharacters(tabPane)
-            }
-        }
-        countButton.text = "Count"
-        countButton.preferredSize = Dimension(100, 40)
-        countButton.setMnemonic(KeyEvent.VK_C)
-        buttons.add(countButton)
-        buttons.preferredSize = Dimension(300, 60)
-
         val panel = JPanel()
         panel.layout = BorderLayout()
         panel.add(searchInput, BorderLayout.NORTH)
         panel.add(tabPane, BorderLayout.CENTER)
-        panel.add(buttons, BorderLayout.SOUTH)
 
         SubjectPool.observeNewSearchResult { component, title ->
             addNewTab(tabPane, component.view(), title)
