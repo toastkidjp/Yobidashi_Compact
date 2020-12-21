@@ -46,18 +46,16 @@ class FileMenuView {
             it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK)
         })
 
-        fileMenu.add(makeSwitchInternalBrowserMenu())
+        fileMenu.add(
+                JCheckBoxMenuItem("Use internal editor", Setting.useInternalEditor()).also { checkbox ->
+                    checkbox.addActionListener {
+                        Setting.setUseInternalEditor(checkbox.isSelected)
+                    }
+                }
+        )
 
         fileMenu.add(makeExit())
         return fileMenu
-    }
-
-    private fun makeSwitchInternalBrowserMenu(): JCheckBoxMenuItem {
-        return JCheckBoxMenuItem("Use internal editor", Setting.useInternalEditor()).also { checkbox ->
-            checkbox.addActionListener {
-                Setting.setUseInternalEditor(checkbox.isSelected)
-            }
-        }
     }
 
     private fun makeExit(): JMenuItem {
