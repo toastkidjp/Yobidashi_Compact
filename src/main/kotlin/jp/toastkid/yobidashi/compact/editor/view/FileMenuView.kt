@@ -19,12 +19,14 @@ class FileMenuView(private val channel: Channel<MenuCommand>) {
         val fileMenu = JMenu("File(F)")
         fileMenu.setMnemonic('F')
 
-        val item = JMenuItem("Open folder")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK)
-        item.addActionListener {
-            Desktop.getDesktop().open(Setting.articleFolderFile())
-        }
-        fileMenu.add(item)
+        fileMenu.add(
+                JMenuItem("Open folder").also {
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK)
+                    it.addActionListener {
+                        Desktop.getDesktop().open(Setting.articleFolderFile())
+                    }
+                }
+        )
 
         val saveItem = JMenuItem("Save")
         saveItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK)
