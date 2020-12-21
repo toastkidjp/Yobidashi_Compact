@@ -50,8 +50,9 @@ class ArticleListView {
     fun view() = scrollPane
 
     private fun initializeView(): JList<Article> {
-        val list = JList(fileListModel)
-        list.cellRenderer = ArticleCellRenderer()
+        val list = JList(fileListModel).also {
+            it.cellRenderer = ArticleCellRenderer()
+        }
         return list
     }
 
