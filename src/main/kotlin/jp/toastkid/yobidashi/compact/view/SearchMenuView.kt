@@ -68,7 +68,7 @@ class SearchMenuView {
         val panel = JPanel()
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
         val fileFilter = JTextField()
-        fileFilter.preferredSize = Dimension(100, 36)
+        fileFilter.preferredSize = Dimension(100, 24)
         panel.add(JLabel("Please would you input search query."))
         panel.add(JLabel("Title filter"))
         panel.add(fileFilter)
