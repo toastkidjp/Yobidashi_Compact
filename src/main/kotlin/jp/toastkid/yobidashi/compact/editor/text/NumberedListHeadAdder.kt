@@ -10,9 +10,9 @@ class NumberedListHeadAdder {
             return text
         }
 
-        return text.split("\n")
+        return text.trimEnd().split("\n")
                 .mapIndexed { index, s -> "${index + 1}. $s" }
-                .reduceRight { s, acc -> "$s\n$acc" }
+                .reduceRight { s, acc -> "$s\n$acc" } + "\n"
     }
 
 }
