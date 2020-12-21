@@ -30,9 +30,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(blockQuotationMenu)
 
-        val hyphenListMenu = JMenuItem()
-        hyphenListMenu.action = object : AbstractAction("Unordered list") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val hyphenListMenu = JMenuItem("Unordered list").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.UNORDERED_LIST)
                 }
