@@ -20,6 +20,12 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
 
         val current = Setting.lookAndFeel() ?: UIManager.getLookAndFeel().javaClass.canonicalName
 
+        loadDefaultLookAndFeels(current, menu)
+
+        return menu
+    }
+
+    private fun loadDefaultLookAndFeels(current: String?, menu: JMenu) {
         val group = ButtonGroup()
 
         UIManager.getInstalledLookAndFeels()
@@ -28,8 +34,6 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
                     group.add(it)
                     menu.add(it)
                 }
-
-        return menu
     }
 
     private fun toMenuItem(it: UIManager.LookAndFeelInfo, current: String?, group: ButtonGroup): JRadioButtonMenuItem {
