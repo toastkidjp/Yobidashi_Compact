@@ -13,6 +13,7 @@ class MenubarView(private val channel: Channel<MenuCommand>) {
 
         menuBar.add(FileMenuView(channel).invoke())
         menuBar.add(EditMenuView(channel).invoke())
+        menuBar.add(AppearanceMenuView(channel).invoke())
         menuBar.add(LookAndFeelMenuView { frame }())
         return menuBar
     }
