@@ -18,14 +18,16 @@ class ColorSettingService {
         constraints.gridy = 0
 
         val sample = JLabel("あアA1@亜")
-        content.add(sample, constraints)
+        val sampleBackground = JPanel().also { it.add(sample) }
+        content.add(sampleBackground, constraints)
 
         constraints.gridx = 1
         val backgroundChooserButton = JButton("Background color").also {
             it.addActionListener {
                 val color = ColorChooserService().invoke() ?: return@addActionListener
                 Setting.setEditorBackgroundColor(color)
-                sample.background = color
+                Setting.save()
+                sampleBackground.background = color
             }
         }
         content.add(backgroundChooserButton, constraints)
