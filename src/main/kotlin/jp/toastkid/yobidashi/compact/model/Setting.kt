@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
+import java.awt.Color
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -58,6 +59,14 @@ object Setting {
 
     fun useCaseSensitiveInFinder(): Boolean {
         return properties.getProperty("use_case_sensitive")?.toBoolean() ?: false
+    }
+
+    fun setEditorBackgroundColor(color: Color) {
+        properties.setProperty("editor_background_color", Integer.toHexString(color.rgb))
+    }
+
+    fun editorBackgroundColor(): Color {
+        return Color.getColor(properties.getProperty("editor_background_color")) ?: Color(225, 225, 225, 255)
     }
 
     fun save() {
