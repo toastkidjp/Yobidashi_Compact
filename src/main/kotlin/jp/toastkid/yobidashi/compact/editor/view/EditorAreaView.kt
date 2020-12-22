@@ -35,7 +35,6 @@ class EditorAreaView(
 
     init {
         val editorBackgroundColor = Setting.editorBackgroundColor()
-        println("${editorBackgroundColor}")
         editorArea.background = editorBackgroundColor
         editorArea.addHyperlinkListener {
             if (it.eventType != HyperlinkEvent.EventType.ACTIVATED) {
