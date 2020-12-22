@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.finder.FinderService
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
 import jp.toastkid.yobidashi.compact.editor.service.KeyboardShortcutService
+import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +34,9 @@ class EditorAreaView(
     private val finderService by lazy { FinderService(editorArea, messageChannel) }
 
     init {
-        editorArea.background = BACKGROUND_COLOR
+        val editorBackgroundColor = Setting.editorBackgroundColor()
+        println("${editorBackgroundColor}")
+        editorArea.background = editorBackgroundColor
         editorArea.addHyperlinkListener {
             if (it.eventType != HyperlinkEvent.EventType.ACTIVATED) {
                 return@addHyperlinkListener
