@@ -89,13 +89,13 @@ class CalendarPanel : JPanel() {
         dayPanel.layout = layout
 
         val dayOfWeekLabelFactory = DayOfWeekLabelFactory(DAY_LABEL_SIZE)
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.SUNDAY))
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.MONDAY))
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.TUESDAY))
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.WEDNESDAY))
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.THURSDAY))
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.FRIDAY))
-        dayPanel.add(dayOfWeekLabelFactory.invoke(DayOfWeek.SATURDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.SUNDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.MONDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.TUESDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.WEDNESDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.THURSDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.FRIDAY))
+        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.SATURDAY))
 
         val dayLabelFactory = DayLabelFactory(DAY_LABEL_SIZE)
 
