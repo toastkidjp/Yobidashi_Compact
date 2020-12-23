@@ -34,8 +34,7 @@ class EditorAreaView(
     private val finderService by lazy { FinderService(editorArea, messageChannel) }
 
     init {
-        val editorBackgroundColor = Setting.editorBackgroundColor()
-        editorArea.background = editorBackgroundColor
+        editorArea.background = Setting.editorBackgroundColor()
         editorArea.addHyperlinkListener {
             if (it.eventType != HyperlinkEvent.EventType.ACTIVATED) {
                 return@addHyperlinkListener
