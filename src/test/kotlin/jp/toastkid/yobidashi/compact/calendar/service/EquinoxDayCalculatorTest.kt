@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact.calendar.model
+package jp.toastkid.yobidashi.compact.calendar.service
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach

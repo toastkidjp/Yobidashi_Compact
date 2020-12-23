@@ -1,6 +1,5 @@
 package jp.toastkid.yobidashi.compact.calendar.service
 
-import jp.toastkid.yobidashi.compact.calendar.model.EquinoxDayCalculator
 import jp.toastkid.yobidashi.compact.calendar.model.FixedJapaneseHoliday
 
 class OffDayFinderService(
