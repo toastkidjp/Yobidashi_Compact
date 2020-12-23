@@ -35,10 +35,12 @@ class FileMenuView(private val channel: Channel<MenuCommand>) {
                 }
         )
 
-        val closeItem = JMenuItem("Close")
-        closeItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK)
-        closeItem.addActionListener { CoroutineScope(Dispatchers.Default).launch { channel.send(MenuCommand.CLOSE) } }
-        fileMenu.add(closeItem)
+        fileMenu.add(
+                JMenuItem("Close").also {
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK)
+                    it.addActionListener { CoroutineScope(Dispatchers.Default).launch { channel.send(MenuCommand.CLOSE) } }
+                }
+        )
 
         return fileMenu
     }
