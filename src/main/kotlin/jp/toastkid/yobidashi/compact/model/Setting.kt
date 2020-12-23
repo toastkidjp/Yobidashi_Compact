@@ -67,9 +67,8 @@ object Setting {
     }
 
     fun editorBackgroundColor(): Color {
-        val argbColorCode = properties.getProperty("editor_background_color")
-                ?: return Color(225, 225, 225, 255)
-        return ColorDecoderService().invoke(argbColorCode) ?: Color(225, 225, 225, 255)
+        return ColorDecoderService().invoke(properties.getProperty("editor_background_color"))
+                ?: Color(225, 225, 225, 255)
     }
 
     fun save() {
