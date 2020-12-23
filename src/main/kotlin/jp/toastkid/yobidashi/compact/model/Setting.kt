@@ -1,8 +1,8 @@
 package jp.toastkid.yobidashi.compact.model
 
+import jp.toastkid.yobidashi.compact.service.ColorDecoderService
 import java.awt.Color
 import java.io.File
-import java.lang.Long
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.Properties
@@ -69,8 +69,7 @@ object Setting {
     fun editorBackgroundColor(): Color {
         val argbColorCode = properties.getProperty("editor_background_color")
                 ?: return Color(225, 225, 225, 255)
-        val decodable = if (argbColorCode.startsWith("#")) argbColorCode else "#$argbColorCode"
-        return Color(Long.decode(decodable).toInt())
+        return ColorDecoderService().invoke(argbColorCode) ?: Color(225, 225, 225, 255)
     }
 
     fun save() {
