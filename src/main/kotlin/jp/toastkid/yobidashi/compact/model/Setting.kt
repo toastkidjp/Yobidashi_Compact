@@ -71,6 +71,15 @@ object Setting {
                 ?: Color(225, 225, 225, 255)
     }
 
+    fun setEditorForegroundColor(color: Color) {
+        properties.setProperty("editor_foreground_color", Integer.toHexString(color.rgb))
+    }
+
+    fun editorForegroundColor(): Color {
+        return ColorDecoderService().invoke(properties.getProperty("editor_foreground_color"))
+                ?: Color.BLACK
+    }
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
