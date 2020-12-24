@@ -43,10 +43,7 @@ class ColorSettingService {
         }
         content.add(button2, constraints)
 
-        JOptionPane.showConfirmDialog(
-                null,
-                content
-        )
+        JOptionPane.showConfirmDialog(null, content)
     }
 
 }
