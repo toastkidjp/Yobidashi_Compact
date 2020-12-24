@@ -27,7 +27,3 @@ class MovieMemoSubtitleExtractor {
         return result
     }
 }
-
-fun main(args: Array<String>) {
-    MovieMemoSubtitleExtractor().invoke("2020")
-}
