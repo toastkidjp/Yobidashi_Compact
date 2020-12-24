@@ -18,14 +18,14 @@ class LookAndFeelMenuView(private val frameSupplier: () -> JFrame) {
         val menu = JMenu(TITLE)
         menu.setMnemonic('L')
 
-        val current = Setting.lookAndFeel() ?: UIManager.getLookAndFeel().javaClass.canonicalName
-
-        loadDefaultLookAndFeels(current, menu)
+        loadDefaultLookAndFeels(menu)
 
         return menu
     }
 
-    private fun loadDefaultLookAndFeels(current: String?, menu: JMenu) {
+    private fun loadDefaultLookAndFeels(menu: JMenu) {
+        val current = Setting.lookAndFeel() ?: UIManager.getLookAndFeel().javaClass.canonicalName
+
         val group = ButtonGroup()
 
         UIManager.getInstalledLookAndFeels()
