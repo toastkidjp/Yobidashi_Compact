@@ -32,6 +32,17 @@ class ColorSettingService {
         }
         content.add(backgroundChooserButton, constraints)
 
+        constraints.gridy = 1
+        val button2 = JButton("Font color").also {
+            it.addActionListener {
+                val color = ColorChooserService().invoke() ?: return@addActionListener
+                Setting.setEditorForegroundColor(color)
+                Setting.save()
+                sampleBackground.foreground = color
+            }
+        }
+        content.add(button2, constraints)
+
         JOptionPane.showConfirmDialog(
                 null,
                 content
