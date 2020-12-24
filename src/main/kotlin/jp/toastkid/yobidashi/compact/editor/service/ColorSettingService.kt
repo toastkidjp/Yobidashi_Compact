@@ -17,7 +17,7 @@ class ColorSettingService {
         constraints.gridx = 0
         constraints.gridy = 0
 
-        val sample = JLabel("あアA1@亜")
+        val sample = JLabel(SAMPLE_TEXT)
         val sampleBackground = JPanel().also { it.add(sample) }
         content.add(sampleBackground, constraints)
 
@@ -46,4 +46,9 @@ class ColorSettingService {
         JOptionPane.showConfirmDialog(null, content)
     }
 
+    companion object {
+
+        private const val SAMPLE_TEXT = "あアA1@亜"
+
+    }
 }
