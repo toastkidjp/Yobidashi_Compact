@@ -95,6 +95,16 @@ object Setting {
         return properties.getProperty("editor_font_family")
     }
 
+    fun setEditorFontSize(size: Int?) {
+        size?.let {
+            properties.setProperty("editor_font_size", size.toString())
+        }
+    }
+
+    fun editorFontSize(): Int {
+        return properties.getProperty("editor_font_size")?.toIntOrNull() ?: 14
+    }
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }

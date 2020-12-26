@@ -76,6 +76,18 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         }
         content.add(spinner, constraints)
 
+        constraints.gridx = 2
+        constraints.gridy = 1
+        val sizeSpinner = JComboBox<Int>()
+        (9 .. 20).forEach {
+            sizeSpinner.addItem(it)
+        }
+        sizeSpinner.addItemListener {
+            Setting.setEditorFontSize(Integer.parseInt(it.item?.toString()))
+            applyColorSetting()
+        }
+        content.add(sizeSpinner, constraints)
+
         JOptionPane.showConfirmDialog(null, content)
     }
 

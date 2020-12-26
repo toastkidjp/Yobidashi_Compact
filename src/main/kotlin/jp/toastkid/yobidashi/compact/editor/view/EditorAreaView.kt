@@ -141,8 +141,9 @@ class EditorAreaView(
         editorArea.foreground = Setting.editorForegroundColor()
         editorArea.background = Setting.editorBackgroundColor()
         val editorFontFamily = Setting.editorFontFamily() ?: return
+        val fontSize = Setting.editorFontSize()
         val font = try {
-            Font(editorFontFamily, editorArea.font.style, editorArea.font.size)
+            Font(editorFontFamily, editorArea.font.style, fontSize)
         } catch (e: Exception) {
             e.printStackTrace()
             null
