@@ -21,13 +21,24 @@ class ColorSettingService {
         val sampleBackground = JPanel().also { it.add(sample) }
         content.add(sampleBackground, constraints)
 
+        constraints.gridy = 1
+        val contrastRatioLabel = JLabel()
+        content.add(contrastRatioLabel, constraints)
+
+        val contrastRatioCalculatorService = ContrastRatioCalculatorService()
+        contrastRatioLabel.text =
+                "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
+
         constraints.gridx = 1
+        constraints.gridy = 0
         val backgroundChooserButton = JButton("Background color").also {
             it.addActionListener {
                 val color = ColorChooserService().invoke() ?: return@addActionListener
                 Setting.setEditorBackgroundColor(color)
                 Setting.save()
                 sampleBackground.background = color
+                contrastRatioLabel.text =
+                        "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
             }
         }
         content.add(backgroundChooserButton, constraints)
@@ -39,6 +50,8 @@ class ColorSettingService {
                 Setting.setEditorForegroundColor(color)
                 Setting.save()
                 sampleBackground.foreground = color
+                contrastRatioLabel.text =
+                        "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
             }
         }
         content.add(button2, constraints)
