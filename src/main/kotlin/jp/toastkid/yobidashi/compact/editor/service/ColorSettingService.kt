@@ -12,6 +12,8 @@ import javax.swing.JTextField
 
 class ColorSettingService {
 
+    private val sample = JTextField(SAMPLE_TEXT)
+
     operator fun invoke() {
         val content = JPanel()
         content.layout = GridBagLayout()
@@ -19,10 +21,7 @@ class ColorSettingService {
         constraints.gridx = 0
         constraints.gridy = 0
 
-        val sample = JTextField(SAMPLE_TEXT)
         sample.isEditable = false
-        sample.foreground = Setting.editorForegroundColor()
-        sample.background = Setting.editorBackgroundColor()
         content.add(sample, constraints)
 
         constraints.gridy = 1
@@ -30,8 +29,7 @@ class ColorSettingService {
         content.add(contrastRatioLabel, constraints)
 
         val contrastRatioCalculatorService = ContrastRatioCalculatorService()
-        contrastRatioLabel.text =
-                "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
+        applyColorSetting(contrastRatioLabel, contrastRatioCalculatorService)
 
         constraints.gridx = 1
         constraints.gridy = 0
@@ -56,15 +54,19 @@ class ColorSettingService {
         val button = JButton("Reset color setting").also {
             it.addActionListener {
                 Setting.resetEditorColorSetting()
-                sample.foreground = Setting.editorForegroundColor()
-                sample.background = Setting.editorBackgroundColor()
-                contrastRatioLabel.text =
-                        "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
+                applyColorSetting(contrastRatioLabel, contrastRatioCalculatorService)
             }
         }
         content.add(button, constraints)
 
         JOptionPane.showConfirmDialog(null, content)
+    }
+
+    private fun applyColorSetting(contrastRatioLabel: JLabel, contrastRatioCalculatorService: ContrastRatioCalculatorService) {
+        sample.foreground = Setting.editorForegroundColor()
+        sample.background = Setting.editorBackgroundColor()
+        contrastRatioLabel.text =
+                "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
     }
 
     private fun makeFontColorButton(
