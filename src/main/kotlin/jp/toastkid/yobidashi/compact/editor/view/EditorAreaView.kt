@@ -137,6 +137,11 @@ class EditorAreaView(
         editorArea.isEditable = editorArea.isEditable.not()
     }
 
+    fun refresh() {
+        editorArea.foreground = Setting.editorForegroundColor()
+        editorArea.background = Setting.editorBackgroundColor()
+    }
+
     companion object {
 
         private const val DEFAULT_FONT_SIZE = 14f
