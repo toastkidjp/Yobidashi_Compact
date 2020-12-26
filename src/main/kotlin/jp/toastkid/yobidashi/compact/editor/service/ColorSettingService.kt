@@ -51,6 +51,19 @@ class ColorSettingService {
         val button2 = makeFontColorButton(sample, contrastRatioLabel, contrastRatioCalculatorService)
         content.add(button2, constraints)
 
+        constraints.gridx = 1
+        constraints.gridy = 2
+        val button = JButton("Reset color setting").also {
+            it.addActionListener {
+                Setting.resetEditorColorSetting()
+                sample.foreground = Setting.editorForegroundColor()
+                sample.background = Setting.editorBackgroundColor()
+                contrastRatioLabel.text =
+                        "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
+            }
+        }
+        content.add(button, constraints)
+
         JOptionPane.showConfirmDialog(null, content)
     }
 
