@@ -20,6 +20,8 @@ class ColorSettingService {
         constraints.gridy = 0
 
         val sample = JTextField(SAMPLE_TEXT)
+        sample.foreground = Setting.editorForegroundColor()
+        sample.background = Setting.editorBackgroundColor()
         content.add(sample, constraints)
 
         constraints.gridy = 1
