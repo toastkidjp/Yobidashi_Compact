@@ -1,12 +1,12 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
-import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.TableFormConverter
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
+import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.Dispatchers
@@ -139,6 +139,9 @@ class CommandReceiverService(
                         return@collect
                     }
                     urlOpenerService("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}&op=translate")
+                }
+                MenuCommand.REFRESH -> {
+                    editorAreaView.refresh()
                 }
             }
         }

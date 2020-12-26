@@ -1,6 +1,11 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
+import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.model.Setting
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.JButton
@@ -10,7 +15,7 @@ import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class ColorSettingService {
+class ColorSettingService(private val channel: Channel<MenuCommand>) {
 
     private val sample = JTextField(SAMPLE_TEXT)
 
@@ -67,6 +72,9 @@ class ColorSettingService {
         sample.background = Setting.editorBackgroundColor()
         contrastRatioLabel.text =
                 "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
+        CoroutineScope(Dispatchers.Default).launch {
+            channel.send(MenuCommand.REFRESH)
+        }
     }
 
     private fun makeFontColorButton(

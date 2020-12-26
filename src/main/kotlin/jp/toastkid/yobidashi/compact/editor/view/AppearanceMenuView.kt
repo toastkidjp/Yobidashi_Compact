@@ -14,10 +14,7 @@ class AppearanceMenuView(private val channel: Channel<MenuCommand>) {
 
         val findItem = JMenuItem("Color")
         findItem.addActionListener {
-            ColorSettingService().invoke()
-            /*CoroutineScope(Dispatchers.Default).launch {
-                channel.send(MenuCommand.FIND)
-            }*/
+            ColorSettingService(channel).invoke()
         }
         menu.add(findItem)
 
