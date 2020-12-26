@@ -14,12 +14,12 @@ class ContrastRatioCalculatorService {
     }
 
     private fun calculateLuminance(color: Color): Float {
-        val a = arrayOf(color.red, color.green, color.blue).map {
+        val colorValueArray = arrayOf(color.red, color.green, color.blue).map {
             var v = it.toFloat()
             v /= 255
             if (v <= 0.03928f) v / 12.92f else ((v + 0.055) / 1.055).pow(2.4).toFloat()
         }
-        return a[0] * 0.2126f + a[1] * 0.7152f + a[2] * 0.0722f
+        return colorValueArray[0] * 0.2126f + colorValueArray[1] * 0.7152f + colorValueArray[2] * 0.0722f
     }
 
 }
