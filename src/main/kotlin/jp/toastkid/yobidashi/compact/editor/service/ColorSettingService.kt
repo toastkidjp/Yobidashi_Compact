@@ -6,9 +6,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import java.awt.GraphicsEnvironment
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.JButton
+import javax.swing.JComboBox
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JOptionPane
@@ -63,6 +65,16 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
             }
         }
         content.add(button, constraints)
+
+        constraints.gridx = 2
+        constraints.gridy = 0
+        val fontFamilyNames = GraphicsEnvironment.getLocalGraphicsEnvironment().availableFontFamilyNames;
+        val spinner = JComboBox<String>()
+        fontFamilyNames.forEach { spinner.addItem(it) }
+        spinner.addItemListener {
+            Setting.setEditorFontFamily(it.item?.toString())
+        }
+        content.add(spinner, constraints)
 
         JOptionPane.showConfirmDialog(null, content)
     }

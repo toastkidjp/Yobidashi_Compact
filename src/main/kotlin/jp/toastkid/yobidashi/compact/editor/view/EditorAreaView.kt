@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Color
+import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.JComponent
@@ -139,6 +140,14 @@ class EditorAreaView(
     fun refresh() {
         editorArea.foreground = Setting.editorForegroundColor()
         editorArea.background = Setting.editorBackgroundColor()
+        val editorFontFamily = Setting.editorFontFamily() ?: return
+        val font = try {
+            Font(editorFontFamily, editorArea.font.style, editorArea.font.size)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        } ?: return
+        editorArea.font = font
     }
 
     companion object {

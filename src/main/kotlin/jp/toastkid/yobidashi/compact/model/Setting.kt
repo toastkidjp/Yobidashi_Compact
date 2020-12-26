@@ -85,6 +85,16 @@ object Setting {
         properties.remove("editor_background_color")
     }
 
+    fun setEditorFontFamily(fontFamily: String?) {
+        fontFamily?.let {
+            properties.setProperty("editor_font_family", it)
+        }
+    }
+
+    fun editorFontFamily(): String? {
+        return properties.getProperty("editor_font_family")
+    }
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
