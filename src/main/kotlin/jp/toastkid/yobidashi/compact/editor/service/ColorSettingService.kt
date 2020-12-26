@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.JButton
+import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JOptionPane
 import javax.swing.JPanel
@@ -44,7 +45,18 @@ class ColorSettingService {
         content.add(backgroundChooserButton, constraints)
 
         constraints.gridy = 1
-        val button2 = JButton("Font color").also {
+        val button2 = makeFontColorButton(sampleBackground, contrastRatioLabel, contrastRatioCalculatorService)
+        content.add(button2, constraints)
+
+        JOptionPane.showConfirmDialog(null, content)
+    }
+
+    private fun makeFontColorButton(
+            sampleBackground: JPanel,
+            contrastRatioLabel: JLabel,
+            contrastRatioCalculatorService: ContrastRatioCalculatorService
+    ): JComponent {
+        return JButton("Font color").also {
             it.addActionListener {
                 val color = ColorChooserService().invoke() ?: return@addActionListener
                 Setting.setEditorForegroundColor(color)
@@ -54,9 +66,6 @@ class ColorSettingService {
                         "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
             }
         }
-        content.add(button2, constraints)
-
-        JOptionPane.showConfirmDialog(null, content)
     }
 
     companion object {
