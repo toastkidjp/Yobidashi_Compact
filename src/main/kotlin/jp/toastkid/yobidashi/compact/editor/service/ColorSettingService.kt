@@ -43,9 +43,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
                 val color = ColorChooserService().invoke() ?: return@addActionListener
                 Setting.setEditorBackgroundColor(color)
                 Setting.save()
-                sample.background = color
-                contrastRatioLabel.text =
-                        "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
+                applyColorSetting(contrastRatioLabel, contrastRatioCalculatorService)
             }
         }
         content.add(backgroundChooserButton, constraints)
