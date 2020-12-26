@@ -19,6 +19,10 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
 
     private val sample = JTextField(SAMPLE_TEXT)
 
+    private val contrastRatioCalculatorService = ContrastRatioCalculatorService()
+
+    private val contrastRatioLabel = JLabel()
+
     operator fun invoke() {
         val content = JPanel()
         content.layout = GridBagLayout()
@@ -30,11 +34,9 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         content.add(sample, constraints)
 
         constraints.gridy = 1
-        val contrastRatioLabel = JLabel()
         content.add(contrastRatioLabel, constraints)
 
-        val contrastRatioCalculatorService = ContrastRatioCalculatorService()
-        applyColorSetting(contrastRatioLabel, contrastRatioCalculatorService)
+        applyColorSetting()
 
         constraints.gridx = 1
         constraints.gridy = 0
@@ -43,7 +45,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
                 val color = ColorChooserService().invoke() ?: return@addActionListener
                 Setting.setEditorBackgroundColor(color)
                 Setting.save()
-                applyColorSetting(contrastRatioLabel, contrastRatioCalculatorService)
+                applyColorSetting()
             }
         }
         content.add(backgroundChooserButton, constraints)
@@ -57,7 +59,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         val button = JButton("Reset color setting").also {
             it.addActionListener {
                 Setting.resetEditorColorSetting()
-                applyColorSetting(contrastRatioLabel, contrastRatioCalculatorService)
+                applyColorSetting()
             }
         }
         content.add(button, constraints)
@@ -65,7 +67,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         JOptionPane.showConfirmDialog(null, content)
     }
 
-    private fun applyColorSetting(contrastRatioLabel: JLabel, contrastRatioCalculatorService: ContrastRatioCalculatorService) {
+    private fun applyColorSetting() {
         sample.foreground = Setting.editorForegroundColor()
         sample.background = Setting.editorBackgroundColor()
         contrastRatioLabel.text =
