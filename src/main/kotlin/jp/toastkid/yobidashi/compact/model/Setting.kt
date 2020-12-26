@@ -80,13 +80,13 @@ object Setting {
                 ?: Color.BLACK
     }
 
-    fun save() {
-        properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
-    }
-
     fun resetEditorColorSetting() {
         properties.remove("editor_foreground_color")
         properties.remove("editor_background_color")
+    }
+
+    fun save() {
+        properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
 
 }
