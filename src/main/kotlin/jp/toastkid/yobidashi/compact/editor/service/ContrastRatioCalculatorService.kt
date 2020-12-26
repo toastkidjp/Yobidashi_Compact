@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import java.awt.Color
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.pow
 
 class ContrastRatioCalculatorService {
@@ -8,8 +10,8 @@ class ContrastRatioCalculatorService {
     operator fun invoke(color1: Color, color2: Color): Float {
         val lum1 = calculateLuminance(color1)
         val lum2 = calculateLuminance(color2)
-        val brighter = Math.max(lum1, lum2)
-        val darker = Math.min(lum1, lum2)
+        val brighter = max(lum1, lum2)
+        val darker = min(lum1, lum2)
         return (brighter + 0.05f) / (darker + 0.05f)
     }
 
