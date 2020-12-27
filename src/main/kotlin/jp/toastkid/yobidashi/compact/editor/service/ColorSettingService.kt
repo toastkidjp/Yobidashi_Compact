@@ -89,7 +89,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         sizeSpinner.selectedItem = Setting.editorFontSize()
         content.add(sizeSpinner, constraints)
 
-        JOptionPane.showConfirmDialog(null, content)
+        JOptionPane.showMessageDialog(null, content)
     }
 
     private fun applyColorSetting() {
