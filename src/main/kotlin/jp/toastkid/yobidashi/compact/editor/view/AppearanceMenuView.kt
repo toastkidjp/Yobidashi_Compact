@@ -12,7 +12,7 @@ class AppearanceMenuView(private val channel: Channel<MenuCommand>) {
         val menu = JMenu("Appearance(A)")
         menu.setMnemonic('A')
 
-        val findItem = JMenuItem("Color")
+        val findItem = JMenuItem("Color & Font")
         findItem.addActionListener {
             ColorSettingService(channel).invoke()
         }
