@@ -46,7 +46,6 @@ class EditorAreaView(
             }
         }
         editorArea.paintTabLines = true
-        editorArea.font = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
         editorArea.addKeyListener(object : KeyListener {
             private val keyboardShortcutService = KeyboardShortcutService(channel)
 
