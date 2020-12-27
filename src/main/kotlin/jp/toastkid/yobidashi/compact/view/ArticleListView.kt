@@ -7,12 +7,17 @@ import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Desktop
 import java.awt.Dimension
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
+import java.awt.event.ActionEvent
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.io.File
+import javax.swing.AbstractAction
 import javax.swing.JList
+import javax.swing.JPopupMenu
 import javax.swing.JScrollPane
 import javax.swing.JTextField
 
@@ -52,6 +57,14 @@ class ArticleListView {
     private fun initializeView(): JList<Article> {
         return JList(fileListModel).also {
             it.cellRenderer = ArticleCellRenderer()
+            it.componentPopupMenu = JPopupMenu()
+            it.componentPopupMenu.add(object : AbstractAction("Copy title") {
+                override fun actionPerformed(e: ActionEvent?) {
+                    Toolkit.getDefaultToolkit().systemClipboard.setContents(
+                            StringSelection(it.model.getElementAt(it.locationToIndex(it.mousePosition)).getTitle())
+                    ) { _, _ -> }
+                }
+            })
         }
     }
 
