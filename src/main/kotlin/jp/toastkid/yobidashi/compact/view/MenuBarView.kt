@@ -9,7 +9,7 @@ class MenuBarView {
         val menuBar = JMenuBar()
 
         menuBar.add(FileMenuView().invoke())
-        menuBar.add(SearchMenuView().invoke())
+        menuBar.add(FindMenuView().invoke())
         menuBar.add(AggregationMenuView().invoke())
         menuBar.add(SortMenuView().invoke())
         menuBar.add(ToolMenuView().invoke())

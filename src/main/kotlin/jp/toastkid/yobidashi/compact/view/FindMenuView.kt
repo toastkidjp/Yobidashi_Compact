@@ -20,7 +20,7 @@ import javax.swing.JPanel
 import javax.swing.JTextField
 import javax.swing.KeyStroke
 
-class SearchMenuView {
+class FindMenuView {
 
     operator fun invoke(): JMenu {
         val menu = JMenu("Search")
