@@ -18,13 +18,9 @@ class SearchSiteSelectorModel : ComboBoxModel<SearchSite> {
         return searchSites[index]
     }
 
-    override fun addListDataListener(l: ListDataListener?) {
-        // NOOP
-    }
+    override fun addListDataListener(l: ListDataListener?) = Unit
 
-    override fun removeListDataListener(l: ListDataListener?) {
-        // NOOP
-    }
+    override fun removeListDataListener(l: ListDataListener?) = Unit
 
     override fun setSelectedItem(anItem: Any?) {
         lastSelected = (anItem as? SearchSite) ?: SearchSite.YAHOO_JAPAN
