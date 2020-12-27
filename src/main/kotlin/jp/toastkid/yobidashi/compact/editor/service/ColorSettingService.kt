@@ -78,15 +78,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
 
         constraints.gridx = 2
         constraints.gridy = 1
-        val sizeSpinner = JComboBox<Int>()
-        (9 .. 20).forEach {
-            sizeSpinner.addItem(it)
-        }
-        sizeSpinner.addItemListener {
-            Setting.setEditorFontSize(Integer.parseInt(it.item?.toString()))
-            applyColorSetting()
-        }
-        sizeSpinner.selectedItem = Setting.editorFontSize()
+        val sizeSpinner = makeSizeSpinner()
         content.add(sizeSpinner, constraints)
 
         JOptionPane.showMessageDialog(null, content)
@@ -115,6 +107,19 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
                 applyColorSetting()
             }
         }
+    }
+
+    private fun makeSizeSpinner(): JComboBox<Int> {
+        val sizeSpinner = JComboBox<Int>()
+        (9..20).forEach {
+            sizeSpinner.addItem(it)
+        }
+        sizeSpinner.addItemListener {
+            Setting.setEditorFontSize(Integer.parseInt(it.item?.toString()))
+            applyColorSetting()
+        }
+        sizeSpinner.selectedItem = Setting.editorFontSize()
+        return sizeSpinner
     }
 
     companion object {
