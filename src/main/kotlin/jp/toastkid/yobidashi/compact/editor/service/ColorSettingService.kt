@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import java.awt.Font
 import java.awt.GraphicsEnvironment
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -88,6 +89,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
     private fun applyColorSetting() {
         sample.foreground = Setting.editorForegroundColor()
         sample.background = Setting.editorBackgroundColor()
+        sample.font = Font(Setting.editorFontFamily(), Font.PLAIN, Setting.editorFontSize())
         contrastRatioLabel.text =
                 "Contrast ratio: ${contrastRatioCalculatorService(Setting.editorBackgroundColor(), Setting.editorForegroundColor())}"
         CoroutineScope(Dispatchers.Default).launch {
