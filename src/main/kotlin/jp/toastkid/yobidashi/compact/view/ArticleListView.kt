@@ -58,22 +58,38 @@ class ArticleListView {
         return JList(fileListModel).also {
             it.cellRenderer = ArticleCellRenderer()
             it.componentPopupMenu = JPopupMenu()
+            var currentFocused: Article? = null
+            it.addMouseListener(object : MouseAdapter() {
+                override fun mousePressed(e: MouseEvent?) {
+                    if (e?.isPopupTrigger != false) {
+                        return
+                    }
+                    currentFocused = it.model.getElementAt(it.locationToIndex(it.mousePosition))
+                }
+
+                override fun mouseReleased(e: MouseEvent?) {
+                    if (e?.isPopupTrigger != false) {
+                        return
+                    }
+                    currentFocused = it.model.getElementAt(it.locationToIndex(it.mousePosition))
+                }
+            })
             it.componentPopupMenu.add(object : AbstractAction("Open") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    getCurrentFocusedItem(it).open()
+                    currentFocused?.open()
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
                 override fun actionPerformed(e: ActionEvent?) {
                     Toolkit.getDefaultToolkit().systemClipboard.setContents(
-                            StringSelection(getCurrentFocusedItem(it).getTitle())
+                            StringSelection(currentFocused?.getTitle())
                     ) { _, _ -> }
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title as internal link") {
                 override fun actionPerformed(e: ActionEvent?) {
                     Toolkit.getDefaultToolkit().systemClipboard.setContents(
-                            StringSelection("[[${getCurrentFocusedItem(it).getTitle()}]]")
+                            StringSelection("[[${currentFocused?.getTitle()}]]")
                     ) { _, _ -> }
                 }
             })
