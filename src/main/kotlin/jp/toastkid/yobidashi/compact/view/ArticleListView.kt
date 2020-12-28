@@ -60,7 +60,7 @@ class ArticleListView {
             it.componentPopupMenu = JPopupMenu()
             it.componentPopupMenu.add(object : AbstractAction("Open") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    it.model.getElementAt(it.locationToIndex(it.mousePosition)).open()
+                    getCurrentFocusedItem(it).open()
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
@@ -73,7 +73,7 @@ class ArticleListView {
             it.componentPopupMenu.add(object : AbstractAction("Copy title as internal link") {
                 override fun actionPerformed(e: ActionEvent?) {
                     Toolkit.getDefaultToolkit().systemClipboard.setContents(
-                            StringSelection("[[${it.model.getElementAt(it.locationToIndex(it.mousePosition)).getTitle()}]]")
+                            StringSelection("[[${getCurrentFocusedItem(it).getTitle()}]]")
                     ) { _, _ -> }
                 }
             })
