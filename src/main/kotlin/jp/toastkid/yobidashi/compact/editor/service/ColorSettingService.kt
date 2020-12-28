@@ -73,6 +73,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         fontFamilyNames.forEach { spinner.addItem(it) }
         spinner.addItemListener {
             Setting.setEditorFontFamily(it.item?.toString())
+            applyColorSetting()
         }
         content.add(spinner, constraints)
 
