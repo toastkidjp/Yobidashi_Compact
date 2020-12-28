@@ -23,7 +23,7 @@ import javax.swing.KeyStroke
 class FindMenuView {
 
     operator fun invoke(): JMenu {
-        val menu = JMenu("Search")
+        val menu = JMenu("Find")
         menu.add(makeMenuItem())
         return menu
     }
@@ -35,7 +35,7 @@ class FindMenuView {
             onAction()
         }
         item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK)
-        item.text = "Search"
+        item.text = "Find article"
         return item
     }
 
@@ -60,7 +60,7 @@ class FindMenuView {
                 JOptionPane.showMessageDialog(null, "Article which contains '$keyword' is not found.")
                 return@launch
             }
-            SubjectPool.sendSearchResult(articleListView, "'$keyword' search result")
+            SubjectPool.sendSearchResult(articleListView, "'$keyword' find result")
         }
     }
 
@@ -69,7 +69,7 @@ class FindMenuView {
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
         val fileFilter = JTextField()
         fileFilter.preferredSize = Dimension(100, 24)
-        panel.add(JLabel("Please would you input search query."))
+        panel.add(JLabel("Please would you input find query."))
         panel.add(JLabel("Title filter"))
         panel.add(fileFilter)
         panel.add(JLabel("Keyword"))
