@@ -16,4 +16,8 @@ enum class SearchSite(val siteName: String, private val searchUrlBase: String) {
         return URI("$searchUrlBase${URLEncoder.encode(rawQuery, StandardCharsets.UTF_8.name())}")
     }
 
+    companion object {
+        fun getDefault() = YAHOO_JAPAN
+    }
+
 }
