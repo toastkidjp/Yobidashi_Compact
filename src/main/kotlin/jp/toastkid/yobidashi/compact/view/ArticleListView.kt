@@ -66,7 +66,7 @@ class ArticleListView {
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
                 override fun actionPerformed(e: ActionEvent?) {
                     Toolkit.getDefaultToolkit().systemClipboard.setContents(
-                            StringSelection(it.model.getElementAt(it.locationToIndex(it.mousePosition)).getTitle())
+                            StringSelection(getCurrentFocusedItem(it).getTitle())
                     ) { _, _ -> }
                 }
             })
@@ -79,6 +79,9 @@ class ArticleListView {
             })
         }
     }
+
+    private fun getCurrentFocusedItem(jList: JList<Article>) =
+            jList.model.getElementAt(jList.locationToIndex(jList.mousePosition))
 
     fun add(article: Article) {
         fileListModel.add(article)
