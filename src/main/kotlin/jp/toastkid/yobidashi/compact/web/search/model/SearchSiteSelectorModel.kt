@@ -7,8 +7,7 @@ class SearchSiteSelectorModel : ComboBoxModel<SearchSite> {
 
     private val searchSites = SearchSite.values()
 
-    // TODO impl getDefault()
-    private var lastSelected = SearchSite.YAHOO_JAPAN
+    private var lastSelected = SearchSite.getDefault()
 
     override fun getSize(): Int {
         return searchSites.size
