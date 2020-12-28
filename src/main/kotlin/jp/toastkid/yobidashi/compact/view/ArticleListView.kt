@@ -58,6 +58,11 @@ class ArticleListView {
         return JList(fileListModel).also {
             it.cellRenderer = ArticleCellRenderer()
             it.componentPopupMenu = JPopupMenu()
+            it.componentPopupMenu.add(object : AbstractAction("Open") {
+                override fun actionPerformed(e: ActionEvent?) {
+                    it.model.getElementAt(it.locationToIndex(it.mousePosition)).open()
+                }
+            })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
                 override fun actionPerformed(e: ActionEvent?) {
                     Toolkit.getDefaultToolkit().systemClipboard.setContents(
