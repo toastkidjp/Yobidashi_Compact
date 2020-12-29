@@ -39,13 +39,6 @@ class ArticleListView {
                 }
             }
         })
-        view.addMouseListener(object : MouseAdapter() {
-            override fun mouseClicked(e: MouseEvent?) {
-                if (e?.clickCount ?: 0 >= 2) {
-                    view.selectedValue?.open()
-                }
-            }
-        })
 
         scrollPane.viewport.view = view
         scrollPane.preferredSize = Dimension(400, 800)
@@ -59,6 +52,12 @@ class ArticleListView {
             it.componentPopupMenu = JPopupMenu()
             var currentFocused: Article? = null
             it.addMouseListener(object : MouseAdapter() {
+                override fun mouseClicked(e: MouseEvent?) {
+                    if (e?.clickCount ?: 0 >= 2) {
+                        view.selectedValue?.open()
+                    }
+                }
+
                 override fun mousePressed(e: MouseEvent?) {
                     extractFocused(e)
                 }
