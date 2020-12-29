@@ -81,12 +81,12 @@ class ArticleListView {
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    ClipboardPutterService().invoke(currentFocused?.getTitle())
+                    ClipboardPutterService()(currentFocused?.getTitle())
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title as internal link") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    ClipboardPutterService().invoke("[[${currentFocused?.getTitle()}]]")
+                    ClipboardPutterService()("[[${currentFocused?.getTitle()}]]")
                 }
             })
         }
