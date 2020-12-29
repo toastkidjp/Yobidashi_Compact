@@ -108,12 +108,6 @@ class ArticleListView {
         view.updateUI()
     }
 
-    fun openCurrentArticle() {
-        view.selectedValuesList.forEach {
-            it.open()
-        }
-    }
-
     fun counts(): String? {
         val selectedArticles = view.selectedValuesList
         if (selectedArticles.isNullOrEmpty()) {
