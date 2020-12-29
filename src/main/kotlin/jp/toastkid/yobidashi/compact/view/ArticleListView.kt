@@ -61,13 +61,14 @@ class ArticleListView {
             var currentFocused: Article? = null
             it.addMouseListener(object : MouseAdapter() {
                 override fun mousePressed(e: MouseEvent?) {
-                    if (e?.isPopupTrigger != false) {
-                        return
-                    }
-                    currentFocused = it.model.getElementAt(it.locationToIndex(it.mousePosition))
+                    extractFocused(e)
                 }
 
                 override fun mouseReleased(e: MouseEvent?) {
+                    extractFocused(e)
+                }
+
+                private fun extractFocused(e: MouseEvent?) {
                     if (e?.isPopupTrigger != false) {
                         return
                     }
