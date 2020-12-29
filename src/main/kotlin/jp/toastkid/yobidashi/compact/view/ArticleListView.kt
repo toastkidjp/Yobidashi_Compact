@@ -91,9 +91,6 @@ class ArticleListView {
         }
     }
 
-    private fun getCurrentFocusedItem(jList: JList<Article>) =
-            jList.model.getElementAt(jList.locationToIndex(jList.mousePosition))
-
     fun add(article: Article) {
         fileListModel.add(article)
     }
