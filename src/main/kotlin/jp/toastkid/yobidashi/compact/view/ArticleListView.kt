@@ -75,17 +75,37 @@ class ArticleListView {
             })
             it.componentPopupMenu.add(object : AbstractAction("Open") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    currentFocused?.open()
+                    if (it.isSelectionEmpty) {
+                        currentFocused?.open()
+                        return
+                    }
+
+                    it.selectedValuesList?.forEach { article -> article.open() }
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    ClipboardPutterService()(currentFocused?.getTitle())
+                    if (it.isSelectionEmpty) {
+                        ClipboardPutterService()(currentFocused?.getTitle())
+                        return
+                    }
+
+                    ClipboardPutterService()(
+                            it.selectedValuesList?.map { article -> article.getTitle() }
+                                    ?.reduce { base, item -> "$base, $item" }
+                    )
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title as internal link") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    ClipboardPutterService()("[[${currentFocused?.getTitle()}]]")
+                    if (it.isSelectionEmpty) {
+                        ClipboardPutterService()("[[${currentFocused?.getTitle()}]]")
+                        return
+                    }
+                    ClipboardPutterService()(
+                            it.selectedValuesList?.map { article -> "[[${article.getTitle()}]]" }
+                                    ?.reduce { base, item -> "$base, $item" }
+                    )
                 }
             })
         }
