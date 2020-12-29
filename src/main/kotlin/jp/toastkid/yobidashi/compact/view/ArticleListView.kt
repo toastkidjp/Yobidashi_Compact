@@ -1,14 +1,13 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.SubjectPool
+import jp.toastkid.yobidashi.compact.editor.service.ClipboardPutterService
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleFileListModel
 import jp.toastkid.yobidashi.compact.model.Sorting
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import java.awt.Desktop
 import java.awt.Dimension
-import java.awt.Toolkit
-import java.awt.datatransfer.StringSelection
 import java.awt.event.ActionEvent
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
@@ -82,16 +81,12 @@ class ArticleListView {
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    Toolkit.getDefaultToolkit().systemClipboard.setContents(
-                            StringSelection(currentFocused?.getTitle())
-                    ) { _, _ -> }
+                    ClipboardPutterService().invoke(currentFocused?.getTitle())
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title as internal link") {
                 override fun actionPerformed(e: ActionEvent?) {
-                    Toolkit.getDefaultToolkit().systemClipboard.setContents(
-                            StringSelection("[[${currentFocused?.getTitle()}]]")
-                    ) { _, _ -> }
+                    ClipboardPutterService().invoke("[[${currentFocused?.getTitle()}]]")
                 }
             })
         }
