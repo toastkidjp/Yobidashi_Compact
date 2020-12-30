@@ -141,16 +141,6 @@ class ArticleListView {
         view.updateUI()
     }
 
-    fun counts(): String? {
-        val selectedArticles = view.selectedValuesList
-        if (selectedArticles.isNullOrEmpty()) {
-            return null
-        }
-        return selectedArticles
-                .map { "${it.getTitle()}: ${it.count()}" }
-                .reduce { base, item -> "$base${System.lineSeparator()}$item" }
-    }
-
     fun isEmpty() = fileListModel.size == 0
 
     fun sortBy(sorting: Sorting) {
