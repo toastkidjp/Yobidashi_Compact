@@ -1,4 +1,4 @@
-package jp.toastkid.yobidashi.compact.editor
+package jp.toastkid.yobidashi.compact.editor.text
 
 class TableFormConverter {
 

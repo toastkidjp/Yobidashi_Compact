@@ -1,7 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
-import jp.toastkid.yobidashi.compact.editor.TableFormConverter
+import jp.toastkid.yobidashi.compact.editor.text.TableFormConverter
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
