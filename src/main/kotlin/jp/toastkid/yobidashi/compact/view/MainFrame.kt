@@ -23,7 +23,6 @@ import java.util.stream.Collectors
 import javax.imageio.ImageIO
 import javax.swing.JComponent
 import javax.swing.JFrame
-import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.JTabbedPane
 import javax.swing.JTextField
@@ -112,10 +111,6 @@ class MainFrame(title: String) {
             SwingUtilities.updateComponentTreeUI(it)
         }
 
-        SubjectPool.observeCountCharacters {
-            countArticleCharacters(tabPane)
-        }
-
         ZipViewModel.observe {
             tabs.get(tabPane.selectedIndex).zip()
         }
@@ -123,12 +118,6 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 600)
-    }
-
-    private fun countArticleCharacters(tabPane: JTabbedPane) {
-        tabs.get(tabPane.selectedIndex).counts()?.also {
-            JOptionPane.showConfirmDialog(frame, it)
-        }
     }
 
     private fun addNewTab(tabPane: JTabbedPane, component: JComponent, title: String) {
