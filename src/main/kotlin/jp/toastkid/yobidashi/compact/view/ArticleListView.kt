@@ -84,7 +84,7 @@ class ArticleListView {
                     it.selectedValuesList?.forEach { article -> article.open() }
                 }
             })
-            it.componentPopupMenu.add(object : AbstractAction("Count") {
+            it.componentPopupMenu.add(object : AbstractAction("Count characters") {
                 override fun actionPerformed(e: ActionEvent?) {
                     val message = if (it.isSelectionEmpty) {
                         "${currentFocused?.getTitle()}: ${currentFocused?.count()}"
