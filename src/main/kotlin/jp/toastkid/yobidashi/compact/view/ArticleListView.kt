@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent
 import java.io.File
 import javax.swing.AbstractAction
 import javax.swing.JList
+import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
 import javax.swing.JScrollPane
 import javax.swing.JTextField
@@ -81,6 +82,18 @@ class ArticleListView {
                     }
 
                     it.selectedValuesList?.forEach { article -> article.open() }
+                }
+            })
+            it.componentPopupMenu.add(object : AbstractAction("Count") {
+                override fun actionPerformed(e: ActionEvent?) {
+                    val message = if (it.isSelectionEmpty) {
+                        "${currentFocused?.getTitle()}: ${currentFocused?.count()}"
+                    } else {
+                        val lineSeparator = System.lineSeparator()
+                        it.selectedValuesList?.map { article -> "${article.getTitle()}: ${article.count()}" }
+                                ?.reduce { base, item -> "$base$lineSeparator$item" }
+                    } ?: return
+                    JOptionPane.showMessageDialog(null, message, "Count", JOptionPane.INFORMATION_MESSAGE)
                 }
             })
             it.componentPopupMenu.add(object : AbstractAction("Copy title") {
