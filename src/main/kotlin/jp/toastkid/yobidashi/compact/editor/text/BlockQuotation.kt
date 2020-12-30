@@ -16,9 +16,10 @@ class BlockQuotation {
         if (text.isNullOrEmpty()) {
             return text
         }
-        return text.split(lineSeparator)
+        val converted = text.trimEnd().split(lineSeparator)
                 .asSequence()
                 .map { "> $it" }
                 .reduce { str1, str2 -> str1 + lineSeparator + str2 }
+        return if (text.endsWith(lineSeparator)) converted.plus(lineSeparator) else converted
     }
 }
