@@ -10,7 +10,7 @@ class ColorDecoderService {
         }
 
         val code = if (argbColorCode.startsWith("#")) argbColorCode else "#$argbColorCode"
-        return Color(java.lang.Long.decode(code).toInt())
+        return Color(java.lang.Long.decode(code).toInt(), code.length > 7)
     }
 
 }
