@@ -88,6 +88,4 @@ object SubjectPool {
         }
     }
 
-    private val countCharacters: Channel<Unit> = Channel()
-
 }
