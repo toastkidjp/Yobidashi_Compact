@@ -10,13 +10,14 @@ import javax.swing.JTabbedPane
 class CloserTabComponentFactoryService(private val tabPane: JTabbedPane) {
 
     operator fun invoke(newContent: JComponent, title: String): JComponent {
-        val closeButton = JButton(LABEL_CLOSE_BUTTON).also {
-            it.addActionListener { tabPane.removeTabAt(tabPane.indexOfComponent(newContent)) }
-        }
         val panel = JPanel()
         panel.layout = BoxLayout(panel, BoxLayout.X_AXIS)
         panel.add(JLabel(title))
-        panel.add(closeButton)
+        panel.add(
+                JButton(LABEL_CLOSE_BUTTON).also {
+                    it.addActionListener { tabPane.removeTabAt(tabPane.indexOfComponent(newContent)) }
+                }
+        )
         return panel
     }
 
