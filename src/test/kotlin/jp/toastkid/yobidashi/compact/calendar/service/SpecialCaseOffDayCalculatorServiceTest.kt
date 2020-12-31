@@ -31,6 +31,14 @@ internal class SpecialCaseOffDayCalculatorServiceTest {
     }
 
     @Test
+    fun test2019_May() {
+        val (isOffDay, forceNormal) = specialCaseOffDayCalculatorService.invoke(2019, 5, 1)
+
+        assertTrue(isOffDay)
+        assertFalse(forceNormal)
+    }
+
+    @Test
     fun test2020_7_20() {
         val (isOffDay, forceNormal) = specialCaseOffDayCalculatorService.invoke(2020, 7, 20)
 
