@@ -90,12 +90,4 @@ object SubjectPool {
 
     private val countCharacters: Channel<Unit> = Channel()
 
-    fun observeCountCharacters(observer: () -> Unit) {
-        CoroutineScope(Dispatchers.Swing).launch {
-            countCharacters
-                    .receiveAsFlow()
-                    .collect { observer.invoke()  }
-        }
-    }
-
 }
