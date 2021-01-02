@@ -1,12 +1,12 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
-import jp.toastkid.yobidashi.compact.calendar.model.Month
 import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.Month
 import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JFrame
@@ -34,7 +34,7 @@ class CalendarPanel : JPanel() {
         add(makeDayPanel())
 
         val date = LocalDate.now()
-        monthChooser.value = Month.from(date)
+        monthChooser.value = date.month
         yearChooser.value = date.year
 
         refreshDayLabels(date, true)
@@ -68,11 +68,11 @@ class CalendarPanel : JPanel() {
         val nextMonth = when {
             next < 0 -> {
                 yearChooser.value = yearChooser.value as Int - 1
-                Month.DEC
+                Month.DECEMBER
             }
             next > 11 -> {
                 yearChooser.value = yearChooser.value as Int + 1
-                Month.JAN
+                Month.JANUARY
             }
             else -> {
                 Month.values()[next]
@@ -121,7 +121,7 @@ class CalendarPanel : JPanel() {
 
     private fun makeMonthChangeListener(): ChangeListener {
         return ChangeListener {
-            refreshDayLabels(yearChooser.value as Int,  Month.fromName(monthChooser.value.toString()))
+            refreshDayLabels(yearChooser.value as Int,  Month.valueOf(monthChooser.value.toString()))
         }
     }
 
@@ -138,7 +138,7 @@ class CalendarPanel : JPanel() {
 
     private fun refreshDayLabels(year: Int, month: Month) {
         val cal = LocalDate.now()
-        if (month.isSameMonth(cal) && year == cal.year) {
+        if (month == cal.month && year == cal.year) {
             refreshDayLabels(cal, true)
         } else {
             refreshDayLabels(LocalDate.of(year, month.ordinal + 1, 1), false)
