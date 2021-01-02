@@ -15,8 +15,7 @@ import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.text.NumberFormatter
 
-
-class CompoundInterestCalclulatorMenuGeneratorService {
+class CompoundInterestCalculatorMenuGeneratorService {
 
     operator fun invoke(): JMenuItem {
         val item = JMenuItem("Compound interest calculation")
@@ -28,9 +27,9 @@ class CompoundInterestCalclulatorMenuGeneratorService {
             intFormatter.minimum = 0
             intFormatter.allowsInvalid = false
 
-            val installmentInput = JFormattedTextField(intFormatter)
-            val annualInterestInput = JFormattedTextField(intFormatter)
-            val yearInput = JFormattedTextField(intFormatter)
+            val installmentInput = JFormattedTextField(IntFormatterFactoryService()())
+            val annualInterestInput = JFormattedTextField(IntFormatterFactoryService()())
+            val yearInput = JFormattedTextField(IntFormatterFactoryService()())
             val content = JPanel().also {
                 it.layout = GridLayout(3, 2)
                 it.add(JLabel("Installment"))
