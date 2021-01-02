@@ -46,7 +46,11 @@ class CompoundInterestCalclulatorMenuGeneratorService {
                     content
             )
 
-            if (option != JOptionPane.OK_OPTION) {
+            if (option != JOptionPane.OK_OPTION
+                    || installmentInput.text.isNullOrBlank()
+                    || annualInterestInput.text.isNullOrBlank()
+                    || yearInput.text.isNullOrBlank()
+            ) {
                 return@addActionListener
             }
 
