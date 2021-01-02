@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.aggregation.model.OutgoAggregationResult
 import jp.toastkid.yobidashi.compact.aggregation.service.AggregationMenuItemGeneratorService
 import jp.toastkid.yobidashi.compact.aggregation.service.AggregationResultTableFactoryService
 import jp.toastkid.yobidashi.compact.aggregation.service.ArticleLengthAggregatorService
+import jp.toastkid.yobidashi.compact.aggregation.service.CompoundInterestCalclulatorMenuGeneratorService
 import jp.toastkid.yobidashi.compact.aggregation.service.MovieMemoSubtitleExtractor
 import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
@@ -57,6 +58,7 @@ class AggregationMenuView {
                         KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK)
                 )
         )
+        menu.add(CompoundInterestCalclulatorMenuGeneratorService().invoke())
 
         return menu
     }
