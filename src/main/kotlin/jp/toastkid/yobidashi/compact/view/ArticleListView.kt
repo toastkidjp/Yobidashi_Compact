@@ -137,7 +137,7 @@ class ArticleListView {
         view.updateUI()
     }
 
-    fun updateUI() {
+    private fun updateUI() {
         view.updateUI()
     }
 
