@@ -12,6 +12,10 @@ class CompoundInterestCalculationResult : AggregationResult {
         return items.map { arrayOf<Any>(it.first, it.second, it.third) }
     }
 
+    override fun columnClass(columnIndex: Int): Class<out Any> {
+        return Integer::class.java
+    }
+
     override fun resultTitleSuffix(): String {
         return " compound interests"
     }
