@@ -48,7 +48,9 @@ class CompoundInterestCalclulatorMenuGeneratorService {
 
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
-                    val result = withContext(Dispatchers.IO) { CompoundInterestCalculatorService()(installment, annualInterest, year) }
+                    val result = withContext(Dispatchers.IO) {
+                        CompoundInterestCalculatorService()(installment, (annualInterest * 0.01), year)
+                    }
 
                     if (result.isEmpty()) {
                         JOptionPane.showConfirmDialog(null, "Result is empty.")
