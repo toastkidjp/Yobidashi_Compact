@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.model
 
+import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.time.DayOfWeek
 import java.time.LocalDate
 
@@ -79,8 +80,10 @@ ${ if (isNotOffDay()) {
 """
 
     private fun isNotOffDay(): Boolean {
-        val dayOfWeek = LocalDate.now().dayOfWeek
+        val now = LocalDate.now()
+        val dayOfWeek = now.dayOfWeek
         return dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY
+                && OffDayFinderService().invoke(now.year, now.monthValue, now.dayOfMonth, dayOfWeek.value)
     }
 
 }
