@@ -41,4 +41,11 @@ internal class SearchSiteSelectorModelTest {
         assertSame(SearchSite.AMAZON, searchSiteSelectorModel.selectedItem)
     }
 
+    @Test
+    fun testSetSelectedItemPassNull() {
+        searchSiteSelectorModel.selectedItem = 1
+
+        assertSame(SearchSite.YAHOO_JAPAN, searchSiteSelectorModel.selectedItem)
+    }
+
 }
