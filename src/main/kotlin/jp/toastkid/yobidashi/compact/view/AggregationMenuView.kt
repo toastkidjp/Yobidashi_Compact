@@ -1,8 +1,6 @@
 package jp.toastkid.yobidashi.compact.view
 
-import jp.toastkid.yobidashi.compact.aggregation.model.OutgoAggregationResult
 import jp.toastkid.yobidashi.compact.aggregation.service.AggregationMenuItemGeneratorService
-import jp.toastkid.yobidashi.compact.aggregation.service.AggregationResultTableFactoryService
 import jp.toastkid.yobidashi.compact.aggregation.service.ArticleLengthAggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.CompoundInterestCalculatorMenuGeneratorService
 import jp.toastkid.yobidashi.compact.aggregation.service.MovieMemoSubtitleExtractor
@@ -12,7 +10,6 @@ import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.time.format.DateTimeFormatter
 import javax.swing.JMenu
-import javax.swing.JOptionPane
 import javax.swing.KeyStroke
 
 /**
@@ -61,20 +58,6 @@ class AggregationMenuView {
         menu.add(CompoundInterestCalculatorMenuGeneratorService().invoke())
 
         return menu
-    }
-
-    private fun onSuccess(aggregationResult: OutgoAggregationResult) {
-        if (aggregationResult.isEmpty()) {
-            JOptionPane.showConfirmDialog(null, "Result is empty.")
-            return
-        }
-
-        JOptionPane.showMessageDialog(
-                null,
-                AggregationResultTableFactoryService().invoke(aggregationResult),
-                "${aggregationResult.target} Total: ${aggregationResult.sum()}",
-                JOptionPane.INFORMATION_MESSAGE
-        )
     }
 
     companion object {
