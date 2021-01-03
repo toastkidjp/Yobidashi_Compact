@@ -26,18 +26,29 @@ internal class WebSearchServiceTest {
 
         webSearchService = WebSearchService(urlOpenerService)
 
-        mockkStatic(JOptionPane::class)
-        every { JOptionPane.showInputDialog(any()) }.answers { "test" }
-
         every { urlOpenerService.invoke(any<URI>()) }.answers { Unit }
     }
 
     @Test
     fun test() {
+        mockkStatic(JOptionPane::class)
+        every { JOptionPane.showInputDialog(any()) }.answers { "test" }
+
         webSearchService()
 
         verify(exactly = 1) { JOptionPane.showInputDialog(any()) }
         verify(exactly = 1) { urlOpenerService.invoke(any<URI>()) }
+    }
+
+    @Test
+    fun testEmptyInputCase() {
+        mockkStatic(JOptionPane::class)
+        every { JOptionPane.showInputDialog(any()) }.answers { "" }
+
+        webSearchService()
+
+        verify(exactly = 1) { JOptionPane.showInputDialog(any()) }
+        verify(exactly = 0) { urlOpenerService.invoke(any<URI>()) }
     }
 
     @AfterEach
