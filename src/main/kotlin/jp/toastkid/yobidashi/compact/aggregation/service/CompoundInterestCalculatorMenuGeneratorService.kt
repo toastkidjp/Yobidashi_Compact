@@ -7,13 +7,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
 import java.awt.GridLayout
-import java.text.NumberFormat
 import javax.swing.JFormattedTextField
 import javax.swing.JLabel
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 import javax.swing.JPanel
-import javax.swing.text.NumberFormatter
 
 class CompoundInterestCalculatorMenuGeneratorService {
 
@@ -21,15 +19,10 @@ class CompoundInterestCalculatorMenuGeneratorService {
         val item = JMenuItem("Compound interest calculation")
         item.hideActionText = true
         item.addActionListener {
-            //installment: Int, annualInterest: Double, year: Int
-            val intFormatter = NumberFormatter(NumberFormat.getInstance())
-            intFormatter.valueClass = Integer::class.java
-            intFormatter.minimum = 0
-            intFormatter.allowsInvalid = false
-
-            val installmentInput = JFormattedTextField(IntFormatterFactoryService()())
-            val annualInterestInput = JFormattedTextField(IntFormatterFactoryService()())
-            val yearInput = JFormattedTextField(IntFormatterFactoryService()())
+            val intFormatter = IntFormatterFactoryService().invoke()
+            val installmentInput = JFormattedTextField(intFormatter)
+            val annualInterestInput = JFormattedTextField(intFormatter)
+            val yearInput = JFormattedTextField(intFormatter)
             val content = JPanel().also {
                 it.layout = GridLayout(3, 2)
                 it.add(JLabel("Installment"))
