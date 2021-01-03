@@ -13,7 +13,6 @@ class CompoundInterestCalculatorMenuGeneratorService {
 
     operator fun invoke(): JMenuItem {
         val item = JMenuItem("Compound interest calculation")
-        item.hideActionText = true
         item.addActionListener {
             val (installment, annualInterest, year) =
                     CompoundInterestCalculationInputService().invoke() ?: return@addActionListener
