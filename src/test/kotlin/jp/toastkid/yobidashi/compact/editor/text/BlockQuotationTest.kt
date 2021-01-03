@@ -36,4 +36,9 @@ internal class BlockQuotationTest {
         )
     }
 
+    @Test
+    fun testInvokeWithEmptyInput() {
+        assertEquals("", quotation(""))
+    }
+
 }
