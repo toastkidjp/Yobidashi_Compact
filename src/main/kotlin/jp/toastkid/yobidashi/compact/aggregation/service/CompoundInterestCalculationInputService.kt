@@ -6,6 +6,9 @@ import javax.swing.JLabel
 import javax.swing.JOptionPane
 import javax.swing.JPanel
 
+/**
+ * TODO write unit test.
+ */
 class CompoundInterestCalculationInputService {
 
     operator fun invoke(): Triple<Int, Double, Int>? {
@@ -13,15 +16,7 @@ class CompoundInterestCalculationInputService {
         val installmentInput = JFormattedTextField(intFormatter)
         val annualInterestInput = JFormattedTextField(intFormatter)
         val yearInput = JFormattedTextField(intFormatter)
-        val content = JPanel().also {
-            it.layout = GridLayout(3, 2)
-            it.add(JLabel("Installment"))
-            it.add(installmentInput)
-            it.add(JLabel("Annual interest"))
-            it.add(annualInterestInput)
-            it.add(JLabel("Year"))
-            it.add(yearInput)
-        }
+        val content = makeContent(installmentInput, annualInterestInput, yearInput)
 
         val option = JOptionPane.showConfirmDialog(
                 null,
@@ -41,6 +36,19 @@ class CompoundInterestCalculationInputService {
         val year = yearInput.text.replace(",", "").toInt()
 
         return Triple(installment, annualInterest, year)
+    }
+
+    private fun makeContent(installmentInput: JFormattedTextField, annualInterestInput: JFormattedTextField, yearInput: JFormattedTextField): JPanel {
+        val content = JPanel().also {
+            it.layout = GridLayout(3, 2)
+            it.add(JLabel("Installment"))
+            it.add(installmentInput)
+            it.add(JLabel("Annual interest"))
+            it.add(annualInterestInput)
+            it.add(JLabel("Year"))
+            it.add(yearInput)
+        }
+        return content
     }
 
 }
