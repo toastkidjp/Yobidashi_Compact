@@ -6,7 +6,7 @@ import kotlinx.coroutines.channels.Channel
 import javax.swing.JFrame
 import javax.swing.JMenuBar
 
-class MenubarView(private val channel: Channel<MenuCommand>) {
+class MenuBarView(private val channel: Channel<MenuCommand>) {
 
     operator fun invoke(frame: JFrame): JMenuBar {
         val menuBar = JMenuBar()
