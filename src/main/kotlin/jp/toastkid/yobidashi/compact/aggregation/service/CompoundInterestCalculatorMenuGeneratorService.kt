@@ -11,7 +11,8 @@ import javax.swing.JOptionPane
 
 class CompoundInterestCalculatorMenuGeneratorService(
         private val inputService: CompoundInterestCalculationInputService = CompoundInterestCalculationInputService(),
-        private val calculatorService: CompoundInterestCalculatorService = CompoundInterestCalculatorService()
+        private val calculatorService: CompoundInterestCalculatorService = CompoundInterestCalculatorService(),
+        private val aggregationResultTableFactoryService: AggregationResultTableFactoryService = AggregationResultTableFactoryService()
 ) {
 
     operator fun invoke(): JMenuItem {
@@ -30,7 +31,7 @@ class CompoundInterestCalculatorMenuGeneratorService(
                         return@launch
                     }
 
-                    val table = AggregationResultTableFactoryService().invoke(result)
+                    val table = aggregationResultTableFactoryService.invoke(result)
                     // "Compound interest calculation. Installment = $installment, Annual interest = $annualInterest, Year = $year"
                     SubjectPool.addNewTab(table, "$installment, $annualInterest, $year")
                 } catch (e: Exception) {
