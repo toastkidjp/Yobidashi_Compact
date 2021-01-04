@@ -5,14 +5,16 @@ import javax.swing.JFormattedTextField
 import javax.swing.JLabel
 import javax.swing.JOptionPane
 import javax.swing.JPanel
+import javax.swing.text.NumberFormatter
 
 /**
  * TODO write unit test.
  */
-class CompoundInterestCalculationInputService {
+class CompoundInterestCalculationInputService(
+        private val intFormatter: NumberFormatter = IntFormatterFactoryService().invoke()
+) {
 
     operator fun invoke(): Triple<Int, Double, Int>? {
-        val intFormatter = IntFormatterFactoryService().invoke()
         val installmentInput = JFormattedTextField(intFormatter)
         val annualInterestInput = JFormattedTextField(intFormatter)
         val yearInput = JFormattedTextField(intFormatter)
