@@ -9,7 +9,9 @@ import kotlinx.coroutines.withContext
 import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 
-class CompoundInterestCalculatorMenuGeneratorService {
+class CompoundInterestCalculatorMenuGeneratorService(
+        private val calculatorService: CompoundInterestCalculatorService = CompoundInterestCalculatorService()
+) {
 
     operator fun invoke(): JMenuItem {
         val item = JMenuItem("Compound interest calculation")
@@ -20,7 +22,7 @@ class CompoundInterestCalculatorMenuGeneratorService {
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
                     val result = withContext(Dispatchers.IO) {
-                        CompoundInterestCalculatorService()(installment, (annualInterest * 0.01), year)
+                        calculatorService(installment, (annualInterest * 0.01), year)
                     }
 
                     if (result.isEmpty()) {
