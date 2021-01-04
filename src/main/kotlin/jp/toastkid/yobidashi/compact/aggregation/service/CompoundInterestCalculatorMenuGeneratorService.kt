@@ -10,6 +10,7 @@ import javax.swing.JMenuItem
 import javax.swing.JOptionPane
 
 class CompoundInterestCalculatorMenuGeneratorService(
+        private val inputService: CompoundInterestCalculationInputService = CompoundInterestCalculationInputService(),
         private val calculatorService: CompoundInterestCalculatorService = CompoundInterestCalculatorService()
 ) {
 
@@ -17,7 +18,7 @@ class CompoundInterestCalculatorMenuGeneratorService(
         val item = JMenuItem("Compound interest calculation")
         item.addActionListener {
             val (installment, annualInterest, year) =
-                    CompoundInterestCalculationInputService().invoke() ?: return@addActionListener
+                    inputService.invoke() ?: return@addActionListener
 
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
