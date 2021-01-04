@@ -17,8 +17,7 @@ class CompoundInterestCalculatorMenuGeneratorService(
     operator fun invoke(): JMenuItem {
         val item = JMenuItem("Compound interest calculation")
         item.addActionListener {
-            val (installment, annualInterest, year) =
-                    inputService.invoke() ?: return@addActionListener
+            val (installment, annualInterest, year) = inputService.invoke() ?: return@addActionListener
 
             CoroutineScope(Dispatchers.Swing).launch {
                 try {
