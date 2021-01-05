@@ -19,7 +19,7 @@ class TrimmingService {
         /**
          * Line separator.
          */
-        private val lineSeparator = System.getProperty("line.separator") ?: "\n"
+        private val lineSeparator = "\n"
 
     }
 
