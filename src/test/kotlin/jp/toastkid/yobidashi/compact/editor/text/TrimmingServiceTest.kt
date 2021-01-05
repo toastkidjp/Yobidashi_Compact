@@ -16,7 +16,7 @@ internal class TrimmingServiceTest {
     @Test
     fun test() {
         assertEquals("aaa", trimmingService.invoke("  aaa   "))
-        val lineSeparator = System.lineSeparator()
+        val lineSeparator = "\n"
         assertEquals(
                 "john${lineSeparator}aaa${lineSeparator}trimmed",
                 trimmingService.invoke(listOf("  john", " aaa   ", "trimmed  ").joinToString(lineSeparator))
