@@ -83,7 +83,7 @@ ${ if (isNotOffDay()) {
         val now = LocalDate.now()
         val dayOfWeek = now.dayOfWeek
         return dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY
-                && OffDayFinderService().invoke(now.year, now.monthValue, now.dayOfMonth, dayOfWeek.value)
+                && OffDayFinderService().invoke(now.year, now.monthValue, now.dayOfMonth, dayOfWeek.value).not()
     }
 
 }
