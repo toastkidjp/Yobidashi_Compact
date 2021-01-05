@@ -1,0 +1,26 @@
+package jp.toastkid.yobidashi.compact.editor.text
+
+class TrimmingService {
+
+    operator fun invoke(text: String?): String? {
+        if (text.isNullOrEmpty()) {
+            return text
+        }
+
+        val converted = text.trimEnd().split(lineSeparator)
+                .asSequence()
+                .map { it.trim() }
+                .reduce { str1, str2 -> str1 + lineSeparator + str2 }
+        return if (text.endsWith(lineSeparator)) converted.plus(lineSeparator) else converted
+    }
+
+    companion object {
+
+        /**
+         * Line separator.
+         */
+        private val lineSeparator = System.getProperty("line.separator") ?: "\n"
+
+    }
+
+}
