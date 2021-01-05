@@ -44,4 +44,15 @@ internal class ColorDecoderServiceTest {
         assertEquals(153, color.alpha)
     }
 
+    @Test
+    fun testWithoutSharp() {
+        val color = colorDecoderService.invoke("99990099")
+                ?: fail("This case doesn't allow null.")
+
+        assertEquals(153, color.red)
+        assertEquals(0, color.green)
+        assertEquals(153, color.blue)
+        assertEquals(153, color.alpha)
+    }
+
 }
