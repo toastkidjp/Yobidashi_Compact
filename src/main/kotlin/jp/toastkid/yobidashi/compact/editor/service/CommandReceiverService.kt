@@ -1,11 +1,12 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
-import jp.toastkid.yobidashi.compact.editor.text.TableFormConverter
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.text.BlockQuotation
 import jp.toastkid.yobidashi.compact.editor.text.ListHeadAdder
 import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
+import jp.toastkid.yobidashi.compact.editor.text.TableFormConverter
+import jp.toastkid.yobidashi.compact.editor.text.TrimmingService
 import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
@@ -81,6 +82,11 @@ class CommandReceiverService(
                 MenuCommand.BLOCKQUOTE -> {
                     editorAreaView.replaceSelected { text ->
                         BlockQuotation().invoke(text) ?: text
+                    }
+                }
+                MenuCommand.TRIMMING -> {
+                    editorAreaView.replaceSelected { text ->
+                        TrimmingService().invoke(text) ?: text
                     }
                 }
                 MenuCommand.CODE_BLOCK -> editorAreaView.replaceSelected { "```\n$it```" }

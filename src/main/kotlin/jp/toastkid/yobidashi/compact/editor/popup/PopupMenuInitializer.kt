@@ -95,6 +95,14 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(codeBlockMenu)
 
+        popupMenu.add(JMenuItem("Trimming").also {
+            it.addActionListener {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.TRIMMING)
+                }
+            }
+        })
+
         val fontColorMenu = JMenuItem("Font color").also {
             it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
