@@ -16,9 +16,9 @@ import javax.swing.KeyStroke
  * TODO:
  * Code clean up.
  */
-class AggregationMenuView {
-
-    private val aggregationMenuItemGeneratorService = AggregationMenuItemGeneratorService()
+class AggregationMenuView(
+        private val aggregationMenuItemGeneratorService: AggregationMenuItemGeneratorService = AggregationMenuItemGeneratorService())
+{
 
     operator fun invoke(): JMenu {
         val menu = JMenu("Aggregate")
