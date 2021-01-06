@@ -17,7 +17,8 @@ import javax.swing.KeyStroke
  * Code clean up.
  */
 class AggregationMenuView(
-        private val aggregationMenuItemGeneratorService: AggregationMenuItemGeneratorService = AggregationMenuItemGeneratorService()
+        private val aggregationMenuItemGeneratorService: AggregationMenuItemGeneratorService = AggregationMenuItemGeneratorService(),
+        private val compoundInterestCalculatorMenuGeneratorService: CompoundInterestCalculatorMenuGeneratorService = CompoundInterestCalculatorMenuGeneratorService()
 ) {
 
     operator fun invoke(): JMenu {
@@ -55,7 +56,7 @@ class AggregationMenuView(
                         KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK)
                 )
         )
-        menu.add(CompoundInterestCalculatorMenuGeneratorService().invoke())
+        menu.add(compoundInterestCalculatorMenuGeneratorService.invoke())
 
         return menu
     }
