@@ -59,9 +59,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(taskListMenu)
 
-        val boldMenu = JMenuItem()
-        boldMenu.action = object : AbstractAction("Bold") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val boldMenu = JMenuItem("Bold").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.BOLD)
                 }
