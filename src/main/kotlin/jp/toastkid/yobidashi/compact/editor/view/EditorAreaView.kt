@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
-import java.awt.Color
 import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -153,8 +152,6 @@ class EditorAreaView(
     companion object {
 
         private const val DEFAULT_FONT_SIZE = 14f
-
-        private val BACKGROUND_COLOR = Color(225, 225, 225, 255)
 
     }
 
