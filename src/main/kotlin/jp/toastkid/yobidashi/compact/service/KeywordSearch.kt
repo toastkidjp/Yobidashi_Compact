@@ -2,13 +2,15 @@ package jp.toastkid.yobidashi.compact.service
 
 import jp.toastkid.yobidashi.compact.model.Setting
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Collectors
+import java.util.stream.Stream
 
 class KeywordSearch {
 
-    operator fun invoke(keyword: String, fileFilter: String?): MutableList<String> {
-        return Files.list(Paths.get(Setting.articleFolder()))
+    operator fun invoke(keyword: String, fileFilter: String?, files: Stream<Path> = Files.list(Paths.get(Setting.articleFolder()))): MutableList<String> {
+        return files
                 .parallel()
                 .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
                 .filter { filterByKeyword(fileFilter, it, keyword) }
