@@ -54,7 +54,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         content.add(backgroundChooserButton, constraints)
 
         constraints.gridy = 1
-        val button2 = makeFontColorButton(sample, contrastRatioLabel, contrastRatioCalculatorService)
+        val button2 = makeFontColorButton()
         content.add(button2, constraints)
 
         constraints.gridx = 1
@@ -97,11 +97,7 @@ class ColorSettingService(private val channel: Channel<MenuCommand>) {
         }
     }
 
-    private fun makeFontColorButton(
-            sample: JComponent,
-            contrastRatioLabel: JLabel,
-            contrastRatioCalculatorService: ContrastRatioCalculatorService
-    ): JComponent {
+    private fun makeFontColorButton(): JComponent {
         return JButton("Font color").also {
             it.addActionListener {
                 val color = ColorChooserService().invoke() ?: return@addActionListener
