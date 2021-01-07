@@ -102,4 +102,12 @@ internal class SpecialCaseOffDayCalculatorServiceTest {
         assertTrue(forceNormal)
     }
 
+    @Test
+    fun test2021_Apr() {
+        val (isOffDay, forceNormal) = specialCaseOffDayCalculatorService.invoke(2021, 4, 26)
+
+        assertFalse(isOffDay)
+        assertFalse(forceNormal)
+    }
+
 }
