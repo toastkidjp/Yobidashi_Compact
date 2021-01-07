@@ -19,7 +19,7 @@ class TrimmingService {
         /**
          * If you use this app in other environment, you should use appropriate line separator.
          */
-        private val lineSeparator = "\n"
+        private const val lineSeparator = "\n"
 
     }
 
