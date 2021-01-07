@@ -15,6 +15,7 @@ class ArticleTemplate {
 追記
 
 ## 今日の資産運用
+評価額は円、評価損益は円(%)だった。
 追記
 ${ if (isNotOffDay()) {
 """
