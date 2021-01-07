@@ -8,7 +8,6 @@ import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorServ
 import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
-import java.time.format.DateTimeFormatter
 import javax.swing.JMenu
 import javax.swing.KeyStroke
 
@@ -61,7 +60,4 @@ class AggregationMenuView(
         return menu
     }
 
-    companion object {
-        private val DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM")
-    }
 }
