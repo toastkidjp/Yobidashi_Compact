@@ -20,12 +20,13 @@ import javax.swing.JPanel
 import javax.swing.JTextField
 import javax.swing.KeyStroke
 
+/**
+ * TODO Divide ArticleFinderService.
+ */
 class FindMenuView {
 
     operator fun invoke(): JMenu {
-        val menu = JMenu("Find")
-        menu.add(makeMenuItem())
-        return menu
+        return JMenu("Find").also { it.add(makeMenuItem()) }
     }
 
     private fun makeMenuItem(): JMenuItem {
