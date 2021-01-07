@@ -29,7 +29,10 @@ internal class AggregationMenuViewTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        aggregationMenuView = AggregationMenuView(aggregationMenuItemGeneratorService, compoundInterestCalculatorMenuGeneratorService)
+        aggregationMenuView = AggregationMenuView(
+                aggregationMenuItemGeneratorService,
+                compoundInterestCalculatorMenuGeneratorService
+        )
 
         every { aggregationMenuItemGeneratorService.invoke(any(), any(), any(), any()) }.answers { mockk() }
         every { compoundInterestCalculatorMenuGeneratorService.invoke() }.answers { mockk() }
