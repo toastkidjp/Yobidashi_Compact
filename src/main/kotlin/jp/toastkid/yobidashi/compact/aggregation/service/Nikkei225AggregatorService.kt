@@ -24,7 +24,7 @@ class Nikkei225AggregatorService {
     private fun extract(result: Nikkei225AggregationResult, pair: Pair<String, MutableList<String>>) {
         var next = false
         pair.second.forEach { line ->
-            if (line.endsWith("今日の日経平均株価終値")) {
+            if (line.endsWith(TARGET_SUFFIX)) {
                 next = true
                 return@forEach
             }
@@ -40,4 +40,9 @@ class Nikkei225AggregatorService {
         }
     }
 
+    companion object {
+
+        private const val TARGET_SUFFIX = "今日の日経平均株価終値"
+
+    }
 }
