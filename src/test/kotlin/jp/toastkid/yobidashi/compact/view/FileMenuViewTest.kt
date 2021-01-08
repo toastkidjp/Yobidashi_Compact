@@ -14,13 +14,13 @@ import javax.swing.JMenuItem
 
 internal class FileMenuViewTest {
 
-    private lateinit var fileView: FileMenuView
+    private lateinit var menuView: FileMenuView
 
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
 
-        fileView = FileMenuView()
+        menuView = FileMenuView()
 
         mockkConstructor(JMenu::class)
         every { anyConstructed<JMenu>().add(any<JMenuItem>()) }.answers { mockk() }
@@ -28,7 +28,7 @@ internal class FileMenuViewTest {
 
     @Test
     fun test() {
-        fileView.invoke()
+        menuView.invoke()
 
         verify(atLeast = 1) { anyConstructed<JMenu>().add(any<JMenuItem>()) }
     }
