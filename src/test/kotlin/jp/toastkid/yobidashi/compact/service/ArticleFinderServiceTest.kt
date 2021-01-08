@@ -38,9 +38,10 @@ internal class ArticleFinderServiceTest {
     }
 
     @Test
-    fun testNullInputCase() {
+    fun testNoneInputCase() {
         mockkStatic(JOptionPane::class)
         every { JOptionPane.showInputDialog(null, any()) }.answers { null }
+        every { anyConstructed<JTextField>().getText() }.answers { null }
 
         articleFinderService.invoke()
 
