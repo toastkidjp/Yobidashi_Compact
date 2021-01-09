@@ -1,8 +1,11 @@
 package jp.toastkid.yobidashi.compact.web.search.view
 
 import io.mockk.MockKAnnotations
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.spyk
 import io.mockk.unmockkAll
+import io.mockk.verify
 import jp.toastkid.yobidashi.compact.web.search.model.SearchSite
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -24,13 +27,18 @@ internal class SearchSiteCellRendererTest {
 
     @Test
     fun test() {
+        val spy = spyk(SearchSite.GITHUB)
+        every { spy.siteName }.returns("test")
+
         searchSiteCellRenderer.getListCellRendererComponent(
                 list,
-                SearchSite.GITHUB,
+                spy,
                 0,
                 true,
                 true
         )
+
+        verify (atLeast = 1) { spy.siteName }
     }
 
     @AfterEach
