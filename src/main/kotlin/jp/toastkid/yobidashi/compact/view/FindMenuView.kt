@@ -7,9 +7,6 @@ import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-/**
- * TODO Divide ArticleFinderService.
- */
 class FindMenuView {
 
     operator fun invoke(): JMenu {
