@@ -1,11 +1,17 @@
 package jp.toastkid.yobidashi.compact.service
 
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkConstructor
+import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.verify
+import jp.toastkid.yobidashi.compact.SubjectPool
+import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.view.ArticleListView
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -20,6 +26,8 @@ internal class ArticleFinderServiceTest {
 
     @BeforeEach
     fun setUp() {
+        MockKAnnotations.init(this)
+
         articleFinderService = ArticleFinderService()
 
         mockkConstructor(JPanel::class)
@@ -29,12 +37,17 @@ internal class ArticleFinderServiceTest {
         mockkConstructor(JTextField::class)
         every { anyConstructed<JTextField>().setPreferredSize(any()) }.answers { mockk() }
 
-        /*
-        val keyword = JOptionPane.showInputDialog(null, panel)
-        if (keyword.isNullOrBlank() && fileFilter.text.isNullOrBlank()) {
-            return
-        }
-         */
+        mockkConstructor(ArticleListView::class)
+        coEvery { anyConstructed<ArticleListView>().add(any<Article>()) }.answers { mockk() }
+
+        mockkConstructor(KeywordSearch::class)
+        coEvery { anyConstructed<KeywordSearch>().invoke(any(), any()) }.returns(mutableListOf("test"))
+
+        mockkObject(Article)
+        coEvery { Article.withTitle(any()) }.returns(mockk())
+
+        mockkObject(SubjectPool)
+        coEvery { SubjectPool.sendSearchResult(any(), any()) }.answers { Unit }
     }
 
     @Test
@@ -48,6 +61,11 @@ internal class ArticleFinderServiceTest {
         verify (exactly = 1) { anyConstructed<JPanel>().setLayout(any()) }
         verify (atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>()) }
         verify (exactly = 1) { anyConstructed<JTextField>().setPreferredSize(any()) }
+
+        verify (exactly = 0) { anyConstructed<ArticleListView>().add(any<Article>()) }
+        verify (exactly = 0) { anyConstructed<KeywordSearch>().invoke(any(), any()) }
+        verify (exactly = 0) { Article.withTitle(any()) }
+        verify (exactly = 0) { SubjectPool.sendSearchResult(any(), any()) }
     }
 
     @AfterEach
