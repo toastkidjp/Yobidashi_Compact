@@ -49,9 +49,8 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(numberedListMenu)
 
-        val taskListMenu = JMenuItem()
-        taskListMenu.action = object : AbstractAction("Task list") {
-            override fun actionPerformed(e: ActionEvent?) {
+        val taskListMenu = JMenuItem("Task list").also {
+            it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
                     channel.send(MenuCommand.TASK_LIST)
                 }
