@@ -34,4 +34,5 @@ internal class FinderAreaViewTest {
     fun tearDown() {
         unmockkAll()
     }
+
 }
