@@ -1,7 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor.view
 
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
-import jp.toastkid.yobidashi.compact.editor.service.ColorSettingService
+import jp.toastkid.yobidashi.compact.editor.service.AppearanceSettingService
 import kotlinx.coroutines.channels.Channel
 import javax.swing.JMenu
 import javax.swing.JMenuItem
@@ -14,7 +14,7 @@ class AppearanceMenuView(private val channel: Channel<MenuCommand>) {
 
         val findItem = JMenuItem("Color & Font")
         findItem.addActionListener {
-            ColorSettingService(channel).invoke()
+            AppearanceSettingService(channel).invoke()
         }
         menu.add(findItem)
 

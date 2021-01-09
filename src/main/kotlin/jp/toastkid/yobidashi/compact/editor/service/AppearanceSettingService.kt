@@ -18,7 +18,7 @@ import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class ColorSettingService(private val channel: Channel<MenuCommand>) {
+class AppearanceSettingService(private val channel: Channel<MenuCommand>) {
 
     private val sample = JTextField(SAMPLE_TEXT)
 
