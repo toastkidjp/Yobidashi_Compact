@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.service
 
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkConstructor
@@ -41,7 +42,7 @@ internal class ArticleFinderServiceTest {
         coEvery { anyConstructed<ArticleListView>().add(any<Article>()) }.answers { mockk() }
 
         mockkConstructor(KeywordSearch::class)
-        coEvery { anyConstructed<KeywordSearch>().invoke(any(), any()) }.returns(mutableListOf("test"))
+        coEvery { anyConstructed<KeywordSearch>().invoke(any(), any(), any()) }.returns(mutableListOf("test"))
 
         mockkObject(Article)
         coEvery { Article.withTitle(any()) }.returns(mockk())
@@ -63,9 +64,28 @@ internal class ArticleFinderServiceTest {
         verify (exactly = 1) { anyConstructed<JTextField>().setPreferredSize(any()) }
 
         verify (exactly = 0) { anyConstructed<ArticleListView>().add(any<Article>()) }
-        verify (exactly = 0) { anyConstructed<KeywordSearch>().invoke(any(), any()) }
+        verify (exactly = 0) { anyConstructed<KeywordSearch>().invoke(any(), any(), any()) }
         verify (exactly = 0) { Article.withTitle(any()) }
         verify (exactly = 0) { SubjectPool.sendSearchResult(any(), any()) }
+    }
+
+    @Test
+    fun testNormalInputCase() {
+        mockkStatic(JOptionPane::class)
+        every { JOptionPane.showInputDialog(null, any()) }.answers { "test" }
+        every { anyConstructed<JTextField>().getText() }.answers { "any" }
+        coEvery { anyConstructed<ArticleListView>().isEmpty() }.returns(false)
+
+        articleFinderService.invoke()
+
+        verify (exactly = 1) { anyConstructed<JPanel>().setLayout(any()) }
+        verify (atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>()) }
+        verify (exactly = 1) { anyConstructed<JTextField>().setPreferredSize(any()) }
+
+        coVerify (exactly = 1) { anyConstructed<ArticleListView>().add(any<Article>()) }
+        coVerify (exactly = 1) { anyConstructed<KeywordSearch>().invoke(any(), any(), any()) }
+        coVerify (exactly = 1) { Article.withTitle(any()) }
+        coVerify (exactly = 1) { SubjectPool.sendSearchResult(any(), any()) }
     }
 
     @AfterEach
