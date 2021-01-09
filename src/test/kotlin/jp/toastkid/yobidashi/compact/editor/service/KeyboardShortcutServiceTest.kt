@@ -90,4 +90,18 @@ internal class KeyboardShortcutServiceTest {
         coVerify(exactly = 1) { channel.send(any()) }
     }
 
+    @Test
+    fun testIsControlAndI() {
+        every { keyEvent.isControlDown() }.answers { true }
+        every { keyEvent.isShiftDown() }.answers { false }
+        every { keyEvent.getKeyCode() }.answers { KeyEvent.VK_I }
+
+        keyboardShortcutService.invoke(keyEvent)
+
+        verify(exactly = 1) { keyEvent.isControlDown() }
+        verify(exactly = 1) { keyEvent.isShiftDown() }
+        verify(exactly = 1) { keyEvent.getKeyCode() }
+        coVerify(exactly = 1) { channel.send(any()) }
+    }
+
 }
