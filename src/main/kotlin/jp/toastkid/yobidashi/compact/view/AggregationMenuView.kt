@@ -11,10 +11,6 @@ import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.KeyStroke
 
-/**
- * TODO:
- * Code clean up.
- */
 class AggregationMenuView(
         private val aggregationMenuItemGeneratorService: AggregationMenuItemGeneratorService = AggregationMenuItemGeneratorService(),
         private val compoundInterestCalculatorMenuGeneratorService: CompoundInterestCalculatorMenuGeneratorService = CompoundInterestCalculatorMenuGeneratorService()
