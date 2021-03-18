@@ -32,15 +32,6 @@ class ArticleListView {
     init {
         view = initializeView()
 
-        view.addKeyListener(object : KeyAdapter() {
-            override fun keyPressed(e: KeyEvent?) {
-                super.keyPressed(e)
-                if (e?.keyCode == KeyEvent.VK_ENTER) {
-                    view.selectedValue?.open()
-                }
-            }
-        })
-
         scrollPane.viewport.view = view
         scrollPane.preferredSize = Dimension(400, 800)
     }
@@ -119,6 +110,14 @@ class ArticleListView {
                             it.selectedValuesList?.map { article -> "[[${article.getTitle()}]]" }
                                     ?.reduce { base, item -> "$base, $item" }
                     )
+                }
+            })
+            it.addKeyListener(object : KeyAdapter() {
+                override fun keyPressed(e: KeyEvent?) {
+                    super.keyPressed(e)
+                    if (e?.keyCode == KeyEvent.VK_ENTER) {
+                        view.selectedValue?.open()
+                    }
                 }
             })
         }
