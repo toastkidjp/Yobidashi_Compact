@@ -41,7 +41,7 @@ class CompoundInterestCalculationInputService(
     }
 
     private fun makeContent(installmentInput: JFormattedTextField, annualInterestInput: JFormattedTextField, yearInput: JFormattedTextField): JPanel {
-        val content = JPanel().also {
+        return JPanel().also {
             it.layout = GridLayout(3, 2)
             it.add(JLabel("Installment"))
             it.add(installmentInput)
@@ -50,7 +50,6 @@ class CompoundInterestCalculationInputService(
             it.add(JLabel("Year"))
             it.add(yearInput)
         }
-        return content
     }
 
 }
