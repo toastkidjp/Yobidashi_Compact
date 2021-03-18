@@ -49,9 +49,7 @@ class OffDayFinderService(
                         .firstOrNull { month == it.month && (date - 1) == it.date }
             }
         }
-        return if (firstOrNull != null) {
-            true
-        } else false
+        return firstOrNull != null
     }
 
 }
