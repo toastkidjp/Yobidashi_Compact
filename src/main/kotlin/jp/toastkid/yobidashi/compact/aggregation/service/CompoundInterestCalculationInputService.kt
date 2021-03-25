@@ -7,9 +7,6 @@ import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.text.NumberFormatter
 
-/**
- * TODO write unit test.
- */
 class CompoundInterestCalculationInputService(
         private val intFormatter: NumberFormatter = IntFormatterFactoryService().invoke()
 ) {
