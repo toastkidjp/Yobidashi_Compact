@@ -53,6 +53,20 @@ internal class CompoundInterestCalculationInputServiceTest {
         verify(atLeast = 1) { anyConstructed<JFormattedTextField>().getText() }
     }
 
+    @Test
+    fun testCancelCase() {
+        every { JOptionPane.showConfirmDialog(null, any<JComponent>()) }.answers { JOptionPane.CANCEL_OPTION }
+        every { anyConstructed<JFormattedTextField>().getText() }.answers { "1" }
+
+        compoundInterestCalculationInputService.invoke()
+
+        verify(atLeast = 1) { intFormatter.install(any()) }
+        verify(exactly = 1) { anyConstructed<JPanel>().setLayout(any()) }
+        verify(atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>()) }
+        verify(exactly = 1) { JOptionPane.showConfirmDialog(null, any<JComponent>()) }
+        verify(exactly = 0) { anyConstructed<JFormattedTextField>().getText() }
+    }
+
     @AfterEach
     fun tearDown() {
         unmockkAll()
