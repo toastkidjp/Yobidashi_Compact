@@ -40,7 +40,11 @@ class CompoundInterestCalculationInputService(
         return Triple(installment, annualInterest, year)
     }
 
-    private fun makeContent(installmentInput: JFormattedTextField, annualInterestInput: JFormattedTextField, yearInput: JFormattedTextField): JPanel {
+    private fun makeContent(
+        installmentInput: JFormattedTextField,
+        annualInterestInput: JFormattedTextField,
+        yearInput: JFormattedTextField
+    ): JPanel {
         return JPanel().also {
             it.layout = GridLayout(3, 2)
             it.add(JLabel("Installment"))
