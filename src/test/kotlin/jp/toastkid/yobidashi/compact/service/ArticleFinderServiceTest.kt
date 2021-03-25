@@ -13,6 +13,7 @@ import io.mockk.verify
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.view.ArticleListView
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -44,7 +45,7 @@ internal class ArticleFinderServiceTest {
         mockkConstructor(KeywordSearch::class)
         coEvery { anyConstructed<KeywordSearch>().invoke(any(), any(), any()) }.returns(mutableListOf("test"))
 
-        mockkObject(Article)
+        mockkObject(Article.Companion)
         coEvery { Article.withTitle(any()) }.returns(mockk())
 
         mockkObject(SubjectPool)
@@ -70,7 +71,7 @@ internal class ArticleFinderServiceTest {
     }
 
     @Test
-    fun testNormalInputCase() {
+    fun testNormalInputCase() = runBlocking {
         mockkStatic(JOptionPane::class)
         every { JOptionPane.showInputDialog(null, any()) }.answers { "test" }
         every { anyConstructed<JTextField>().getText() }.answers { "any" }
@@ -82,9 +83,9 @@ internal class ArticleFinderServiceTest {
         verify (atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>()) }
         verify (exactly = 1) { anyConstructed<JTextField>().setPreferredSize(any()) }
 
+        coVerify (exactly = 1) { Article.withTitle(any()) }
         coVerify (exactly = 1) { anyConstructed<ArticleListView>().add(any<Article>()) }
         coVerify (exactly = 1) { anyConstructed<KeywordSearch>().invoke(any(), any(), any()) }
-        coVerify (exactly = 1) { Article.withTitle(any()) }
         coVerify (exactly = 1) { SubjectPool.sendSearchResult(any(), any()) }
     }
 
