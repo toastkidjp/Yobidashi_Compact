@@ -33,9 +33,9 @@ class CompoundInterestCalculationInputService(
             return null
         }
 
-        val installment = installmentInput.text.replace(",", "").toInt()
-        val annualInterest = annualInterestInput.text.replace(",", "").toDouble()
-        val year = yearInput.text.replace(",", "").toInt()
+        val installment = installmentInput.text.replace(REPLACE_TARGET, "").toInt()
+        val annualInterest = annualInterestInput.text.replace(REPLACE_TARGET, "").toDouble()
+        val year = yearInput.text.replace(REPLACE_TARGET, "").toInt()
 
         return Triple(installment, annualInterest, year)
     }
@@ -50,6 +50,12 @@ class CompoundInterestCalculationInputService(
             it.add(JLabel("Year"))
             it.add(yearInput)
         }
+    }
+
+    companion object {
+
+        private const val REPLACE_TARGET = ","
+
     }
 
 }
