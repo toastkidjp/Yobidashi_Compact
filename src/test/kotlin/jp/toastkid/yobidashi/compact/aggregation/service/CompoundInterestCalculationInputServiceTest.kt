@@ -9,6 +9,7 @@ import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.verify
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import javax.swing.JComponent
@@ -58,7 +59,7 @@ internal class CompoundInterestCalculationInputServiceTest {
         every { JOptionPane.showConfirmDialog(null, any<JComponent>()) }.answers { JOptionPane.CANCEL_OPTION }
         every { anyConstructed<JFormattedTextField>().getText() }.answers { "1" }
 
-        compoundInterestCalculationInputService.invoke()
+        assertNull(compoundInterestCalculationInputService.invoke())
 
         verify(atLeast = 1) { intFormatter.install(any()) }
         verify(exactly = 1) { anyConstructed<JPanel>().setLayout(any()) }
