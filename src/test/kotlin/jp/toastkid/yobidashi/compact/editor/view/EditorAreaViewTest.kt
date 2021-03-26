@@ -121,6 +121,17 @@ internal class EditorAreaViewTest {
 
     @Test
     fun duplicateLine() {
+        every { editorArea.getLineStartOffsetOfCurrentLine() }.returns(0)
+        every { editorArea.getLineEndOffsetOfCurrentLine() }.returns(7)
+        every { editorArea.getText(any(), any()) }.returns("extracted")
+        every { editorArea.insert(any(), any()) }.answers { Unit }
+
+        editorAreaView.duplicateLine()
+
+        verify(exactly = 1) { editorArea.getLineStartOffsetOfCurrentLine() }
+        verify(exactly = 1) { editorArea.getLineEndOffsetOfCurrentLine() }
+        verify(exactly = 1) { editorArea.getText(any(), any()) }
+        verify(exactly = 1) { editorArea.insert(any(), any()) }
     }
 
     @Test
