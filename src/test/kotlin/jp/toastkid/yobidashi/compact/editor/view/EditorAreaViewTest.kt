@@ -130,8 +130,8 @@ internal class EditorAreaViewTest {
 
         verify(exactly = 1) { editorArea.getLineStartOffsetOfCurrentLine() }
         verify(exactly = 1) { editorArea.getLineEndOffsetOfCurrentLine() }
-        verify(exactly = 1) { editorArea.getText(any(), any()) }
-        verify(exactly = 1) { editorArea.insert(any(), any()) }
+        verify(exactly = 1) { editorArea.getText(0, 7) }
+        verify(exactly = 1) { editorArea.insert("extracted", 7) }
     }
 
     @Test
