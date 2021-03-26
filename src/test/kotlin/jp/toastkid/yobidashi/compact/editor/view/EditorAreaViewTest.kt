@@ -117,6 +117,12 @@ internal class EditorAreaViewTest {
 
     @Test
     fun selectedText() {
+        every { editorArea.getSelectedText() }.returns(" abc ")
+
+        val selectedText = editorAreaView.selectedText()
+
+        verify(exactly = 1) { editorArea.getSelectedText() }
+        assertEquals("abc", selectedText)
     }
 
     @Test
