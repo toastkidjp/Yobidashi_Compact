@@ -8,6 +8,7 @@ import io.mockk.mockkConstructor
 import io.mockk.mockkObject
 import io.mockk.spyk
 import io.mockk.unmockkAll
+import io.mockk.verify
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
 import jp.toastkid.yobidashi.compact.model.Setting
@@ -124,10 +125,13 @@ internal class EditorAreaViewTest {
 
     @Test
     fun switchEditable() {
-    }
+        every { editorArea.isEditable() }.returns(true)
+        every { editorArea.setEditable(any()) }.answers { Unit }
 
-    @Test
-    fun refresh() {
+        editorAreaView.switchEditable()
+
+        verify(exactly = 1) { editorArea.isEditable() }
+        verify(exactly = 1) { editorArea.setEditable(any()) }
     }
 
 }
