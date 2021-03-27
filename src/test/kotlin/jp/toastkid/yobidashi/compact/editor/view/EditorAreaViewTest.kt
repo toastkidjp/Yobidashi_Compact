@@ -93,6 +93,12 @@ internal class EditorAreaViewTest {
 
     @Test
     fun getTextArray() {
+        every { editorArea.getText() }.returns("test")
+
+        val textArray = editorAreaView.getTextArray()
+
+        assertEquals("test", String(textArray))
+        verify(exactly = 1) { editorArea.getText() }
     }
 
     @Test
