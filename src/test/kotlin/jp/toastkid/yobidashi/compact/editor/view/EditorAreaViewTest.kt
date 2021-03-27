@@ -113,6 +113,12 @@ internal class EditorAreaViewTest {
 
     @Test
     fun count() {
+        every { editorArea.getSelectedText() }.returns(" abc ")
+
+        val count = editorAreaView.count()
+
+        verify(exactly = 1) { editorArea.getSelectedText() }
+        assertEquals(3, count)
     }
 
     @Test
