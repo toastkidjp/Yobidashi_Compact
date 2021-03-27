@@ -87,7 +87,7 @@ class EditorAreaView(
     }
 
     fun receiveStatus(receiver: (Int) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.Default).launch {
             statusChannel.receiveAsFlow().collect {
                 receiver(editorArea.text.length)
             }
