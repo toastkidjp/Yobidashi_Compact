@@ -198,7 +198,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun duplicateLine() {
+    fun testDuplicateLine() {
         every { editorArea.getLineStartOffsetOfCurrentLine() }.returns(0)
         every { editorArea.getLineEndOffsetOfCurrentLine() }.returns(7)
         every { editorArea.getText(any(), any()) }.returns("extracted")
