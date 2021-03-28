@@ -119,7 +119,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun find() {
+    fun testFind() {
         mockkConstructor(FinderService::class)
         every { anyConstructed<FinderService>().invoke(any()) }.answers { Unit }
 
