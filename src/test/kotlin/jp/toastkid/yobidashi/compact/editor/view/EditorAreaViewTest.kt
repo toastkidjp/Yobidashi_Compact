@@ -109,7 +109,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun insertText() {
+    fun testInsertText() {
         every { editorArea.insert(any(), any()) }.answers { Unit }
         every { editorArea.getCaretPosition() }.returns(0)
 
