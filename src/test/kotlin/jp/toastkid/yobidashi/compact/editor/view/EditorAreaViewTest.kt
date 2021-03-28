@@ -188,7 +188,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun selectedText() {
+    fun testSelectedText() {
         every { editorArea.getSelectedText() }.returns(" abc ")
 
         val selectedText = editorAreaView.selectedText()
