@@ -10,6 +10,8 @@ import io.mockk.spyk
 import io.mockk.unmockkAll
 import io.mockk.verify
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
+import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
+import jp.toastkid.yobidashi.compact.editor.finder.FinderService
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
 import jp.toastkid.yobidashi.compact.model.Setting
 import kotlinx.coroutines.channels.Channel
@@ -118,6 +120,12 @@ internal class EditorAreaViewTest {
 
     @Test
     fun find() {
+        mockkConstructor(FinderService::class)
+        every { anyConstructed<FinderService>().invoke(any()) }.answers { Unit }
+
+        editorAreaView.find(FindOrder("test", "replaced"))
+
+        verify(exactly = 1) { anyConstructed<FinderService>().invoke(any()) }
     }
 
     @Test
