@@ -113,7 +113,7 @@ internal class EditorAreaViewTest {
 
         editorAreaView.insertText("insert")
 
-        verify(exactly = 1) { editorArea.insert(any(), any()) }
+        verify(exactly = 1) { editorArea.insert("insert", 0) }
     }
 
     @Test
