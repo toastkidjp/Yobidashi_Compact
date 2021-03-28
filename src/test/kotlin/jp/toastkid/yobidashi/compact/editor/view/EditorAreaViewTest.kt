@@ -173,8 +173,8 @@ internal class EditorAreaViewTest {
         verify(exactly = 1) { editorArea.getSelectionStart() }
         verify(exactly = 1) { editorArea.getSelectionEnd() }
         verify(exactly = 1) { editorArea.replaceSelection(any()) }
-        verify(exactly = 1) { editorArea.setSelectionStart(any()) }
-        verify(exactly = 1) { editorArea.setSelectionEnd(any()) }
+        verify(exactly = 1) { editorArea.setSelectionStart(2) }
+        verify(exactly = 1) { editorArea.setSelectionEnd(3) }
     }
 
     @Test
