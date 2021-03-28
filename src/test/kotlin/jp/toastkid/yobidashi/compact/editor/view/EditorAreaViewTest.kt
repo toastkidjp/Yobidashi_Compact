@@ -129,7 +129,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun replaceSelectedPassingNull() {
+    fun testReplaceSelectedPassingNull() {
         every { editorArea.getSelectedText() }.returns(null)
         every { editorArea.getSelectionStart() }.returns(2)
         every { editorArea.getSelectionEnd() }.returns(3)
