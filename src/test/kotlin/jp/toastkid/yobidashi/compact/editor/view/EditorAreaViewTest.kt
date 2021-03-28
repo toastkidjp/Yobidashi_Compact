@@ -159,6 +159,25 @@ internal class EditorAreaViewTest {
     }
 
     @Test
+    fun replaceSelectedWithKeepSelection() {
+        every { editorArea.getSelectedText() }.returns("test")
+        every { editorArea.getSelectionStart() }.returns(2)
+        every { editorArea.getSelectionEnd() }.returns(3)
+        every { editorArea.replaceSelection(any()) }.answers { Unit }
+        every { editorArea.setSelectionStart(any()) }.answers { Unit }
+        every { editorArea.setSelectionEnd(any()) }.answers { Unit }
+
+        editorAreaView.replaceSelected(true, { "replaced" })
+
+        verify(exactly = 1) { editorArea.getSelectedText() }
+        verify(exactly = 1) { editorArea.getSelectionStart() }
+        verify(exactly = 1) { editorArea.getSelectionEnd() }
+        verify(exactly = 1) { editorArea.replaceSelection(any()) }
+        verify(exactly = 1) { editorArea.setSelectionStart(any()) }
+        verify(exactly = 1) { editorArea.setSelectionEnd(any()) }
+    }
+
+    @Test
     fun count() {
         every { editorArea.getSelectedText() }.returns(" abc ")
 
