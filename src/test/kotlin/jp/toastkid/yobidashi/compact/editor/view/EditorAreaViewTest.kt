@@ -129,7 +129,18 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun replaceSelected() {
+    fun replaceSelectedPassingNull() {
+        every { editorArea.getSelectedText() }.returns(null)
+        every { editorArea.getSelectionStart() }.returns(2)
+        every { editorArea.getSelectionEnd() }.returns(3)
+        every { editorArea.replaceSelection(any()) }.answers { Unit }
+
+        editorAreaView.replaceSelected(false, { "replaced" })
+
+        verify(exactly = 1) { editorArea.getSelectedText() }
+        verify(exactly = 0) { editorArea.getSelectionStart() }
+        verify(exactly = 0) { editorArea.getSelectionEnd() }
+        verify(exactly = 0) { editorArea.replaceSelection(any()) }
     }
 
     @Test
