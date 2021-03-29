@@ -40,4 +40,14 @@ internal class ColorChooserServiceTest {
         verify(exactly = 1) { anyConstructed<JColorChooser>().getColor() }
     }
 
+    @Test
+    fun testCancelCase() {
+        every { JOptionPane.showConfirmDialog(any(), any()) }.returns(JOptionPane.CANCEL_OPTION)
+
+        colorChooserService.invoke()
+
+        verify(exactly = 1) { JOptionPane.showConfirmDialog(any(), any()) }
+        verify(exactly = 0) { anyConstructed<JColorChooser>().getColor() }
+    }
+
 }
