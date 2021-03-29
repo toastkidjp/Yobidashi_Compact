@@ -37,7 +37,7 @@ class ArticlesReaderServiceTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         articlesReaderService.invoke()
 
         verify(exactly = 1) { Setting.articleFolder() }
