@@ -120,7 +120,7 @@ class EditorAreaView(
         return editorArea.selectedText.trim().codePoints().count()
     }
 
-    fun selectedText(): String? {
+    fun selectedText(): String {
         return editorArea.selectedText.trim()
     }
 
