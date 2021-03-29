@@ -60,9 +60,9 @@ class MainFrame(title: String) {
         tabPane.add("Articles", list.view())
         tabs.add(list)
 
-        SubjectPool.observeSort({
+        SubjectPool.observeSort {
             tabs.get(tabPane.selectedIndex).sortBy(it)
-        })
+        }
 
         val searchInput = JTextField()
         searchInput.addKeyListener(object : KeyListener {
