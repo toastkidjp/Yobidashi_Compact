@@ -33,7 +33,7 @@ internal class ColorChooserServiceTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         colorChooserService.invoke()
 
         verify(exactly = 1) { JOptionPane.showConfirmDialog(any(), any()) }
