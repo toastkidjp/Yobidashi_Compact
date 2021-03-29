@@ -104,7 +104,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun receiveStatus() {
+    fun testReceiveStatus() {
         editorAreaView.receiveStatus {  }
     }
 
