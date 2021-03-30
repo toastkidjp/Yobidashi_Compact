@@ -51,7 +51,7 @@ internal class MovieMemoSubtitleExtractorTest {
 
         val first = movieMemoExtractorResult.itemArrays().first()
         assertEquals("file.md", first[0])
-        assertEquals(" 『ミッション：インポッシブル(原題：MISSION:IMPOSSIBLE)』(1996年、アメリカ合衆国)", first[1])
+        assertEquals("『ミッション：インポッシブル(原題：MISSION:IMPOSSIBLE)』(1996年、アメリカ合衆国)", first[1])
 
         verify(exactly = 1) { Files.readAllLines(any()) }
         verify(exactly = 1) { articlesReaderService.invoke() }
