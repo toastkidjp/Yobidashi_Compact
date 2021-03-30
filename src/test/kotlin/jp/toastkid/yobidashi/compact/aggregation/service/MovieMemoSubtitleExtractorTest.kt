@@ -46,7 +46,7 @@ internal class MovieMemoSubtitleExtractorTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         val movieMemoExtractorResult = movieMemoSubtitleExtractor.invoke("file")
 
         val first = movieMemoExtractorResult.itemArrays().first()
