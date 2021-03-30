@@ -94,7 +94,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun getTextArray() {
+    fun testGetTextArray() {
         every { editorArea.getText() }.returns("test")
 
         val textArray = editorAreaView.getTextArray()
