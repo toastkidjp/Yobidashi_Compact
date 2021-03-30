@@ -16,7 +16,7 @@ class MovieMemoSubtitleExtractor(private val articlesReaderService: ArticlesRead
                     it.fileName.toString() to
                         Files.readAllLines(it)
                                 .filter { line -> line.startsWith("##") && line.contains("年、") }
-                                .map { line -> line.substring(line.indexOf(" ")) }
+                                .map { line -> line.substring(line.indexOf(" ")).trim() }
                 }
                 .filter { it.second.isNotEmpty() }
                 .forEach {
