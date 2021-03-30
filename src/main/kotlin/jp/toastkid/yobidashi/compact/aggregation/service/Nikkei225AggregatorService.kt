@@ -1,16 +1,15 @@
 package jp.toastkid.yobidashi.compact.aggregation.service
 
 import jp.toastkid.yobidashi.compact.aggregation.model.Nikkei225AggregationResult
-import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.ArticlesReaderService
 import java.nio.file.Files
-import java.nio.file.Paths
 
-class Nikkei225AggregatorService {
+class Nikkei225AggregatorService(private val articlesReaderService: ArticlesReaderService = ArticlesReaderService()) {
 
     operator fun invoke(keyword: String): Nikkei225AggregationResult {
         val result = Nikkei225AggregationResult()
 
-        Files.list(Paths.get(Setting.articleFolder()))
+        articlesReaderService.invoke()
                 .parallel()
                 .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
                 .filter { it.first.startsWith(keyword) }
