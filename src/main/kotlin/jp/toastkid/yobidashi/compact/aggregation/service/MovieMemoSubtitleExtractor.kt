@@ -1,17 +1,15 @@
 package jp.toastkid.yobidashi.compact.aggregation.service
 
 import jp.toastkid.yobidashi.compact.aggregation.model.MovieMemoExtractorResult
-import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.ArticlesReaderService
 import java.nio.file.Files
-import java.nio.file.Paths
 import kotlin.streams.asSequence
 
-class MovieMemoSubtitleExtractor {
+class MovieMemoSubtitleExtractor(private val articlesReaderService: ArticlesReaderService = ArticlesReaderService()) {
 
     operator fun invoke(keyword: String): MovieMemoExtractorResult {
         val result = MovieMemoExtractorResult()
-        Files.list(Paths.get(Setting.articleFolder()))
-                //.parallel()
+        articlesReaderService.invoke()
                 .asSequence()
                 .filter { it.fileName.toString().startsWith(keyword) }
                 .map {
