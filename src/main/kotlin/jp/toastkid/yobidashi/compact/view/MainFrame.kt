@@ -71,10 +71,7 @@ class MainFrame(title: String) {
             override fun keyPressed(e: KeyEvent?) = Unit
 
             override fun keyReleased(e: KeyEvent?) {
-                if (e == null) {
-                    return
-                }
-                if (e.keyCode == KeyEvent.VK_ENTER) {
+                if (e?.keyCode == KeyEvent.VK_ENTER) {
                     list.filter(searchInput)
                 }
             }
