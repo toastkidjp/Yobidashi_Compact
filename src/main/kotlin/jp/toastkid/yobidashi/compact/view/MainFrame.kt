@@ -47,14 +47,7 @@ class MainFrame(title: String) {
         }
 
         val list = ArticleListView()
-        CoroutineScope(Dispatchers.Swing).launch {
-            val articles = withContext(Dispatchers.IO) {
-                Files.list(Paths.get(Setting.articleFolder()))
-                        .map { Article(it) }
-                        .collect(Collectors.toList())
-            }
-            list.addAll(articles)
-        }
+        loadArticles(list)
 
         val tabPane = JTabbedPane()
         tabPane.add("Articles", list.view())
@@ -84,6 +77,17 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 600)
+    }
+
+    private fun loadArticles(list: ArticleListView) {
+        CoroutineScope(Dispatchers.Swing).launch {
+            val articles = withContext(Dispatchers.IO) {
+                Files.list(Paths.get(Setting.articleFolder()))
+                    .map { Article(it) }
+                    .collect(Collectors.toList())
+            }
+            list.addAll(articles)
+        }
     }
 
     private fun makeFilterInput(list: ArticleListView): JTextField {
