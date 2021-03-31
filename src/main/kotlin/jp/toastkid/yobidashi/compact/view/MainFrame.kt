@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
+import jp.toastkid.yobidashi.compact.service.ArticleFilterViewFactoryService
 import jp.toastkid.yobidashi.compact.service.CloseActionService
 import jp.toastkid.yobidashi.compact.service.CloserTabComponentFactoryService
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
@@ -95,7 +96,7 @@ class MainFrame(title: String) {
 
             override fun keyReleased(e: KeyEvent?) {
                 if (e?.keyCode == KeyEvent.VK_ENTER) {
-                    list.filter(searchInput)
+                    list.filter(searchInput.text)
                 }
             }
         })

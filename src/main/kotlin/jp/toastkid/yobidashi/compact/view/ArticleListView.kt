@@ -19,7 +19,6 @@ import javax.swing.JList
 import javax.swing.JOptionPane
 import javax.swing.JPopupMenu
 import javax.swing.JScrollPane
-import javax.swing.JTextField
 
 class ArticleListView {
 
@@ -131,8 +130,8 @@ class ArticleListView {
         fileListModel.addAll(articles) { SubjectPool.refreshUi(view) }
     }
 
-    fun filter(searchInput: JTextField) {
-        fileListModel.filter(searchInput.text)
+    fun filter(searchInput: String?) {
+        fileListModel.filter(searchInput)
         view.updateUI()
     }
 
