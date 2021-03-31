@@ -64,19 +64,7 @@ class MainFrame(title: String) {
             tabs.get(tabPane.selectedIndex).sortBy(it)
         }
 
-        val searchInput = JTextField()
-        searchInput.addKeyListener(object : KeyListener {
-            override fun keyTyped(e: KeyEvent?) = Unit
-
-            override fun keyPressed(e: KeyEvent?) = Unit
-
-            override fun keyReleased(e: KeyEvent?) {
-                if (e?.keyCode == KeyEvent.VK_ENTER) {
-                    list.filter(searchInput)
-                }
-            }
-        })
-        searchInput.preferredSize = Dimension(600, 40)
+        val searchInput = makeFilterInput(list)
 
         val panel = JPanel()
         panel.layout = BorderLayout()
@@ -115,6 +103,23 @@ class MainFrame(title: String) {
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
         frame.setBounds(200, 200, 400, 600)
+    }
+
+    private fun makeFilterInput(list: ArticleListView): JTextField {
+        val searchInput = JTextField()
+        searchInput.addKeyListener(object : KeyListener {
+            override fun keyTyped(e: KeyEvent?) = Unit
+
+            override fun keyPressed(e: KeyEvent?) = Unit
+
+            override fun keyReleased(e: KeyEvent?) {
+                if (e?.keyCode == KeyEvent.VK_ENTER) {
+                    list.filter(searchInput)
+                }
+            }
+        })
+        searchInput.preferredSize = Dimension(600, 40)
+        return searchInput
     }
 
     private fun addNewTab(tabPane: JTabbedPane, component: JComponent, title: String) {
