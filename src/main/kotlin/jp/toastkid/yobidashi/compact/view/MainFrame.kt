@@ -53,10 +53,6 @@ class MainFrame(title: String) {
         tabPane.add("Articles", list.view())
         tabs.add(list)
 
-        SubjectPool.observeSort {
-            tabs.get(tabPane.selectedIndex).sortBy(it)
-        }
-
         val searchInput = makeFilterInput(list)
 
         val panel = JPanel()
@@ -108,6 +104,10 @@ class MainFrame(title: String) {
     }
 
     private fun observe(tabPane: JTabbedPane, list: ArticleListView, closeActionService: CloseActionService) {
+        SubjectPool.observeSort {
+            tabs.get(tabPane.selectedIndex).sortBy(it)
+        }
+
         SubjectPool.observeNewSearchResult { component, title ->
             addNewTab(tabPane, component.view(), title)
             tabs.add(component)
