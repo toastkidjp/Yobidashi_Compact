@@ -71,34 +71,15 @@ class MainFrame(title: String) {
         panel.add(searchInput, BorderLayout.NORTH)
         panel.add(tabPane, BorderLayout.CENTER)
 
-        SubjectPool.observeNewSearchResult { component, title ->
-            addNewTab(tabPane, component.view(), title)
-            tabs.add(component)
-        }
-
-        SubjectPool.observeAddNewTab {
-            addNewTab(tabPane, it.first, it.second)
-        }
-
-        val closeActionService = CloseActionService(
+        observe(
+            tabPane,
+            list,
+            CloseActionService(
                 tabPane::getTabCount,
                 { tabPane.removeTabAt(tabPane.tabCount - 1) },
                 frame::dispose
+            )
         )
-        SubjectPool.observeCloseWindow(closeActionService::invoke)
-
-        SubjectPool.observeAddToList {
-            list.add(it)
-            list.sortBy(Setting.sorting())
-        }
-
-        SubjectPool.observeRefreshUi {
-            SwingUtilities.updateComponentTreeUI(it)
-        }
-
-        ZipViewModel.observe {
-            tabs.get(tabPane.selectedIndex).zip()
-        }
 
         frame.jMenuBar = MenuBarView().invoke(frame)
         frame.contentPane.add(panel, BorderLayout.CENTER)
@@ -120,6 +101,32 @@ class MainFrame(title: String) {
         })
         searchInput.preferredSize = Dimension(600, 40)
         return searchInput
+    }
+
+    private fun observe(tabPane: JTabbedPane, list: ArticleListView, closeActionService: CloseActionService) {
+        SubjectPool.observeNewSearchResult { component, title ->
+            addNewTab(tabPane, component.view(), title)
+            tabs.add(component)
+        }
+
+        SubjectPool.observeAddNewTab {
+            addNewTab(tabPane, it.first, it.second)
+        }
+
+        SubjectPool.observeCloseWindow(closeActionService::invoke)
+
+        SubjectPool.observeAddToList {
+            list.add(it)
+            list.sortBy(Setting.sorting())
+        }
+
+        SubjectPool.observeRefreshUi {
+            SwingUtilities.updateComponentTreeUI(it)
+        }
+
+        ZipViewModel.observe {
+            tabs.get(tabPane.selectedIndex).zip()
+        }
     }
 
     private fun addNewTab(tabPane: JTabbedPane, component: JComponent, title: String) {
