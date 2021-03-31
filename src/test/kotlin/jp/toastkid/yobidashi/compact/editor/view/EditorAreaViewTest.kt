@@ -87,7 +87,7 @@ internal class EditorAreaViewTest {
     }
 
     @Test
-    fun setText() {
+    fun testSetText() {
         editorAreaView.setText("test")
 
         assertEquals("test", editorArea.text)
