@@ -60,7 +60,7 @@ _
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         val outgoAggregationResult = outgoAggregatorService.invoke("file")
 
         assertEquals(1733, outgoAggregationResult.sum())
