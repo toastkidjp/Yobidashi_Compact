@@ -8,6 +8,7 @@ import jp.toastkid.yobidashi.compact.service.ArticleFilterViewFactoryService
 import jp.toastkid.yobidashi.compact.service.ArticlesReaderService
 import jp.toastkid.yobidashi.compact.service.CloseActionService
 import jp.toastkid.yobidashi.compact.service.CloserTabComponentFactoryService
+import jp.toastkid.yobidashi.compact.service.TabAdderService
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -87,13 +88,15 @@ class MainFrame(title: String) {
             tabs.get(tabPane.selectedIndex).sortBy(it)
         }
 
+        val tabAdderService = TabAdderService(tabPane)
+
         SubjectPool.observeNewSearchResult { component, title ->
-            addNewTab(tabPane, component.view(), title)
+            tabAdderService(component.view(), title)
             tabs.add(component)
         }
 
         SubjectPool.observeAddNewTab {
-            addNewTab(tabPane, it.first, it.second)
+            tabAdderService(it.first, it.second)
         }
 
         SubjectPool.observeCloseWindow(closeActionService::invoke)
