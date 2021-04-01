@@ -54,7 +54,7 @@ _
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         val nikkei225AggregationResult = nikkei225AggregatorService.invoke("file")
 
         val first = nikkei225AggregationResult.itemArrays().first()
