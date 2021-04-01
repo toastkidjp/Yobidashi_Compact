@@ -15,9 +15,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
 import java.awt.BorderLayout
-import java.awt.Dimension
-import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.stream.Collectors
@@ -26,7 +23,6 @@ import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.JTabbedPane
-import javax.swing.JTextField
 import javax.swing.SwingUtilities
 
 /**
@@ -85,23 +81,6 @@ class MainFrame(title: String) {
             }
             list.addAll(articles)
         }
-    }
-
-    private fun makeFilterInput(list: ArticleListView): JTextField {
-        val searchInput = JTextField()
-        searchInput.addKeyListener(object : KeyListener {
-            override fun keyTyped(e: KeyEvent?) = Unit
-
-            override fun keyPressed(e: KeyEvent?) = Unit
-
-            override fun keyReleased(e: KeyEvent?) {
-                if (e?.keyCode == KeyEvent.VK_ENTER) {
-                    list.filter(searchInput.text)
-                }
-            }
-        })
-        searchInput.preferredSize = Dimension(600, 40)
-        return searchInput
     }
 
     private fun observe(tabPane: JTabbedPane, list: ArticleListView, closeActionService: CloseActionService) {
