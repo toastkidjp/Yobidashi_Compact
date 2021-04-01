@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.ArticleFilterViewFactoryService
+import jp.toastkid.yobidashi.compact.service.ArticlesReaderService
 import jp.toastkid.yobidashi.compact.service.CloseActionService
 import jp.toastkid.yobidashi.compact.service.CloserTabComponentFactoryService
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
@@ -15,8 +16,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import kotlinx.coroutines.withContext
 import java.awt.BorderLayout
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.util.stream.Collectors
 import javax.imageio.ImageIO
 import javax.swing.JComponent
@@ -75,7 +74,7 @@ class MainFrame(title: String) {
     private fun loadArticles(list: ArticleListView) {
         CoroutineScope(Dispatchers.Swing).launch {
             val articles = withContext(Dispatchers.IO) {
-                Files.list(Paths.get(Setting.articleFolder()))
+                ArticlesReaderService().invoke()
                     .map { Article(it) }
                     .collect(Collectors.toList())
             }
