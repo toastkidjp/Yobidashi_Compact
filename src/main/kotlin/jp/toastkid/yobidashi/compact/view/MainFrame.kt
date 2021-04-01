@@ -54,7 +54,7 @@ class MainFrame(title: String) {
         tabPane.add("Articles", list.view())
         tabs.add(list)
 
-        val searchInput = makeFilterInput(list)
+        val searchInput = ArticleFilterViewFactoryService().invoke { list.filter(it) }
 
         val panel = JPanel()
         panel.layout = BorderLayout()
