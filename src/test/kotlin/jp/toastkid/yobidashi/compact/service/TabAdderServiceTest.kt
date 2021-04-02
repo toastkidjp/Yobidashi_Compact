@@ -51,4 +51,17 @@ internal class TabAdderServiceTest {
         verify(exactly = 1) { closerTabComponentFactoryService.invoke(any(), any()) }
     }
 
+    @Test
+    fun testNotFoundCase() {
+        every { tabPane.indexOfComponent(any<JComponent>()) }.returns(-1)
+
+        tabAdderService.invoke(mockk(), "tab1")
+
+        verify(exactly = 1) { tabPane.add(any<JComponent>()) }
+        verify(exactly = 1) { tabPane.indexOfComponent(any<JComponent>()) }
+        verify(exactly = 0) { tabPane.setTabComponentAt(any(), any<JComponent>()) }
+        verify(exactly = 0) { tabPane.setSelectedIndex(any()) }
+        verify(exactly = 0) { closerTabComponentFactoryService.invoke(any(), any()) }
+    }
+
 }
