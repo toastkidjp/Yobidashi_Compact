@@ -43,4 +43,14 @@ internal class DisposeActionServiceTest {
         verify(exactly = 1) { JOptionPane.showConfirmDialog(any(), any()) }
     }
 
+    @Test
+    fun testCancelCase() {
+        every { JOptionPane.showConfirmDialog(any(), any()) }.returns(JOptionPane.CANCEL_OPTION)
+
+        disposeActionService.invoke(false)
+
+        verify(exactly = 0) { frame.dispose() }
+        verify(exactly = 1) { JOptionPane.showConfirmDialog(any(), any()) }
+    }
+
 }
