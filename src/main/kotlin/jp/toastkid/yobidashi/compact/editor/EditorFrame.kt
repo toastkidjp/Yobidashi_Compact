@@ -5,6 +5,7 @@ import jp.toastkid.yobidashi.compact.editor.finder.FinderAreaView
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.service.ArticleContentLoaderService
 import jp.toastkid.yobidashi.compact.editor.service.CommandReceiverService
+import jp.toastkid.yobidashi.compact.editor.service.DisposeActionService
 import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
 import jp.toastkid.yobidashi.compact.editor.view.MenuBarView
 import jp.toastkid.yobidashi.compact.model.Article
@@ -21,7 +22,6 @@ import java.awt.BorderLayout
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JLabel
-import javax.swing.JOptionPane
 import javax.swing.JPanel
 
 class EditorFrame {
@@ -117,19 +117,7 @@ class EditorFrame {
     }
 
     private fun dispose() {
-        if (editing.shouldShowIndicator().not()) {
-            frame.dispose()
-            return
-        }
-
-        val choice = JOptionPane.showConfirmDialog(
-                frame,
-                "Would you like to close this editor window? This file is editing."
-        )
-
-        if (choice == JOptionPane.OK_OPTION) {
-            frame.dispose()
-        }
+        DisposeActionService(frame).invoke(editing.shouldShowIndicator().not())
     }
 
 }
