@@ -26,11 +26,11 @@ import javax.swing.SwingUtilities
 /**
  * @author toastkidjp
  */
-class MainFrame(title: String) {
-
-    private val tabs = ArticleListTabs()
-
-    private val frame = JFrame(title)
+class MainFrame(
+    title: String,
+    private val tabs: ArticleListTabs = ArticleListTabs(),
+    private val frame: JFrame = JFrame(title)
+) {
 
     private fun initialize() {
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
