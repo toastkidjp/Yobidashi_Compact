@@ -42,7 +42,7 @@ internal class MainFrameTest {
     }
 
     @Test
-    fun show() {
+    fun testShow() {
         mainFrame.show()
 
         verify(exactly = 1) { tabs.add(any()) }
