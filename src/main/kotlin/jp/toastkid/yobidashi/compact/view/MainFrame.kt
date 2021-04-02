@@ -7,7 +7,6 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.ArticleFilterViewFactoryService
 import jp.toastkid.yobidashi.compact.service.ArticlesReaderService
 import jp.toastkid.yobidashi.compact.service.CloseActionService
-import jp.toastkid.yobidashi.compact.service.CloserTabComponentFactoryService
 import jp.toastkid.yobidashi.compact.service.TabAdderService
 import jp.toastkid.yobidashi.compact.service.UiUpdaterService
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
@@ -19,7 +18,6 @@ import kotlinx.coroutines.withContext
 import java.awt.BorderLayout
 import java.util.stream.Collectors
 import javax.imageio.ImageIO
-import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.JTabbedPane
@@ -113,16 +111,6 @@ class MainFrame(title: String) {
         ZipViewModel.observe {
             tabs.get(tabPane.selectedIndex).zip()
         }
-    }
-
-    private fun addNewTab(tabPane: JTabbedPane, component: JComponent, title: String) {
-        tabPane.add(component)
-        val indexOfComponent = tabPane.indexOfComponent(component)
-        if (indexOfComponent == -1) {
-            return
-        }
-        tabPane.setTabComponentAt(indexOfComponent, CloserTabComponentFactoryService(tabPane)(component, title))
-        tabPane.selectedIndex = indexOfComponent
     }
 
     fun show() {
