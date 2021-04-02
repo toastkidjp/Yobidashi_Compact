@@ -53,4 +53,12 @@ internal class DisposeActionServiceTest {
         verify(exactly = 1) { JOptionPane.showConfirmDialog(any(), any()) }
     }
 
+    @Test
+    fun testShouldNotShowCase() {
+        disposeActionService.invoke(true)
+
+        verify(exactly = 1) { frame.dispose() }
+        verify(exactly = 0) { JOptionPane.showConfirmDialog(any(), any()) }
+    }
+
 }
