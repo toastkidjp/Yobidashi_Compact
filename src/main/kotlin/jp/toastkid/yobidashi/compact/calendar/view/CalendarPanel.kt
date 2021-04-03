@@ -15,12 +15,16 @@ import javax.swing.border.LineBorder
 
 class CalendarPanel : JPanel() {
 
-    private val dayLabels = Array(6) { arrayOfNulls<JLabel>(7) }
+    private val dayLabels:  Array<Array<JLabel?>>
 
     init {
         layout = BoxLayout(this, BoxLayout.Y_AXIS)
+
+        val panelAndDayLabels = DayPanelFactory().invoke()
+        dayLabels = panelAndDayLabels.second
+
         add(ChooserPanelFactory({ year, month -> refreshDayLabels(year, month) }).invoke())
-        add(makeDayPanel())
+        add(panelAndDayLabels.first)
 
         val date = LocalDate.now()
         refreshDayLabels(date, true)
