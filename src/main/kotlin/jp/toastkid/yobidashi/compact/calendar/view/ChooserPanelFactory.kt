@@ -5,15 +5,13 @@ import java.time.Month
 import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JSpinner
-import javax.swing.JTextField
-import javax.swing.SpinnerListModel
 import javax.swing.SpinnerNumberModel
 import javax.swing.event.ChangeListener
 
 class ChooserPanelFactory(private val refreshDayLabels: (Int, Month) -> Unit) {
 
     operator fun invoke(): JPanel {
-        val monthChooser = makeMonthChooser()
+        val monthChooser = MonthChooserFactory().invoke()
         val yearChooser = makeYearChooser()
 
         val monthYearListener: ChangeListener = makeMonthChangeListener(yearChooser, monthChooser)
@@ -39,19 +37,6 @@ class ChooserPanelFactory(private val refreshDayLabels: (Int, Month) -> Unit) {
         yearChooser.value = date.year
 
         return chooserPanel
-    }
-
-    private fun makeMonthChooser(): JSpinner {
-        val monthChooser = JSpinner()
-        monthChooser.model = SpinnerListModel(Month.values())
-        monthChooser.font = monthChooser.font.deriveFont(14f)
-        val tm = (monthChooser.editor as? JSpinner.DefaultEditor)?.textField
-        tm?.horizontalAlignment = JTextField.CENTER
-
-        val dm = monthChooser.preferredSize
-        dm.width += 10
-        monthChooser.preferredSize = dm
-        return monthChooser
     }
 
     private fun makeYearChooser(): JSpinner {
