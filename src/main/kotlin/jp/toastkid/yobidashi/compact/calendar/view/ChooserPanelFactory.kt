@@ -12,7 +12,7 @@ class ChooserPanelFactory(private val refreshDayLabels: (Int, Month) -> Unit) {
 
     operator fun invoke(): JPanel {
         val monthChooser = MonthChooserFactory().invoke()
-        val yearChooser = makeYearChooser()
+        val yearChooser = YearChooserFactory().invoke()
 
         val monthYearListener: ChangeListener = makeMonthChangeListener(yearChooser, monthChooser)
         monthChooser.addChangeListener(monthYearListener)
