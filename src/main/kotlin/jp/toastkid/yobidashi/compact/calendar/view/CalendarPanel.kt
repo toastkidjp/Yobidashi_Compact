@@ -2,7 +2,6 @@ package jp.toastkid.yobidashi.compact.calendar.view
 
 import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
-import java.awt.Dimension
 import java.time.LocalDate
 import java.time.Month
 import javax.swing.BoxLayout
@@ -93,8 +92,6 @@ class CalendarPanel : JPanel() {
 
         private val TODAY_BG: Color = Color(220, 220, 255)
         private val TODAY_BORDER = LineBorder(Color(50, 50, 175), 2, false)
-
-        private val DAY_LABEL_SIZE = Dimension(50, 50)
     }
 }
 
