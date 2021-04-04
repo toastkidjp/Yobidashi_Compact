@@ -36,7 +36,7 @@ internal class DisposeActionServiceTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         disposeActionService.invoke(false)
 
         verify(exactly = 1) { frame.dispose() }
