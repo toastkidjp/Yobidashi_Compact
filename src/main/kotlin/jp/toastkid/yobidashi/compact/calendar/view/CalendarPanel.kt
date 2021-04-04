@@ -3,8 +3,6 @@ package jp.toastkid.yobidashi.compact.calendar.view
 import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
 import java.awt.Dimension
-import java.awt.GridLayout
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
 import javax.swing.BoxLayout
@@ -28,33 +26,6 @@ class CalendarPanel : JPanel() {
 
         val date = LocalDate.now()
         refreshDayLabels(date, true)
-    }
-
-    private fun makeDayPanel(): JPanel {
-        val dayPanel = JPanel()
-        val layout = GridLayout(7, 7)
-        layout.hgap = 3
-        layout.vgap = 3
-        dayPanel.layout = layout
-
-        val dayOfWeekLabelFactory = DayOfWeekLabelFactory(DAY_LABEL_SIZE)
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.SUNDAY))
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.MONDAY))
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.TUESDAY))
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.WEDNESDAY))
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.THURSDAY))
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.FRIDAY))
-        dayPanel.add(dayOfWeekLabelFactory(DayOfWeek.SATURDAY))
-
-        val dayLabelFactory = DayLabelFactory(DAY_LABEL_SIZE)
-
-        for (i in 0..5) {
-            for (j in 0..6) {
-                dayLabels[i][j] = dayLabelFactory.invoke(j)
-                dayPanel.add(dayLabels[i][j])
-            }
-        }
-        return dayPanel
     }
 
     private fun refreshDayLabels(year: Int, month: Month) {
