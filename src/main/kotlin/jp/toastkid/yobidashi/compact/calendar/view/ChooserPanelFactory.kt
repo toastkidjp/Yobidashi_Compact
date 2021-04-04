@@ -7,11 +7,15 @@ import javax.swing.JPanel
 import javax.swing.JSpinner
 import javax.swing.event.ChangeListener
 
-class ChooserPanelFactory(private val refreshDayLabels: (Int, Month) -> Unit) {
+class ChooserPanelFactory(
+    private val refreshDayLabels: (Int, Month) -> Unit,
+    private val monthChooserFactory: MonthChooserFactory = MonthChooserFactory(),
+    private val yearChooserFactory: YearChooserFactory = YearChooserFactory()
+) {
 
     operator fun invoke(): JPanel {
-        val monthChooser = MonthChooserFactory().invoke()
-        val yearChooser = YearChooserFactory().invoke()
+        val monthChooser = monthChooserFactory.invoke()
+        val yearChooser = yearChooserFactory.invoke()
 
         val monthYearListener: ChangeListener = makeMonthChangeListener(yearChooser, monthChooser)
         monthChooser.addChangeListener(monthYearListener)
