@@ -41,7 +41,7 @@ internal class TabAdderServiceTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         tabAdderService.invoke(mockk(), "tab1")
 
         verify(exactly = 1) { tabPane.add(any<JComponent>()) }
