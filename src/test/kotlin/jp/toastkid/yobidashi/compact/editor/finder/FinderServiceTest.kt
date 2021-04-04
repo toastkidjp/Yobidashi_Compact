@@ -79,4 +79,16 @@ internal class FinderServiceTest {
         verify(exactly = 2) { editorArea.replaceRange(any(), any(), any()) }
     }
 
+    @Test
+    fun testNotFoundCase() {
+        every { editorArea.getText() }.returns("ACB news will go bankrupt ACB.")
+        every { editorArea.replaceRange(any(), any(), any()) }.answers { Unit }
+
+        finderService.invoke(FindOrder("axx", "BXX", invokeReplace = true, caseSensitive = false))
+
+        verify(exactly = 0) { editorArea.setSelectionStart(any()) }
+        verify(exactly = 0) { editorArea.setSelectionEnd(any()) }
+        verify(exactly = 0) { editorArea.replaceRange(any(), any(), any()) }
+    }
+
 }
