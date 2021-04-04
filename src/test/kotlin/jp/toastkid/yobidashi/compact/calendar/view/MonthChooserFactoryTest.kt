@@ -35,7 +35,7 @@ internal class MonthChooserFactoryTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         monthChooserFactory.invoke()
 
         verify(exactly = 1) { anyConstructed<JSpinner>().setModel(any()) }
