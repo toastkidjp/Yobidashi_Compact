@@ -23,4 +23,9 @@ internal class TrimmingServiceTest {
         )
     }
 
+    @Test
+    fun testEmptyCase() {
+        assertEquals("", trimmingService.invoke(""))
+    }
+
 }
