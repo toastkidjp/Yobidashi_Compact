@@ -53,7 +53,7 @@ internal class ChooserPanelFactoryTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         chooserPanelFactory.invoke()
 
         verify(exactly = 1) { monthChooserFactory.invoke() }
