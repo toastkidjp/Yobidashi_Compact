@@ -1,7 +1,6 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import jp.toastkid.yobidashi.compact.calendar.service.DayLabelRefresherService
-import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
 import java.time.LocalDate
 import javax.swing.BoxLayout
@@ -27,52 +26,6 @@ class CalendarPanel : JPanel() {
 
         val date = LocalDate.now()
         dayLabelRefresherService(date, true)
-    }
-
-    private fun refreshDayLabels(calendar: LocalDate, currentMonth: Boolean) {
-        val maxDate = calendar.month.length(calendar.isLeapYear)
-        val today = calendar.dayOfMonth
-        val firstDay = calendar.withDayOfMonth(1)
-        val firstDayOfWeek = firstDay.dayOfWeek.value % 7
-        for (ll in dayLabels) {
-            for (l in ll) {
-                l?.text = ""
-            }
-        }
-
-        val year = calendar.year
-        val month = calendar.monthValue
-        val offDayFinder = OffDayFinderService()
-        for (day in 1..maxDate) {
-            getDayLabel(day, firstDayOfWeek)?.also {
-                it.text = day.toString()
-                val color = if (offDayFinder(year, month, day, (day + firstDayOfWeek - 1) % 7)) {
-                    Color.RED
-                } else {
-                    Color.BLACK
-                }
-                when (it.foreground) {
-                    Color.BLACK -> it.foreground = color
-                    Color.RED -> it.foreground = color
-                }
-            }
-        }
-
-        for (i in dayLabels.indices) {
-            for (element in dayLabels[i]) {
-                element?.also {
-                    it.background = DAY_BG
-                    it.border = BORDER
-                    it.isVisible = it.text.isNotEmpty()
-                }
-            }
-        }
-        if (currentMonth) {
-            getDayLabel(today, firstDayOfWeek)?.also {
-                it.background = TODAY_BG
-                it.border = TODAY_BORDER
-            }
-        }
     }
 
     private fun getDayLabel(day: Int, firstDayOfWeek: Int): JLabel? {
