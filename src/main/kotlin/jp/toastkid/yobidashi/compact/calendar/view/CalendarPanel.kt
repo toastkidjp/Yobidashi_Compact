@@ -1,5 +1,6 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
+import jp.toastkid.yobidashi.compact.calendar.service.DayLabelRefresherService
 import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
 import java.time.LocalDate
@@ -20,11 +21,13 @@ class CalendarPanel : JPanel() {
         val panelAndDayLabels = DayPanelFactory().invoke()
         dayLabels = panelAndDayLabels.second
 
-        add(ChooserPanelFactory({ year, month -> refreshDayLabels(year, month) }).invoke())
+        val dayLabelRefresherService = DayLabelRefresherService(dayLabels)
+
+        add(ChooserPanelFactory({ year, month -> dayLabelRefresherService(year, month) }).invoke())
         add(panelAndDayLabels.first)
 
         val date = LocalDate.now()
-        refreshDayLabels(date, true)
+        dayLabelRefresherService(date, true)
     }
 
     private fun refreshDayLabels(year: Int, month: Month) {
