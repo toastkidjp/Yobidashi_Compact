@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor.text
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 internal class NumberedListHeadAdderTest {
@@ -16,6 +17,11 @@ internal class NumberedListHeadAdderTest {
     @Test
     fun test() {
         assertEquals(expected, NumberedListHeadAdder().invoke(target))
+    }
+
+    @Test
+    fun testNullCase() {
+        assertNull(NumberedListHeadAdder().invoke(null))
     }
 
 }
