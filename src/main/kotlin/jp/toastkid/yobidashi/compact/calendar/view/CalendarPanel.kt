@@ -4,7 +4,6 @@ import jp.toastkid.yobidashi.compact.calendar.service.DayLabelRefresherService
 import jp.toastkid.yobidashi.compact.calendar.service.OffDayFinderService
 import java.awt.Color
 import java.time.LocalDate
-import java.time.Month
 import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JLabel
@@ -28,15 +27,6 @@ class CalendarPanel : JPanel() {
 
         val date = LocalDate.now()
         dayLabelRefresherService(date, true)
-    }
-
-    private fun refreshDayLabels(year: Int, month: Month) {
-        val cal = LocalDate.now()
-        if (month == cal.month && year == cal.year) {
-            refreshDayLabels(cal, true)
-        } else {
-            refreshDayLabels(LocalDate.of(year, month.ordinal + 1, 1), false)
-        }
     }
 
     private fun refreshDayLabels(calendar: LocalDate, currentMonth: Boolean) {
