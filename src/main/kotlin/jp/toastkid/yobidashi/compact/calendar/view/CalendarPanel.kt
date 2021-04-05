@@ -28,10 +28,6 @@ class CalendarPanel : JPanel() {
         dayLabelRefresherService(date, true)
     }
 
-    private fun getDayLabel(day: Int, firstDayOfWeek: Int): JLabel? {
-        return dayLabels[(day + firstDayOfWeek - 1) / 7][(day + firstDayOfWeek - 1) % 7]
-    }
-
     companion object {
         private val DAY_BG: Color = Color(250, 250, 255)
         private val BORDER = LineBorder(Color(220, 220, 220, 220), 2, false)
