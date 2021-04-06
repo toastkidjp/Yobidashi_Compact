@@ -76,7 +76,7 @@ internal class ArticleCellRendererTest {
 
 
     @Test
-    fun getListCellRendererComponentIsNotSelected() {
+    fun testGetListCellRendererComponentIsNotSelected() {
         articleCellRenderer.getListCellRendererComponent(
             list, value, 1, false, true
         )
