@@ -67,8 +67,8 @@ internal class ArticleCellRendererTest {
         verify(atLeast = 1) { value.getTitle() }
         verify(atLeast = 1) { value.lastModified() }
         verify(atLeast = 1) { anyConstructed<JPanel>().setLayout(any()) }
-        verify(atLeast = 1) { anyConstructed<JPanel>().setBackground(any()) }
-        verify(atLeast = 1) { anyConstructed<JPanel>().setForeground(any()) }
+        verify(atLeast = 1) { anyConstructed<JPanel>().setBackground(Color.BLUE) }
+        verify(atLeast = 1) { anyConstructed<JPanel>().setForeground(Color.WHITE) }
         verify(atLeast = 1) { anyConstructed<JPanel>().setBorder(any()) }
         verify(atLeast = 1) { anyConstructed<JLabel>().setText(any()) }
         verify(atLeast = 1) { anyConstructed<JLabel>().setForeground(any()) }
