@@ -62,6 +62,8 @@ internal class ArticleCellRendererTest {
 
         verify(atLeast = 1) { list.getSelectionBackground() }
         verify(atLeast = 1) { list.getSelectionForeground() }
+        verify(exactly = 0) { list.getBackground() }
+        verify(exactly = 0) { list.getForeground() }
         verify(atLeast = 1) { value.getTitle() }
         verify(atLeast = 1) { value.lastModified() }
         verify(atLeast = 1) { anyConstructed<JPanel>().setLayout(any()) }
