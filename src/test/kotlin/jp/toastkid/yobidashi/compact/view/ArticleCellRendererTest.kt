@@ -36,6 +36,9 @@ internal class ArticleCellRendererTest {
         every { list.getSelectionBackground() }.answers { Color.BLUE }
         every { list.getSelectionForeground() }.answers { Color.WHITE }
 
+        every { list.getBackground() }.answers { Color.WHITE }
+        every { list.getForeground() }.answers { Color.BLACK }
+
         every { value.getTitle() }.returns("Test")
         every { value.lastModified() }.returns(1610059992L)
 
@@ -59,6 +62,27 @@ internal class ArticleCellRendererTest {
 
         verify(atLeast = 1) { list.getSelectionBackground() }
         verify(atLeast = 1) { list.getSelectionForeground() }
+        verify(atLeast = 1) { value.getTitle() }
+        verify(atLeast = 1) { value.lastModified() }
+        verify(atLeast = 1) { anyConstructed<JPanel>().setLayout(any()) }
+        verify(atLeast = 1) { anyConstructed<JPanel>().setBackground(any()) }
+        verify(atLeast = 1) { anyConstructed<JPanel>().setForeground(any()) }
+        verify(atLeast = 1) { anyConstructed<JPanel>().setBorder(any()) }
+        verify(atLeast = 1) { anyConstructed<JLabel>().setText(any()) }
+        verify(atLeast = 1) { anyConstructed<JLabel>().setForeground(any()) }
+    }
+
+
+    @Test
+    fun getListCellRendererComponentIsNotSelected() {
+        articleCellRenderer.getListCellRendererComponent(
+            list, value, 1, false, true
+        )
+
+        verify(exactly = 0) { list.getSelectionBackground() }
+        verify(exactly = 0) { list.getSelectionForeground() }
+        verify(atLeast = 1) { list.getBackground() }
+        verify(atLeast = 1) { list.getForeground() }
         verify(atLeast = 1) { value.getTitle() }
         verify(atLeast = 1) { value.lastModified() }
         verify(atLeast = 1) { anyConstructed<JPanel>().setLayout(any()) }
