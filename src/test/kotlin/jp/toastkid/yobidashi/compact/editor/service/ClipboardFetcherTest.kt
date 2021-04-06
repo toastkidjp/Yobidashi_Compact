@@ -40,6 +40,13 @@ internal class ClipboardFetcherTest {
         assertNull(clipboardFetcher.invoke())
     }
 
+    @Test
+    fun testContentIsNull() {
+        every { clipboard.getContents(any()) }.returns(null)
+        every { transferable.isDataFlavorSupported(any()) }.returns(false)
+
+        assertNull(clipboardFetcher.invoke())
+    }
 
     @Test
     fun test() {
