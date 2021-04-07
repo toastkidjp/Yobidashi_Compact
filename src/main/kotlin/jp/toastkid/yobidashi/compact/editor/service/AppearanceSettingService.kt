@@ -69,7 +69,7 @@ class AppearanceSettingService(private val channel: Channel<MenuCommand>) {
 
         constraints.gridx = 2
         constraints.gridy = 0
-        val fontFamilyNames = GraphicsEnvironment.getLocalGraphicsEnvironment().availableFontFamilyNames;
+        val fontFamilyNames = GraphicsEnvironment.getLocalGraphicsEnvironment().availableFontFamilyNames
         val spinner = JComboBox<String>()
         fontFamilyNames.forEach { spinner.addItem(it) }
         spinner.addItemListener {
