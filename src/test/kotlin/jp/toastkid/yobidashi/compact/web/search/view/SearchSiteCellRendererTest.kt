@@ -31,11 +31,11 @@ internal class SearchSiteCellRendererTest {
         every { spy.siteName }.returns("test")
 
         searchSiteCellRenderer.getListCellRendererComponent(
-                list,
-                spy,
-                0,
-                true,
-                true
+            list,
+            spy,
+            0,
+            isSelected = true,
+            cellHasFocus = true
         )
 
         verify (atLeast = 1) { spy.siteName }
