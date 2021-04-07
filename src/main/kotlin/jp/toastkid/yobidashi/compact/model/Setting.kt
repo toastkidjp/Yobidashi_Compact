@@ -23,11 +23,11 @@ object Setting {
         properties.load(Files.newBufferedReader(Paths.get(PATH)))
     }
 
-    fun articleFolder() = properties.getProperty("article.folder")
+    fun articleFolder(): String = properties.getProperty("article.folder") ?: ""
 
     fun articleFolderFile() = File(articleFolder())
 
-    fun lookAndFeel() = properties.getProperty("look_and_feel")
+    fun lookAndFeel(): String? = properties.getProperty("look_and_feel")
 
     fun sorting() = Sorting.findByName(properties.getProperty("sorting"))
 
