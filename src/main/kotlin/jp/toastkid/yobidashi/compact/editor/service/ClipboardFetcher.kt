@@ -8,7 +8,7 @@ class ClipboardFetcher(private val clipboard: Clipboard = Toolkit.getDefaultTool
 
     operator fun invoke(): String? {
         val transferData = clipboard.getContents(this)
-        return if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) null
+        return if (transferData == null || !transferData.isDataFlavorSupported(DataFlavor.stringFlavor)) null
         else transferData.getTransferData(DataFlavor.stringFlavor).toString()
     }
 }
