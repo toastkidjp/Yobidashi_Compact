@@ -25,14 +25,14 @@ class OutgoAggregatorService(private val articlesReaderService: ArticlesReaderSe
                         }
 
                         val items = line.split("|")
-                        val target = items.get(2)
+                        val target = items[2]
                         var price = 0
                         if (target.endsWith(YEN_UNIT)) {
                             val priceStr = target.substring(0, target.indexOf(YEN_UNIT)).trim().replace(",", "")
                             if (priceStr.isNotBlank()) {
                                 price = Integer.parseInt(priceStr)
                             }
-                            aggregationResult.add(it.first, items.get(0) + items.get(1).trim(), price)
+                            aggregationResult.add(it.first, items[0] + items[1].trim(), price)
                         }
                     }
                 }
