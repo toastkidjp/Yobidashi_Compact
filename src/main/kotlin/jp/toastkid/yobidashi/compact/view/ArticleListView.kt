@@ -151,4 +151,9 @@ class ArticleListView {
         ZipArchiver().invoke(paths)
         Desktop.getDesktop().open(File("."))
     }
+
+    fun size(): Int {
+        return fileListModel.size
+    }
+
 }
