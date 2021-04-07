@@ -51,7 +51,10 @@ object Setting {
         val offDayString = properties.getProperty("user_off_day") ?: return emptyList()
         return offDayString.split(",")
                 .filter { it.contains("/") }
-                .map { it.split("/").let { it[0].toInt() to it[1].toInt() } }
+                .map {
+                    it.split("/")
+                        .let { monthAndDate -> monthAndDate[0].toInt() to monthAndDate[1].toInt() }
+                }
     }
 
     fun setUseCaseSensitiveInFinder(use: Boolean) {
