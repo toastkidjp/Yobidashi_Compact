@@ -27,10 +27,6 @@ internal class ClipboardFetcherTest {
         every { clipboard.getContents(any()) }.returns(transferable)
 
         clipboardFetcher = ClipboardFetcher(clipboard)
-        /*
-        n if (transferData?.isDataFlavorSupported(DataFlavor.stringFlavor) == false) null
-        else transferData.getTransferData(DataFlavor.stringFlavor).toString()
-         */
     }
 
     @Test
