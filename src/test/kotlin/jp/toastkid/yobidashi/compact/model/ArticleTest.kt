@@ -37,7 +37,7 @@ internal class ArticleTest {
     }
 
     @Test
-    fun makeWith() {
+    fun testMakeWith() {
         Article.withTitle("test.md")
 
         verify(exactly = 1) { Paths.get(any(), any()) }
