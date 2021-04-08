@@ -3,9 +3,11 @@ package jp.toastkid.yobidashi.compact.model
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.verify
+import jp.toastkid.yobidashi.compact.editor.service.OpenEditorService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -50,6 +52,18 @@ internal class ArticleTest {
         assertEquals("test", article.getTitle())
 
         verify(exactly = 1) { Paths.get(any(), any()) }
+    }
+
+    @Test
+    fun testOpen() {
+        mockkConstructor(OpenEditorService::class)
+        every { anyConstructed<OpenEditorService>().invoke(any()) }.answers { Unit }
+
+        val article = Article.withTitle("test.md")
+        article.open()
+
+        verify(exactly = 1) { Paths.get(any(), any()) }
+        verify(exactly = 1) { anyConstructed<OpenEditorService>().invoke(any()) }
     }
 
 }
