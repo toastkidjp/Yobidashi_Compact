@@ -38,7 +38,7 @@ class ArticleFinderService {
                 JOptionPane.showMessageDialog(null, "Article which contains '$keyword' is not found.")
                 return@launch
             }
-            SubjectPool.sendSearchResult(articleListView, "'$keyword' find result")
+            SubjectPool.sendSearchResult(articleListView, "'$keyword' find result ${articleListView.size()}")
         }
     }
 
