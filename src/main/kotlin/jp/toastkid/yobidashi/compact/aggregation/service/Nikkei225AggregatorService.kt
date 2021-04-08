@@ -29,9 +29,9 @@ class Nikkei225AggregatorService(private val articlesReaderService: ArticlesRead
             }
             if (next) {
                 val split = line.split("円(")
-                val target: String = split.get(0)
+                val target: String = split[0]
                 if (target.isNotEmpty()) {
-                    result.put(pair.first, target, split.get(1).let { it.substring(0, it.length - 1) })
+                    result.put(pair.first, target, split[1].let { it.substring(0, it.length - 1) })
                     return@forEach
                 }
                 return
