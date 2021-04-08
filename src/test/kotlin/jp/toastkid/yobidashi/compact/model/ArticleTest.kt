@@ -7,6 +7,7 @@ import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.verify
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -39,6 +40,14 @@ internal class ArticleTest {
     @Test
     fun testMakeWith() {
         Article.withTitle("test.md")
+
+        verify(exactly = 1) { Paths.get(any(), any()) }
+    }
+
+    @Test
+    fun testGetTitle() {
+        val article = Article.withTitle("test.md")
+        assertEquals("test", article.getTitle())
 
         verify(exactly = 1) { Paths.get(any(), any()) }
     }
