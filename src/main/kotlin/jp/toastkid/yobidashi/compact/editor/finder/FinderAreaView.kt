@@ -141,4 +141,8 @@ class FinderAreaView(
 
     fun view(): JComponent = content
 
+    fun switchVisibility() {
+        content.isVisible = !content.isVisible
+    }
+
 }
