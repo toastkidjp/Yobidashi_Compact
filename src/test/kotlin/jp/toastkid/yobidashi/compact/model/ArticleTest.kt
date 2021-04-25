@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
+import java.io.IOException
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -58,6 +59,18 @@ internal class ArticleTest {
     fun testOpen() {
         mockkConstructor(OpenEditorService::class)
         every { anyConstructed<OpenEditorService>().invoke(any()) }.answers { Unit }
+
+        val article = Article.withTitle("test.md")
+        article.open()
+
+        verify(exactly = 1) { Paths.get(any(), any()) }
+        verify(exactly = 1) { anyConstructed<OpenEditorService>().invoke(any()) }
+    }
+
+    @Test
+    fun testOpenErrorCase() {
+        mockkConstructor(OpenEditorService::class)
+        every { anyConstructed<OpenEditorService>().invoke(any()) }.throws(IOException())
 
         val article = Article.withTitle("test.md")
         article.open()
