@@ -61,9 +61,9 @@ class EditorFrame(
         panel.add(footer, BorderLayout.SOUTH)
 
         val finderChannel = Channel<FindOrder>()
-        val finderView = FinderAreaView(finderChannel, messageChannel).view()
+        val finderView = FinderAreaView(finderChannel, messageChannel)
 
-        panel.add(finderView, BorderLayout.NORTH)
+        panel.add(finderView.view(), BorderLayout.NORTH)
         CoroutineScope(Dispatchers.Default).launch {
             finderChannel.receiveAsFlow().collect {
                 editorAreaView.find(it)
@@ -82,7 +82,7 @@ class EditorFrame(
                 { currentArticle },
                 editing,
                 this::resetFrameTitle,
-                { finderView.isVisible = !finderView.isVisible },
+                { finderView.switchVisibility() },
                 this::dispose
         )
         CoroutineScope(Dispatchers.Swing).launch {
