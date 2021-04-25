@@ -143,6 +143,12 @@ class FinderAreaView(
 
     fun switchVisibility() {
         content.isVisible = !content.isVisible
+
+        if (content.isVisible) {
+            val jTextField = content.getComponent(1) as? JTextField
+            jTextField?.requestFocus()
+            jTextField?.caretPosition = 0
+        }
     }
 
 }
