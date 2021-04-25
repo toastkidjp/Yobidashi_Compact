@@ -44,7 +44,7 @@ internal class EditMenuViewTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         editMenuView.invoke()
 
         verify(atLeast = 1) { anyConstructed<JMenu>().addSeparator() }
