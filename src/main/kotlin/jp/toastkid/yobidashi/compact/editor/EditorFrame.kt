@@ -24,17 +24,15 @@ import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class EditorFrame {
-
-    private val frame = JFrame("Editor")
-
-    private var currentArticle: Article? = null
+class EditorFrame(
+    private val frame: JFrame = JFrame("Editor"),
+    private val editing: Editing = Editing(),
+    private val statusLabel: JLabel = JLabel()
+) {
 
     private val editorAreaView: EditorAreaView
 
-    private val editing = Editing()
-
-    private val statusLabel = JLabel()
+    private var currentArticle: Article? = null
 
     init {
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
@@ -64,7 +62,7 @@ class EditorFrame {
 
         val finderChannel = Channel<FindOrder>()
         val finderView = FinderAreaView(finderChannel, messageChannel).view()
-        finderView.isVisible = false
+
         panel.add(finderView, BorderLayout.NORTH)
         CoroutineScope(Dispatchers.Default).launch {
             finderChannel.receiveAsFlow().collect {

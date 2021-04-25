@@ -85,6 +85,8 @@ class FinderAreaView(
         content.add(JButton("x").also {
             it.addActionListener { content.isVisible = false }
         })
+
+        content.isVisible = false
     }
 
     private fun makeButtons(target: JTextField, replace: JTextField, caseCondition: JCheckBox): JPanel {
