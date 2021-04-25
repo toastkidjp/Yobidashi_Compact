@@ -1,11 +1,3 @@
-apply plugin: 'kotlin'
-apply plugin: 'application'
-apply plugin: 'jacoco'
-
-group 'jp.toastkid'
-version '1.0-SNAPSHOT'
-mainClassName = "jp.toastkid.yobidashi.compact.MainKt"
-
 buildscript {
     ext.kotlin_version = '1.4.21'
 
@@ -16,6 +8,18 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
+
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.16.0"
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply plugin: 'jacoco'
+
+group 'jp.toastkid'
+version '1.0-SNAPSHOT'
+mainClassName = "jp.toastkid.yobidashi.compact.MainKt"
 
 repositories {
     jcenter()
