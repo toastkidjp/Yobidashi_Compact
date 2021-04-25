@@ -13,7 +13,7 @@ class ArticleFileListModel : ListModel<Article> {
     private val master = mutableListOf<Article>()
 
     override fun getElementAt(index: Int): Article {
-        return items.get(index)
+        return items[index]
     }
 
     override fun getSize(): Int {
