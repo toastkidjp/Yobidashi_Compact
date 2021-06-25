@@ -30,6 +30,9 @@ internal class FinderAreaViewTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
+
+        every { textField.requestFocus() }.returns(Unit)
+        every { textField.setCaretPosition(any()) }.returns(Unit)
     }
 
     @Test
@@ -40,9 +43,6 @@ internal class FinderAreaViewTest {
 
     @Test
     fun testSwitchVisibility() {
-        every { textField.requestFocus() }.returns(Unit)
-        every { textField.setCaretPosition(any()) }.returns(Unit)
-
         mockkConstructor(JPanel::class)
         every { anyConstructed<JPanel>().getComponent(any()) }.returns(textField)
 
