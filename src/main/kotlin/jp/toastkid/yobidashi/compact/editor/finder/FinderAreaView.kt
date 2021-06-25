@@ -4,10 +4,7 @@ import jp.toastkid.yobidashi.compact.model.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.swing.Swing
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -72,11 +69,7 @@ class FinderAreaView(
         val message = JLabel()
         message.preferredSize = Dimension(200, 36)
         message.font = message.font.deriveFont(14f)
-        CoroutineScope(Dispatchers.Swing).launch {
-            messageChannel.receiveAsFlow().collect {
-                message.text = it
-            }
-        }
+        MessageReceiverService(messageChannel, message).invoke()
         constraints.gridx = 4
         constraints.gridy = 0
         content.add(message)
