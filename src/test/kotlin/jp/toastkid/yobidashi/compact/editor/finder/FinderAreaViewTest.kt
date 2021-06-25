@@ -3,7 +3,6 @@ package jp.toastkid.yobidashi.compact.editor.finder
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -25,6 +24,9 @@ internal class FinderAreaViewTest {
     @MockK
     private lateinit var messageChannel: Channel<String>
 
+    @MockK
+    private lateinit var textField: JTextField
+
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
@@ -38,7 +40,6 @@ internal class FinderAreaViewTest {
 
     @Test
     fun testSwitchVisibility() {
-        val textField = mockk<JTextField>()
         every { textField.requestFocus() }.returns(Unit)
         every { textField.setCaretPosition(any()) }.returns(Unit)
 
