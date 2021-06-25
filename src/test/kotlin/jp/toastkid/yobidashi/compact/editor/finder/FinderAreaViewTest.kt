@@ -33,6 +33,9 @@ internal class FinderAreaViewTest {
 
         every { textField.requestFocus() }.returns(Unit)
         every { textField.setCaretPosition(any()) }.returns(Unit)
+
+        mockkConstructor(MessageReceiverService::class)
+        every { anyConstructed<MessageReceiverService>().invoke() }.returns(Unit)
     }
 
     @Test
