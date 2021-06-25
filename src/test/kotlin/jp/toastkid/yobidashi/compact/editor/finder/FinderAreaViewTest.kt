@@ -31,7 +31,7 @@ internal class FinderAreaViewTest {
     }
 
     @Test
-    fun test() {
+    fun testView() {
         finderAreaView = FinderAreaView(orderChannel, messageChannel)
         assertNotNull(finderAreaView.view())
     }
