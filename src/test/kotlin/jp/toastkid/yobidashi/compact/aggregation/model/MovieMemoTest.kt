@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 internal class MovieMemoTest {
 
     @Test
-    fun test() {
+    fun testHeader() {
         assertEquals(2, MovieMemo.header().size)
     }
 
