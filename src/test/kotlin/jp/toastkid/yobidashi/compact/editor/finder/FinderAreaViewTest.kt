@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.editor.finder
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -31,11 +33,11 @@ internal class FinderAreaViewTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        every { textField.requestFocus() }.returns(Unit)
-        every { textField.setCaretPosition(any()) }.returns(Unit)
+        every { textField.requestFocus() }.just(Runs)
+        every { textField.setCaretPosition(any()) }.just(Runs)
 
         mockkConstructor(MessageReceiverService::class)
-        every { anyConstructed<MessageReceiverService>().invoke() }.returns(Unit)
+        every { anyConstructed<MessageReceiverService>().invoke() }.just(Runs)
     }
 
     @Test
