@@ -10,4 +10,9 @@ internal class MovieMemoTest {
         assertEquals(2, MovieMemo.header().size)
     }
 
+    @Test
+    fun test() {
+        assertEquals(2, MovieMemo("2021-06-27", "test").toArray().size)
+    }
+
 }
