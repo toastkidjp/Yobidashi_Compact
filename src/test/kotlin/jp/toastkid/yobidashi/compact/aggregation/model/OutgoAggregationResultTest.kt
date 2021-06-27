@@ -15,7 +15,7 @@ internal class OutgoAggregationResultTest {
     }
 
     @Test
-    fun testAdd() {
+    fun test() {
         outgoAggregationResult.add("2021-04-30", "Orange", 100)
         outgoAggregationResult.add("2021-04-30", "Ramen", 211)
 
