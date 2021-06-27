@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.aggregation.model
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -22,6 +23,11 @@ internal class OutgoAggregationResultTest {
         assertEquals(2, outgoAggregationResult.itemArrays().size)
         assertFalse(outgoAggregationResult.isEmpty())
         assertEquals("Total: 311", outgoAggregationResult.resultTitleSuffix())
+    }
+
+    @Test
+    fun testHeader() {
+        assertTrue(outgoAggregationResult.header().isNotEmpty())
     }
 
 }
