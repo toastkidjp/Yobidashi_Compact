@@ -18,7 +18,11 @@ class StepsAggregatorService(private val articlesReaderService: ArticlesReaderSe
                     .forEach { line ->
                         val matcher = pattern.matcher(line)
                         while (matcher.find()) {
-                            aggregationResult.put(it.first, matcher.group(1).replace(",", "").toIntOrNull() ?: 0, matcher.group(2).toIntOrNull() ?: 0)
+                            aggregationResult.put(
+                                it.first,
+                                matcher.group(1).replace(",", "").toIntOrNull() ?: 0,
+                                matcher.group(2).toIntOrNull() ?: 0
+                            )
                         }
                     }
             }
