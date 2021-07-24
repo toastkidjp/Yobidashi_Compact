@@ -6,6 +6,7 @@ import jp.toastkid.yobidashi.compact.aggregation.service.CompoundInterestCalcula
 import jp.toastkid.yobidashi.compact.aggregation.service.MovieMemoSubtitleExtractor
 import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
+import jp.toastkid.yobidashi.compact.aggregation.service.StepsAggregatorService
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
@@ -42,6 +43,14 @@ class AggregationMenuView(
                     { MovieMemoSubtitleExtractor().invoke(it) },
                     KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK)
                 )
+        )
+        menu.add(
+            aggregationMenuItemGeneratorService.invoke(
+                "Steps",
+                "Please input year and month you want aggregate count of steps? ex)",
+                { StepsAggregatorService().invoke(it) },
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_MASK)
+            )
         )
         menu.add(
                 aggregationMenuItemGeneratorService.invoke(
