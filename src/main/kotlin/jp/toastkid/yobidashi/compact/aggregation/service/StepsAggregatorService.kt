@@ -20,7 +20,7 @@ class StepsAggregatorService(private val articlesReaderService: ArticlesReaderSe
                         while (matcher.find()) {
                             aggregationResult.put(
                                 it.first,
-                                matcher.group(1).replace(",", "").toIntOrNull() ?: 0,
+                                matcher.group(INDEX_STEPS).replace(",", "").toIntOrNull() ?: 0,
                                 matcher.group(2).toIntOrNull() ?: 0
                             )
                         }
@@ -32,6 +32,8 @@ class StepsAggregatorService(private val articlesReaderService: ArticlesReaderSe
     companion object {
 
         private const val TARGET = "今日の歩数は"
+
+        private const val INDEX_STEPS = 1
 
         private val pattern = Pattern.compile("歩数は(.+?)、消費カロリーは(.+?)kcal")
 
