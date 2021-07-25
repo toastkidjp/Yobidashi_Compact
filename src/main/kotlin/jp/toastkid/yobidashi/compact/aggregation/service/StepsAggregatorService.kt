@@ -14,7 +14,7 @@ class StepsAggregatorService(private val articlesReaderService: ArticlesReaderSe
             .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
             .filter { it.first.startsWith(keyword) }
             .forEach {
-                it.second.filter { line -> line.contains("今日の歩数は") }
+                it.second.filter { line -> line.contains(TARGET) }
                     .forEach { line ->
                         val matcher = pattern.matcher(line)
                         while (matcher.find()) {
@@ -30,7 +30,11 @@ class StepsAggregatorService(private val articlesReaderService: ArticlesReaderSe
     }
 
     companion object {
+
+        private const val TARGET = "今日の歩数は"
+
         private val pattern = Pattern.compile("歩数は(.+?)、消費カロリーは(.+?)kcal")
+
     }
 
 }
