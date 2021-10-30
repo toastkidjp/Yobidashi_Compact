@@ -22,7 +22,7 @@ version '1.0-SNAPSHOT'
 mainClassName = "jp.toastkid.yobidashi.compact.MainKt"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
