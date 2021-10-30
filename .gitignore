@@ -16,3 +16,5 @@ gradlew*
 *.bin
 *.log
 setting.properties
+
+!.gradle/wrapper/gradle-wrapper.properties
