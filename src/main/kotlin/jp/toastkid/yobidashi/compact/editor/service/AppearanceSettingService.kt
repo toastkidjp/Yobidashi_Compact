@@ -71,7 +71,13 @@ class AppearanceSettingService(private val channel: Channel<MenuCommand>) {
         constraints.gridy = 0
         val fontFamilyNames = GraphicsEnvironment.getLocalGraphicsEnvironment().availableFontFamilyNames
         val spinner = JComboBox<String>()
-        fontFamilyNames.forEach { spinner.addItem(it) }
+        val currentEditorFontFamily = Setting.editorFontFamily()
+        fontFamilyNames.forEachIndexed { index, font ->
+            spinner.addItem(font)
+            if (font == currentEditorFontFamily) {
+                spinner.selectedItem = font
+            }
+        }
         spinner.addItemListener {
             Setting.setEditorFontFamily(it.item?.toString())
             applyColorSetting()
