@@ -115,19 +115,6 @@ class AppearanceSettingService(private val channel: Channel<MenuCommand>) {
         }
     }
 
-    private fun makeSizeSpinner(): JComboBox<Int> {
-        val sizeSpinner = JComboBox<Int>()
-        (9..20).forEach {
-            sizeSpinner.addItem(it)
-        }
-        sizeSpinner.addItemListener {
-            Setting.setEditorFontSize(Integer.parseInt(it.item?.toString()))
-            applyColorSetting()
-        }
-        sizeSpinner.selectedItem = Setting.editorFontSize()
-        return sizeSpinner
-    }
-
     companion object {
 
         private const val SAMPLE_TEXT = "あアA1@亜"
