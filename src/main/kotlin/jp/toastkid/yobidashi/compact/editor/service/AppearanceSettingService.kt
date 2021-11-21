@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
+import jp.toastkid.yobidashi.compact.editor.service.factory.FontSizeSpinnerFactory
 import jp.toastkid.yobidashi.compact.model.Setting
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +87,7 @@ class AppearanceSettingService(private val channel: Channel<MenuCommand>) {
 
         constraints.gridx = 2
         constraints.gridy = 1
-        val sizeSpinner = makeSizeSpinner()
+        val sizeSpinner = FontSizeSpinnerFactory().invoke { applyColorSetting() }
         content.add(sizeSpinner, constraints)
 
         JOptionPane.showMessageDialog(null, content)
