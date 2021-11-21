@@ -12,8 +12,7 @@ class StocksAggregatorService(private val articlesReaderService: ArticlesReaderS
         articlesReaderService.invoke()
             .parallel()
             .map { it.toFile().nameWithoutExtension to Files.readAllLines(it) }
-            .filter { it.first.startsWith(keyword)
-                    && it.first.endsWith("(Sun)").not() && it.first.endsWith("(Mon)").not() }
+            .filter { it.first.startsWith(keyword) && it.first.endsWith("n)").not() }
             .forEach {
                 it.second.filter { line -> line.contains(TARGET) }
                     .forEach { line ->
