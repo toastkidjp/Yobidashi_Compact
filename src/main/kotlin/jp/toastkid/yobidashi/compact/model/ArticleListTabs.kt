@@ -6,7 +6,7 @@ class ArticleListTabs {
 
     private val tabs = mutableListOf<ArticleListView>()
 
-    fun get(index: Int) = tabs.get(index)
+    fun get(index: Int) = tabs[index]
 
     fun add(articleListView: ArticleListView) = tabs.add(articleListView)
 
