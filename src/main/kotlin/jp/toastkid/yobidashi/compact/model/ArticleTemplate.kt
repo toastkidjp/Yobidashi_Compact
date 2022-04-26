@@ -11,11 +11,16 @@ class ArticleTemplate {
 ## 今日のプログラミング
 追記
 
-${ if (isNotOffDay()) {
+${ if (isStockDay()) {
 """
 ## 今日の資産運用
 評価額は円、評価損益は円(%)だった。
 追記
+
+### 指数
+S&P 500は
+[VIX](https://www.bloomberg.co.jp/quote/VIX:IND) は 
+
 """.trimIndent()    
 } else "" }
 
@@ -102,6 +107,13 @@ ${ if (isNotOffDay()) {
         val now = LocalDate.now()
         val dayOfWeek = now.dayOfWeek
         return dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY
+                && OffDayFinderService().invoke(now.year, now.monthValue, now.dayOfMonth, dayOfWeek.value).not()
+    }
+
+    private fun isStockDay(): Boolean {
+        val now = LocalDate.now()
+        val dayOfWeek = now.dayOfWeek
+        return dayOfWeek != DayOfWeek.MONDAY && dayOfWeek != DayOfWeek.SUNDAY
                 && OffDayFinderService().invoke(now.year, now.monthValue, now.dayOfMonth, dayOfWeek.value).not()
     }
 
