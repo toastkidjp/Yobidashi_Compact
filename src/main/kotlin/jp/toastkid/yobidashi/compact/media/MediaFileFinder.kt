@@ -1,10 +1,8 @@
 package jp.toastkid.yobidashi.compact.media
 
-import jp.toastkid.yobidashi.compact.model.Setting
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.io.path.absolutePathString
 import kotlin.io.path.isDirectory
 import kotlin.io.path.isExecutable
 import kotlin.io.path.nameWithoutExtension
@@ -37,15 +35,4 @@ class MediaFileFinder {
                 .toList()
     }
 
-}
-
-fun main() {
-    val mediaFiles = MediaFileFinder().invoke(Setting.mediaFolderPath())
-    println(Setting.mediaPlayerPath())
-    Runtime.getRuntime().exec(
-            arrayOf(
-                Setting.mediaPlayerPath(),
-                mediaFiles.random().absolutePathString()
-            )
-    )
 }
