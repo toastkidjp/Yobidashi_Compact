@@ -18,7 +18,13 @@ class MediaFileFinder {
             return emptyList()
         }
 
-        return readFromFolder(folder).union(Files.list(folder).filter { it.isDirectory() }.map { readFromFolder(it) }.flatMap { it.stream() }.toList())
+        return readFromFolder(folder).union(
+                Files.list(folder)
+                        .filter { it.isDirectory() }
+                        .map { readFromFolder(it) }
+                        .flatMap { it.stream() }
+                        .toList()
+        )
     }
 
     private fun readFromFolder(folder: Path): List<Path> {
