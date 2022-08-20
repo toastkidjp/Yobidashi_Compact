@@ -108,6 +108,10 @@ object Setting {
         return properties.getProperty("editor_font_size")?.toIntOrNull() ?: 14
     }
 
+    fun mediaPlayerPath() = properties.getProperty("media_player_path")
+
+    fun mediaFolderPath() = properties.getProperty("media_folder_path")
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
