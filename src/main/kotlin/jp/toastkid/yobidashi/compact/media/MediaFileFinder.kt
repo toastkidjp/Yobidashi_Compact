@@ -32,7 +32,9 @@ class MediaFileFinder {
             return emptyList()
         }
 
-        return Files.list(folder).filter { it.isDirectory().not() && it.nameWithoutExtension.startsWith("AlbumArt").not() && it.isExecutable() }.toList()
+        return Files.list(folder)
+                .filter { it.isDirectory().not() && it.nameWithoutExtension.startsWith("AlbumArt").not() && it.isExecutable() }
+                .toList()
     }
 
 }
