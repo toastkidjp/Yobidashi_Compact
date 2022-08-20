@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.SubjectPool
+import jp.toastkid.yobidashi.compact.media.MediaFileFinder
+import jp.toastkid.yobidashi.compact.media.MediaListView
 import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.ArticleListTabs
 import jp.toastkid.yobidashi.compact.model.Setting
@@ -47,6 +49,13 @@ class MainFrame(
         val tabPane = JTabbedPane()
         tabPane.add("Articles", list.view())
         tabs.add(list)
+
+        val mediaListView = MediaListView()
+        tabPane.add("Media", mediaListView.view())
+        CoroutineScope(Dispatchers.IO).launch {
+            val mediaList = MediaFileFinder().invoke(Setting.mediaFolderPath())
+            mediaListView.addAll(mediaList)
+        }
 
         val searchInput = ArticleFilterViewFactoryService().invoke { list.filter(it) }
 
