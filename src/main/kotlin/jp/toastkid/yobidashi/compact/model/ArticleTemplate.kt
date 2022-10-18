@@ -8,9 +8,6 @@ class ArticleTemplate {
     operator fun invoke(header: String) = """# $header
 時分起床。起きた時の室温は度だった。
 
-## 今日のプログラミング
-追記
-
 ${ if (isStockDay()) {
 """
 ## 今日の資産運用
@@ -26,6 +23,9 @@ S&P 500は
 
 ## 朝食
 追記からおかめ納豆極小粒1パックとふんわり食パン2枚を食べる。食後にインスタントコーヒーを飲む。
+
+## 今日のプログラミング
+追記
 
 ${ if (isNotOffDay()) {
 """
