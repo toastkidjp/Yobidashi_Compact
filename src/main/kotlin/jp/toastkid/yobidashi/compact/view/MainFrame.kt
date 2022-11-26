@@ -68,7 +68,7 @@ class MainFrame(
             tabPane,
             list,
             CloseActionService(
-                tabPane::getTabCount,
+                    { tabPane.tabCount - if (tabPane.indexOfTab("Media") != -1) 1 else 0 },
                 { tabPane.removeTabAt(tabPane.tabCount - 1) },
                 frame::dispose
             )
