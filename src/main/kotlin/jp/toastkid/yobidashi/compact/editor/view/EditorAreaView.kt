@@ -36,6 +36,7 @@ class EditorAreaView(
 
     init {
         refresh()
+        editorArea.eolMarkersVisible = true
         editorArea.addHyperlinkListener {
             if (it.eventType != HyperlinkEvent.EventType.ACTIVATED) {
                 return@addHyperlinkListener
