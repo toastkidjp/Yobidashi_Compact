@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
+import org.fife.ui.rtextarea.RTextAreaEditorKit
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Font
 import java.awt.event.KeyEvent
@@ -66,6 +67,7 @@ class EditorAreaView(
         })
 
         PopupMenuInitializer(editorArea.popupMenu, channel).invoke()
+        editorArea.document.putProperty(RTextAreaEditorKit.EndOfLineStringProperty, System.lineSeparator())
 
         scrollArea = RTextScrollPane(editorArea)
         scrollArea.lineNumbersEnabled = true
