@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.calendar.view.CalendarPanel
 import jp.toastkid.yobidashi.compact.service.DateArticleUrlFactoryService
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
+import jp.toastkid.yobidashi.compact.web.private.search.PrivateImageSearchService
 import jp.toastkid.yobidashi.compact.web.search.WebSearchService
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
@@ -30,6 +31,13 @@ class ToolMenuView(private val urlOpenerService: UrlOpenerService = UrlOpenerSer
                 WebSearchService().invoke()
             }
             it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK)
+        })
+
+        menu.add(JMenuItem("Private image search").also {
+            it.addActionListener {
+                PrivateImageSearchService().invoke()
+            }
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK)
         })
 
         menu.add(JMenuItem("What happened today").also {
