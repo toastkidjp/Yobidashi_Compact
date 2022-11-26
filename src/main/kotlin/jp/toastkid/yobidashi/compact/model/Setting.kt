@@ -112,6 +112,10 @@ object Setting {
 
     fun mediaFolderPath() = properties.getProperty("media_folder_path")
 
+    fun privateSearchPath() = properties.getProperty("private_search_path")
+
+    fun privateSearchOption() = properties.getProperty("private_search_option")
+
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
     }
