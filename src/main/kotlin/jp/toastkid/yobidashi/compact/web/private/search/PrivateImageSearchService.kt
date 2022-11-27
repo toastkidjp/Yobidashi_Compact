@@ -31,7 +31,7 @@ class PrivateImageSearchService(private val urlOpenerService: UrlOpenerService =
                 arrayOf(
                         Setting.privateSearchPath(),
                         Setting.privateSearchOption(),
-                        "https://www.google.co.jp/searchbyimage?image_url=${URLEncoder.encode(input, StandardCharsets.UTF_8.name())}"
+                        "https://www.bing.com/images/search?view=detailv2&iss=sbi&q=imgurl:${URLEncoder.encode(input, StandardCharsets.UTF_8.name())}"
                 )
         )
     }
