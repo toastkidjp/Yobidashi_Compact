@@ -127,21 +127,21 @@ class CommandReceiverService(
                 }
                 MenuCommand.WEB_SEARCH -> {
                     val selectedText = editorAreaView.selectedText()
-                    if (selectedText.isNullOrBlank()) {
+                    if (selectedText.isBlank()) {
                         return@collect
                     }
                     urlOpenerService("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}")
                 }
                 MenuCommand.DICTIONARY_SEARCH -> {
                     val selectedText = editorAreaView.selectedText()
-                    if (selectedText.isNullOrBlank()) {
+                    if (selectedText.isBlank()) {
                         return@collect
                     }
                     urlOpenerService("https://ejje.weblio.jp/content/${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}")
                 }
                 MenuCommand.TRANSLATION_TO_ENGLISH -> {
                     val selectedText = editorAreaView.selectedText()
-                    if (selectedText.isNullOrBlank()) {
+                    if (selectedText.isBlank()) {
                         return@collect
                     }
                     urlOpenerService("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}&op=translate")
