@@ -1,7 +1,6 @@
 package jp.toastkid.yobidashi.compact.web.private.search
 
 import jp.toastkid.yobidashi.compact.model.Setting
-import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
@@ -11,7 +10,7 @@ import javax.swing.JLabel
 import javax.swing.JOptionPane
 import javax.swing.JPanel
 
-class PrivateImageSearchService(private val urlOpenerService: UrlOpenerService = UrlOpenerService()) {
+class PrivateImageSearchService {
 
     operator fun invoke() {
         val content = JPanel().also { panel ->
