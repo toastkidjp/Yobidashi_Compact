@@ -1,13 +1,11 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import jp.toastkid.yobidashi.compact.calendar.service.DayLabelRefresherService
-import java.awt.Color
 import java.time.LocalDate
 import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
-import javax.swing.border.LineBorder
 
 class CalendarPanel : JPanel() {
 
@@ -28,13 +26,6 @@ class CalendarPanel : JPanel() {
         dayLabelRefresherService(date, true)
     }
 
-    companion object {
-        private val DAY_BG: Color = Color(250, 250, 255)
-        private val BORDER = LineBorder(Color(220, 220, 220, 220), 2, false)
-
-        private val TODAY_BG: Color = Color(220, 220, 255)
-        private val TODAY_BORDER = LineBorder(Color(50, 50, 175), 2, false)
-    }
 }
 
 fun main() {
