@@ -130,21 +130,21 @@ class CommandReceiverService(
                     if (selectedText.isBlank()) {
                         return@collect
                     }
-                    urlOpenerService("https://search.yahoo.co.jp/search?p=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}")
+                    urlOpenerService("https://search.yahoo.co.jp/search?p=${encodeUtf8(selectedText)}")
                 }
                 MenuCommand.DICTIONARY_SEARCH -> {
                     val selectedText = editorAreaView.selectedText()
                     if (selectedText.isBlank()) {
                         return@collect
                     }
-                    urlOpenerService("https://ejje.weblio.jp/content/${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}")
+                    urlOpenerService("https://ejje.weblio.jp/content/${encodeUtf8(selectedText)}")
                 }
                 MenuCommand.TRANSLATION_TO_ENGLISH -> {
                     val selectedText = editorAreaView.selectedText()
                     if (selectedText.isBlank()) {
                         return@collect
                     }
-                    urlOpenerService("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())}&op=translate")
+                    urlOpenerService("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${encodeUtf8(selectedText)}&op=translate")
                 }
                 MenuCommand.REFRESH -> {
                     editorAreaView.refresh()
@@ -152,4 +152,6 @@ class CommandReceiverService(
             }
         }
     }
+
+    private fun encodeUtf8(selectedText: String) = URLEncoder.encode(selectedText, StandardCharsets.UTF_8.name())
 }
