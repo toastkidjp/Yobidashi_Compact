@@ -110,7 +110,7 @@ class CommandReceiverService(
                 MenuCommand.REVERSE_CASE -> {
                     editorAreaView.replaceSelected(true) {
                         if (it.isEmpty()) return@replaceSelected it
-                        return@replaceSelected if (it.toCharArray()[0].isUpperCase()) it.lowercase() else it.toUpperCase()
+                        return@replaceSelected if (it.toCharArray()[0].isUpperCase()) it.lowercase() else it.uppercase()
                     }
                 }
                 MenuCommand.DUPLICATE_LINE -> {
