@@ -37,7 +37,7 @@ class PrivateImageSearchService(private val urlOpenerService: UrlOpenerService =
     }
 
     companion object {
-        private const val MESSAGE = "Please would you input search query?"
+        private const val MESSAGE = "Please would you input search image URL?"
     }
 
 }
