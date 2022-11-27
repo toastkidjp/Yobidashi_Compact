@@ -132,6 +132,13 @@ class CommandReceiverService(
                     }
                     urlOpenerService("https://search.yahoo.co.jp/search?p=${encodeUtf8(selectedText)}")
                 }
+                MenuCommand.OPEN_URL -> {
+                    val selectedText = editorAreaView.selectedText()
+                    if (selectedText.isBlank() || selectedText.startsWith("https://").not()) {
+                        return@collect
+                    }
+                    urlOpenerService(selectedText)
+                }
                 MenuCommand.DICTIONARY_SEARCH -> {
                     val selectedText = editorAreaView.selectedText()
                     if (selectedText.isBlank()) {
