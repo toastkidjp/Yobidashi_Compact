@@ -31,7 +31,11 @@ class Article(private val file: Path) {
     }
 
     fun lastModified(): Long {
-        return Files.getLastModifiedTime(file).toMillis()
+        return try {
+            Files.getLastModifiedTime(file).toMillis()
+        } catch (e: NoSuchFieldException) {
+            0L
+        }
     }
 
     fun path() = file
