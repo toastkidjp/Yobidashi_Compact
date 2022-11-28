@@ -50,6 +50,6 @@ jar {
         attributes 'Main-Class'   : mainClassName
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    destinationDir = projectDir
+    destinationDirectory.set(projectDir)
     from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 }
