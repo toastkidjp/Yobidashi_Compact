@@ -9,10 +9,10 @@ import jp.toastkid.yobidashi.compact.editor.text.TableFormConverter
 import jp.toastkid.yobidashi.compact.editor.text.TrimmingService
 import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
 import jp.toastkid.yobidashi.compact.model.Article
+import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -152,6 +152,10 @@ class CommandReceiverService(
                         return@collect
                     }
                     urlOpenerService("https://translate.google.co.jp/?hl=en&sl=auto&tl=en&text=${encodeUtf8(selectedText)}&op=translate")
+                }
+                MenuCommand.SWITCH_WRAP_LINE -> {
+                    Setting.switchWrapLine()
+                    editorAreaView.refresh()
                 }
                 MenuCommand.REFRESH -> {
                     editorAreaView.refresh()
