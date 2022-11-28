@@ -16,5 +16,6 @@ gradlew*
 *.bin
 *.log
 setting.properties
+jcef-bundle/
 
 !gradle/wrapper/gradle-wrapper.properties
