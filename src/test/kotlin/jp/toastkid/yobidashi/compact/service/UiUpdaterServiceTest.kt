@@ -41,6 +41,19 @@ internal class UiUpdaterServiceTest {
         verify (exactly = 1) { SwingUtilities.updateComponentTreeUI(any()) }
     }
 
+    @Test
+    fun testErrorCase() {
+        every { SwingUtilities.updateComponentTreeUI(any()) }.throws(RuntimeException())
+
+        val frame = mockk<JFrame>()
+
+        uiUpdaterService.invoke(frame, "test")
+
+        verify (exactly = 1) { UIManager.setLookAndFeel("test") }
+        verify (exactly = 1) { Setting.setLookAndFeel("test") }
+        verify (exactly = 1) { SwingUtilities.updateComponentTreeUI(any()) }
+    }
+
     @AfterEach
     fun tearDown() {
         unmockkAll()
