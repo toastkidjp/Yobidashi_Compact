@@ -10,7 +10,6 @@ import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
@@ -138,6 +137,7 @@ class EditorAreaView(
     }
 
     fun refresh() {
+        editorArea.lineWrap = Setting.wrapLine()
         editorArea.foreground = Setting.editorForegroundColor()
         editorArea.background = Setting.editorBackgroundColor()
         val editorFontFamily = Setting.editorFontFamily() ?: return
