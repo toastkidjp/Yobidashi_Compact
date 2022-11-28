@@ -138,6 +138,15 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(webSearchMenu)
 
+        val openUrlMenu = JMenuItem("Open URL").also {
+            it.addActionListener {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.OPEN_URL)
+                }
+            }
+        }
+        popupMenu.add(openUrlMenu)
+
         val dictionaryMenu = JMenuItem("Dictionary").also {
             it.addActionListener {
                 CoroutineScope(Dispatchers.Default).launch {
