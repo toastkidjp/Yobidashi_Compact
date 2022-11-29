@@ -16,7 +16,10 @@ import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-class ToolMenuView(private val urlOpenerService: UrlOpenerService = UrlOpenerService()) {
+class ToolMenuView(
+    private val urlOpenerService: UrlOpenerService = UrlOpenerService(),
+    private val unixTimeConverterService: UnixTimeConverterService = UnixTimeConverterService()
+) {
 
     private val zoneOffset = OffsetDateTime.now().offset
 
@@ -66,7 +69,7 @@ class ToolMenuView(private val urlOpenerService: UrlOpenerService = UrlOpenerSer
 
         menu.add(JMenuItem("UNIX TIME").also {
             it.addActionListener {
-                UnixTimeConverterService().invoke()
+                unixTimeConverterService.invoke()
             }
         })
 
