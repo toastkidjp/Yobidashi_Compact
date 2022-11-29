@@ -11,7 +11,6 @@ import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.net.URI
 import java.time.LocalDateTime
-import java.time.OffsetDateTime
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
@@ -20,8 +19,6 @@ class ToolMenuView(
     private val urlOpenerService: UrlOpenerService = UrlOpenerService(),
     private val unixTimeConverterService: UnixTimeConverterService = UnixTimeConverterService()
 ) {
-
-    private val zoneOffset = OffsetDateTime.now().offset
 
     operator fun invoke(): JMenu {
         val menu = JMenu("Tool")
