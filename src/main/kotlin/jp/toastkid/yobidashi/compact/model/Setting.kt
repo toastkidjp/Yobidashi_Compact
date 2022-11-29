@@ -122,6 +122,8 @@ object Setting {
 
     fun wrapLine() = properties.getProperty("editor_wrap_line").toBoolean()
 
-    fun switchWrapLine() = properties.setProperty("editor_wrap_line", wrapLine().not().toString())
+    fun switchWrapLine() {
+        properties.setProperty("editor_wrap_line", wrapLine().not().toString())
+    }
 
 }
