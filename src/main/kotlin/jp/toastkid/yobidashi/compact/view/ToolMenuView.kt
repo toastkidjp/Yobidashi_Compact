@@ -16,7 +16,6 @@ import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
-import java.time.OffsetDateTime
 import javax.swing.BoxLayout
 import javax.swing.JLabel
 import javax.swing.JMenu
@@ -87,7 +86,6 @@ class ToolMenuView(
                 val panel = JPanel()
                 panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
                 val unixTimeInput = JTextField()
-                val offset = OffsetDateTime.now().offset
                 unixTimeInput.text = "東京特許 許可局"
                 val dateTime = JTextField()
                 dateTime.text = URLEncoder.encode(unixTimeInput.text, StandardCharsets.UTF_8.name())
