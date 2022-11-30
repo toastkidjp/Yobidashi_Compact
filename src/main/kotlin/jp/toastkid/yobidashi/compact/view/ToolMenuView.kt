@@ -99,7 +99,7 @@ class ToolMenuView(
                     }
                 })
                 panel.add(JLabel("Please would you input some words."))
-                panel.add(JLabel("UNIX TIME"))
+                panel.add(JLabel("Raw string"))
                 panel.add(unixTimeInput)
                 panel.add(JLabel("Date time"))
                 dateTime.preferredSize = Dimension(100, 24)
