@@ -101,7 +101,7 @@ class ToolMenuView(
                 panel.add(JLabel("Please would you input some words."))
                 panel.add(JLabel("Raw string"))
                 panel.add(unixTimeInput)
-                panel.add(JLabel("Date time"))
+                panel.add(JLabel("Encoded string"))
                 dateTime.preferredSize = Dimension(100, 24)
                 dateTime.addKeyListener(object : KeyAdapter() {
                     override fun keyReleased(e: KeyEvent?) {
