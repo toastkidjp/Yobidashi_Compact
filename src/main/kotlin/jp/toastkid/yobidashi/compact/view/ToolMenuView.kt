@@ -64,7 +64,7 @@ class ToolMenuView(
             }
         })
 
-        menu.add(JMenuItem("UNIX TIME").also {
+        menu.add(JMenuItem("UNIX TIME Converter").also {
             it.addActionListener {
                 unixTimeConverterService.invoke()
             }
