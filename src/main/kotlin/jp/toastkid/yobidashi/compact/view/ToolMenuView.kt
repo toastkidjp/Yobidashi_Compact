@@ -65,6 +65,7 @@ class ToolMenuView(
         })
 
         menu.add(JMenuItem("UNIX TIME Converter").also {
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK)
             it.addActionListener {
                 unixTimeConverterService.invoke()
             }
