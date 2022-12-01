@@ -15,8 +15,6 @@ import javax.swing.JTextField
 class UrlEncoderService {
 
     operator fun invoke() {
-        val panel = JPanel()
-        panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
         val rawWordInput = JTextField()
         rawWordInput.text = "東京特許 許可局"
         val encodedInput = JTextField()
@@ -28,6 +26,8 @@ class UrlEncoderService {
                 encodedInput.text = URLEncoder.encode(rawWordInput.text, StandardCharsets.UTF_8.name())
             }
         })
+        val panel = JPanel()
+        panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
         panel.add(JLabel("Please would you input some words."))
         panel.add(JLabel("Raw string"))
         panel.add(rawWordInput)
