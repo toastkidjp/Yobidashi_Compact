@@ -18,7 +18,8 @@ import javax.swing.KeyStroke
 
 class ToolMenuView(
     private val urlOpenerService: UrlOpenerService = UrlOpenerService(),
-    private val unixTimeConverterService: UnixTimeConverterService = UnixTimeConverterService()
+    private val unixTimeConverterService: UnixTimeConverterService = UnixTimeConverterService(),
+    private val urlEncoderService: UrlEncoderService = UrlEncoderService()
 ) {
 
     operator fun invoke(): JMenu {
@@ -74,7 +75,7 @@ class ToolMenuView(
 
         menu.add(JMenuItem("URL Encoder").also {
             it.addActionListener {
-                UrlEncoderService().invoke()
+                urlEncoderService.invoke()
             }
         })
 
