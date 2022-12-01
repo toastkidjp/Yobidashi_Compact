@@ -4,25 +4,16 @@ import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.calendar.view.CalendarPanel
 import jp.toastkid.yobidashi.compact.service.DateArticleUrlFactoryService
 import jp.toastkid.yobidashi.compact.service.UnixTimeConverterService
+import jp.toastkid.yobidashi.compact.service.UrlEncoderService
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import jp.toastkid.yobidashi.compact.web.private.search.PrivateImageSearchService
 import jp.toastkid.yobidashi.compact.web.search.WebSearchService
-import java.awt.Dimension
 import java.awt.event.InputEvent
-import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.net.URI
-import java.net.URLDecoder
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
-import javax.swing.BoxLayout
-import javax.swing.JLabel
 import javax.swing.JMenu
 import javax.swing.JMenuItem
-import javax.swing.JOptionPane
-import javax.swing.JPanel
-import javax.swing.JTextField
 import javax.swing.KeyStroke
 
 class ToolMenuView(
@@ -83,31 +74,7 @@ class ToolMenuView(
 
         menu.add(JMenuItem("URL Encoder").also {
             it.addActionListener {
-                val panel = JPanel()
-                panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
-                val unixTimeInput = JTextField()
-                unixTimeInput.text = "東京特許 許可局"
-                val dateTime = JTextField()
-                dateTime.text = URLEncoder.encode(unixTimeInput.text, StandardCharsets.UTF_8.name())
-
-                unixTimeInput.preferredSize = Dimension(100, 24)
-                unixTimeInput.addKeyListener(object : KeyAdapter() {
-                    override fun keyReleased(e: KeyEvent?) {
-                        dateTime.text = URLEncoder.encode(unixTimeInput.text, StandardCharsets.UTF_8.name())
-                    }
-                })
-                panel.add(JLabel("Please would you input some words."))
-                panel.add(JLabel("Raw string"))
-                panel.add(unixTimeInput)
-                panel.add(JLabel("Encoded string"))
-                dateTime.preferredSize = Dimension(100, 24)
-                dateTime.addKeyListener(object : KeyAdapter() {
-                    override fun keyReleased(e: KeyEvent?) {
-                        unixTimeInput.text = URLDecoder.decode(dateTime.text, StandardCharsets.UTF_8.name())
-                    }
-                })
-                panel.add(dateTime)
-                JOptionPane.showMessageDialog(null, panel)
+                UrlEncoderService().invoke()
             }
         })
 
