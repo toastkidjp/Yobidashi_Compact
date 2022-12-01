@@ -26,12 +26,14 @@ class UrlEncoderService {
                 encodedInput.text = URLEncoder.encode(rawWordInput.text, StandardCharsets.UTF_8.name())
             }
         })
+
         encodedInput.preferredSize = Dimension(100, 24)
         encodedInput.addKeyListener(object : KeyAdapter() {
             override fun keyReleased(e: KeyEvent?) {
                 rawWordInput.text = URLDecoder.decode(encodedInput.text, StandardCharsets.UTF_8.name())
             }
         })
+
         val panel = JPanel()
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
         panel.add(JLabel("Please would you input some words."))
