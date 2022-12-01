@@ -7,6 +7,7 @@ import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
 import io.mockk.verify
+import jp.toastkid.yobidashi.compact.service.UnixTimeConverterService
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -21,11 +22,14 @@ internal class ToolMenuViewTest {
     @MockK
     private lateinit var urlOpenerService: UrlOpenerService
 
+    @MockK
+    private lateinit var unixTimeConverterService: UnixTimeConverterService
+
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
 
-        toolMenuView = ToolMenuView(urlOpenerService)
+        toolMenuView = ToolMenuView(urlOpenerService, unixTimeConverterService)
 
         mockkConstructor(JMenu::class)
         every { anyConstructed<JMenu>().add(any<JMenuItem>()) }.answers { mockk() }
