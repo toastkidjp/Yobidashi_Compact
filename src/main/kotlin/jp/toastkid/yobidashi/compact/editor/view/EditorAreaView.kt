@@ -41,8 +41,8 @@ class EditorAreaView(
         refresh()
 
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
-            ?.putMapping("text/plain", MarkdownTokenMaker::class.java.canonicalName)
-        editorArea.syntaxEditingStyle = "text/plain"
+            ?.putMapping("text/plain2", MarkdownTokenMaker::class.java.canonicalName)
+        editorArea.syntaxEditingStyle = "text/plain2"
 
         editorArea.eolMarkersVisible = true
         editorArea.isWhitespaceVisible = true
