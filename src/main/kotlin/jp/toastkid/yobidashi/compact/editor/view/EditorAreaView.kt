@@ -40,8 +40,8 @@ class EditorAreaView(
     init {
         refresh()
 
-        val atmf = TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory
-        atmf?.putMapping("text/plain", "jp.toastkid.yobidashi.compact.editor.view.MarkdownTokenMaker")
+        (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
+            ?.putMapping("text/plain", "jp.toastkid.yobidashi.compact.editor.view.MarkdownTokenMaker")
         editorArea.syntaxEditingStyle = "text/plain"
 
         editorArea.eolMarkersVisible = true
