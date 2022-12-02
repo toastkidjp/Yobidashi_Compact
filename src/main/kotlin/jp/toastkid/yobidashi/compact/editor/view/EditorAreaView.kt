@@ -46,7 +46,7 @@ class EditorAreaView(
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
             ?.putMapping("text/plain2", MarkdownTokenMaker::class.java.canonicalName)
         editorArea.syntaxEditingStyle = "text/plain2"
-        editorArea.syntaxScheme.setStyle(Token.COMMENT_EOL, Style(Color(0,128,0), null, RSyntaxTextArea.getDefaultFont()))
+        editorArea.syntaxScheme.setStyle(Token.COMMENT_EOL, Style(Color(0,128,0), null, editorArea.font))
 
         editorArea.eolMarkersVisible = true
         editorArea.isWhitespaceVisible = true
