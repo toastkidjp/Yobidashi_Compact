@@ -14,8 +14,11 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
+import org.fife.ui.rsyntaxtextarea.Style
+import org.fife.ui.rsyntaxtextarea.Token
 import org.fife.ui.rsyntaxtextarea.TokenMakerFactory
 import org.fife.ui.rtextarea.RTextScrollPane
+import java.awt.Color
 import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -43,6 +46,7 @@ class EditorAreaView(
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
             ?.putMapping("text/plain2", MarkdownTokenMaker::class.java.canonicalName)
         editorArea.syntaxEditingStyle = "text/plain2"
+        editorArea.syntaxScheme.setStyle(Token.COMMENT_EOL, Style(Color(0,128,0), null, RSyntaxTextArea.getDefaultFont()))
 
         editorArea.eolMarkersVisible = true
         editorArea.isWhitespaceVisible = true
