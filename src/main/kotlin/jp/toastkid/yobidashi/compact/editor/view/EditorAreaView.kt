@@ -41,7 +41,7 @@ class EditorAreaView(
         refresh()
 
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
-            ?.putMapping("text/plain", "jp.toastkid.yobidashi.compact.editor.view.MarkdownTokenMaker")
+            ?.putMapping("text/plain", MarkdownTokenMaker::class.java.canonicalName)
         editorArea.syntaxEditingStyle = "text/plain"
 
         editorArea.eolMarkersVisible = true
