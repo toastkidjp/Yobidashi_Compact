@@ -6,6 +6,7 @@ import org.fife.ui.rsyntaxtextarea.Token
 import org.fife.ui.rsyntaxtextarea.TokenMap
 import javax.swing.text.Segment
 
+@Suppress("unused")
 class MarkdownTokenMaker : AbstractTokenMaker() {
 
     private var currentTokenStart = -1
