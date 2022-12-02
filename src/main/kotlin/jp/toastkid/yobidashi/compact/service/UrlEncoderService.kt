@@ -17,6 +17,7 @@ class UrlEncoderService {
     operator fun invoke() {
         val rawWordInput = JTextField()
         rawWordInput.text = "東京特許 許可局"
+
         val encodedInput = JTextField()
         encodedInput.text = URLEncoder.encode(rawWordInput.text, StandardCharsets.UTF_8.name())
 
