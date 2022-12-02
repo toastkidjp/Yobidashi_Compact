@@ -12,13 +12,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
+import org.fife.ui.rsyntaxtextarea.TokenMakerFactory
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.JComponent
 import javax.swing.event.HyperlinkEvent
+
+
+
 
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
@@ -34,6 +39,11 @@ class EditorAreaView(
 
     init {
         refresh()
+
+        val atmf = TokenMakerFactory.getDefaultInstance() as AbstractTokenMakerFactory
+        atmf.putMapping("text/plain", "jp.toastkid.yobidashi.compact.editor.view.MarkdownTokenMaker")
+        editorArea.syntaxEditingStyle = "text/plain"
+
         editorArea.eolMarkersVisible = true
         editorArea.isWhitespaceVisible = true
         editorArea.addHyperlinkListener {
