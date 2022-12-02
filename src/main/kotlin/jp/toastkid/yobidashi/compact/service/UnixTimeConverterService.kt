@@ -20,32 +20,32 @@ class UnixTimeConverterService {
     operator fun invoke() {
         val panel = JPanel()
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
-        val fileFilter = JTextField()
+        val unixTimeInput = JTextField()
         val offset = OffsetDateTime.now().offset
-        fileFilter.text = LocalDateTime.now().toInstant(offset).toEpochMilli().toString()
+        unixTimeInput.text = LocalDateTime.now().toInstant(offset).toEpochMilli().toString()
         val dateTime = JTextField()
         val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         dateTime.text = LocalDateTime.now().format(dateFormatter).toString()
 
-        fileFilter.preferredSize = Dimension(100, 24)
-        fileFilter.addKeyListener(object : KeyAdapter() {
+        unixTimeInput.preferredSize = Dimension(100, 24)
+        unixTimeInput.addKeyListener(object : KeyAdapter() {
             override fun keyReleased(e: KeyEvent?) {
                 // unixtime -> datetime
                 dateTime.text = LocalDateTime
-                    .ofInstant(Instant.ofEpochMilli(fileFilter.text.toLong()), ZoneId.systemDefault())
+                    .ofInstant(Instant.ofEpochMilli(unixTimeInput.text.toLong()), ZoneId.systemDefault())
                     .format(dateFormatter)
             }
         })
         panel.add(JLabel("Please would you input UNIX TIME."))
         panel.add(JLabel("UNIX TIME"))
-        panel.add(fileFilter)
+        panel.add(unixTimeInput)
         panel.add(JLabel("Date time"))
         dateTime.preferredSize = Dimension(100, 24)
         dateTime.addKeyListener(object : KeyAdapter() {
             override fun keyReleased(e: KeyEvent?) {
                 // datetime -> unixtime
                 try {
-                    fileFilter.text = LocalDateTime.parse(dateTime.text, dateFormatter)
+                    unixTimeInput.text = LocalDateTime.parse(dateTime.text, dateFormatter)
                         .toInstant(offset)
                         .toEpochMilli()
                         .toString()
