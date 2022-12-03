@@ -48,10 +48,7 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
                         '>' -> currentTokenType = Token.COMMENT_MULTILINE
                         '|' -> currentTokenType = Token.LITERAL_NUMBER_HEXADECIMAL
                         else -> {
-                            if (RSyntaxUtilities.isDigit(c)) {
-                                currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT
-                                break
-                            } else if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
+                            if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
                                 currentTokenType = Token.IDENTIFIER
                                 break
                             }
