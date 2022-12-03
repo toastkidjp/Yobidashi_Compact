@@ -46,6 +46,7 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
                         '"' -> currentTokenType = Token.LITERAL_STRING_DOUBLE_QUOTE
                         '#' -> currentTokenType = Token.COMMENT_EOL
                         '>' -> currentTokenType = Token.COMMENT_MULTILINE
+                        '|' -> currentTokenType = Token.LITERAL_NUMBER_HEXADECIMAL
                         else -> {
                             if (RSyntaxUtilities.isDigit(c)) {
                                 currentTokenType = Token.LITERAL_NUMBER_DECIMAL_INT
@@ -102,13 +103,7 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
                         break // Still an identifier of some type.
                     }
                 }
-                Token.COMMENT_EOL -> {
-                    i = end - 1
-                    addToken(text, currentTokenStart, i, currentTokenType, newStartOffset + currentTokenStart)
-                    // We need to set token type to null so at the bottom we don't add one more token.
-                    currentTokenType = Token.NULL
-                }
-                Token.COMMENT_MULTILINE -> {
+                Token.COMMENT_EOL, Token.COMMENT_MULTILINE, Token.LITERAL_NUMBER_HEXADECIMAL -> {
                     i = end - 1
                     addToken(text, currentTokenStart, i, currentTokenType, newStartOffset + currentTokenStart)
                     // We need to set token type to null so at the bottom we don't add one more token.
