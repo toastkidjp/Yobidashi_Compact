@@ -25,9 +25,6 @@ import java.awt.event.KeyListener
 import javax.swing.JComponent
 import javax.swing.event.HyperlinkEvent
 
-
-
-
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
         private val channel: Channel<MenuCommand>,
