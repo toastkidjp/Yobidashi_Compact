@@ -47,6 +47,7 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
                         '#' -> currentTokenType = Token.COMMENT_EOL
                         '>' -> currentTokenType = Token.COMMENT_MULTILINE
                         '|' -> currentTokenType = Token.LITERAL_NUMBER_HEXADECIMAL
+                        '-' -> currentTokenType = Token.DATA_TYPE
                         else -> {
                             if (RSyntaxUtilities.isLetter(c) || c == '/' || c == '_') {
                                 currentTokenType = Token.IDENTIFIER
@@ -100,7 +101,7 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
                         break // Still an identifier of some type.
                     }
                 }
-                Token.COMMENT_EOL, Token.COMMENT_MULTILINE, Token.LITERAL_NUMBER_HEXADECIMAL -> {
+                Token.COMMENT_EOL, Token.COMMENT_MULTILINE, Token.LITERAL_NUMBER_HEXADECIMAL, Token.DATA_TYPE -> {
                     i = end - 1
                     addToken(text, currentTokenStart, i, currentTokenType, newStartOffset + currentTokenStart)
                     // We need to set token type to null so at the bottom we don't add one more token.
