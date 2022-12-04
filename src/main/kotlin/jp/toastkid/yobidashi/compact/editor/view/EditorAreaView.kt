@@ -86,9 +86,10 @@ class EditorAreaView(
     }
 
     private fun applyCodeSyntaxHighlight() {
+        val customStyle = "text/plain2"
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
-            ?.putMapping("text/plain2", MarkdownTokenMaker::class.java.canonicalName)
-        editorArea.syntaxEditingStyle = "text/plain2"
+            ?.putMapping(customStyle, MarkdownTokenMaker::class.java.canonicalName)
+        editorArea.syntaxEditingStyle = customStyle
         val boldFont = editorArea.font.deriveFont(Font.BOLD)
         editorArea.syntaxScheme.setStyle(
             Token.COMMENT_EOL,
