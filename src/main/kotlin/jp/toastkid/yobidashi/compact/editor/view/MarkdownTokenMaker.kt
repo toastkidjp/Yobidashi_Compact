@@ -154,11 +154,4 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
         return firstToken
     }
 
-    override fun getWordsToHighlight(): TokenMap {
-        val tokenMap = TokenMap()
-        tokenMap.put("---", Token.RESERVED_WORD)
-        tokenMap.put("追記", Token.RESERVED_WORD)
-        return tokenMap
-    }
-
 }
