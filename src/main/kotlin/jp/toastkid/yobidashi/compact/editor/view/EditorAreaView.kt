@@ -27,6 +27,7 @@ import javax.swing.event.HyperlinkEvent
 
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
+        private val syntaxHighlightApplier: SyntaxHighlightApplier = SyntaxHighlightApplier(),
         private val channel: Channel<MenuCommand>,
         private val messageChannel: Channel<String>
 ) {
@@ -40,7 +41,7 @@ class EditorAreaView(
     init {
         refresh()
 
-        applyCodeSyntaxHighlight()
+        syntaxHighlightApplier(editorArea)
 
         editorArea.eolMarkersVisible = true
         editorArea.isWhitespaceVisible = true
@@ -80,23 +81,6 @@ class EditorAreaView(
         scrollArea.lineNumbersEnabled = true
         scrollArea.isIconRowHeaderEnabled = true
         scrollArea.gutter.lineNumberFont = editorArea.font.deriveFont(DEFAULT_FONT_SIZE)
-    }
-
-    private fun applyCodeSyntaxHighlight() {
-        val customStyle = "text/plain2"
-        (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
-            ?.putMapping(customStyle, MarkdownTokenMaker::class.java.canonicalName)
-        editorArea.syntaxEditingStyle = customStyle
-        val boldFont = editorArea.font.deriveFont(Font.BOLD)
-        val syntaxScheme = editorArea.syntaxScheme
-        syntaxScheme.setStyle(
-            Token.COMMENT_EOL,
-            Style(Color(0, 128, 0), null, boldFont)
-        )
-        syntaxScheme.setStyle(
-            Token.LITERAL_NUMBER_HEXADECIMAL,
-            Style(Color(128, 0, 220), null, boldFont)
-        )
     }
 
     fun view(): JComponent {
