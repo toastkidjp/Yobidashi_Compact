@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.editor.view
 import org.fife.ui.rsyntaxtextarea.AbstractTokenMaker
 import org.fife.ui.rsyntaxtextarea.RSyntaxUtilities
 import org.fife.ui.rsyntaxtextarea.Token
+import org.fife.ui.rsyntaxtextarea.TokenMap
 import javax.swing.text.Segment
 
 class MarkdownTokenMaker : AbstractTokenMaker() {
@@ -151,6 +152,10 @@ class MarkdownTokenMaker : AbstractTokenMaker() {
 
         // Return the first token in our linked list.
         return firstToken
+    }
+
+    override fun getWordsToHighlight(): TokenMap {
+        return TokenMap()
     }
 
 }
