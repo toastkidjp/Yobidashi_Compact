@@ -89,13 +89,14 @@ class EditorAreaView(
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
             ?.putMapping("text/plain2", MarkdownTokenMaker::class.java.canonicalName)
         editorArea.syntaxEditingStyle = "text/plain2"
+        val boldFont = editorArea.font.deriveFont(Font.BOLD)
         editorArea.syntaxScheme.setStyle(
             Token.COMMENT_EOL,
-            Style(Color(0, 128, 0), null, editorArea.font.deriveFont(Font.BOLD))
+            Style(Color(0, 128, 0), null, boldFont)
         )
         editorArea.syntaxScheme.setStyle(
             Token.LITERAL_NUMBER_HEXADECIMAL,
-            Style(Color(128, 0, 220), null, editorArea.font.deriveFont(Font.BOLD))
+            Style(Color(128, 0, 220), null, boldFont)
         )
     }
 
