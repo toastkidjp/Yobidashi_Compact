@@ -91,11 +91,12 @@ class EditorAreaView(
             ?.putMapping(customStyle, MarkdownTokenMaker::class.java.canonicalName)
         editorArea.syntaxEditingStyle = customStyle
         val boldFont = editorArea.font.deriveFont(Font.BOLD)
-        editorArea.syntaxScheme.setStyle(
+        val syntaxScheme = editorArea.syntaxScheme
+        syntaxScheme.setStyle(
             Token.COMMENT_EOL,
             Style(Color(0, 128, 0), null, boldFont)
         )
-        editorArea.syntaxScheme.setStyle(
+        syntaxScheme.setStyle(
             Token.LITERAL_NUMBER_HEXADECIMAL,
             Style(Color(128, 0, 220), null, boldFont)
         )
