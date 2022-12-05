@@ -43,6 +43,16 @@ class ChooserPanelFactory(
         monthChooser.value = date.month
         yearChooser.value = date.year
 
+        setKeyboardAction(chooserPanel, monthChooser, yearChooser)
+
+        return chooserPanel
+    }
+
+    private fun setKeyboardAction(
+        chooserPanel: JPanel,
+        monthChooser: JSpinner,
+        yearChooser: JSpinner
+    ) {
         chooserPanel.inputMap.also {
             it.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "prev")
             it.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "next")
@@ -60,8 +70,6 @@ class ChooserPanelFactory(
                 }
             })
         }
-
-        return chooserPanel
     }
 
     private fun makeMonthChangeListener(yearChooser: JSpinner, monthChooser: JSpinner): ChangeListener {
