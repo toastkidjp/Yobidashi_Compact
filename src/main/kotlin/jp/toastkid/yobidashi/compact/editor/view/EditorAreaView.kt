@@ -12,16 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
-import org.fife.ui.rsyntaxtextarea.Style
-import org.fife.ui.rsyntaxtextarea.Token
-import org.fife.ui.rsyntaxtextarea.TokenMakerFactory
 import org.fife.ui.rtextarea.RTextScrollPane
-import java.awt.Color
 import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import java.util.Locale
 import javax.swing.JComponent
 import javax.swing.event.HyperlinkEvent
 
