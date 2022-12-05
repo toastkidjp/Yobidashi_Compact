@@ -11,7 +11,6 @@ import java.awt.Font
 class SyntaxHighlightApplier {
 
     operator fun invoke(editorArea: RSyntaxTextArea) {
-        val customStyle = "text/plain2"
         (TokenMakerFactory.getDefaultInstance() as? AbstractTokenMakerFactory)
             ?.putMapping(customStyle, MarkdownTokenMaker::class.java.canonicalName)
         editorArea.syntaxEditingStyle = customStyle
@@ -28,3 +27,5 @@ class SyntaxHighlightApplier {
     }
 
 }
+
+private val customStyle = "text/plain2"
