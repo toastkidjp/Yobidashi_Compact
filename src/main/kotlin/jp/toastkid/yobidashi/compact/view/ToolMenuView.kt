@@ -140,7 +140,7 @@ class ToolMenuView(
                 panel.dropTarget = dropTarget
                 panel.add(JLabel("Base file name"))
                 val input = JOptionPane.showInputDialog(null, panel)
-                if (input.isNullOrBlank()) {
+                if (input.isNullOrBlank() || defaultListModel.isEmpty) {
                     return@addActionListener
                 }
                 defaultListModel.elements().toList().map { it.toPath() }.forEachIndexed { i, p ->
