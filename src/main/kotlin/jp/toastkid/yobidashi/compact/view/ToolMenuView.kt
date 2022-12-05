@@ -19,6 +19,7 @@ import javax.swing.KeyStroke
 
 
 class ToolMenuView(
+    private val fileRenameService: FileRenameService = FileRenameService(),
     private val urlOpenerService: UrlOpenerService = UrlOpenerService(),
     private val unixTimeConverterService: UnixTimeConverterService = UnixTimeConverterService(),
     private val urlEncoderService: UrlEncoderService = UrlEncoderService()
@@ -83,7 +84,7 @@ class ToolMenuView(
 
         menu.add(JMenuItem("Files rename").also {
             it.addActionListener {
-                FileRenameService().invoke()
+                fileRenameService.invoke()
             }
         })
 
