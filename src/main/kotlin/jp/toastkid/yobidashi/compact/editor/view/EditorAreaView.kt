@@ -17,7 +17,6 @@ import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import java.util.Locale
 import javax.swing.JComponent
 import javax.swing.event.HyperlinkEvent
 
@@ -139,6 +138,14 @@ class EditorAreaView(
 
     fun switchEditable() {
         editorArea.isEditable = editorArea.isEditable.not()
+    }
+
+    fun toTop() {
+        editorArea.caretPosition = 0
+    }
+
+    fun toBottom() {
+        editorArea.caretPosition = editorArea.document.length
     }
 
     fun refresh() {
