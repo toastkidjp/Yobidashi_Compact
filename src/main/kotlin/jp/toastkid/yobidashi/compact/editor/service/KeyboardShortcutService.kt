@@ -14,6 +14,18 @@ class KeyboardShortcutService(private val channel: Channel<MenuCommand>) {
             return
         }
 
+        if (e.isShiftDown && e.keyCode == KeyEvent.VK_UP) {
+            CoroutineScope(Dispatchers.Default).launch {
+                channel.send(MenuCommand.EDITOR_TO_TOP)
+            }
+        }
+
+        if (e.isShiftDown && e.keyCode == KeyEvent.VK_DOWN) {
+            CoroutineScope(Dispatchers.Default).launch {
+                channel.send(MenuCommand.EDITOR_TO_BOTTOM)
+            }
+        }
+
         if (e.isShiftDown && e.keyCode == KeyEvent.VK_U) {
             CoroutineScope(Dispatchers.Default).launch {
                 channel.send(MenuCommand.REVERSE_CASE)

@@ -157,6 +157,12 @@ class CommandReceiverService(
                     Setting.switchWrapLine()
                     editorAreaView.refresh()
                 }
+                MenuCommand.EDITOR_TO_TOP -> {
+                    editorAreaView.toTop()
+                }
+                MenuCommand.EDITOR_TO_BOTTOM-> {
+                    editorAreaView.toBottom()
+                }
                 MenuCommand.REFRESH -> {
                     editorAreaView.refresh()
                 }
