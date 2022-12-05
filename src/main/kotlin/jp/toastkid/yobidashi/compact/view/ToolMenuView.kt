@@ -140,6 +140,9 @@ class ToolMenuView(
                 panel.dropTarget = dropTarget
                 panel.add(JLabel("Base file name"))
                 val input = JOptionPane.showInputDialog(null, panel)
+                if (input.isNullOrBlank()) {
+                    return@addActionListener
+                }
                 defaultListModel.elements().toList().map { it.toPath() }.forEachIndexed { i, p ->
                     Files.copy(p, p.resolveSibling("${input}_${i + 1}.${p.extension}"))
                 }
