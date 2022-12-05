@@ -1,10 +1,14 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
+import java.awt.event.ActionEvent
+import java.awt.event.KeyEvent
 import java.time.LocalDate
 import java.time.Month
+import javax.swing.AbstractAction
 import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JSpinner
+import javax.swing.KeyStroke
 import javax.swing.event.ChangeListener
 
 class ChooserPanelFactory(
@@ -38,6 +42,24 @@ class ChooserPanelFactory(
         val date = LocalDate.now()
         monthChooser.value = date.month
         yearChooser.value = date.year
+
+        chooserPanel.inputMap.also {
+            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "prev")
+            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "next")
+        }
+
+        chooserPanel.actionMap.also {
+            it.put("prev", object : AbstractAction() {
+                override fun actionPerformed(e: ActionEvent?) {
+                    addMonth(monthChooser, yearChooser, -1)
+                }
+            })
+            it.put("next", object : AbstractAction() {
+                override fun actionPerformed(e: ActionEvent?) {
+                    addMonth(monthChooser, yearChooser, 1)
+                }
+            })
+        }
 
         return chooserPanel
     }
