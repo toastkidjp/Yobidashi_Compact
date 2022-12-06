@@ -62,12 +62,13 @@ class FileRenameService {
             }
         )
         panel.dropTarget = dropTarget
-        panel.add(JButton("Clear").also {
+        panel.add(JButton().also {
             it.action = object : AbstractAction() {
                 override fun actionPerformed(e: ActionEvent?) {
                     defaultListModel.clear()
                 }
             }
+            it.text = "Clear"
         })
         panel.add(JLabel("Base file name"))
         val input = JOptionPane.showInputDialog(null, panel)
