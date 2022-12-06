@@ -84,6 +84,7 @@ class ToolMenuView(
         })
 
         menu.add(JMenuItem("Files rename").also {
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK)
             it.addActionListener {
                 fileRenameService.invoke()
             }
