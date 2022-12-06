@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.aggregation.service
 import jp.toastkid.yobidashi.compact.aggregation.model.MovieMemoExtractorResult
 import jp.toastkid.yobidashi.compact.service.ArticlesReaderService
 import java.nio.file.Files
+import kotlin.io.path.nameWithoutExtension
 import kotlin.streams.asSequence
 
 class MovieMemoSubtitleExtractor(private val articlesReaderService: ArticlesReaderService = ArticlesReaderService()) {
@@ -13,7 +14,7 @@ class MovieMemoSubtitleExtractor(private val articlesReaderService: ArticlesRead
                 .asSequence()
                 .filter { it.fileName.toString().startsWith(keyword) }
                 .map {
-                    it.fileName.toString() to
+                    it.nameWithoutExtension.toString() to
                         Files.readAllLines(it)
                                 .filter { line -> line.startsWith("##") && line.contains("年、") }
                                 .map { line -> line.substring(line.indexOf(" ")).trim() }
