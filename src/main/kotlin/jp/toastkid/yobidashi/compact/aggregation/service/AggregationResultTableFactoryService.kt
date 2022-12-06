@@ -1,8 +1,11 @@
 package jp.toastkid.yobidashi.compact.aggregation.service
 
 import jp.toastkid.yobidashi.compact.aggregation.model.AggregationResult
+import jp.toastkid.yobidashi.compact.model.Article
 import java.awt.Dimension
 import java.awt.Font
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import javax.swing.JComponent
 import javax.swing.JScrollPane
 import javax.swing.JTable
@@ -22,6 +25,18 @@ class AggregationResultTableFactoryService {
         table.autoCreateRowSorter = true
 
         result.itemArrays().forEach { tableModel.addRow(it) }
+
+        table.addMouseListener(object : MouseAdapter() {
+            override fun mouseClicked(e: MouseEvent?) {
+                e ?: return
+                val row = table.rowAtPoint(e.getPoint());
+                val col = table.columnAtPoint(e.getPoint());
+                if (row >= 0 && col == 0) {
+                    val title = tableModel.getValueAt(row, col).toString()
+                    Article.withTitle(title).open()
+                }
+            }
+        })
 
         return JScrollPane(table).also {
             it.preferredSize = PREFERRED_SIZE
