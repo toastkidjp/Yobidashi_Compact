@@ -22,7 +22,7 @@ import javax.swing.event.HyperlinkEvent
 
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
-        private val syntaxHighlightApplier: SyntaxHighlightApplier = SyntaxHighlightApplier(),
+        syntaxHighlightApplier: SyntaxHighlightApplier = SyntaxHighlightApplier(),
         private val channel: Channel<MenuCommand>,
         private val messageChannel: Channel<String>
 ) {
