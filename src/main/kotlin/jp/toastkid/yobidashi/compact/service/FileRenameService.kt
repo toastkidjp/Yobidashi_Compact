@@ -7,11 +7,14 @@ import java.awt.dnd.DnDConstants
 import java.awt.dnd.DropTarget
 import java.awt.dnd.DropTargetAdapter
 import java.awt.dnd.DropTargetDropEvent
+import java.awt.event.ActionEvent
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
+import javax.swing.AbstractAction
 import javax.swing.BoxLayout
 import javax.swing.DefaultListModel
+import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JOptionPane
@@ -33,7 +36,6 @@ class FileRenameService {
         dropTarget.addDropTargetListener(
             object : DropTargetAdapter() {
                 override fun drop(dtde: DropTargetDropEvent?) {
-                    println(dtde)
                     try {
                         if (dtde!!.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
                             dtde!!.acceptDrop(DnDConstants.ACTION_COPY)
@@ -60,6 +62,13 @@ class FileRenameService {
             }
         )
         panel.dropTarget = dropTarget
+        panel.add(JButton("Clear").also {
+            it.action = object : AbstractAction() {
+                override fun actionPerformed(e: ActionEvent?) {
+                    defaultListModel.clear()
+                }
+            }
+        })
         panel.add(JLabel("Base file name"))
         val input = JOptionPane.showInputDialog(null, panel)
         if (input.isNullOrBlank() || defaultListModel.isEmpty) {
