@@ -77,6 +77,7 @@ class ToolMenuView(
         })
 
         menu.add(JMenuItem("URL Encoder").also {
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK)
             it.addActionListener {
                 urlEncoderService.invoke()
             }
