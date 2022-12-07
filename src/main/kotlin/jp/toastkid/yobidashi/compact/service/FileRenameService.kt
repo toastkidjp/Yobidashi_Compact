@@ -26,7 +26,7 @@ class FileRenameService {
     operator fun invoke() {
         val panel = JPanel()
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
-        panel.add(JLabel("Please would you drop any file?"))
+        panel.add(JLabel("Please would you drop any file which you want to rename?"))
         val droppedFileList = JList<File>()
         droppedFileList.preferredSize = Dimension(300, 400)
         panel.add(droppedFileList)
