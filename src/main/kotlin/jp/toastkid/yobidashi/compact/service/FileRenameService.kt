@@ -45,11 +45,7 @@ class FileRenameService {
                                 DataFlavor.javaFileListFlavor
                             ) as List<*>
                             println("list ${list.size}")
-                            for (o in list) {
-                                if (o is File) {
-                                    defaultListModel.addElement(o)
-                                }
-                            }
+                            list.filterIsInstance<File>().forEach { defaultListModel.addElement(it) }
                             dtde!!.dropComplete(true)
                             return
                         }
