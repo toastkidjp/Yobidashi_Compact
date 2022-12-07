@@ -36,6 +36,7 @@ class FileRenameService {
         dropTarget.addDropTargetListener(
             object : DropTargetAdapter() {
                 override fun drop(dtde: DropTargetDropEvent?) {
+                    dtde ?: return
                     try {
                         if (dtde!!.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
                             dtde!!.acceptDrop(DnDConstants.ACTION_COPY)
