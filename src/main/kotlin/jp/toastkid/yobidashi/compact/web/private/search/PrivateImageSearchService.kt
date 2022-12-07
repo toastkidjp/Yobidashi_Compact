@@ -1,6 +1,7 @@
 package jp.toastkid.yobidashi.compact.web.private.search
 
 import jp.toastkid.yobidashi.compact.model.Setting
+import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
@@ -26,13 +27,17 @@ class PrivateImageSearchService {
 
         println(Setting.privateSearchPath())
 
-        Runtime.getRuntime().exec(
-                arrayOf(
-                        Setting.privateSearchPath(),
-                        Setting.privateSearchOption(),
-                        "https://www.bing.com/images/search?view=detailv2&iss=sbi&q=imgurl:${URLEncoder.encode(input, StandardCharsets.UTF_8.name())}"
-                )
-        )
+        try {
+            Runtime.getRuntime().exec(
+                    arrayOf(
+                            Setting.privateSearchPath(),
+                            Setting.privateSearchOption(),
+                            "https://www.bing.com/images/search?view=detailv2&iss=sbi&q=imgurl:${URLEncoder.encode(input, StandardCharsets.UTF_8.name())}"
+                    )
+            )
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     companion object {
