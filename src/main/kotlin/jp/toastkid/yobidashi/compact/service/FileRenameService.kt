@@ -38,7 +38,7 @@ class FileRenameService {
                 override fun drop(dtde: DropTargetDropEvent?) {
                     dtde ?: return
                     try {
-                        if (dtde!!.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                        if (dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
                             dtde!!.acceptDrop(DnDConstants.ACTION_COPY)
                             val transferable = dtde!!.transferable
                             val list = transferable.getTransferData(
