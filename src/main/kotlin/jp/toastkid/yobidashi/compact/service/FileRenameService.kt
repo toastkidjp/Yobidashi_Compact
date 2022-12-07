@@ -71,7 +71,7 @@ class FileRenameService {
             it.text = "Clear"
         })
         panel.add(JLabel("Base file name"))
-        val input = JOptionPane.showInputDialog(null, panel)
+        val input = JOptionPane.showInputDialog(null, panel, "Files rename", JOptionPane.QUESTION_MESSAGE)
         if (input.isNullOrBlank() || defaultListModel.isEmpty) {
             return
         }
