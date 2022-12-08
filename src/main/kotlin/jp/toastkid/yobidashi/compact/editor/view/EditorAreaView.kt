@@ -80,6 +80,7 @@ class EditorAreaView(
 
         editorArea.inputMap.also {
             it.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK), "dupe")
+            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK), "extract")
         }
 
         editorArea.actionMap.also {
@@ -88,6 +89,11 @@ class EditorAreaView(
                     CoroutineScope(Dispatchers.Swing).launch {
                         channel.send(MenuCommand.DUPLICATE_LINE)
                     }
+                }
+            })
+            it.put("extract", object : AbstractAction() {
+                override fun actionPerformed(e: ActionEvent?) {
+                    extractLine()
                 }
             })
         }
