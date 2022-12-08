@@ -163,6 +163,10 @@ class EditorAreaView(
     }
 
     fun extractLine() {
+        if (editorArea.selectedText?.isNotEmpty() == true) {
+            editorArea.cut()
+            return
+        }
         val start = editorArea.lineStartOffsetOfCurrentLine
         val end = editorArea.lineEndOffsetOfCurrentLine
         val currentLineText = editorArea.getText(start, end - start)
