@@ -5,8 +5,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import java.awt.event.InputEvent
+import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.JMenuItem
+import javax.swing.KeyStroke
 
 class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
 
@@ -20,6 +23,7 @@ class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
                     channel.send(MenuCommand.WEB_SEARCH)
                 }
             }
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
         }
         menu.add(webSearchMenu)
 
