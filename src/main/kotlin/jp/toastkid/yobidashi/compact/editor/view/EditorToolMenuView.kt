@@ -27,15 +27,16 @@ class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
         }
         menu.add(webSearchMenu)
 
-        val openUrlMenu = JMenuItem("Open URL").also {
-            it.addActionListener {
-                CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(MenuCommand.OPEN_URL)
+        menu.add(
+            JMenuItem("Open URL").also {
+                it.addActionListener {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        channel.send(MenuCommand.OPEN_URL)
+                    }
                 }
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
-        }
-        menu.add(openUrlMenu)
+        )
 
         return menu
     }
