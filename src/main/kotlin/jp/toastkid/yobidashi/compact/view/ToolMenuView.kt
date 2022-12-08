@@ -17,7 +17,6 @@ import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-
 class ToolMenuView(
     private val fileRenameService: FileRenameService = FileRenameService(),
     private val urlOpenerService: UrlOpenerService = UrlOpenerService(),
