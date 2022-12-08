@@ -40,7 +40,7 @@ class AggregationMenuView(
         menu.add(
                 aggregationMenuItemGeneratorService.invoke(
                     "Movie memo",
-                    "Please input year and month you want aggregate article length? ex)",
+                    "Please input year and month you want aggregate movies? ex)",
                     { MovieMemoSubtitleExtractor().invoke(it) },
                     KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK)
                 )
