@@ -21,7 +21,7 @@ class FileMenuView(private val channel: Channel<MenuCommand>) {
 
         fileMenu.add(
                 JMenuItem("Open folder").also {
-                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK)
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK)
                     it.addActionListener {
                         Desktop.getDesktop().open(Setting.articleFolderFile())
                     }
