@@ -12,12 +12,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.swing.Swing
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Font
+import java.awt.event.ActionEvent
+import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
+import javax.swing.AbstractAction
 import javax.swing.JComponent
+import javax.swing.KeyStroke
 import javax.swing.event.HyperlinkEvent
 
 class EditorAreaView(
@@ -71,6 +76,20 @@ class EditorAreaView(
         })
 
         PopupMenuInitializer(editorArea.popupMenu, channel).invoke()
+
+        editorArea.inputMap.also {
+            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK), "dupe")
+        }
+
+        editorArea.actionMap.also {
+            it.put("dupe", object : AbstractAction() {
+                override fun actionPerformed(e: ActionEvent?) {
+                    CoroutineScope(Dispatchers.Swing).launch {
+                        channel.send(MenuCommand.DUPLICATE_LINE)
+                    }
+                }
+            })
+        }
 
         scrollArea = RTextScrollPane(editorArea)
         scrollArea.lineNumbersEnabled = true
