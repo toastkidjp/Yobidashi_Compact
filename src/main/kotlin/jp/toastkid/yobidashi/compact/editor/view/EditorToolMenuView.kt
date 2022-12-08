@@ -23,6 +23,15 @@ class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
         }
         menu.add(webSearchMenu)
 
+        val openUrlMenu = JMenuItem("Open URL").also {
+            it.addActionListener {
+                CoroutineScope(Dispatchers.Default).launch {
+                    channel.send(MenuCommand.OPEN_URL)
+                }
+            }
+        }
+        menu.add(openUrlMenu)
+
         return menu
     }
 
