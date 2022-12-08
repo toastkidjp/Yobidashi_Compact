@@ -33,6 +33,7 @@ class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
                     channel.send(MenuCommand.OPEN_URL)
                 }
             }
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
         }
         menu.add(openUrlMenu)
 
