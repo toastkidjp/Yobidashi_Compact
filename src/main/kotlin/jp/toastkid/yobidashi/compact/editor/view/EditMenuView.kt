@@ -50,14 +50,25 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         menu.addSeparator()
 
         menu.add(
-                JMenuItem("Duplicate line").also {
-                    it.addActionListener {
-                        CoroutineScope(Dispatchers.Default).launch {
-                            channel.send(MenuCommand.DUPLICATE_LINE)
-                        }
+            JMenuItem("Duplicate line").also {
+                it.addActionListener {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        channel.send(MenuCommand.DUPLICATE_LINE)
                     }
-                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
                 }
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.SHIFT_MASK or InputEvent.CTRL_MASK)
+            }
+        )
+
+        menu.add(
+            JMenuItem("Extract line").also {
+                it.addActionListener {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        channel.send(MenuCommand.EXTRACT_LINE)
+                    }
+                }
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK)
+            }
         )
 
         menu.addSeparator()

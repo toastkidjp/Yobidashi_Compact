@@ -4,6 +4,7 @@ import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.finder.FindOrder
 import jp.toastkid.yobidashi.compact.editor.finder.FinderService
 import jp.toastkid.yobidashi.compact.editor.popup.PopupMenuInitializer
+import jp.toastkid.yobidashi.compact.editor.service.ClipboardPutterService
 import jp.toastkid.yobidashi.compact.editor.service.KeyboardShortcutService
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
@@ -153,6 +154,14 @@ class EditorAreaView(
         val end = editorArea.lineEndOffsetOfCurrentLine
         val currentLineText = editorArea.getText(start, end - start)
         editorArea.insert(currentLineText, end)
+    }
+
+    fun extractLine() {
+        val start = editorArea.lineStartOffsetOfCurrentLine
+        val end = editorArea.lineEndOffsetOfCurrentLine
+        val currentLineText = editorArea.getText(start, end - start)
+        ClipboardPutterService().invoke(currentLineText)
+        editorArea.replaceRange("", start, end)
     }
 
     fun switchEditable() {

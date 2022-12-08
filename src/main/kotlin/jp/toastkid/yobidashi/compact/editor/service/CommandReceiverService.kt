@@ -116,6 +116,9 @@ class CommandReceiverService(
                 MenuCommand.DUPLICATE_LINE -> {
                     editorAreaView.duplicateLine()
                 }
+                MenuCommand.EXTRACT_LINE -> {
+                    editorAreaView.extractLine()
+                }
                 MenuCommand.SWITCH_EDITABLE -> {
                     editorAreaView.switchEditable()
                 }
