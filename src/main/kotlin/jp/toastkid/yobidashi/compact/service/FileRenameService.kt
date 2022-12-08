@@ -44,7 +44,6 @@ class FileRenameService {
                             val list = transferable.getTransferData(
                                 DataFlavor.javaFileListFlavor
                             ) as List<*>
-                            println("list ${list.size}")
                             list.filterIsInstance<File>().forEach { defaultListModel.addElement(it) }
                             dtde!!.dropComplete(true)
                             return
