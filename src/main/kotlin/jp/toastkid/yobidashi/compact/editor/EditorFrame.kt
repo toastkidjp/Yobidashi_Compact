@@ -78,7 +78,7 @@ class EditorFrame(
         val commandReceiverService = CommandReceiverService(
                 channel,
                 editorAreaView,
-                { currentArticle },
+                { currentArticle?.path() },
                 editing,
                 this::resetFrameTitle,
                 { finderView.switchVisibility() },

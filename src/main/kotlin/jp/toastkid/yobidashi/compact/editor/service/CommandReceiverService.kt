@@ -8,7 +8,6 @@ import jp.toastkid.yobidashi.compact.editor.text.NumberedListHeadAdder
 import jp.toastkid.yobidashi.compact.editor.text.TableFormConverter
 import jp.toastkid.yobidashi.compact.editor.text.TrimmingService
 import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
-import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.Dispatchers
@@ -19,12 +18,13 @@ import java.io.IOException
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
+import java.nio.file.Path
 import javax.swing.JOptionPane
 
 class CommandReceiverService(
         private val channel: Channel<MenuCommand>,
         private val editorAreaView: EditorAreaView,
-        private val currentArticle: () -> Article?,
+        private val currentArticle: () -> Path?,
         private val editing: Editing,
         private val resetFrameTitle: () -> Unit,
         private val switchFinder: () -> Unit,
@@ -36,9 +36,9 @@ class CommandReceiverService(
         channel.receiveAsFlow().collect { command ->
             when (command) {
                 MenuCommand.SAVE -> {
-                    val article = currentArticle() ?: return@collect
+                    val path = currentArticle() ?: return@collect
                     try {
-                        withContext(Dispatchers.IO) { Files.write(article.path(), editorAreaView.getTextArray()) }
+                        withContext(Dispatchers.IO) { Files.write(path, editorAreaView.getTextArray()) }
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
