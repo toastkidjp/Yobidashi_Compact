@@ -27,7 +27,7 @@ import javax.swing.event.HyperlinkEvent
 
 class EditorAreaView(
         private val editorArea: RSyntaxTextArea = RSyntaxTextArea(),
-        syntaxHighlightApplier: SyntaxHighlightApplier = SyntaxHighlightApplier(),
+        private val syntaxHighlightApplier: SyntaxHighlightApplier = SyntaxHighlightApplier(),
         private val channel: Channel<MenuCommand>,
         private val messageChannel: Channel<String>
 ) {
@@ -40,8 +40,6 @@ class EditorAreaView(
 
     init {
         refresh()
-
-        syntaxHighlightApplier(editorArea)
 
         editorArea.eolMarkersVisible = true
         editorArea.isWhitespaceVisible = true
@@ -189,6 +187,10 @@ class EditorAreaView(
 
     fun toBottom() {
         editorArea.caretPosition = editorArea.document.length
+    }
+
+    fun setStyle(extension: String) {
+        syntaxHighlightApplier(editorArea, extension)
     }
 
     fun refresh() {
