@@ -153,6 +153,10 @@ class EditorAreaView(
     }
 
     fun duplicateLine() {
+        if (editorArea.selectedText?.isNotEmpty() == true) {
+            editorArea.insert(editorArea.selectedText, editorArea.caretPosition)
+            return
+        }
         val start = editorArea.lineStartOffsetOfCurrentLine
         val end = editorArea.lineEndOffsetOfCurrentLine
         val currentLineText = editorArea.getText(start, end - start)
