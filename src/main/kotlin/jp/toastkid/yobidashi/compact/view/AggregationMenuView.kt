@@ -3,6 +3,7 @@ package jp.toastkid.yobidashi.compact.view
 import jp.toastkid.yobidashi.compact.aggregation.service.AggregationMenuItemGeneratorService
 import jp.toastkid.yobidashi.compact.aggregation.service.ArticleLengthAggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.CompoundInterestCalculatorMenuGeneratorService
+import jp.toastkid.yobidashi.compact.aggregation.service.EatingOutCounterService
 import jp.toastkid.yobidashi.compact.aggregation.service.MovieMemoSubtitleExtractor
 import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
@@ -28,6 +29,14 @@ class AggregationMenuView(
                         { OutgoAggregatorService().invoke(it) },
                         KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK)
                 )
+        )
+        menu.add(
+            aggregationMenuItemGeneratorService.invoke(
+                "Eat out count",
+                "Please input year and month you want count eat-out times?",
+                { EatingOutCounterService().invoke(it) },
+                null
+            )
         )
         menu.add(
                 aggregationMenuItemGeneratorService.invoke(
