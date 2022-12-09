@@ -106,7 +106,7 @@ class EditorFrame(
     }
 
     private fun setStatus(status: String) {
-        statusLabel.text = status
+        statusLabel.text = "${ if (editorAreaView.isEditable().not()) "Not editable " else "" } $status"
     }
 
     fun show() {
