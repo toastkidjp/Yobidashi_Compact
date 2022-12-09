@@ -13,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.swing.Swing
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
 import java.awt.Font
@@ -86,9 +85,7 @@ class EditorAreaView(
         editorArea.actionMap.also {
             it.put("dupe", object : AbstractAction() {
                 override fun actionPerformed(e: ActionEvent?) {
-                    CoroutineScope(Dispatchers.Swing).launch {
-                        channel.send(MenuCommand.DUPLICATE_LINE)
-                    }
+                    duplicateLine()
                 }
             })
             it.put("extract", object : AbstractAction() {
