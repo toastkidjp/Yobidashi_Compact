@@ -18,10 +18,13 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.swing.Swing
 import java.awt.BorderLayout
+import java.nio.file.Path
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
+import kotlin.io.path.extension
+import kotlin.io.path.nameWithoutExtension
 
 class EditorFrame(
     private val frame: JFrame = JFrame("Editor"),
@@ -31,7 +34,7 @@ class EditorFrame(
 
     private val editorAreaView: EditorAreaView
 
-    private var currentArticle: Article? = null
+    private var path: Path? = null
 
     init {
         frame.iconImage = ImageIO.read(javaClass.classLoader.getResourceAsStream("images/icon.png"))
@@ -78,7 +81,7 @@ class EditorFrame(
         val commandReceiverService = CommandReceiverService(
                 channel,
                 editorAreaView,
-                { currentArticle?.path() },
+                { path },
                 editing,
                 this::resetFrameTitle,
                 { finderView.switchVisibility() },
@@ -90,11 +93,19 @@ class EditorFrame(
     }
 
     fun load(article: Article) {
-        currentArticle = article
+        path = article.path()
+        path?.let {
+            load(it)
+        }
+    }
+
+    fun load(path: Path) {
+        this.path = path
 
         resetFrameTitle()
 
-        val text = ArticleContentLoaderService("\n").invoke(article)
+        editorAreaView.setStyle(path.extension)
+        val text = ArticleContentLoaderService("\n").invoke(path)
         editorAreaView.setText(text)
         editing.setCurrentSize(text.length)
         setStatus("Character: ${text.length}")
@@ -102,7 +113,7 @@ class EditorFrame(
 
     private fun resetFrameTitle() {
         val editingIndicator = if (editing.shouldShowIndicator()) " *" else ""
-        frame.title = "${currentArticle?.getTitle()}$editingIndicator - Editor"
+        frame.title = "${path?.nameWithoutExtension}$editingIndicator - Editor"
     }
 
     private fun setStatus(status: String) {
