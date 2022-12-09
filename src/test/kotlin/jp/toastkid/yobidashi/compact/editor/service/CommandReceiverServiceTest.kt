@@ -8,7 +8,6 @@ import io.mockk.unmockkAll
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
-import jp.toastkid.yobidashi.compact.model.Article
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +16,7 @@ import kotlinx.coroutines.launch
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.nio.file.Path
 
 internal class CommandReceiverServiceTest {
 
@@ -30,7 +30,7 @@ internal class CommandReceiverServiceTest {
     private lateinit var editorAreaView: EditorAreaView
 
     @MockK
-    private lateinit var currentArticle: () -> Article
+    private lateinit var currentArticle: () -> Path
 
     @MockK
     private lateinit var editing: Editing
