@@ -178,6 +178,10 @@ class EditorAreaView(
         editorArea.isEditable = editorArea.isEditable.not()
     }
 
+    fun isEditable(): Boolean {
+        return editorArea.isEditable
+    }
+
     fun toTop() {
         editorArea.caretPosition = 0
     }
