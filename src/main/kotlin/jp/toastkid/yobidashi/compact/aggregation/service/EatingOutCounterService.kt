@@ -41,8 +41,10 @@ class EatingOutCounterService(private val articlesReaderService: ArticlesReaderS
     }
 
     companion object {
-        private const val YEN_UNIT = "円"
     }
 
 }
+
 private const val TARGET_LINE_LABEL = "(外食)"
+
+private const val YEN_UNIT = "円"
