@@ -12,13 +12,7 @@ import java.nio.file.Paths
  */
 fun main(array: Array<String>?) {
     if (array?.isNotEmpty() == true) {
-        array.mapNotNull { Paths.get(it) }
-            .filter { Files.isReadable(it) }
-            .forEach {
-                val editorFrame = EditorFrame()
-                editorFrame.load(it)
-                editorFrame.show()
-            }
+        openFilesWithEditor(array)
         return
     }
     val frame = MainFrame("Yobidashi Compact")
@@ -26,4 +20,14 @@ fun main(array: Array<String>?) {
     Runtime.getRuntime().addShutdownHook(Thread {
         Setting.save()
     })
+}
+
+private fun openFilesWithEditor(array: Array<String>) {
+    array.mapNotNull { Paths.get(it) }
+        .filter { Files.isReadable(it) }
+        .forEach {
+            val editorFrame = EditorFrame()
+            editorFrame.load(it)
+            editorFrame.show()
+        }
 }
