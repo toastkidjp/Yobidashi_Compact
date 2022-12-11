@@ -40,8 +40,7 @@ class EatingOutCounterService(private val articlesReaderService: ArticlesReaderS
         return aggregationResult
     }
 
-    companion object {
-    }
+    companion object
 
 }
 
