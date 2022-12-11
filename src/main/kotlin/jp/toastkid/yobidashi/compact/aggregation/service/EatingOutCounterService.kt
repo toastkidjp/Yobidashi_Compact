@@ -20,7 +20,7 @@ class EatingOutCounterService(private val articlesReaderService: ArticlesReaderS
                         isOutGoLine = true
                     }
 
-                    if (!isOutGoLine || !line.startsWith("|") || line.contains("(外食)").not()) {
+                    if (!isOutGoLine || !line.startsWith("|") || line.contains(TARGET_LINE_LABEL).not()) {
                         continue
                     }
 
@@ -45,3 +45,4 @@ class EatingOutCounterService(private val articlesReaderService: ArticlesReaderS
     }
 
 }
+private val TARGET_LINE_LABEL = "(外食)"
