@@ -8,7 +8,7 @@ import jp.toastkid.yobidashi.compact.service.TodayFileTitleGenerator
 import jp.toastkid.yobidashi.compact.service.ZipArchiver
 import jp.toastkid.yobidashi.compact.viewmodel.ZipViewModel
 import java.awt.Desktop
-import java.awt.event.InputEvent
+import java.awt.Event
 import java.awt.event.KeyEvent
 import java.io.File
 import java.nio.file.Files
@@ -33,7 +33,7 @@ class FileMenuView {
         fileMenu.add(makeZipDiaryMenuItem())
 
         val item = JMenuItem("Open folder")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, Event.CTRL_MASK)
         item.addActionListener {
             Desktop.getDesktop().open(Setting.articleFolderFile())
         }
@@ -53,7 +53,7 @@ class FileMenuView {
 
     private fun makeExit(): JMenuItem {
         val item = JMenuItem("Exit")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, Event.CTRL_MASK)
         item.addActionListener {
             SubjectPool.closeWindow()
         }
@@ -62,7 +62,7 @@ class FileMenuView {
 
     private fun makeTodayMenuItem(): JMenuItem {
         val item = JMenuItem("Make today")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_T, Event.CTRL_MASK)
         item.addActionListener {
             val title = TodayFileTitleGenerator().invoke(System.currentTimeMillis()) ?: return@addActionListener
             if (existsArticle(title)) {
@@ -78,7 +78,7 @@ class FileMenuView {
 
     private fun makeNewMenuItem(): JMenuItem {
         val item = JMenuItem("Make new")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK)
         item.addActionListener {
             val dialog = JOptionPane.showInputDialog("Please input new article name.")
             if (dialog.isNullOrBlank() || existsArticle(dialog)) {
@@ -97,7 +97,7 @@ class FileMenuView {
 
     private fun makeZipAllMenuItem(): JMenuItem {
         val item = JMenuItem("Zip all")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Event.CTRL_MASK)
         item.addActionListener {
             ZipViewModel.zip()
         }
