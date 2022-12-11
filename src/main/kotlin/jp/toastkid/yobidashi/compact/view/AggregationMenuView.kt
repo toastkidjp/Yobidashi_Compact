@@ -34,8 +34,7 @@ class AggregationMenuView(
             aggregationMenuItemGeneratorService.invoke(
                 "Eat out count",
                 "Please input year and month you want count eat-out times?",
-                { EatingOutCounterService().invoke(it) },
-                null
+                { EatingOutCounterService().invoke(it) }
             )
         )
         menu.add(
