@@ -45,4 +45,4 @@ class EatingOutCounterService(private val articlesReaderService: ArticlesReaderS
     }
 
 }
-private val TARGET_LINE_LABEL = "(外食)"
+private const val TARGET_LINE_LABEL = "(外食)"
