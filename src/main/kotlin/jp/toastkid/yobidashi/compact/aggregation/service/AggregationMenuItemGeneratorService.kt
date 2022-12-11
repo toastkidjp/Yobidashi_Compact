@@ -19,7 +19,7 @@ class AggregationMenuItemGeneratorService {
             menuTitle: String,
             message: String,
             aggregator: (String) -> AggregationResult,
-            accelerator: KeyStroke?
+            accelerator: KeyStroke? = null
     ): JMenuItem {
         val item = JMenuItem(menuTitle)
         item.hideActionText = true
