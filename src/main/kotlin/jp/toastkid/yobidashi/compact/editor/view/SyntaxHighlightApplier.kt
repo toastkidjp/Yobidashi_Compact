@@ -19,11 +19,9 @@ class SyntaxHighlightApplier {
             }
             "java" -> {
                 editorArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JAVA
-                editorArea.syntaxScheme = SyntaxScheme.loadFromString(SyntaxConstants.SYNTAX_STYLE_JAVA)
             }
             "kt" -> {
                 editorArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_KOTLIN
-                editorArea.syntaxScheme = SyntaxScheme.loadFromString(SyntaxConstants.SYNTAX_STYLE_KOTLIN)
             }
             "py" -> editorArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_PYTHON
             "js", "tsx" -> editorArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_TYPESCRIPT
