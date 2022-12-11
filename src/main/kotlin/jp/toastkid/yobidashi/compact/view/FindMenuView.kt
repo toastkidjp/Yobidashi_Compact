@@ -1,7 +1,7 @@
 package jp.toastkid.yobidashi.compact.view
 
 import jp.toastkid.yobidashi.compact.service.ArticleFinderService
-import java.awt.event.InputEvent
+import java.awt.Event
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.JMenuItem
@@ -19,7 +19,7 @@ class FindMenuView {
         item.addActionListener {
             ArticleFinderService().invoke()
         }
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, Event.CTRL_MASK)
         item.text = "Find article"
         return item
     }
