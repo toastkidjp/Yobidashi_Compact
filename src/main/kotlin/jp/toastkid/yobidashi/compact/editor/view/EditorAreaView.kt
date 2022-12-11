@@ -15,9 +15,9 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rtextarea.RTextScrollPane
+import java.awt.Event
 import java.awt.Font
 import java.awt.event.ActionEvent
-import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.AbstractAction
@@ -76,8 +76,8 @@ class EditorAreaView(
         PopupMenuInitializer(editorArea.popupMenu, channel).invoke()
 
         editorArea.inputMap.also {
-            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK), "dupe")
-            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK), "extract")
+            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, Event.CTRL_MASK), "dupe")
+            it.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, Event.CTRL_MASK), "extract")
         }
 
         editorArea.actionMap.also {
