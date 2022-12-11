@@ -9,6 +9,7 @@ import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorServ
 import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.StepsAggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.StocksAggregatorService
+import java.awt.Event
 import java.awt.event.InputEvent
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
@@ -27,7 +28,7 @@ class AggregationMenuView(
                         "OutGo",
                         "Please input year and month you want aggregate outgo?",
                         { OutgoAggregatorService().invoke(it) },
-                        KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK)
+                        KeyStroke.getKeyStroke(KeyEvent.VK_G, Event.CTRL_MASK)
                 )
         )
         menu.add(
@@ -42,7 +43,7 @@ class AggregationMenuView(
                         "Article length",
                         "Please input year and month you want aggregate article length?",
                         { ArticleLengthAggregatorService().invoke(it) },
-                        KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK)
+                        KeyStroke.getKeyStroke(KeyEvent.VK_L, Event.CTRL_MASK)
                 )
         )
         menu.add(
@@ -50,7 +51,7 @@ class AggregationMenuView(
                     "Movie memo",
                     "Please input year and month you want aggregate movies? ex)",
                     { MovieMemoSubtitleExtractor().invoke(it) },
-                    KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK)
+                    KeyStroke.getKeyStroke(KeyEvent.VK_M, Event.CTRL_MASK)
                 )
         )
         menu.add(
@@ -66,7 +67,7 @@ class AggregationMenuView(
                 "Stock",
                 "Please input year and month you want aggregate stocks? ex)",
                 { StocksAggregatorService().invoke(it) },
-                KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK)
+                KeyStroke.getKeyStroke(KeyEvent.VK_3, Event.CTRL_MASK)
             )
         )
         menu.add(
@@ -74,7 +75,7 @@ class AggregationMenuView(
                         "Nikkei 225",
                         "Please input year and month you want aggregate Nikkei 225? ex)",
                         { Nikkei225AggregatorService().invoke(it) },
-                        KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK)
+                        KeyStroke.getKeyStroke(KeyEvent.VK_2, Event.CTRL_MASK)
                 )
         )
         menu.add(compoundInterestCalculatorMenuGeneratorService.invoke())
