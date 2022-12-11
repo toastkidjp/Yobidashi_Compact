@@ -40,8 +40,6 @@ class EatingOutCounterService(private val articlesReaderService: ArticlesReaderS
         return aggregationResult
     }
 
-    companion object
-
 }
 
 private const val TARGET_LINE_LABEL = "(外食)"
