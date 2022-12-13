@@ -23,7 +23,7 @@ class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
                     channel.send(MenuCommand.WEB_SEARCH)
                 }
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.SHIFT_MASK or Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.SHIFT_MASK or KeyEvent.CTRL_DOWN_MASK)
         }
         menu.add(webSearchMenu)
 
@@ -34,7 +34,7 @@ class EditorToolMenuView(private val channel: Channel<MenuCommand>) {
                         channel.send(MenuCommand.OPEN_URL)
                     }
                 }
-                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Event.SHIFT_MASK or Event.CTRL_MASK)
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Event.SHIFT_MASK or KeyEvent.CTRL_DOWN_MASK)
             }
         )
 
