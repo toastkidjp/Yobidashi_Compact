@@ -9,7 +9,6 @@ import jp.toastkid.yobidashi.compact.service.UrlEncoderService
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
 import jp.toastkid.yobidashi.compact.web.private.search.PrivateImageSearchService
 import jp.toastkid.yobidashi.compact.web.search.WebSearchService
-import java.awt.Event
 import java.awt.event.KeyEvent
 import java.net.URI
 import java.time.LocalDateTime
@@ -31,21 +30,21 @@ class ToolMenuView(
             it.addActionListener {
                 SubjectPool.addNewTab(CalendarPanel(), "Calendar")
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK)
         })
 
         menu.add(JMenuItem("Web search").also {
             it.addActionListener {
                 WebSearchService().invoke()
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK)
         })
 
         menu.add(JMenuItem("Private image search").also {
             it.addActionListener {
                 PrivateImageSearchService().invoke()
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_P, Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_P, KeyEvent.CTRL_DOWN_MASK)
         })
 
         menu.add(JMenuItem("What happened today").also {
@@ -69,21 +68,21 @@ class ToolMenuView(
         })
 
         menu.add(JMenuItem("UNIX TIME Converter").also {
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_U, Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_U, KeyEvent.CTRL_DOWN_MASK)
             it.addActionListener {
                 unixTimeConverterService.invoke()
             }
         })
 
         menu.add(JMenuItem("URL Encoder").also {
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_E, Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK)
             it.addActionListener {
                 urlEncoderService.invoke()
             }
         })
 
         menu.add(JMenuItem("Files rename").also {
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_R, Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK)
             it.addActionListener {
                 fileRenameService.invoke()
             }
