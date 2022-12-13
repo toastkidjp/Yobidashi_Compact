@@ -110,7 +110,7 @@ object Setting {
 
     fun mediaPlayerPath() = properties.getProperty("media_player_path")
 
-    fun mediaFolderPath() = properties.getProperty("media_folder_path")
+    fun mediaFolderPath(): String = properties.getProperty("media_folder_path")
 
     fun privateSearchPath(): String = properties.getProperty("private_search_path")
 
