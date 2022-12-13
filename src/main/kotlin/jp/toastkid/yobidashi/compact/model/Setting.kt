@@ -114,7 +114,7 @@ object Setting {
 
     fun privateSearchPath() = properties.getProperty("private_search_path")
 
-    fun privateSearchOption() = properties.getProperty("private_search_option")
+    fun privateSearchOption(): String = properties.getProperty("private_search_option")
 
     fun save() {
         properties.store(Files.newBufferedWriter(Paths.get(PATH)), null)
