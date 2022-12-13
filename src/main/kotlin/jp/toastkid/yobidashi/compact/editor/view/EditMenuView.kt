@@ -18,7 +18,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         menu.setMnemonic('E')
 
         val findItem = JMenuItem("Find")
-        findItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, Event.CTRL_MASK)
+        findItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK)
         findItem.addActionListener {
             CoroutineScope(Dispatchers.Default).launch {
                 channel.send(MenuCommand.FIND)
@@ -29,7 +29,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
         menu.addSeparator()
 
         val item = JMenuItem("Paste as quotation")
-        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, Event.CTRL_MASK)
+        item.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK)
         item.addActionListener {
             CoroutineScope(Dispatchers.Default).launch {
                 channel.send(MenuCommand.PASTE_AS_QUOTATION)
@@ -56,7 +56,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                         channel.send(MenuCommand.DUPLICATE_LINE)
                     }
                 }
-                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, Event.SHIFT_MASK or Event.CTRL_MASK)
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, Event.SHIFT_MASK or KeyEvent.CTRL_DOWN_MASK)
             }
         )
 
@@ -67,7 +67,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                         channel.send(MenuCommand.EXTRACT_LINE)
                     }
                 }
-                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, Event.CTRL_MASK)
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK)
             }
         )
 
@@ -79,7 +79,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                     channel.send(MenuCommand.SWITCH_EDITABLE)
                 }
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.SHIFT_MASK or Event.CTRL_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.SHIFT_MASK or KeyEvent.CTRL_DOWN_MASK)
         })
 
         return menu
