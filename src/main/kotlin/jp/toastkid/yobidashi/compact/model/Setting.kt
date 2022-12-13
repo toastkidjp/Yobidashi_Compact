@@ -112,7 +112,7 @@ object Setting {
 
     fun mediaFolderPath() = properties.getProperty("media_folder_path")
 
-    fun privateSearchPath() = properties.getProperty("private_search_path")
+    fun privateSearchPath(): String = properties.getProperty("private_search_path")
 
     fun privateSearchOption(): String = properties.getProperty("private_search_option")
 
