@@ -47,7 +47,7 @@ internal class CommandLineArgumentServiceTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         commandLineArgumentService.invoke(arrayOf("file1", "file2"))
 
         verify { anyConstructed<EditorFrame>().load(any<Path>()) }
