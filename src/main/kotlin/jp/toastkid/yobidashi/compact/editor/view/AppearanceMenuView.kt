@@ -26,7 +26,8 @@ class AppearanceMenuView(private val channel: Channel<MenuCommand>) {
         menu.add(findItem)
 
         val wrapLineSwitchItem = JCheckBoxMenuItem("Wrap line", Setting.wrapLine())
-        wrapLineSwitchItem.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, KeyEvent.SHIFT_DOWN_MASK or KeyEvent.CTRL_DOWN_MASK)
+        wrapLineSwitchItem.accelerator =
+            KeyStroke.getKeyStroke(KeyEvent.VK_W, KeyEvent.SHIFT_DOWN_MASK or KeyEvent.CTRL_DOWN_MASK)
         wrapLineSwitchItem.addActionListener {
             CoroutineScope(Dispatchers.IO).launch {
                 channel.send(MenuCommand.SWITCH_WRAP_LINE)
