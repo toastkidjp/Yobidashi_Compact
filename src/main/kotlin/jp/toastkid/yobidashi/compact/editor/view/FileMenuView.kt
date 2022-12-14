@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import java.awt.Desktop
-import java.awt.Event
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.JMenuItem
@@ -21,7 +20,7 @@ class FileMenuView(private val channel: Channel<MenuCommand>) {
 
         fileMenu.add(
                 JMenuItem("Open folder").also {
-                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, Event.CTRL_MASK)
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK)
                     it.addActionListener {
                         Desktop.getDesktop().open(Setting.articleFolderFile())
                     }
@@ -30,14 +29,14 @@ class FileMenuView(private val channel: Channel<MenuCommand>) {
 
         fileMenu.add(
                 JMenuItem("Save").also {
-                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK)
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK)
                     it.addActionListener { CoroutineScope(Dispatchers.Default).launch { channel.send(MenuCommand.SAVE) } }
                 }
         )
 
         fileMenu.add(
                 JMenuItem("Close").also {
-                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, Event.CTRL_MASK)
+                    it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_W, KeyEvent.CTRL_DOWN_MASK)
                     it.addActionListener { CoroutineScope(Dispatchers.Default).launch { channel.send(MenuCommand.CLOSE) } }
                 }
         )
