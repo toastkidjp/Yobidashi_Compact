@@ -15,4 +15,5 @@ class CommandLineArgumentService {
                 editorFrame.show()
             }
     }
+
 }
