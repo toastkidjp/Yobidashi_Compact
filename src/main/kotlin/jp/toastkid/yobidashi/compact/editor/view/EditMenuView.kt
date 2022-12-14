@@ -56,7 +56,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                         channel.send(MenuCommand.DUPLICATE_LINE)
                     }
                 }
-                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, Event.SHIFT_MASK or KeyEvent.CTRL_DOWN_MASK)
+                it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.SHIFT_DOWN_MASK or KeyEvent.CTRL_DOWN_MASK)
             }
         )
 
