@@ -5,7 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import java.awt.Event
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.JMenuItem
@@ -79,7 +78,7 @@ class EditMenuView(private val channel: Channel<MenuCommand>) {
                     channel.send(MenuCommand.SWITCH_EDITABLE)
                 }
             }
-            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.SHIFT_MASK or KeyEvent.CTRL_DOWN_MASK)
+            it.accelerator = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.SHIFT_DOWN_MASK or KeyEvent.CTRL_DOWN_MASK)
         })
 
         return menu
