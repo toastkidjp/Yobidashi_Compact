@@ -51,7 +51,7 @@ internal class CommandLineArgumentServiceTest {
         commandLineArgumentService.invoke(arrayOf("file1", "file2"))
 
         verify { anyConstructed<EditorFrame>().load(any<Path>()) }
-        verify { anyConstructed<EditorFrame>().show() }
+        verify(exactly = 2) { anyConstructed<EditorFrame>().show() }
     }
 
 }
