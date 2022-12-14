@@ -9,7 +9,6 @@ import jp.toastkid.yobidashi.compact.aggregation.service.Nikkei225AggregatorServ
 import jp.toastkid.yobidashi.compact.aggregation.service.OutgoAggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.StepsAggregatorService
 import jp.toastkid.yobidashi.compact.aggregation.service.StocksAggregatorService
-import java.awt.Event
 import java.awt.event.KeyEvent
 import javax.swing.JMenu
 import javax.swing.KeyStroke
@@ -58,7 +57,7 @@ class AggregationMenuView(
                 "Steps",
                 "Please input year and month you want aggregate count of steps? ex)",
                 { StepsAggregatorService().invoke(it) },
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.SHIFT_MASK)
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.SHIFT_DOWN_MASK)
             )
         )
         menu.add(
