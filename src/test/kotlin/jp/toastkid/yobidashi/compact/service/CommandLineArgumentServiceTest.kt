@@ -53,4 +53,5 @@ internal class CommandLineArgumentServiceTest {
         verify { anyConstructed<EditorFrame>().load(any<Path>()) }
         verify { anyConstructed<EditorFrame>().show() }
     }
+
 }
