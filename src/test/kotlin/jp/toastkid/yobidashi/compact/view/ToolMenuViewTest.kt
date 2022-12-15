@@ -2,6 +2,7 @@ package jp.toastkid.yobidashi.compact.view
 
 import io.mockk.MockKAnnotations
 import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.mockkConstructor
@@ -19,6 +20,7 @@ import javax.swing.JMenuItem
 
 internal class ToolMenuViewTest {
 
+    @InjectMockKs
     private lateinit var toolMenuView: ToolMenuView
 
     @MockK
