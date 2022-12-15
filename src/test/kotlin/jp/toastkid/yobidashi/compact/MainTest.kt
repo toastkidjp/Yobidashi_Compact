@@ -37,7 +37,7 @@ class MainTest {
 
     @Test
     fun test() {
-        main()
+        main(arrayOf())
 
         verify { anyConstructed<MainFrame>().show() }
     }
