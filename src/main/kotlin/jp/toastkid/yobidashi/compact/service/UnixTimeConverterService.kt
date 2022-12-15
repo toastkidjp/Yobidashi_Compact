@@ -55,7 +55,7 @@ class UnixTimeConverterService {
             }
         })
         panel.add(dateTime)
-        JOptionPane.showMessageDialog(null, panel)
+        JOptionPane.showMessageDialog(null, panel, "UnixTime converter", JOptionPane.QUESTION_MESSAGE)
     }
 
 }
