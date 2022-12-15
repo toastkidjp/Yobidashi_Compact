@@ -33,6 +33,9 @@ internal class EditorAreaViewTest {
     private lateinit var editorArea: RSyntaxTextArea
 
     @MockK
+    private lateinit var syntaxHighlightApplier: SyntaxHighlightApplier
+
+    @MockK
     private lateinit var channel: Channel<MenuCommand>
 
     @MockK
@@ -73,7 +76,7 @@ internal class EditorAreaViewTest {
         mockkConstructor(PopupMenuInitializer::class)
         every { anyConstructed<PopupMenuInitializer>().invoke() }.answers { Unit }
 
-        editorAreaView = EditorAreaView(editorArea, channel, messageChannel)
+        editorAreaView = EditorAreaView(editorArea, syntaxHighlightApplier, channel, messageChannel)
     }
 
     @AfterEach
