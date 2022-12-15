@@ -7,6 +7,7 @@ import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
 import io.mockk.verify
+import jp.toastkid.yobidashi.compact.service.FileRenameService
 import jp.toastkid.yobidashi.compact.service.UnixTimeConverterService
 import jp.toastkid.yobidashi.compact.service.UrlEncoderService
 import jp.toastkid.yobidashi.compact.service.UrlOpenerService
@@ -29,11 +30,14 @@ internal class ToolMenuViewTest {
     @MockK
     private lateinit var urlEncoderService: UrlEncoderService
 
+    @MockK
+    private lateinit var fileRenameService: FileRenameService
+
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
 
-        toolMenuView = ToolMenuView(urlOpenerService, unixTimeConverterService, urlEncoderService)
+        toolMenuView = ToolMenuView(fileRenameService, urlOpenerService, unixTimeConverterService, urlEncoderService)
 
         mockkConstructor(JMenu::class)
         every { anyConstructed<JMenu>().add(any<JMenuItem>()) }.answers { mockk() }
