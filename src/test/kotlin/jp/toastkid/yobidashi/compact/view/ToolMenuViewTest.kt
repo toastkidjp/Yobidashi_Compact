@@ -39,8 +39,6 @@ internal class ToolMenuViewTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        toolMenuView = ToolMenuView(fileRenameService, urlOpenerService, unixTimeConverterService, urlEncoderService)
-
         mockkConstructor(JMenu::class)
         every { anyConstructed<JMenu>().add(any<JMenuItem>()) }.answers { mockk() }
     }
