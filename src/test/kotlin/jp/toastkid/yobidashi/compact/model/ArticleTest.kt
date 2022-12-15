@@ -14,8 +14,10 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.IOException
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.io.path.nameWithoutExtension
 
 internal class ArticleTest {
 
@@ -33,6 +35,9 @@ internal class ArticleTest {
 
         mockkStatic(Paths::class)
         every { Paths.get(any(), any()) }.returns(path)
+
+        mockkStatic("kotlin.io.path.PathsKt")
+        every { path.nameWithoutExtension }.returns("test")
     }
 
     @AfterEach
