@@ -37,7 +37,7 @@ internal class OpenEditorServiceTest {
         MockKAnnotations.init(this)
         openEditorService = OpenEditorService(editorFrame, desktop)
 
-        every { editorFrame.load(any()) }.answers { Unit }
+        every { editorFrame.load(any<Article>()) }.answers { Unit }
         every { editorFrame.show() }.answers { Unit }
         every { desktop.open(any()) }.answers { Unit }
         every { path.toFile() }.answers { mockk() }
@@ -51,7 +51,7 @@ internal class OpenEditorServiceTest {
 
         openEditorService.invoke(article)
 
-        verify (exactly = 1) { editorFrame.load(any()) }
+        verify (exactly = 1) { editorFrame.load(any<Article>()) }
         verify (exactly = 1) { editorFrame.show() }
         verify (exactly = 0)  { desktop.open(any()) }
     }
@@ -63,7 +63,7 @@ internal class OpenEditorServiceTest {
 
         openEditorService.invoke(article)
 
-        verify (exactly = 0) { editorFrame.load(any()) }
+        verify (exactly = 0) { editorFrame.load(any<Article>()) }
         verify (exactly = 0) { editorFrame.show() }
         verify (exactly = 1)  { desktop.open(any()) }
     }
