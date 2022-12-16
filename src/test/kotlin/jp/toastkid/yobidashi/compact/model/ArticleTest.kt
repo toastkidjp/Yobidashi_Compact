@@ -84,4 +84,13 @@ internal class ArticleTest {
         verify(exactly = 1) { anyConstructed<OpenEditorService>().invoke(any()) }
     }
 
+    @Test
+    fun count() {
+        mockkStatic(Files::class)
+        every { Files.readAllLines(any()) }.returns(listOf("test content", "is containing dummy text です"))
+
+        val article = Article.withTitle("test.md")
+        assertEquals(39, article.count())
+    }
+
 }
