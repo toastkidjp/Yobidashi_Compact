@@ -93,4 +93,16 @@ internal class ArticleTest {
         assertEquals(39, article.count())
     }
 
+    @Test
+    fun makeFile() {
+        mockkStatic(Files::class)
+        every { Files.createFile(any()) }.returns(path)
+        every { Files.write(any(), any<ByteArray>()) }.returns(path)
+
+        Article.withTitle("test.md").makeFile { "test" }
+
+        verify { Files.createFile(any()) }
+        verify { Files.write(any(), any<ByteArray>()) }
+    }
+
 }
