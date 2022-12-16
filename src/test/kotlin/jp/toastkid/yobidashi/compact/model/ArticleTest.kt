@@ -85,7 +85,7 @@ internal class ArticleTest {
     }
 
     @Test
-    fun count() {
+    fun testCount() {
         mockkStatic(Files::class)
         every { Files.readAllLines(any()) }.returns(listOf("test content", "is containing dummy text です"))
 
