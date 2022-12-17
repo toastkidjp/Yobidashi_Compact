@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.model
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
@@ -64,7 +66,7 @@ internal class ArticleTest {
     @Test
     fun testOpen() {
         mockkConstructor(OpenEditorService::class)
-        every { anyConstructed<OpenEditorService>().invoke(any()) }.answers { Unit }
+        every { anyConstructed<OpenEditorService>().invoke(any()) }.just(Runs)
 
         val article = Article.withTitle("test.md")
         article.open()
