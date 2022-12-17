@@ -127,7 +127,7 @@ internal class ArticleTest {
     }
 
     @Test
-    fun lastModified() {
+    fun testLastModifiedThrowingIoException() {
         val fileTime = mockk<FileTime>()
         every { fileTime.toMillis() }.throws(IOException())
         mockkStatic(Files::class)
