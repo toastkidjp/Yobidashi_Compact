@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.unmockkAll
@@ -37,7 +39,7 @@ internal class OpenEditorServiceTest {
         MockKAnnotations.init(this)
         openEditorService = OpenEditorService(editorFrame, desktop)
 
-        every { editorFrame.load(any<Article>()) }.answers { Unit }
+        every { editorFrame.load(any<Article>()) }.just(Runs)
         every { editorFrame.show() }.answers { Unit }
         every { desktop.open(any()) }.answers { Unit }
         every { path.toFile() }.answers { mockk() }
