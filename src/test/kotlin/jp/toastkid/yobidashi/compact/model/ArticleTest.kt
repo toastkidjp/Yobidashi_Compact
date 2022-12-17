@@ -10,6 +10,7 @@ import io.mockk.verify
 import jp.toastkid.yobidashi.compact.editor.service.OpenEditorService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -103,6 +104,11 @@ internal class ArticleTest {
 
         verify { Files.createFile(any()) }
         verify { Files.write(any(), any<ByteArray>()) }
+    }
+
+    @Test
+    fun path() {
+        assertSame(path, Article.withTitle("test.md").path())
     }
 
 }
