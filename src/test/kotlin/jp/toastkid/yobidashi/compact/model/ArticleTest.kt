@@ -107,7 +107,7 @@ internal class ArticleTest {
     }
 
     @Test
-    fun path() {
+    fun testPath() {
         assertSame(path, Article.withTitle("test.md").path())
     }
 
