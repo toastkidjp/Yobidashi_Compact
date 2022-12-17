@@ -5,6 +5,7 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
+import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
@@ -20,6 +21,7 @@ import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.nio.file.attribute.FileTime
 import kotlin.io.path.nameWithoutExtension
 
 internal class ArticleTest {
@@ -111,6 +113,17 @@ internal class ArticleTest {
     @Test
     fun testPath() {
         assertSame(path, Article.withTitle("test.md").path())
+    }
+
+    @Test
+    fun lastModified() {
+        val fileTime = mockk<FileTime>()
+        every { fileTime.toMillis() }.returns(42L)
+        mockkStatic(Files::class)
+        every { Files.getLastModifiedTime(any()) }.returns(fileTime)
+
+        val article = Article.withTitle("test.md")
+        assertEquals(42L, article.lastModified())
     }
 
 }
