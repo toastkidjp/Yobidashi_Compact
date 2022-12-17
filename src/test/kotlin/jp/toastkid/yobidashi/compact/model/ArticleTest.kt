@@ -126,4 +126,15 @@ internal class ArticleTest {
         assertEquals(42L, article.lastModified())
     }
 
+    @Test
+    fun lastModified() {
+        val fileTime = mockk<FileTime>()
+        every { fileTime.toMillis() }.throws(IOException())
+        mockkStatic(Files::class)
+        every { Files.getLastModifiedTime(any()) }.returns(fileTime)
+
+        val article = Article.withTitle("test.md")
+        assertEquals(0L, article.lastModified())
+    }
+
 }
