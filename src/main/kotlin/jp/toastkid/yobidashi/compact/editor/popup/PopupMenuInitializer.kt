@@ -165,13 +165,14 @@ class PopupMenuInitializer(private val popupMenu: JPopupMenu, private val channe
         }
         popupMenu.add(translateMenu)
 
-        val horizontalRuleMenu = JMenuItem("Horizontal rule").also {
-            it.addActionListener {
-                CoroutineScope(Dispatchers.Default).launch {
-                    channel.send(MenuCommand.HORIZONTAL_RULE)
+        popupMenu.add(
+            JMenuItem("Horizontal rule").also {
+                it.addActionListener {
+                    CoroutineScope(Dispatchers.Default).launch {
+                        channel.send(MenuCommand.HORIZONTAL_RULE)
+                    }
                 }
             }
-        }
-        popupMenu.add(horizontalRuleMenu)
+        )
     }
 }
