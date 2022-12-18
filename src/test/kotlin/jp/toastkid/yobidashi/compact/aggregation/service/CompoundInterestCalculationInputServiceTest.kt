@@ -38,7 +38,7 @@ internal class CompoundInterestCalculationInputServiceTest {
 
         mockkConstructor(JFormattedTextField::class)
         mockkConstructor(JPanel::class)
-        every { anyConstructed<JPanel>().setLayout(any()) }.answers { Unit }
+        every { anyConstructed<JPanel>().setLayout(any()) }.just(Runs)
         every { anyConstructed<JPanel>().add(any<JComponent>()) }.answers { mockk() }
     }
 
