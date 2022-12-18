@@ -42,7 +42,7 @@ internal class DayPanelFactoryTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         dayPanelFactory.invoke()
 
         verify(atLeast = 1) { dayOfWeekLabelFactory.invoke(any()) }
