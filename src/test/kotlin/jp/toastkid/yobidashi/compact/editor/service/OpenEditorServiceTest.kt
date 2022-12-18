@@ -41,7 +41,7 @@ internal class OpenEditorServiceTest {
 
         every { editorFrame.load(any<Article>()) }.just(Runs)
         every { editorFrame.show() }.just(Runs)
-        every { desktop.open(any()) }.answers { Unit }
+        every { desktop.open(any()) }.just(Runs)
         every { path.toFile() }.answers { mockk() }
         every { article.path() }.answers { path }
     }
