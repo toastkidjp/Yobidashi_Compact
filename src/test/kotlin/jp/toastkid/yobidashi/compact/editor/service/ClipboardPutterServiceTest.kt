@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.unmockkAll
 import io.mockk.verify
 import org.junit.jupiter.api.AfterEach
@@ -22,7 +24,7 @@ internal class ClipboardPutterServiceTest {
         MockKAnnotations.init(this)
         clipboardPutterService = ClipboardPutterService(clipboard)
 
-        every { clipboard.setContents(any(), any()) }.answers { Unit }
+        every { clipboard.setContents(any(), any()) }.just(Runs)
     }
 
     @AfterEach
