@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact.service
 
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -18,7 +20,7 @@ internal class ArticleFilterViewFactoryServiceTest {
         articleFilterViewFactoryService = ArticleFilterViewFactoryService()
 
         mockkConstructor(JTextField::class)
-        every { anyConstructed<JTextField>().addKeyListener(any()) }.answers { Unit }
+        every { anyConstructed<JTextField>().addKeyListener(any()) }.just(Runs)
         every { anyConstructed<JTextField>().setPreferredSize(any()) }.answers { Unit }
     }
 
