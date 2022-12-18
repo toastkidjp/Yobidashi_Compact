@@ -42,8 +42,8 @@ internal class ChooserPanelFactoryTest {
         every { refreshDayLabels.invoke(any(), any()) }.just(Runs)
         every { monthChooserFactory.invoke() }.returns(mockSpinner)
         every { yearChooserFactory.invoke() }.returns(mockSpinner)
-        every { mockSpinner.setValue(any()) }.answers { Unit }
-        every { mockSpinner.addChangeListener(any()) }.answers { Unit }
+        every { mockSpinner.setValue(any()) }.just(Runs)
+        every { mockSpinner.addChangeListener(any()) }.just(Runs)
 
         mockkConstructor(JPanel::class)
         every { anyConstructed<JPanel>().add(any<JComponent>()) }.returns(mockk())
