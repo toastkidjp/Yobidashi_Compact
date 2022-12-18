@@ -21,7 +21,7 @@ import javax.swing.JTextField
 
 class FinderAreaView(
         private val orderChannel: Channel<FindOrder>,
-        private val messageChannel: Channel<String>
+        messageChannel: Channel<String>
 ) {
 
     private val content = JPanel()
