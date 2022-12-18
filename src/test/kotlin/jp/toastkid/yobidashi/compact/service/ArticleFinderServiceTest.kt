@@ -1,9 +1,11 @@
 package jp.toastkid.yobidashi.compact.service
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.mockkObject
@@ -49,7 +51,7 @@ internal class ArticleFinderServiceTest {
         coEvery { Article.withTitle(any()) }.returns(mockk())
 
         mockkObject(SubjectPool)
-        coEvery { SubjectPool.sendSearchResult(any(), any()) }.answers { Unit }
+        coEvery { SubjectPool.sendSearchResult(any(), any()) }.just(Runs)
     }
 
     @Test
