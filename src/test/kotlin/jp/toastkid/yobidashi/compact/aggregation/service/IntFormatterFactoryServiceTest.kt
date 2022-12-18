@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact.aggregation.service
 
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
@@ -24,7 +26,7 @@ internal class IntFormatterFactoryServiceTest {
         every { NumberFormat.getInstance() }.answers { mockk() }
 
         mockkConstructor(NumberFormatter::class)
-        every { anyConstructed<NumberFormatter>().setValueClass(any()) }.answers { Unit }
+        every { anyConstructed<NumberFormatter>().setValueClass(any()) }.just(Runs)
         every { anyConstructed<NumberFormatter>().setMinimum(any()) }.answers { Unit }
         every { anyConstructed<NumberFormatter>().setAllowsInvalid(any()) }.answers { Unit }
     }
