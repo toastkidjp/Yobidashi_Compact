@@ -1,9 +1,11 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
@@ -37,7 +39,7 @@ internal class ChooserPanelFactoryTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        every { refreshDayLabels.invoke(any(), any()) }.answers { Unit }
+        every { refreshDayLabels.invoke(any(), any()) }.just(Runs)
         every { monthChooserFactory.invoke() }.returns(mockSpinner)
         every { yearChooserFactory.invoke() }.returns(mockSpinner)
         every { mockSpinner.setValue(any()) }.answers { Unit }
