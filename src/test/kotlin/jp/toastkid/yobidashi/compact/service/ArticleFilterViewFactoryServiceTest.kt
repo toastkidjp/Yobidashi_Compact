@@ -21,7 +21,7 @@ internal class ArticleFilterViewFactoryServiceTest {
 
         mockkConstructor(JTextField::class)
         every { anyConstructed<JTextField>().addKeyListener(any()) }.just(Runs)
-        every { anyConstructed<JTextField>().setPreferredSize(any()) }.answers { Unit }
+        every { anyConstructed<JTextField>().setPreferredSize(any()) }.just(Runs)
     }
 
     @AfterEach
