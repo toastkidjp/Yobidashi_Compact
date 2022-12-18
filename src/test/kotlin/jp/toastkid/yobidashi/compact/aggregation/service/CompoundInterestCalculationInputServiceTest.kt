@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.aggregation.service
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
@@ -28,7 +30,7 @@ internal class CompoundInterestCalculationInputServiceTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        every { intFormatter.install(any()) }.answers { Unit }
+        every { intFormatter.install(any()) }.just(Runs)
 
         compoundInterestCalculationInputService = CompoundInterestCalculationInputService(intFormatter)
 
