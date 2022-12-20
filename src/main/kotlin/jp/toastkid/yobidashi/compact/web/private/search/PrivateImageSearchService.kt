@@ -25,8 +25,6 @@ class PrivateImageSearchService {
             null
         } ?: return
 
-        println(Setting.privateSearchPath())
-
         try {
             Runtime.getRuntime().exec(
                     arrayOf(
