@@ -37,7 +37,7 @@ internal class YearChooserFactoryTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         yearChooserFactory.invoke()
 
         verify(exactly = 1) { anyConstructed<JSpinner>().setModel(any()) }
