@@ -3,7 +3,7 @@ package jp.toastkid.yobidashi.compact.editor.text
 class NumberedListHeadAdder {
 
     /**
-     * @param str Nullable [CharSequence]
+     * @param text Nullable [CharSequence]
      */
     operator fun invoke(text: String?): String? {
         if (text.isNullOrEmpty()) {
