@@ -24,9 +24,6 @@ internal class BlockQuotationTest {
         quotation = BlockQuotation()
     }
 
-    /**
-     * Test of [Quotation.invoke].
-     */
     @Test
     fun testInvoke() {
         assertEquals("> tomato", quotation("tomato"))
