@@ -36,7 +36,7 @@ internal class DayLabelFactoryTest {
         every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setPreferredSize(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setOpaque(any()) }.just(Runs)
-        every { anyConstructed<JLabel>().setBorder(any()) }.answers { Unit }
+        every { anyConstructed<JLabel>().setBorder(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setBackground(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setForeground(any()) }.answers { Unit }
     }
