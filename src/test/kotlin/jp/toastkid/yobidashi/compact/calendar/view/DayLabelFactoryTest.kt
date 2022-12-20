@@ -33,7 +33,7 @@ internal class DayLabelFactoryTest {
         every { anyConstructed<JLabel>().getFont() }.answers { font }
         every { anyConstructed<JLabel>().setFont(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setHorizontalAlignment(any()) }.just(Runs)
-        every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.answers { Unit }
+        every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setPreferredSize(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setOpaque(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setBorder(any()) }.answers { Unit }
