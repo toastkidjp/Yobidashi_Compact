@@ -32,7 +32,7 @@ internal class DayLabelFactoryTest {
         mockkConstructor(JLabel::class)
         every { anyConstructed<JLabel>().getFont() }.answers { font }
         every { anyConstructed<JLabel>().setFont(any()) }.just(Runs)
-        every { anyConstructed<JLabel>().setHorizontalAlignment(any()) }.answers { Unit }
+        every { anyConstructed<JLabel>().setHorizontalAlignment(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setPreferredSize(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setOpaque(any()) }.answers { Unit }
