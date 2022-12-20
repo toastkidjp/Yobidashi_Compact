@@ -40,7 +40,7 @@ internal class FontSizeSpinnerFactoryTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         fontSizeSpinnerFactory.invoke(mockk())
 
         verify(atLeast = 1) { anyConstructed<JComboBox<Int>>().addItem(any()) }
