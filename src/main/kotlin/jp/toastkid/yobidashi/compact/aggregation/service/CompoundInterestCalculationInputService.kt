@@ -19,7 +19,9 @@ class CompoundInterestCalculationInputService(
 
         val option = JOptionPane.showConfirmDialog(
                 null,
-                content
+                content,
+            "Compound interest calculation",
+            JOptionPane.DEFAULT_OPTION
         )
 
         if (option != JOptionPane.OK_OPTION
