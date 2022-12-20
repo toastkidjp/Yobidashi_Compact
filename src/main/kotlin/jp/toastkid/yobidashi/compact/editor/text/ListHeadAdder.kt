@@ -3,7 +3,7 @@ package jp.toastkid.yobidashi.compact.editor.text
 class ListHeadAdder {
 
     /**
-     * @param str Nullable [CharSequence]
+     * @param text Nullable [CharSequence]
      * @param head
      */
     operator fun invoke(text: String?, head: String): String? {
