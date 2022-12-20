@@ -4,6 +4,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
+import io.mockk.verify
 import jp.toastkid.yobidashi.compact.calendar.service.DayLabelRefresherService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -33,6 +34,10 @@ internal class CalendarPanelTest {
     @Test
     fun test() {
         assertNotNull(CalendarPanel())
+
+        verify(exactly = 1) { anyConstructed<DayPanelFactory>().invoke() }
+        verify(atLeast = 1) { anyConstructed<DayLabelRefresherService>().invoke(any<Int>(), any()) }
+        verify(atLeast = 1) { anyConstructed<DayLabelRefresherService>().invoke(any<LocalDate>(), any()) }
     }
 
 }
