@@ -39,7 +39,7 @@ internal class EditorFrameTest {
         MockKAnnotations.init(this)
         every { frame.setIconImage(any()) }.just(Runs)
         every { frame.getContentPane() }.answers { JPanel() }
-        every { frame.setJMenuBar(any()) }.answers { Unit }
+        every { frame.setJMenuBar(any()) }.just(Runs)
         every { frame.setBounds(any(), any(), any(), any()) }.answers { Unit }
         every { frame.setDefaultCloseOperation(any()) }.answers { Unit }
         every { frame.setVisible(any()) }.answers { Unit }
