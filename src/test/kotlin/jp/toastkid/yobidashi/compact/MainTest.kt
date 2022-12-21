@@ -23,7 +23,7 @@ class MainTest {
         every { anyConstructed<MainFrame>().show() }.just(Runs)
 
         val runtime = spyk(Runtime.getRuntime())
-        every { runtime.addShutdownHook(any()) }.answers { Unit }
+        every { runtime.addShutdownHook(any()) }.just(Runs)
 
         mockkStatic(Runtime::class)
         every { Runtime.getRuntime() }.returns(runtime)
