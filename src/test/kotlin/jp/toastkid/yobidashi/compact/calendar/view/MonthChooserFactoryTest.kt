@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
@@ -20,7 +22,7 @@ internal class MonthChooserFactoryTest {
         monthChooserFactory = MonthChooserFactory()
 
         mockkConstructor(JSpinner::class)
-        every { anyConstructed<JSpinner>().setModel(any()) }.answers { Unit }
+        every { anyConstructed<JSpinner>().setModel(any()) }.just(Runs)
         every { anyConstructed<JSpinner>().setFont(any()) }.answers { Unit }
         val font = mockk<Font>()
         every { font.deriveFont(any<Float>()) }.returns(font)
