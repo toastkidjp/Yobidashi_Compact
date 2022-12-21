@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact
 
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockkConstructor
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
@@ -18,7 +20,7 @@ class MainTest {
     @BeforeEach
     fun setUp() {
         mockkConstructor(MainFrame::class)
-        every { anyConstructed<MainFrame>().show() }.answers { Unit }
+        every { anyConstructed<MainFrame>().show() }.just(Runs)
 
         val runtime = spyk(Runtime.getRuntime())
         every { runtime.addShutdownHook(any()) }.answers { Unit }
