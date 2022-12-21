@@ -42,7 +42,7 @@ internal class EditorFrameTest {
         every { frame.setJMenuBar(any()) }.just(Runs)
         every { frame.setBounds(any(), any(), any(), any()) }.just(Runs)
         every { frame.setDefaultCloseOperation(any()) }.just(Runs)
-        every { frame.setVisible(any()) }.answers { Unit }
+        every { frame.setVisible(any()) }.just(Runs)
 
         val font = mockk<Font>()
         every { font.deriveFont(any<Float>()) }.returns(font)
