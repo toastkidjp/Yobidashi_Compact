@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.calendar.view
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -29,7 +31,7 @@ internal class DayOfWeekLabelFactoryTest {
         every { font.deriveFont(any<Float>()) }.answers { font }
         mockkConstructor(JLabel::class)
         every { anyConstructed<JLabel>().getFont() }.answers { font }
-        every { anyConstructed<JLabel>().setFont(any()) }.answers { Unit }
+        every { anyConstructed<JLabel>().setFont(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setHorizontalAlignment(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setPreferredSize(any()) }.answers { Unit }
