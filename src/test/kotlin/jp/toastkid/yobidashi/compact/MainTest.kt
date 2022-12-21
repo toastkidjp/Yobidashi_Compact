@@ -29,7 +29,7 @@ class MainTest {
         every { Runtime.getRuntime() }.returns(runtime)
 
         mockkObject(Setting)
-        every { Setting.save() }.answers { Unit }
+        every { Setting.save() }.just(Runs)
     }
 
     @AfterEach
