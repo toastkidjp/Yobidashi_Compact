@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.editor
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
@@ -35,7 +37,7 @@ internal class EditorFrameTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        every { frame.setIconImage(any()) }.answers { Unit }
+        every { frame.setIconImage(any()) }.just(Runs)
         every { frame.getContentPane() }.answers { JPanel() }
         every { frame.setJMenuBar(any()) }.answers { Unit }
         every { frame.setBounds(any(), any(), any(), any()) }.answers { Unit }
