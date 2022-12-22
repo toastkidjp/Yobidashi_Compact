@@ -49,7 +49,7 @@ internal class EditorFrameTest {
         every { statusLabel.getFont() }.returns(font)
         every { statusLabel.setFont(any()) }.just(Runs)
 
-        every { editing.setCurrentSize(any()) }.answers { Unit }
+        every { editing.setCurrentSize(any()) }.just(Runs)
 
         mockkConstructor(MenuBarView::class)
         every { anyConstructed<MenuBarView>().invoke(any()) }.returns(mockk())
