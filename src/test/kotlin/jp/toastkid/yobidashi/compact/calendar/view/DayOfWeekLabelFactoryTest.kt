@@ -35,7 +35,7 @@ internal class DayOfWeekLabelFactoryTest {
         every { anyConstructed<JLabel>().setHorizontalAlignment(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setPreferredSize(any()) }.just(Runs)
-        every { anyConstructed<JLabel>().setOpaque(any()) }.answers { Unit }
+        every { anyConstructed<JLabel>().setOpaque(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setBorder(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setBackground(any()) }.answers { Unit }
         every { anyConstructed<JLabel>().setForeground(any()) }.answers { Unit }
