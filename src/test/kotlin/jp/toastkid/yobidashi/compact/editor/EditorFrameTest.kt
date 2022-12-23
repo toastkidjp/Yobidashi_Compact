@@ -59,7 +59,7 @@ internal class EditorFrameTest {
         every { anyConstructed<EditorAreaView>().receiveStatus(any()) }.just(Runs)
 
         mockkConstructor(UiUpdaterService::class)
-        every { anyConstructed<UiUpdaterService>().invoke(any(), any()) }.answers { Unit }
+        every { anyConstructed<UiUpdaterService>().invoke(any(), any()) }.just(Runs)
 
         mockkConstructor(JPanel::class)
         every { anyConstructed<JPanel>().add(any<JComponent>(), any<String>()) }.returns(mockk())
