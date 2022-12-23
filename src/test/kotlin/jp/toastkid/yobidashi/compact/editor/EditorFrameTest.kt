@@ -41,7 +41,7 @@ internal class EditorFrameTest {
         every { frame.contentPane }.answers { JPanel() }
         every { frame.jMenuBar = any() }.just(Runs)
         every { frame.setBounds(any(), any(), any(), any()) }.just(Runs)
-        every { frame.setDefaultCloseOperation(any()) }.just(Runs)
+        every { frame.defaultCloseOperation = any() }.just(Runs)
         every { frame.setVisible(any()) }.just(Runs)
 
         val font = mockk<Font>()
