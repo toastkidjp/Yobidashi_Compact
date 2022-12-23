@@ -56,7 +56,7 @@ internal class EditorFrameTest {
 
         mockkConstructor(EditorAreaView::class)
         every { anyConstructed<EditorAreaView>().find(any()) }.just(Runs)
-        every { anyConstructed<EditorAreaView>().receiveStatus(any()) }.answers { Unit }
+        every { anyConstructed<EditorAreaView>().receiveStatus(any()) }.just(Runs)
 
         mockkConstructor(UiUpdaterService::class)
         every { anyConstructed<UiUpdaterService>().invoke(any(), any()) }.answers { Unit }
