@@ -47,7 +47,7 @@ internal class EditorFrameTest {
         val font = mockk<Font>()
         every { font.deriveFont(any<Float>()) }.returns(font)
         every { statusLabel.font }.returns(font)
-        every { statusLabel.setFont(any()) }.just(Runs)
+        every { statusLabel.font = any() }.just(Runs)
 
         every { editing.setCurrentSize(any()) }.just(Runs)
 
