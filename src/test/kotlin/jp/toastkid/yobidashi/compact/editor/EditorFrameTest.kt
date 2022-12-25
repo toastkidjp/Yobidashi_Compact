@@ -99,7 +99,7 @@ internal class EditorFrameTest {
     fun testShow() {
         editorFrame.show()
 
-        verify { frame.isVisible = any() }
+        verify { frame.isVisible = true }
     }
 
 }
