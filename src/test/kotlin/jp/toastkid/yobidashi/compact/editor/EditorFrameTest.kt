@@ -98,6 +98,8 @@ internal class EditorFrameTest {
     @Test
     fun testShow() {
         editorFrame.show()
+
+        verify { frame.isVisible = any() }
     }
 
 }
