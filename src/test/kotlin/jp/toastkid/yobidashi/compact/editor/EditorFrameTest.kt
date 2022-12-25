@@ -8,6 +8,7 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.unmockkAll
+import io.mockk.verify
 import jp.toastkid.yobidashi.compact.editor.model.Editing
 import jp.toastkid.yobidashi.compact.editor.service.ArticleContentLoaderService
 import jp.toastkid.yobidashi.compact.editor.view.EditorAreaView
@@ -89,6 +90,9 @@ internal class EditorFrameTest {
         every { anyConstructed<ArticleContentLoaderService>().invoke(any()) }.returns("test")
 
         editorFrame.load(path)
+
+        verify { statusLabel.text = any() }
+        verify { anyConstructed<EditorAreaView>().setText(any()) }
     }
 
     @Test
