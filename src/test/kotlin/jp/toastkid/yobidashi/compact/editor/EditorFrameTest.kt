@@ -96,7 +96,7 @@ internal class EditorFrameTest {
     }
 
     @Test
-    fun show() {
+    fun testShow() {
         editorFrame.show()
     }
 
