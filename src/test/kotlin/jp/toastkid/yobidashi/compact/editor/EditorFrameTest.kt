@@ -85,7 +85,7 @@ internal class EditorFrameTest {
     }
 
     @Test
-    fun load() {
+    fun testLoad() {
         mockkConstructor(ArticleContentLoaderService::class)
         every { anyConstructed<ArticleContentLoaderService>().invoke(any()) }.returns("test")
 
