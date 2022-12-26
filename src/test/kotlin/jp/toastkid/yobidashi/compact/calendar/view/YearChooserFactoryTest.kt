@@ -43,7 +43,7 @@ internal class YearChooserFactoryTest {
         yearChooserFactory.invoke()
 
         verify(exactly = 1) { anyConstructed<JSpinner>().model = any() }
-        verify(exactly = 1) { anyConstructed<JSpinner>().setFont(any()) }
+        verify(exactly = 1) { anyConstructed<JSpinner>().font = any() }
         // Following 2 verifications make crash.
         //verify(exactly = 1) { anyConstructed<JSpinner>().getFont() }
         //verify(exactly = 1) { anyConstructed<JSpinner>().getEditor() }
