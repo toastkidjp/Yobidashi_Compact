@@ -12,7 +12,7 @@ internal class UserOffDayServiceTest {
     @BeforeEach
     fun setUp() {
         userOffDayService = UserOffDayService(
-                listOf(12 to 29)
+            listOf(12 to 29)
         )
     }
 
