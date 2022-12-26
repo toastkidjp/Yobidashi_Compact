@@ -30,7 +30,7 @@ internal class YearChooserFactoryTest {
         every { anyConstructed<JSpinner>().font }.returns(font)
         every { anyConstructed<JSpinner>().editor }.returns(mockk())
         every { anyConstructed<JSpinner>().preferredSize }.returns(Dimension())
-        every { anyConstructed<JSpinner>().setPreferredSize(any()) }.just(Runs)
+        every { anyConstructed<JSpinner>().preferredSize = any() }.just(Runs)
     }
 
     @AfterEach
