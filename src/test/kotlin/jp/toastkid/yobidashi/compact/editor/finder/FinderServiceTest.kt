@@ -68,7 +68,7 @@ internal class FinderServiceTest {
     }
 
     @Test
-    fun testReplce() {
+    fun testReplace() {
         every { editorArea.getText() }.returns("ACB news will go bankrupt ACB.")
         every { editorArea.replaceRange(any(), any(), any()) }.answers { Unit }
 
