@@ -18,7 +18,7 @@ internal class UserOffDayServiceTest {
     fun testInvoke() {
         assertFalse(userOffDayService(12, 3))
         assertFalse(userOffDayService(11, 29))
-        assertTrue(userOffDayService.invoke(12, 29))
+        assertTrue(userOffDayService(12, 29))
     }
 
 }
