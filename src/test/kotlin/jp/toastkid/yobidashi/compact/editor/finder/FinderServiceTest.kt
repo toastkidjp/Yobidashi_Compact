@@ -1,9 +1,11 @@
 package jp.toastkid.yobidashi.compact.editor.finder
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.unmockkAll
 import io.mockk.verify
 import kotlinx.coroutines.channels.Channel
@@ -25,7 +27,7 @@ internal class FinderServiceTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        coEvery { messageChannel.send(any()) }.answers { Unit }
+        coEvery { messageChannel.send(any()) }.just(Runs)
         every { editorArea.setSelectionStart(any()) }.answers { Unit }
         every { editorArea.setSelectionEnd(any()) }.answers { Unit }
 
