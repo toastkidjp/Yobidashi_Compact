@@ -1,6 +1,8 @@
 package jp.toastkid.yobidashi.compact.service
 
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
@@ -21,7 +23,7 @@ internal class UiUpdaterServiceTest {
     @BeforeEach
     fun setUp() {
         mockkStatic(UIManager::class)
-        every { UIManager.setLookAndFeel(any<String>()) }.answers { Unit }
+        every { UIManager.setLookAndFeel(any<String>()) }.just(Runs)
         mockkObject(Setting)
         every { Setting.setLookAndFeel(any()) }.answers { Unit }
         mockkStatic(SwingUtilities::class)
