@@ -25,7 +25,7 @@ internal class UiUpdaterServiceTest {
         mockkStatic(UIManager::class)
         every { UIManager.setLookAndFeel(any<String>()) }.just(Runs)
         mockkObject(Setting)
-        every { Setting.setLookAndFeel(any()) }.answers { Unit }
+        every { Setting.setLookAndFeel(any()) }.just(Runs)
         mockkStatic(SwingUtilities::class)
         every { SwingUtilities.updateComponentTreeUI(any()) }.answers { Unit }
 
