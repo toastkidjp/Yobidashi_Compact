@@ -61,7 +61,7 @@ internal class FinderServiceTest {
 
     @Test
     fun testFirstStringUpper() {
-        every { editorArea.getText() }.returns("ACB news will go bankrupt.")
+        every { editorArea.text }.returns("ACB news will go bankrupt.")
 
         finderService.invoke(FindOrder("ACB", "", upper = true))
 
