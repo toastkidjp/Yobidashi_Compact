@@ -65,7 +65,7 @@ internal class FinderServiceTest {
 
         finderService.invoke(FindOrder("ACB", "", upper = true))
 
-        verify(exactly = 1) { editorArea.setSelectionStart(0) }
+        verify(exactly = 1) { editorArea.selectionStart = 0 }
         verify(exactly = 1) { editorArea.setSelectionEnd(3) }
     }
 
