@@ -56,7 +56,7 @@ internal class FinderServiceTest {
         finderService.invoke(FindOrder("NEWS", "", caseSensitive = false))
 
         verify(exactly = 1) { editorArea.selectionStart = 4 }
-        verify(exactly = 1) { editorArea.setSelectionEnd(8) }
+        verify(exactly = 1) { editorArea.selectionEnd = 8 }
     }
 
     @Test
