@@ -77,7 +77,7 @@ internal class FinderServiceTest {
         finderService.invoke(FindOrder("acb", "BXX", invokeReplace = true, caseSensitive = false))
 
         verify(exactly = 0) { editorArea.selectionStart = any() }
-        verify(exactly = 0) { editorArea.setSelectionEnd(any()) }
+        verify(exactly = 0) { editorArea.selectionEnd = any() }
         verify(exactly = 2) { editorArea.replaceRange(any(), any(), any()) }
     }
 
