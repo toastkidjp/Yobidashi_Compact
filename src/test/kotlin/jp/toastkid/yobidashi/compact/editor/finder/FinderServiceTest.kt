@@ -41,7 +41,7 @@ internal class FinderServiceTest {
 
     @Test
     fun testFirstString() {
-        every { editorArea.getText() }.returns("ACB news will go bankrupt.")
+        every { editorArea.text }.returns("ACB news will go bankrupt.")
 
         finderService.invoke(FindOrder("ACB", "", caseSensitive = true))
 
