@@ -28,7 +28,7 @@ internal class MonthChooserFactoryTest {
         every { font.deriveFont(any<Float>()) }.returns(font)
         every { anyConstructed<JSpinner>().getFont() }.returns(font)
         every { anyConstructed<JSpinner>().getEditor() }.returns(mockk())
-        every { anyConstructed<JSpinner>().setPreferredSize(any()) }.answers { Unit }
+        every { anyConstructed<JSpinner>().setPreferredSize(any()) }.just(Runs)
     }
 
     @AfterEach
