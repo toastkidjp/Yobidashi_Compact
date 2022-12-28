@@ -71,7 +71,7 @@ internal class FinderServiceTest {
 
     @Test
     fun testReplace() {
-        every { editorArea.getText() }.returns("ACB news will go bankrupt ACB.")
+        every { editorArea.text }.returns("ACB news will go bankrupt ACB.")
         every { editorArea.replaceRange(any(), any(), any()) }.answers { Unit }
 
         finderService.invoke(FindOrder("acb", "BXX", invokeReplace = true, caseSensitive = false))
