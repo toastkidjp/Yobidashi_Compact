@@ -84,7 +84,7 @@ internal class FinderServiceTest {
     @Test
     fun testNotFoundCase() {
         every { editorArea.text }.returns("ACB news will go bankrupt ACB.")
-        every { editorArea.replaceRange(any(), any(), any()) }.answers { Unit }
+        every { editorArea.replaceRange(any(), any(), any()) }.just(Runs)
 
         finderService.invoke(FindOrder("axx", "BXX", invokeReplace = true, caseSensitive = false))
 
