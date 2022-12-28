@@ -28,7 +28,7 @@ internal class FinderServiceTest {
     fun setUp() {
         MockKAnnotations.init(this)
         coEvery { messageChannel.send(any()) }.just(Runs)
-        every { editorArea.setSelectionStart(any()) }.just(Runs)
+        every { editorArea.selectionStart = any() }.just(Runs)
         every { editorArea.selectionEnd = any() }.just(Runs)
 
         finderService = FinderService(editorArea, messageChannel)
