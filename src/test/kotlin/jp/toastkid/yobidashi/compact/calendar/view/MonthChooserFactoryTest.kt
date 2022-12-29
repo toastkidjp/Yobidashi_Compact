@@ -23,7 +23,7 @@ internal class MonthChooserFactoryTest {
 
         mockkConstructor(JSpinner::class)
         every { anyConstructed<JSpinner>().model = any() }.just(Runs)
-        every { anyConstructed<JSpinner>().setFont(any()) }.just(Runs)
+        every { anyConstructed<JSpinner>().font = any() }.just(Runs)
         val font = mockk<Font>()
         every { font.deriveFont(any<Float>()) }.returns(font)
         every { anyConstructed<JSpinner>().getFont() }.returns(font)
