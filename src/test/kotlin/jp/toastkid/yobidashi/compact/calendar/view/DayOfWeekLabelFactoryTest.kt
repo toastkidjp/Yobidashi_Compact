@@ -40,12 +40,7 @@ internal class DayOfWeekLabelFactoryTest {
         every { anyConstructed<JLabel>().setBackground(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setForeground(any()) }.just(Runs)
     }
-/*
-        if (dayOfWeek == DayOfWeek.SUNDAY) {
-            dayOfWeekLabel.foreground = Color.RED
-        } else if (dayOfWeek == DayOfWeek.SATURDAY) {
-            dayOfWeekLabel.foreground = Color.BLUE
- */
+
     @Test
     fun testMondayCase() {
         dayOfWeekLabelFactory.invoke(DayOfWeek.MONDAY)
