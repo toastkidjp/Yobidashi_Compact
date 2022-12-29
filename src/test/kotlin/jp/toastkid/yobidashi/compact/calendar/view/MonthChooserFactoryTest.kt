@@ -27,7 +27,7 @@ internal class MonthChooserFactoryTest {
         val font = mockk<Font>()
         every { font.deriveFont(any<Float>()) }.returns(font)
         every { anyConstructed<JSpinner>().font }.returns(font)
-        every { anyConstructed<JSpinner>().getEditor() }.returns(mockk())
+        every { anyConstructed<JSpinner>().editor }.returns(mockk())
         every { anyConstructed<JSpinner>().setPreferredSize(any()) }.just(Runs)
     }
 
