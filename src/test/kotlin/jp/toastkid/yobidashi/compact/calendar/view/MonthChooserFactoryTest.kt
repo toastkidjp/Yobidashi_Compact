@@ -42,7 +42,7 @@ internal class MonthChooserFactoryTest {
 
         verify(exactly = 1) { anyConstructed<JSpinner>().model = any() }
         verify(exactly = 1) { anyConstructed<JSpinner>().font = any() }
-        verify(exactly = 1) { anyConstructed<JSpinner>().getFont() }
+        verify(exactly = 1) { anyConstructed<JSpinner>().font }
         verify(exactly = 1) { anyConstructed<JSpinner>().getEditor() }
         verify(exactly = 1) { anyConstructed<JSpinner>().setPreferredSize(any()) }
     }
