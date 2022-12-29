@@ -40,7 +40,7 @@ internal class MonthChooserFactoryTest {
     fun testInvoke() {
         monthChooserFactory.invoke()
 
-        verify(exactly = 1) { anyConstructed<JSpinner>().setModel(any()) }
+        verify(exactly = 1) { anyConstructed<JSpinner>().model = any() }
         verify(exactly = 1) { anyConstructed<JSpinner>().setFont(any()) }
         verify(exactly = 1) { anyConstructed<JSpinner>().getFont() }
         verify(exactly = 1) { anyConstructed<JSpinner>().getEditor() }
