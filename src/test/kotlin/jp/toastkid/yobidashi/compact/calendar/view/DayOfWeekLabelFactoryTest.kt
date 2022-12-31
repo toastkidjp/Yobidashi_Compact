@@ -30,7 +30,7 @@ internal class DayOfWeekLabelFactoryTest {
         MockKAnnotations.init(this)
         every { font.deriveFont(any<Float>()) }.answers { font }
         mockkConstructor(JLabel::class)
-        every { anyConstructed<JLabel>().getFont() }.answers { font }
+        every { anyConstructed<JLabel>().font }.answers { font }
         every { anyConstructed<JLabel>().setFont(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setHorizontalAlignment(any()) }.just(Runs)
         every { anyConstructed<JLabel>().setVerticalAlignment(any()) }.just(Runs)
