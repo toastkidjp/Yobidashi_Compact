@@ -52,7 +52,7 @@ internal class DayOfWeekLabelFactoryTest {
         verify (exactly = 1) { anyConstructed<JLabel>().preferredSize = any() }
         verify (exactly = 1) { anyConstructed<JLabel>().isOpaque = any() }
         verify (exactly = 1) { anyConstructed<JLabel>().border = any() }
-        verify (exactly = 1) { anyConstructed<JLabel>().setBackground(any()) }
+        verify (exactly = 1) { anyConstructed<JLabel>().background = any() }
         verify (exactly = 0) { anyConstructed<JLabel>().setForeground(any()) }
     }
 
