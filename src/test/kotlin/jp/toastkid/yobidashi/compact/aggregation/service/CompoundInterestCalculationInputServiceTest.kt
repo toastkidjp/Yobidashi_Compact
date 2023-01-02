@@ -59,7 +59,7 @@ internal class CompoundInterestCalculationInputServiceTest {
     @Test
     fun testCancelCase() {
         every { JOptionPane.showConfirmDialog(null, any<JComponent>()) }.answers { JOptionPane.CANCEL_OPTION }
-        every { anyConstructed<JFormattedTextField>().getText() }.answers { "1" }
+        every { anyConstructed<JFormattedTextField>().text }.answers { "1" }
 
         assertNull(compoundInterestCalculationInputService.invoke())
 
