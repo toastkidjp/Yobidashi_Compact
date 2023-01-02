@@ -64,7 +64,7 @@ internal class CompoundInterestCalculationInputServiceTest {
         assertNull(compoundInterestCalculationInputService.invoke())
 
         verify(atLeast = 1) { intFormatter.install(any()) }
-        verify(exactly = 1) { anyConstructed<JPanel>().setLayout(any()) }
+        verify(exactly = 1) { anyConstructed<JPanel>().layout = any() }
         verify(atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>()) }
         verify(exactly = 1) { JOptionPane.showConfirmDialog(null, any<JComponent>()) }
         verify(exactly = 0) { anyConstructed<JFormattedTextField>().text }
