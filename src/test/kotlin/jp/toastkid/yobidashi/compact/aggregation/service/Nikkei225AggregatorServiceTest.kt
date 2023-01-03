@@ -29,7 +29,7 @@ internal class Nikkei225AggregatorServiceTest {
     @BeforeEach
     fun setUp() {
         val file = mockk<File>()
-        every { file.getName() }.returns("file.md")
+        every { file.name }.returns("file.md")
 
         val path = mockk<Path>()
         every { path.toFile() }.returns(file)
