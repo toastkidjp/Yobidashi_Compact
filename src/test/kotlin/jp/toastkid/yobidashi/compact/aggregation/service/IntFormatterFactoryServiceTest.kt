@@ -38,7 +38,7 @@ internal class IntFormatterFactoryServiceTest {
         verify (exactly = 1) { NumberFormat.getInstance() }
         verify (exactly = 1) { anyConstructed<NumberFormatter>().valueClass = Integer::class.java }
         verify (exactly = 1) { anyConstructed<NumberFormatter>().minimum = 0 }
-        verify (exactly = 1) { anyConstructed<NumberFormatter>().setAllowsInvalid(false) }
+        verify (exactly = 1) { anyConstructed<NumberFormatter>().allowsInvalid = false }
     }
 
     @AfterEach
