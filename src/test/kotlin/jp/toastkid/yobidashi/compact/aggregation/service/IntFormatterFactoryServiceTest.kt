@@ -27,7 +27,7 @@ internal class IntFormatterFactoryServiceTest {
 
         mockkConstructor(NumberFormatter::class)
         every { anyConstructed<NumberFormatter>().valueClass = any() }.just(Runs)
-        every { anyConstructed<NumberFormatter>().setMinimum(any()) }.just(Runs)
+        every { anyConstructed<NumberFormatter>().minimum = any() }.just(Runs)
         every { anyConstructed<NumberFormatter>().setAllowsInvalid(any()) }.just(Runs)
     }
 
