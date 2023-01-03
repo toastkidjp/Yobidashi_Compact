@@ -55,7 +55,7 @@ internal class FinderAreaViewTest {
         finderAreaView.switchVisibility()
 
         verify(exactly = 1) { textField.requestFocus() }
-        verify(exactly = 1) { textField.setCaretPosition(any()) }
+        verify(exactly = 1) { textField.caretPosition = any() }
         verify(exactly = 1) { anyConstructed<JPanel>().getComponent(any()) }
     }
 
