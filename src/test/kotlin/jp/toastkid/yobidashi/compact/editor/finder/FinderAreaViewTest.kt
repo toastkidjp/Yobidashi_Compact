@@ -34,7 +34,7 @@ internal class FinderAreaViewTest {
         MockKAnnotations.init(this)
 
         every { textField.requestFocus() }.just(Runs)
-        every { textField.setCaretPosition(any()) }.just(Runs)
+        every { textField.caretPosition = any() }.just(Runs)
 
         mockkConstructor(MessageReceiverService::class)
         every { anyConstructed<MessageReceiverService>().invoke() }.just(Runs)
