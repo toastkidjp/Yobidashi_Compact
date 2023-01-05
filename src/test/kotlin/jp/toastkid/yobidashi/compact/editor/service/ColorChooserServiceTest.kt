@@ -37,7 +37,7 @@ internal class ColorChooserServiceTest {
         colorChooserService.invoke()
 
         verify(exactly = 1) { JOptionPane.showConfirmDialog(any(), any()) }
-        verify(exactly = 1) { anyConstructed<JColorChooser>().getColor() }
+        verify(exactly = 1) { anyConstructed<JColorChooser>().color }
     }
 
     @Test
