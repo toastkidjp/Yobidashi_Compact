@@ -48,7 +48,7 @@ internal class EditMenuViewTest {
         editMenuView.invoke()
 
         verify(atLeast = 1) { anyConstructed<JMenu>().addSeparator() }
-        verify(atLeast = 1) { anyConstructed<JMenuItem>().setAccelerator(any()) }
+        verify(atLeast = 1) { anyConstructed<JMenuItem>().accelerator = any() }
         verify(atLeast = 1) { anyConstructed<JMenuItem>().addActionListener(any()) }
     }
 
