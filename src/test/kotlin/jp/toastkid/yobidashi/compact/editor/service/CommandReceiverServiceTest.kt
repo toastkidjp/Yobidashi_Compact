@@ -23,6 +23,7 @@ internal class CommandReceiverServiceTest {
     @InjectMockKs
     private lateinit var commandReceiverService: CommandReceiverService
 
+    @Suppress("unused")
     @MockK
     private lateinit var channel: Channel<MenuCommand>
 
