@@ -47,6 +47,7 @@ internal class CommandReceiverServiceTest {
     @MockK
     private lateinit var switchFinder: () -> Unit
 
+    @Suppress("unused")
     @MockK
     private lateinit var close: () -> Unit
 
