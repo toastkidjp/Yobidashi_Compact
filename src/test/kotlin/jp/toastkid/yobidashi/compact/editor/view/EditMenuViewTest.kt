@@ -34,7 +34,7 @@ internal class EditMenuViewTest {
         every { anyConstructed<JMenu>().addSeparator() }.answers {  }
 
         mockkConstructor(JMenuItem::class)
-        every { anyConstructed<JMenuItem>().setAccelerator(any()) }.returns(mockk())
+        every { anyConstructed<JMenuItem>().accelerator = any() }.returns(mockk())
         every { anyConstructed<JMenuItem>().addActionListener(any()) }.returns(mockk())
     }
 
