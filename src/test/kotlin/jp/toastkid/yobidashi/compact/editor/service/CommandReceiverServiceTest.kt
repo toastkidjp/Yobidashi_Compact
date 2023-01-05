@@ -31,6 +31,7 @@ internal class CommandReceiverServiceTest {
     @MockK
     private lateinit var editorAreaView: EditorAreaView
 
+    @Suppress("unused")
     @MockK
     private lateinit var currentArticle: () -> Path
 
