@@ -46,7 +46,7 @@ internal class DayLabelFactoryTest {
         dayLabelFactory.invoke(DayOfWeek.MONDAY.value)
         verify (exactly = 1) { font.deriveFont(any<Float>()) }
         verify (exactly = 1) { anyConstructed<JLabel>().font }
-        verify (exactly = 1) { anyConstructed<JLabel>().setFont(any()) }
+        verify (exactly = 1) { anyConstructed<JLabel>().font = any() }
         verify (exactly = 1) { anyConstructed<JLabel>().setHorizontalAlignment(any()) }
         verify (exactly = 1) { anyConstructed<JLabel>().setVerticalAlignment(any()) }
         verify (exactly = 1) { anyConstructed<JLabel>().setPreferredSize(any()) }
