@@ -53,7 +53,7 @@ internal class DayLabelFactoryTest {
         verify (exactly = 1) { anyConstructed<JLabel>().isOpaque = any() }
         verify (exactly = 1) { anyConstructed<JLabel>().border = any() }
         verify (exactly = 1) { anyConstructed<JLabel>().background = any() }
-        verify (exactly = 1) { anyConstructed<JLabel>().setForeground(any()) }
+        verify (exactly = 1) { anyConstructed<JLabel>().foreground = any() }
     }
 
     @AfterEach
