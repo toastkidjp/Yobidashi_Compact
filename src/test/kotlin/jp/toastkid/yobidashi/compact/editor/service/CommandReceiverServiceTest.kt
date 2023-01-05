@@ -27,6 +27,7 @@ internal class CommandReceiverServiceTest {
     @MockK
     private lateinit var channel: Channel<MenuCommand>
 
+    @Suppress("unused")
     @MockK
     private lateinit var editorAreaView: EditorAreaView
 
