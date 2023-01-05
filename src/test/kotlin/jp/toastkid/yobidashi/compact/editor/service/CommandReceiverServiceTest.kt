@@ -51,6 +51,7 @@ internal class CommandReceiverServiceTest {
     @MockK
     private lateinit var close: () -> Unit
 
+    @Suppress("unused")
     @MockK
     private lateinit var urlOpenerService: UrlOpenerService
 
