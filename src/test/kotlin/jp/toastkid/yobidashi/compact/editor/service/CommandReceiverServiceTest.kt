@@ -35,6 +35,7 @@ internal class CommandReceiverServiceTest {
     @MockK
     private lateinit var currentArticle: () -> Path
 
+    @Suppress("unused")
     @MockK
     private lateinit var editing: Editing
 
