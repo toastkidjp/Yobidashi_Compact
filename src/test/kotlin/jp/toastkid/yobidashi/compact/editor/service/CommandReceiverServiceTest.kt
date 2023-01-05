@@ -39,6 +39,7 @@ internal class CommandReceiverServiceTest {
     @MockK
     private lateinit var editing: Editing
 
+    @Suppress("unused")
     @MockK
     private lateinit var resetFrameTitle: () -> Unit
 
