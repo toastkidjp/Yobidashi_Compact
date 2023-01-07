@@ -51,7 +51,7 @@ internal class EditorAreaViewTest {
         every { editorArea.addHyperlinkListener(any()) }.answers { Unit }
         every { editorArea.paintTabLines = any() }.answers { Unit }
         every { editorArea.addKeyListener(any()) }.answers { Unit }
-        every { editorArea.setForeground(any()) }.answers { Unit }
+        every { editorArea.foreground = any() }.answers { Unit }
         every { editorArea.setBackground(any()) }.answers { Unit }
         every { editorArea.setFont(any()) }.answers { Unit }
         every { editorArea.getPopupMenu() }.returns(mockk())
