@@ -47,7 +47,7 @@ internal class EditorAreaViewTest {
         val font = mockk<Font>()
 
         editorArea = spyk(RSyntaxTextArea())
-        every { editorArea.getFont() }.returns(font)
+        every { editorArea.font }.returns(font)
         every { editorArea.addHyperlinkListener(any()) }.answers { Unit }
         every { editorArea.setPaintTabLines(any()) }.answers { Unit }
         every { editorArea.addKeyListener(any()) }.answers { Unit }
