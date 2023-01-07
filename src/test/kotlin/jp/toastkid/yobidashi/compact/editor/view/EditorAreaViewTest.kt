@@ -63,7 +63,7 @@ internal class EditorAreaViewTest {
         every { Setting.editorFontSize() }.returns(12)
 
         every { font.deriveFont(any<Float>()) }.answers { font }
-        every { font.getStyle() }.returns(Font.PLAIN)
+        every { font.style }.returns(Font.PLAIN)
 
         mockkConstructor(RTextScrollPane::class)
         every { anyConstructed<RTextScrollPane>().setLineNumbersEnabled(any()) }.answers { Unit }
