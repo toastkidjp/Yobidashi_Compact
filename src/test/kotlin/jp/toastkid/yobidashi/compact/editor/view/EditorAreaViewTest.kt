@@ -70,7 +70,7 @@ internal class EditorAreaViewTest {
         every { anyConstructed<RTextScrollPane>().isIconRowHeaderEnabled = any() }.answers { Unit }
 
         val gutter = mockk<Gutter>()
-        every { anyConstructed<RTextScrollPane>().getGutter() }.answers { gutter }
+        every { anyConstructed<RTextScrollPane>().gutter }.answers { gutter }
         every { gutter.setLineNumberFont(any()) }.answers { Unit }
 
         mockkConstructor(PopupMenuInitializer::class)
