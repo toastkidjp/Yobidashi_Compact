@@ -66,7 +66,7 @@ internal class EditorAreaViewTest {
         every { font.style }.returns(Font.PLAIN)
 
         mockkConstructor(RTextScrollPane::class)
-        every { anyConstructed<RTextScrollPane>().setLineNumbersEnabled(any()) }.answers { Unit }
+        every { anyConstructed<RTextScrollPane>().lineNumbersEnabled = any() }.answers { Unit }
         every { anyConstructed<RTextScrollPane>().setIconRowHeaderEnabled(any()) }.answers { Unit }
 
         val gutter = mockk<Gutter>()
