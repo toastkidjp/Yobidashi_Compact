@@ -52,7 +52,7 @@ internal class EditorAreaViewTest {
         every { editorArea.paintTabLines = any() }.answers { Unit }
         every { editorArea.addKeyListener(any()) }.answers { Unit }
         every { editorArea.foreground = any() }.answers { Unit }
-        every { editorArea.setBackground(any()) }.answers { Unit }
+        every { editorArea.background = any() }.answers { Unit }
         every { editorArea.setFont(any()) }.answers { Unit }
         every { editorArea.getPopupMenu() }.returns(mockk())
 
