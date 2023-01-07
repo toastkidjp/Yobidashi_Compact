@@ -49,7 +49,7 @@ internal class EditorAreaViewTest {
         editorArea = spyk(RSyntaxTextArea())
         every { editorArea.font }.returns(font)
         every { editorArea.addHyperlinkListener(any()) }.answers { Unit }
-        every { editorArea.setPaintTabLines(any()) }.answers { Unit }
+        every { editorArea.paintTabLines = any() }.answers { Unit }
         every { editorArea.addKeyListener(any()) }.answers { Unit }
         every { editorArea.setForeground(any()) }.answers { Unit }
         every { editorArea.setBackground(any()) }.answers { Unit }
