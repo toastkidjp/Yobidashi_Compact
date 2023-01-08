@@ -141,7 +141,7 @@ internal class EditorAreaViewTest {
         editorAreaView.replaceSelected(false, { "replaced" })
 
         verify(exactly = 1) { editorArea.selectedText }
-        verify(exactly = 0) { editorArea.getSelectionStart() }
+        verify(exactly = 0) { editorArea.selectionStart }
         verify(exactly = 0) { editorArea.getSelectionEnd() }
         verify(exactly = 0) { editorArea.replaceSelection(any()) }
     }
