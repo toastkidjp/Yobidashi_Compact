@@ -202,7 +202,7 @@ internal class EditorAreaViewTest {
 
     @Test
     fun testDuplicateLine() {
-        every { editorArea.getLineStartOffsetOfCurrentLine() }.returns(0)
+        every { editorArea.lineStartOffsetOfCurrentLine }.returns(0)
         every { editorArea.getLineEndOffsetOfCurrentLine() }.returns(7)
         every { editorArea.getText(any(), any()) }.returns("extracted")
         every { editorArea.insert(any(), any()) }.answers { Unit }
