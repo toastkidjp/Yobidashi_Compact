@@ -210,7 +210,7 @@ internal class EditorAreaViewTest {
         editorAreaView.duplicateLine()
 
         verify(exactly = 1) { editorArea.lineStartOffsetOfCurrentLine }
-        verify(exactly = 1) { editorArea.getLineEndOffsetOfCurrentLine() }
+        verify(exactly = 1) { editorArea.lineEndOffsetOfCurrentLine }
         verify(exactly = 1) { editorArea.getText(0, 7) }
         verify(exactly = 1) { editorArea.insert("extracted", 7) }
     }
