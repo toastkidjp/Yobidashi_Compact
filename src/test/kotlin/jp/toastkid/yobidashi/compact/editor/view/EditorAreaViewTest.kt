@@ -196,7 +196,7 @@ internal class EditorAreaViewTest {
 
         val selectedText = editorAreaView.selectedText()
 
-        verify(exactly = 1) { editorArea.getSelectedText() }
+        verify(exactly = 1) { editorArea.selectedText }
         assertEquals("abc", selectedText)
     }
 
