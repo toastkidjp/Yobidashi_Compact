@@ -218,7 +218,7 @@ internal class EditorAreaViewTest {
     @Test
     fun testSwitchEditable() {
         every { editorArea.isEditable }.returns(true)
-        every { editorArea.setEditable(any()) }.answers { Unit }
+        every { editorArea.isEditable = any() }.answers { Unit }
 
         editorAreaView.switchEditable()
 
