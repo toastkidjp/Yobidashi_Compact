@@ -164,7 +164,7 @@ internal class EditorAreaViewTest {
     @Test
     fun testReplaceSelectedWithKeepSelection() {
         every { editorArea.selectedText }.returns("test")
-        every { editorArea.getSelectionStart() }.returns(2)
+        every { editorArea.selectionStart }.returns(2)
         every { editorArea.getSelectionEnd() }.returns(3)
         every { editorArea.replaceSelection(any()) }.answers { Unit }
         every { editorArea.setSelectionStart(any()) }.answers { Unit }
