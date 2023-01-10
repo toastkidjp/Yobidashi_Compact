@@ -1,8 +1,10 @@
 package jp.toastkid.yobidashi.compact.editor.view
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkConstructor
 import io.mockk.mockkObject
@@ -218,7 +220,7 @@ internal class EditorAreaViewTest {
     @Test
     fun testSwitchEditable() {
         every { editorArea.isEditable }.returns(true)
-        every { editorArea.isEditable = any() }.answers { Unit }
+        every { editorArea.isEditable = any() }.just(Runs)
 
         editorAreaView.switchEditable()
 
