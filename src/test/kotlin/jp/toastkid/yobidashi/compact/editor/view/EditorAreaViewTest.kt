@@ -207,7 +207,7 @@ internal class EditorAreaViewTest {
         every { editorArea.lineStartOffsetOfCurrentLine }.returns(0)
         every { editorArea.lineEndOffsetOfCurrentLine }.returns(7)
         every { editorArea.getText(any(), any()) }.returns("extracted")
-        every { editorArea.insert(any(), any()) }.answers { Unit }
+        every { editorArea.insert(any(), any()) }.just(Runs)
 
         editorAreaView.duplicateLine()
 
