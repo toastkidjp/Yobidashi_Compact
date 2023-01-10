@@ -76,7 +76,7 @@ internal class EditorAreaViewTest {
         every { gutter.setLineNumberFont(any()) }.answers { Unit }
 
         mockkConstructor(PopupMenuInitializer::class)
-        every { anyConstructed<PopupMenuInitializer>().invoke() }.answers { Unit }
+        every { anyConstructed<PopupMenuInitializer>().invoke() }.just(Runs)
 
         editorAreaView = EditorAreaView(editorArea, syntaxHighlightApplier, channel, messageChannel)
     }
