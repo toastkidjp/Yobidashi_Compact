@@ -223,7 +223,7 @@ internal class EditorAreaViewTest {
         editorAreaView.switchEditable()
 
         verify(exactly = 1) { editorArea.isEditable }
-        verify(exactly = 1) { editorArea.setEditable(false) }
+        verify(exactly = 1) { editorArea.isEditable = false }
     }
 
 }
