@@ -126,7 +126,7 @@ internal class EditorAreaViewTest {
     @Test
     fun testFind() {
         mockkConstructor(FinderService::class)
-        every { anyConstructed<FinderService>().invoke(any()) }.answers { Unit }
+        every { anyConstructed<FinderService>().invoke(any()) }.just(Runs)
 
         editorAreaView.find(FindOrder("test", "replaced"))
 
