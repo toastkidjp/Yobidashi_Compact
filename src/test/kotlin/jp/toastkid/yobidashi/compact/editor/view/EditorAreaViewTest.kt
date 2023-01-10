@@ -153,7 +153,7 @@ internal class EditorAreaViewTest {
         every { editorArea.selectedText }.returns("test")
         every { editorArea.selectionStart }.returns(2)
         every { editorArea.selectionEnd }.returns(3)
-        every { editorArea.replaceSelection(any()) }.answers { Unit }
+        every { editorArea.replaceSelection(any()) }.just(Runs)
 
         editorAreaView.replaceSelected(false, { "replaced" })
 
