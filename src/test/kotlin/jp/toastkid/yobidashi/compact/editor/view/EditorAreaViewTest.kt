@@ -54,7 +54,7 @@ internal class EditorAreaViewTest {
         every { editorArea.paintTabLines = any() }.just(Runs)
         every { editorArea.addKeyListener(any()) }.just(Runs)
         every { editorArea.foreground = any() }.just(Runs)
-        every { editorArea.background = any() }.answers { Unit }
+        every { editorArea.background = any() }.just(Runs)
         every { editorArea.font = any() }.answers { Unit }
         every { editorArea.popupMenu }.returns(mockk())
 
