@@ -55,7 +55,7 @@ internal class EditorAreaViewTest {
         every { editorArea.addKeyListener(any()) }.just(Runs)
         every { editorArea.foreground = any() }.just(Runs)
         every { editorArea.background = any() }.just(Runs)
-        every { editorArea.font = any() }.answers { Unit }
+        every { editorArea.font = any() }.just(Runs)
         every { editorArea.popupMenu }.returns(mockk())
 
         mockkObject(Setting)
