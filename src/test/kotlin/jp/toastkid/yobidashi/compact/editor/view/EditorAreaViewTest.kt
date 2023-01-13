@@ -73,7 +73,7 @@ internal class EditorAreaViewTest {
 
         val gutter = mockk<Gutter>()
         every { anyConstructed<RTextScrollPane>().gutter }.answers { gutter }
-        every { gutter.setLineNumberFont(any()) }.just(Runs)
+        every { gutter.lineNumberFont = any() }.just(Runs)
 
         mockkConstructor(PopupMenuInitializer::class)
         every { anyConstructed<PopupMenuInitializer>().invoke() }.just(Runs)
