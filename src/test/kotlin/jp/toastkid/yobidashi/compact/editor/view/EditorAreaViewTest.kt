@@ -116,7 +116,7 @@ internal class EditorAreaViewTest {
     @Test
     fun testInsertText() {
         every { editorArea.insert(any(), any()) }.just(Runs)
-        every { editorArea.getCaretPosition() }.returns(0)
+        every { editorArea.caretPosition }.returns(0)
 
         editorAreaView.insertText("insert")
 
