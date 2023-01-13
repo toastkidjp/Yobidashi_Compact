@@ -105,7 +105,7 @@ internal class EditorAreaViewTest {
         val textArray = editorAreaView.getTextArray()
 
         assertEquals("test", String(textArray))
-        verify(exactly = 1) { editorArea.getText() }
+        verify(exactly = 1) { editorArea.text }
     }
 
     @Test
