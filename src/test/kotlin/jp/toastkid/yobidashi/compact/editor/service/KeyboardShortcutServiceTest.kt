@@ -1,10 +1,12 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.unmockkAll
 import io.mockk.verify
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
@@ -30,7 +32,7 @@ internal class KeyboardShortcutServiceTest {
 
         keyboardShortcutService = KeyboardShortcutService(channel)
 
-        coEvery { channel.send(any()) }.answers { Unit }
+        coEvery { channel.send(any()) }.just(Runs)
     }
 
     @AfterEach
