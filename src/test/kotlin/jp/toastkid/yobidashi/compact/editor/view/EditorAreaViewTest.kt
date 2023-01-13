@@ -184,7 +184,7 @@ internal class EditorAreaViewTest {
 
     @Test
     fun testCount() {
-        every { editorArea.getSelectedText() }.returns(" abc ")
+        every { editorArea.selectedText }.returns(" abc ")
 
         val count = editorAreaView.count()
 
