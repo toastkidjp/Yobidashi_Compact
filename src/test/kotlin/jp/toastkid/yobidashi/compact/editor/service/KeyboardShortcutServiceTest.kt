@@ -95,7 +95,7 @@ internal class KeyboardShortcutServiceTest {
     @Test
     fun testIsControlAndI() {
         every { keyEvent.isControlDown() }.returns(true)
-        every { keyEvent.isShiftDown() }.answers { false }
+        every { keyEvent.isShiftDown() }.returns(true)
         every { keyEvent.getKeyCode() }.answers { KeyEvent.VK_I }
 
         keyboardShortcutService.invoke(keyEvent)
