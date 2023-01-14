@@ -42,7 +42,7 @@ internal class KeyboardShortcutServiceTest {
 
     @Test
     fun testIsNotControlDown() {
-        every { keyEvent.isControlDown() }.answers { false }
+        every { keyEvent.isControlDown }.answers { false }
 
         keyboardShortcutService.invoke(keyEvent)
 
