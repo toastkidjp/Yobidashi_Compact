@@ -46,7 +46,7 @@ internal class KeyboardShortcutServiceTest {
 
         keyboardShortcutService.invoke(keyEvent)
 
-        verify(exactly = 1) { keyEvent.isControlDown() }
+        verify(exactly = 1) { keyEvent.isControlDown }
         coVerify(exactly = 0) { channel.send(any()) }
     }
 
