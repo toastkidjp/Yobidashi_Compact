@@ -52,7 +52,7 @@ internal class KeyboardShortcutServiceTest {
 
     @Test
     fun testIsControlAndShiftDown() {
-        every { keyEvent.isControlDown() }.answers { true }
+        every { keyEvent.isControlDown() }.returns(true)
         every { keyEvent.isShiftDown() }.answers { true }
         every { keyEvent.getKeyCode() }.answers { KeyEvent.VK_U }
 
