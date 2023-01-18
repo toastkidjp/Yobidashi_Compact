@@ -59,7 +59,7 @@ internal class KeyboardShortcutServiceTest {
         keyboardShortcutService.invoke(keyEvent)
 
         verify(exactly = 1) { keyEvent.isControlDown }
-        verify(exactly = 1) { keyEvent.isShiftDown() }
+        verify(exactly = 1) { keyEvent.isShiftDown }
         verify(exactly = 1) { keyEvent.getKeyCode() }
         coVerify(exactly = 1) { channel.send(any()) }
     }
