@@ -68,7 +68,7 @@ internal class KeyboardShortcutServiceTest {
     fun testIsControlAndShiftDownButNotContainU() {
         every { keyEvent.isControlDown }.returns(true)
         every { keyEvent.isShiftDown }.returns(true)
-        every { keyEvent.getKeyCode() }.answers { KeyEvent.VK_Z }
+        every { keyEvent.keyCode }.answers { KeyEvent.VK_Z }
 
         keyboardShortcutService.invoke(keyEvent)
 
