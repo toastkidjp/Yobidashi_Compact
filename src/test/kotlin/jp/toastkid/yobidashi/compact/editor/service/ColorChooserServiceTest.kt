@@ -24,7 +24,7 @@ internal class ColorChooserServiceTest {
         every { JOptionPane.showConfirmDialog(any(), any()) }.returns(JOptionPane.OK_OPTION)
 
         mockkConstructor(JColorChooser::class)
-        every { anyConstructed<JColorChooser>().getColor() }.returns(Color.BLACK)
+        every { anyConstructed<JColorChooser>().color }.returns(Color.BLACK)
     }
 
     @AfterEach
