@@ -48,7 +48,7 @@ internal class YearChooserFactoryTest {
         //verify(exactly = 1) { anyConstructed<JSpinner>().getFont() }
         //verify(exactly = 1) { anyConstructed<JSpinner>().getEditor() }
         verify(exactly = 1) { anyConstructed<JSpinner>().preferredSize }
-        verify(exactly = 1) { anyConstructed<JSpinner>().setPreferredSize(any()) }
+        verify(exactly = 1) { anyConstructed<JSpinner>().preferredSize = any() }
     }
 
 }
