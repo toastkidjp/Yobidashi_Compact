@@ -24,7 +24,7 @@ internal class AggregationResultTableFactoryServiceTest {
         MockKAnnotations.init(this)
         every { result.header() }.answers { arrayOf("1", "2") }
         every { result.columnClass(any()) }.answers { Integer::class.java }
-        every { result.itemArrays() }.answers { listOf(arrayOf<Any>("first", "second")) }
+        every { result.itemArrays() }.answers { listOf(arrayOf("first", "second")) }
     }
 
     @Test
