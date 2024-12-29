@@ -22,6 +22,7 @@ internal class EditMenuViewTest {
     @InjectMockKs
     private lateinit var editMenuView: EditMenuView
 
+    @Suppress("unused")
     @MockK
     private lateinit var channel: Channel<MenuCommand>
 
