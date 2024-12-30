@@ -55,7 +55,7 @@ internal class ArticleCellRendererTest {
     }
 
     @Test
-    fun getListCellRendererComponent() {
+    fun testGetListCellRendererComponent() {
         articleCellRenderer.getListCellRendererComponent(
                 list, value, 1, true, true
         )
