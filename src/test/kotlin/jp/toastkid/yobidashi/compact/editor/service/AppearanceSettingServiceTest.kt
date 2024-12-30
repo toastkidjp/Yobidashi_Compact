@@ -49,7 +49,7 @@ internal class AppearanceSettingServiceTest {
         appearanceSettingService.invoke()
 
         coVerify (atLeast = 1) { channel.send(any()) }
-        verify (atLeast = 1) { anyConstructed<JPanel>().setLayout(any()) }
+        verify (atLeast = 1) { anyConstructed<JPanel>().layout = any() }
         verify (atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>(), any<GridBagConstraints>()) }
         verify (atLeast = 1) { JOptionPane.showMessageDialog(any(), any()) }
     }
