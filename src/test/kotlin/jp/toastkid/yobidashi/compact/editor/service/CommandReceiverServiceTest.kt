@@ -1,9 +1,11 @@
 package jp.toastkid.yobidashi.compact.editor.service
 
 import io.mockk.MockKAnnotations
+import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.mockk.just
 import io.mockk.unmockkAll
 import jp.toastkid.yobidashi.compact.editor.MenuCommand
 import jp.toastkid.yobidashi.compact.editor.model.Editing
@@ -58,7 +60,7 @@ internal class CommandReceiverServiceTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        every { urlOpenerService.invoke(any<String>()) }.answers { Unit }
+        every { urlOpenerService.invoke(any<String>()) }.just(Runs)
     }
 
     @AfterEach

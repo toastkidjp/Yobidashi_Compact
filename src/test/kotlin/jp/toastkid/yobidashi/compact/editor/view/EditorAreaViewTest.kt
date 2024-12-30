@@ -172,7 +172,7 @@ internal class EditorAreaViewTest {
         every { editorArea.selectionStart = any() }.just(Runs)
         every { editorArea.selectionEnd = any() }.just(Runs)
 
-        editorAreaView.replaceSelected(true, { "replaced" })
+        editorAreaView.replaceSelected(true) { "replaced" }
 
         verify(exactly = 1) { editorArea.selectedText }
         verify(exactly = 1) { editorArea.selectionStart }
