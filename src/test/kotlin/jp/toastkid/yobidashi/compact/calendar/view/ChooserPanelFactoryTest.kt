@@ -60,7 +60,7 @@ internal class ChooserPanelFactoryTest {
 
         verify(exactly = 1) { monthChooserFactory.invoke() }
         verify(exactly = 1) { yearChooserFactory.invoke() }
-        verify(atLeast = 1) { mockSpinner.setValue(any()) }
+        verify(atLeast = 1) { mockSpinner.value = any() }
         verify(atLeast = 1) { mockSpinner.addChangeListener(any()) }
         verify(atLeast = 1) { anyConstructed<JPanel>().add(any<JComponent>()) }
     }
