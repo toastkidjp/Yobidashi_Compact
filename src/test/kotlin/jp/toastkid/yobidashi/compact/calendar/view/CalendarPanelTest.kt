@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
-import javax.swing.JLabel
 import javax.swing.JPanel
 
 internal class CalendarPanelTest {
@@ -20,7 +19,7 @@ internal class CalendarPanelTest {
     fun setUp() {
         mockkConstructor(DayPanelFactory::class)
         every { anyConstructed<DayPanelFactory>().invoke() }
-            .returns(JPanel() to Array(6) { arrayOfNulls<JLabel>(7) })
+            .returns(JPanel() to Array(6) { arrayOfNulls(7) })
         mockkConstructor(DayLabelRefresherService::class)
         every { anyConstructed<DayLabelRefresherService>().invoke(any<Int>(), any()) }.returns(mockk())
         every { anyConstructed<DayLabelRefresherService>().invoke(any<LocalDate>(), any()) }.returns(mockk())
