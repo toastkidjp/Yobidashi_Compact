@@ -18,4 +18,9 @@ internal class ListHeadAdderTest {
         assertEquals(expected, ListHeadAdder().invoke(target, "-"))
     }
 
+    @Test
+    fun testEmptyCase() {
+        assertEquals("", ListHeadAdder().invoke("", "-"))
+    }
+
 }
