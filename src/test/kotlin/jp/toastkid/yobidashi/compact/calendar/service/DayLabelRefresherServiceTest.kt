@@ -15,7 +15,7 @@ internal class DayLabelRefresherServiceTest {
     }
 
     @Test
-    fun invoke() {
+    fun testInvoke() {
         dayLabelRefresherService.invoke(2021, Month.FEBRUARY)
     }
 
