@@ -3,8 +3,6 @@ package jp.toastkid.yobidashi.compact.view
 import jp.toastkid.yobidashi.compact.SubjectPool
 import jp.toastkid.yobidashi.compact.model.Setting
 import jp.toastkid.yobidashi.compact.model.Sorting
-import java.awt.event.ActionEvent
-import javax.swing.AbstractAction
 import javax.swing.ButtonGroup
 import javax.swing.JMenu
 import javax.swing.JRadioButtonMenuItem
@@ -34,10 +32,8 @@ class SortMenuView {
         val item = JRadioButtonMenuItem()
         item.isSelected = it == current
         item.hideActionText = true
-        item.action = object : AbstractAction() {
-            override fun actionPerformed(e: ActionEvent) {
-                updateSorting(Sorting.findByName(group.selection.actionCommand))
-            }
+        item.addActionListener {
+            updateSorting(Sorting.findByName(group.selection.actionCommand))
         }
         item.text = it.text
         item.actionCommand = it.name
